@@ -1,16 +1,15 @@
-"""Reasonable on-ball options: passes, carries, and a shot.
+"""One on-ball arrow: the best pass or the best carry for the softmax class.
 
-The highlighted arrow is the best geometric option of the action the softmax
-recommends. The other options stay on screen at a lower alpha. Coordinates
-are either pitch meters or image pixels; thresholds scale with the frame.
-
-Passes are pinned to a teammate's point. A shot is pinned to the opponent
-goal mouth on this same plane (105×68 m when ``space`` is ``pitch``). Neither
-arrow is allowed to end on an opponent.
+Softmax chooses the action class (pass, dribble, shoot, hold). It does not
+choose a receiver. When the class is pass, the arrow is the single best
+visible teammate. When it is dribble, the arrow is one short carry into open
+space. Shoot and hold stay in the probability bars and are not drawn as lines.
+Coordinates are pitch meters or image pixels; thresholds scale with the frame.
 """
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
 from inside_the_game.labels import ACTION_LABELS
@@ -73,32 +72,70 @@ def build_options(
     attacking_positive: bool,
     space: str = "pitch",
 ) -> list[TacticalOption]:
-    """Options for one on-ball player. ``recommended`` is a System 1 label."""
+    """The one arrow for ``recommended``. Shoot and hold draw nothing.
+
+    ``recommended`` is the System 1 class. Pass targets come from the geometric
+    ranking below, never from the softmax itself.
+    """
     if recommended not in ACTION_LABELS:
         raise ValueError(f"recommended must be one of {ACTION_LABELS}")
+    if recommended == "pass":
+        return _primary_pass(
+            origin, players, possessor_id, possessor_team, bounds, attacking_positive, space
+        )
+    if recommended == "dribble":
+        return _primary_carry(
+            origin, players, possessor_id, possessor_team, bounds, attacking_positive, space
+        )
+    return []
+
+
+def _primary_pass(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
     limits = _thresholds(bounds, space)
     mates = _teammates(players, possessor_id, possessor_team, attacking_positive, bounds)
-    passes = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
-    carries = _carries(
+    found = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
+    if not found:
+        return []
+    best = max(found, key=lambda item: item.score)
+    mate = mates.get(best.target_id) if best.target_id is not None else None
+    if mate is None:
+        return []
+    return [
+        TacticalOption(
+            kind="pass",
+            origin=origin,
+            target=mate.xy,
+            score=best.score,
+            primary=True,
+            alpha=PRIMARY_ALPHA,
+            label="pass",
+            target_id=mate.track_id,
+            slot=f"pass:{mate.track_id}",
+        )
+    ]
+
+
+def _primary_carry(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
+    limits = _thresholds(bounds, space)
+    found = _carries(
         origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits
     )
-    shots = _shots(origin, bounds, attacking_positive, limits)
-    hold = TacticalOption(
-        kind="hold",
-        origin=origin,
-        target=origin,
-        score=0.15,
-        primary=False,
-        alpha=SECONDARY_ALPHA,
-        label="hold",
-        slot="hold",
-    )
-    pool = passes + carries + shots + [hold]
-    pool = _ensure_recommended(
-        pool, origin, mates, recommended, bounds, attacking_positive, limits
-    )
-    pool = _pin_to_players_and_goal(pool, mates, bounds, attacking_positive)
-    return _mark_primary(pool, recommended)
+    if not found:
+        return []
+    best = max(found, key=lambda item: item.score)
+    return [
+        TacticalOption(
+            kind="dribble",
+            origin=origin,
+            target=best.target,
+            score=best.score,
+            primary=True,
+            alpha=PRIMARY_ALPHA,
+            label="carry",
+            target_id=None,
+            slot=best.slot,
+        )
+    ]
 
 
 def _teammates(
@@ -138,9 +175,7 @@ def _passes(origin, mates, players, possessor_team, bounds, attacking_positive, 
             continue
         if _lane_blocked(origin, player.xy, opponents, limits["lane"]):
             continue
-        forward = _attack(player.xy, bounds, attacking_positive) - _attack(origin, bounds, attacking_positive)
-        openness = _clearance(origin, player.xy, opponents)
-        score = 0.015 * forward + 0.04 * openness - 0.01 * distance
+        score = _pass_score(origin, player.xy, opponents, bounds, attacking_positive, limits)
         found.append(
             TacticalOption(
                 kind="pass",
@@ -155,10 +190,38 @@ def _passes(origin, mates, players, possessor_team, bounds, attacking_positive, 
             )
         )
     found.sort(key=lambda item: item.score, reverse=True)
-    return found[:3]
+    return found
+
+
+def _pass_score(origin, target, opponents, bounds, attacking_positive, limits) -> float:
+    """Advance and space, minus intercept risk. Length is only a light tax.
+
+    A longer pass into a clear lane can outrank a short dump into traffic.
+    ``limits['pass_max']`` is what rejects an absurd length, not this tax.
+    """
+    distance = _dist(origin, target)
+    advance = _attack(target, bounds, attacking_positive) - _attack(origin, bounds, attacking_positive)
+    lane_clearance = _clearance(origin, target, opponents)
+    if opponents:
+        local_space = min(_dist(target, player.xy) for player in opponents)
+    else:
+        local_space = limits["open_space"]
+    intercept = _intercept_risk(origin, target, opponents, limits["threat"])
+    return (
+        0.55 * advance
+        + 0.35 * local_space
+        + 0.25 * lane_clearance
+        - 1.6 * intercept
+        - 0.04 * distance
+    )
 
 
 def _carries(origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits):
+    """Search a forward fan and keep the direction with the best open space.
+
+    The arrow is short and must not finish on a player, so a carry never reads
+    as a pass into empty air.
+    """
     opponents = [
         player
         for player in players
@@ -166,23 +229,39 @@ def _carries(origin, players, possessor_id, possessor_team, bounds, attacking_po
         and player.role != "referee"
         and player.team not in (possessor_team, "unknown", "referee")
     ]
+    bodies = [
+        player.xy
+        for player in players
+        if player.track_id != possessor_id and player.role != "referee"
+    ]
     length, width = bounds
-    step = limits["dribble"]
-    directions = (
-        ("forward", 1.0, 0.0),
-        ("left", 0.72, 0.55),
-        ("right", 0.72, -0.55),
-    )
+    step = limits["dribble"] * 0.58
     sign = 1.0 if attacking_positive else -1.0
     found: list[TacticalOption] = []
-    for name, along, across in directions:
-        raw = (origin[0] + sign * step * along, origin[1] + step * across * 0.65)
+    for angle in range(-80, 81, 10):
+        radians = math.radians(angle)
+        direction = (sign * math.cos(radians), math.sin(radians))
+        raw = (origin[0] + step * direction[0], origin[1] + step * direction[1])
         target = (_clamp(raw[0], 0.0, length), _clamp(raw[1], 0.0, width))
-        if _dist(origin, target) < step * 0.35:
+        cleared = _shorten_clear(origin, target, bodies, limits["body"], step * 0.35)
+        # A crowded lane still gets a short stub. The arrow must not vanish,
+        # and it must not be stretched out to a nearby player.
+        if cleared is None:
+            stub = step * 0.42
+            target = (
+                _clamp(origin[0] + stub * direction[0], 0.0, length),
+                _clamp(origin[1] + stub * direction[1], 0.0, width),
+            )
+        else:
+            target = cleared
+        if _dist(origin, target) < step * 0.28:
             continue
-        clearance = min((_dist(target, player.xy) for player in opponents), default=step)
+        end_clear = min((_dist(target, player.xy) for player in opponents), default=limits["open_space"])
+        lane_clear = _clearance(origin, target, opponents)
         forward = _attack(target, bounds, attacking_positive) - _attack(origin, bounds, attacking_positive)
-        score = 0.02 * forward + 0.03 * clearance
+        nearest_body = min((_dist(target, body) for body in bodies), default=limits["open_space"])
+        crowd = max(0.0, limits["body"] * 2.6 - nearest_body)
+        score = 1.0 * forward + 0.55 * end_clear + 0.30 * lane_clear - 0.85 * crowd
         found.append(
             TacticalOption(
                 kind="dribble",
@@ -192,140 +271,11 @@ def _carries(origin, players, possessor_id, possessor_team, bounds, attacking_po
                 primary=False,
                 alpha=SECONDARY_ALPHA,
                 label="carry",
-                slot=f"dribble:{name}",
+                slot=f"dribble:{angle}",
             )
         )
     found.sort(key=lambda item: item.score, reverse=True)
-    return found[:2]
-
-
-def _shots(origin, bounds, attacking_positive, limits):
-    attack = _attack(origin, bounds, attacking_positive)
-    if attack < limits["shot_min_attack"]:
-        return []
-    return [_shot_option(origin, bounds, attacking_positive, score=0.02 * attack)]
-
-
-def _shot_option(origin, bounds, attacking_positive, score: float) -> TacticalOption:
-    return TacticalOption(
-        kind="shoot",
-        origin=origin,
-        target=opponent_goal(bounds, attacking_positive),
-        score=score,
-        primary=False,
-        alpha=SECONDARY_ALPHA,
-        label="shot",
-        slot="shoot:goal",
-    )
-
-
-def _ensure_recommended(pool, origin, mates, recommended, bounds, attacking_positive, limits):
-    if any(item.kind == recommended for item in pool):
-        return pool
-    if recommended == "shoot":
-        return pool + [_shot_option(origin, bounds, attacking_positive, score=0.01)]
-    if recommended == "pass":
-        if not mates:
-            return pool
-        target = min(mates.values(), key=lambda player: _dist(origin, player.xy))
-        extra = TacticalOption(
-            kind="pass",
-            origin=origin,
-            target=target.xy,
-            score=0.01,
-            primary=False,
-            alpha=SECONDARY_ALPHA,
-            label="pass",
-            target_id=target.track_id,
-            slot=f"pass:{target.track_id}",
-        )
-        return pool + [extra]
-    if recommended == "dribble":
-        sign = 1.0 if attacking_positive else -1.0
-        step = limits["dribble"]
-        target = (
-            _clamp(origin[0] + sign * step, 0.0, bounds[0]),
-            _clamp(origin[1], 0.0, bounds[1]),
-        )
-        extra = TacticalOption(
-            kind="dribble",
-            origin=origin,
-            target=target,
-            score=0.01,
-            primary=False,
-            alpha=SECONDARY_ALPHA,
-            label="carry",
-            slot="dribble:forward",
-        )
-        return pool + [extra]
-    return pool
-
-
-def _pin_to_players_and_goal(pool, mates, bounds, attacking_positive):
-    """Pass heads sit on a teammate. Shot heads sit on the opponent goal."""
-    goal = opponent_goal(bounds, attacking_positive)
-    pinned: list[TacticalOption] = []
-    for item in pool:
-        if item.kind == "shoot":
-            pinned.append(
-                TacticalOption(
-                    kind=item.kind,
-                    origin=item.origin,
-                    target=goal,
-                    score=item.score,
-                    primary=item.primary,
-                    alpha=item.alpha,
-                    label=item.label,
-                    target_id=None,
-                    slot="shoot:goal",
-                )
-            )
-            continue
-        if item.kind != "pass":
-            pinned.append(item)
-            continue
-        mate = mates.get(item.target_id) if item.target_id is not None else None
-        if mate is None:
-            continue
-        pinned.append(
-            TacticalOption(
-                kind="pass",
-                origin=item.origin,
-                target=mate.xy,
-                score=item.score,
-                primary=item.primary,
-                alpha=item.alpha,
-                label="pass",
-                target_id=mate.track_id,
-                slot=f"pass:{mate.track_id}",
-            )
-        )
-    return pinned
-
-
-def _mark_primary(pool: list[TacticalOption], recommended: str) -> list[TacticalOption]:
-    of_kind = [item for item in pool if item.kind == recommended]
-    if not of_kind:
-        return pool
-    best = max(of_kind, key=lambda item: item.score)
-    marked: list[TacticalOption] = []
-    for item in pool:
-        primary = item.slot == best.slot and item.kind == best.kind
-        marked.append(
-            TacticalOption(
-                kind=item.kind,
-                origin=item.origin,
-                target=item.target,
-                score=item.score,
-                primary=primary,
-                alpha=PRIMARY_ALPHA if primary else SECONDARY_ALPHA,
-                label=item.label,
-                target_id=item.target_id,
-                slot=item.slot,
-            )
-        )
-    marked.sort(key=lambda item: item.primary)
-    return marked
+    return found[:1]
 
 
 def is_opponent_goalkeeper(
@@ -350,6 +300,9 @@ def _thresholds(bounds: tuple[float, float], space: str) -> dict[str, float]:
             "shot_min_attack": 62.0,
             "dribble": 11.0,
             "lane": 2.4,
+            "threat": 8.0,
+            "body": 3.2,
+            "open_space": 18.0,
         }
     return {
         "pass_min": 0.04 * length,
@@ -357,6 +310,9 @@ def _thresholds(bounds: tuple[float, float], space: str) -> dict[str, float]:
         "shot_min_attack": 0.58 * length,
         "dribble": 0.12 * length,
         "lane": 0.035 * length,
+        "threat": 0.08 * length,
+        "body": 0.035 * length,
+        "open_space": 0.18 * length,
     }
 
 
@@ -380,6 +336,37 @@ def _clearance(start, end, opponents) -> float:
     if not opponents:
         return 20.0
     return min(_point_segment_distance(player.xy, start, end) for player in opponents)
+
+
+def _intercept_risk(start, end, opponents, threat: float) -> float:
+    """How easily a defender steps onto the pass. 0 is a free lane."""
+    if not opponents or threat <= 1e-6:
+        return 0.0
+    risk = 0.0
+    for player in opponents:
+        along = _segment_param(player.xy, start, end)
+        if along < 0.08 or along > 0.92:
+            continue
+        distance = _point_segment_distance(player.xy, start, end)
+        risk += max(0.0, 1.0 - distance / threat)
+    return risk
+
+
+def _shorten_clear(origin, target, bodies, body_radius: float, min_length: float):
+    """Pull a carry back until its tip is not sitting on a player."""
+    point = target
+    for _ in range(6):
+        if all(_dist(point, body) >= body_radius for body in bodies):
+            break
+        point = (
+            origin[0] + 0.72 * (point[0] - origin[0]),
+            origin[1] + 0.72 * (point[1] - origin[1]),
+        )
+    if _dist(origin, point) < min_length:
+        return None
+    if any(_dist(point, body) < body_radius * 0.8 for body in bodies):
+        return None
+    return point
 
 
 def _point_segment_distance(point, start, end) -> float:

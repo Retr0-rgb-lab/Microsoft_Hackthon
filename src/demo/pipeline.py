@@ -135,12 +135,7 @@ def run_clip(config: DemoConfig) -> RunStats:
     ball_smoother = BallSmoother(hold_frames=config.hold_frames)
     # Possession is decided in the image, where the ball and the feet actually are.
     # A ground-plane projection of the ball centre is a poor contact point.
-    possessor_tracker = PossessorTracker(
-        hold_frames=config.hold_frames,
-        max_distance=0.12 * height,
-        switch_frames=6,
-        commit_distance=0.04 * height,
-    )
+    possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
     teams = TeamBook()
     memory = OverlayMemory()
     foot_trail = FootTrail()
@@ -176,12 +171,7 @@ def run_clip(config: DemoConfig) -> RunStats:
                     foot_trail.retain(set())
                     ball_mark.reset()
                     ball_smoother = BallSmoother(hold_frames=config.hold_frames)
-                    possessor_tracker = PossessorTracker(
-                        hold_frames=config.hold_frames,
-                        max_distance=0.12 * height,
-                        switch_frames=6,
-                        commit_distance=0.04 * height,
-                    )
+                    possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
                     teams = TeamBook()
             previous_tiny = tiny
 
@@ -318,9 +308,13 @@ def run_clip(config: DemoConfig) -> RunStats:
                         xy=track.foot,
                         team=str(team),
                         role=track.role,
+                        velocity=(track.vx, track.vy),
                     )
                 )
+            ball_speed = _dist((0.0, 0.0), ball_smoother.velocity)
             ball_for_possessor = ball_fix.visible
+            # A weak box far from every foot is ignored, unless it is moving
+            # like a pass. BallSmoother already rejected a low-confidence jump.
             if ball_for_possessor and ball_fix.confidence < 0.45 and ball_fix.xy is not None:
                 nearest = min(
                     (
@@ -330,13 +324,14 @@ def run_clip(config: DemoConfig) -> RunStats:
                     ),
                     default=1e9,
                 )
-                if nearest > possessor_tracker.max_distance:
+                if nearest > possessor_tracker.max_distance and ball_speed < possessor_tracker.resolved_flight_speed():
                     ball_for_possessor = False
             possessor = possessor_tracker.update(
                 players,
                 ball_fix.xy,
                 ball_visible=ball_for_possessor,
                 frame_gap=1,
+                ball_velocity=ball_smoother.velocity,
             )
             if possessor.track_id is not None:
                 stats.possessor_frames += 1
@@ -384,7 +379,7 @@ def run_clip(config: DemoConfig) -> RunStats:
                 elapsed = time.perf_counter() - started
                 print(
                     f"frame {stats.frames}  wall {elapsed:.1f}s  "
-                    f"plane {mode}  possessor {possessor.source}",
+                    f"plane {mode}  possessor {possessor.state}:{possessor.source}",
                     flush=True,
                 )
     finally:
@@ -457,7 +452,11 @@ def _compose(
         badges.append("image coordinates")
     if possessor.held:
         badges.append("ball missed — holding possessor")
-    elif possessor.source == "loose":
+    elif possessor.state == "PASS_IN_FLIGHT":
+        badges.append("pass in flight")
+    elif possessor.state == "CONTESTED":
+        badges.append("possession contested")
+    elif possessor.source == "loose" or possessor.state == "LOOSE":
         badges.append("ball loose")
     elif possessor.source == "none":
         badges.append("no possessor")
@@ -558,7 +557,16 @@ def _compose(
         attacking_positive,
         space,
     )
+    visible_mates = {
+        player.track_id
+        for player in working
+        if player.team == possession_team and player.role != "referee" and player.track_id != possessor.track_id
+    }
     for option in options:
+        if not option.primary or option.kind not in ("pass", "dribble"):
+            continue
+        if option.kind == "pass" and option.target_id not in visible_mates:
+            continue
         if space == "pitch" and pitch_to_image is not None:
             projected = project_segment(pitch_to_image, option.origin, option.target)
             if projected is None:
@@ -851,6 +859,21 @@ def _maybe_screenshot(frame, config: DemoConfig, frame_idx: int, fps: float) -> 
         if abs(timestamp - target) <= 0.5 / fps:
             path = config.screenshot_dir / f"t{target:.1f}s.png"
             cv2.imwrite(str(path), frame)
+
+
+def _possessor_tracker(hold_frames: int, width: int, height: int):
+    """Image-space possession. Speeds scale with the frame, not the pitch."""
+    span = float(max(width, height))
+    return PossessorTracker(
+        hold_frames=hold_frames,
+        max_distance=0.12 * height,
+        switch_frames=6,
+        commit_distance=0.04 * height,
+        control_scale=2.4,
+        flight_speed=0.008 * span,
+        touch_rel_speed=0.004 * span,
+        receiver_speed=0.006 * span,
+    )
 
 
 def _dist(a: tuple[float, float], b: tuple[float, float]) -> float:

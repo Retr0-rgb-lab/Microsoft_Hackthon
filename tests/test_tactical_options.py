@@ -1,6 +1,6 @@
-"""Arrows are the reasonable options; the recommended one is the bright arrow."""
+"""The softmax class picks the arrow. Geometry picks the one receiver or carry."""
 
-from demo.options import PRIMARY_ALPHA, SECONDARY_ALPHA, OptionPlayer, build_options
+from demo.options import PRIMARY_ALPHA, OptionPlayer, build_options, opponent_goal
 from demo.teams import TeamBook
 
 
@@ -15,7 +15,7 @@ def _players() -> list[OptionPlayer]:
     ]
 
 
-def test_passes_go_to_teammates_and_the_shot_uses_the_attacking_goal() -> None:
+def test_passes_go_to_one_visible_teammate() -> None:
     options = build_options(
         (78.0, 34.0),
         _players(),
@@ -26,20 +26,35 @@ def test_passes_go_to_teammates_and_the_shot_uses_the_attacking_goal() -> None:
         attacking_positive=True,
         space="pitch",
     )
-    passes = [item for item in options if item.kind == "pass"]
-    assert passes
-    assert all(target != (88.0, 34.0) for _kind, target in ((item.kind, item.target) for item in passes))
-    assert all(item.target != (84.0, 20.0) for item in passes)
-    shot = next(item for item in options if item.kind == "shoot")
-    assert shot.target == (105.0, 34.0)
-    primary = [item for item in options if item.primary]
-    assert len(primary) == 1
-    assert primary[0].kind == "pass"
-    assert primary[0].alpha == PRIMARY_ALPHA
-    assert all(item.alpha == SECONDARY_ALPHA for item in options if not item.primary)
+    assert len(options) == 1
+    arrow = options[0]
+    assert arrow.kind == "pass"
+    assert arrow.primary
+    assert arrow.alpha == PRIMARY_ALPHA
+    assert arrow.target_id in {2, 3, 6}
+    assert arrow.target != (88.0, 34.0)
+    assert arrow.target != (84.0, 20.0)
+    assert arrow.target_id != 4
 
 
-def test_away_shot_points_at_the_left_goal_and_dribble_can_be_highlighted() -> None:
+def test_shoot_and_hold_draw_no_lines() -> None:
+    for recommended in ("shoot", "hold"):
+        options = build_options(
+            (78.0, 34.0),
+            _players(),
+            possessor_id=1,
+            possessor_team="home",
+            recommended=recommended,
+            bounds=(105.0, 68.0),
+            attacking_positive=True,
+            space="pitch",
+        )
+        assert options == []
+    assert opponent_goal((105.0, 68.0), True) == (105.0, 34.0)
+    assert opponent_goal((105.0, 68.0), False) == (0.0, 34.0)
+
+
+def test_dribble_is_one_short_carry_toward_the_attack() -> None:
     options = build_options(
         (20.0, 34.0),
         [OptionPlayer(1, (20.0, 34.0), "away"), OptionPlayer(2, (12.0, 40.0), "away")],
@@ -50,60 +65,134 @@ def test_away_shot_points_at_the_left_goal_and_dribble_can_be_highlighted() -> N
         attacking_positive=False,
         space="pitch",
     )
-    shot = next(item for item in options if item.kind == "shoot")
-    assert shot.target[0] == 0.0
-    primary = next(item for item in options if item.primary)
-    assert primary.kind == "dribble"
-    assert primary.target[0] < 20.0
+    assert len(options) == 1
+    carry = options[0]
+    assert carry.kind == "dribble"
+    assert carry.primary
+    assert carry.target_id is None
+    assert carry.target[0] < 20.0
+    length = ((carry.target[0] - 20.0) ** 2 + (carry.target[1] - 34.0) ** 2) ** 0.5
+    assert length < 9.0
+    # Not a pass drawn at the teammate standing on the left.
+    assert abs(carry.target[0] - 12.0) > 1.0 or abs(carry.target[1] - 40.0) > 1.0
 
 
 def test_image_fallback_options_stay_in_the_frame() -> None:
     width, height = 1920.0, 1080.0
-    options = build_options(
+    players = [
+        OptionPlayer(1, (400.0, 700.0), "home"),
+        OptionPlayer(2, (900.0, 500.0), "home"),
+        OptionPlayer(3, (700.0, 800.0), "away"),
+    ]
+    for recommended in ("pass", "dribble"):
+        options = build_options(
+            (400.0, 700.0),
+            players,
+            possessor_id=1,
+            possessor_team="home",
+            recommended=recommended,
+            bounds=(width, height),
+            attacking_positive=True,
+            space="image",
+        )
+        assert len(options) == 1
+        item = options[0]
+        assert item.kind == recommended
+        assert 0.0 <= item.target[0] <= width
+        assert 0.0 <= item.target[1] <= height
+        assert item.origin == (400.0, 700.0)
+    passed = build_options(
         (400.0, 700.0),
-        [
-            OptionPlayer(1, (400.0, 700.0), "home"),
-            OptionPlayer(2, (900.0, 500.0), "home"),
-            OptionPlayer(3, (700.0, 800.0), "away"),
-        ],
+        players,
         possessor_id=1,
         possessor_team="home",
-        recommended="shoot",
+        recommended="pass",
         bounds=(width, height),
         attacking_positive=True,
         space="image",
     )
-    assert any(item.kind == "shoot" and item.primary for item in options)
-    for item in options:
-        assert 0.0 <= item.target[0] <= width
-        assert 0.0 <= item.target[1] <= height
-        assert item.origin == (400.0, 700.0)
+    assert passed[0].target_id == 2
 
 
-def test_shot_stays_on_the_opponent_goal_when_a_teammate_is_nearby() -> None:
+def test_pass_is_pinned_to_a_teammate_and_not_the_keeper_in_the_goal() -> None:
     options = build_options(
         (80.0, 34.0),
         [
             OptionPlayer(1, (80.0, 34.0), "home"),
-            OptionPlayer(2, (104.0, 34.0), "home"),
+            OptionPlayer(2, (96.0, 34.0), "home"),
             OptionPlayer(3, (100.0, 34.0), "home", role="goalkeeper"),
             OptionPlayer(4, (90.0, 40.0), "away"),
         ],
         possessor_id=1,
         possessor_team="home",
-        recommended="shoot",
+        recommended="pass",
         bounds=(105.0, 68.0),
         attacking_positive=True,
         space="pitch",
     )
-    passes = [item for item in options if item.kind == "pass"]
-    assert passes
-    assert all(item.target_id == 2 for item in passes)
-    assert all(item.target == (104.0, 34.0) for item in passes)
-    shot = next(item for item in options if item.kind == "shoot")
-    assert shot.target == (105.0, 34.0)
-    assert shot.target not in {item.target for item in passes}
-    assert shot.primary
+    assert len(options) == 1
+    arrow = options[0]
+    assert arrow.kind == "pass"
+    assert arrow.primary
+    assert arrow.target_id == 2
+    assert arrow.target == (96.0, 34.0)
+
+
+def test_open_progressive_pass_beats_a_tiny_dump() -> None:
+    """Clearance, not raw shortness, picks the receiver. Both passes are legal."""
+    options = build_options(
+        (50.0, 34.0),
+        [
+            OptionPlayer(1, (50.0, 34.0), "home"),
+            OptionPlayer(2, (56.0, 42.0), "home"),
+            OptionPlayer(3, (76.0, 34.0), "home"),
+            OptionPlayer(8, (58.0, 44.0), "away"),
+            OptionPlayer(9, (20.0, 10.0), "away"),
+        ],
+        possessor_id=1,
+        possessor_team="home",
+        recommended="pass",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    assert len(options) == 1
+    arrow = options[0]
+    dump = ((56.0 - 50.0) ** 2 + (42.0 - 34.0) ** 2) ** 0.5
+    progressive = 76.0 - 50.0
+    assert progressive > dump + 10.0
+    assert arrow.target_id == 3
+    assert arrow.target == (76.0, 34.0)
+    assert arrow.primary
+
+
+def test_dribble_aims_at_open_space_instead_of_a_player() -> None:
+    options = build_options(
+        (40.0, 34.0),
+        [
+            OptionPlayer(1, (40.0, 34.0), "home"),
+            OptionPlayer(2, (62.0, 34.0), "home"),
+            OptionPlayer(4, (49.0, 34.0), "away"),
+            OptionPlayer(5, (51.0, 33.0), "away"),
+            OptionPlayer(6, (51.0, 35.0), "away"),
+        ],
+        possessor_id=1,
+        possessor_team="home",
+        recommended="dribble",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    assert len(options) == 1
+    carry = options[0]
+    assert carry.kind == "dribble"
+    assert carry.target_id is None
+    assert carry.target[0] > 40.0
+    # Straight ahead is a wall of opponents, so the carry leaves that line.
+    assert abs(carry.target[1] - 34.0) > 2.0
+    for player_xy in ((62.0, 34.0), (49.0, 34.0), (51.0, 33.0), (51.0, 35.0)):
+        gap = ((carry.target[0] - player_xy[0]) ** 2 + (carry.target[1] - player_xy[1]) ** 2) ** 0.5
+        assert gap > 3.2
 
 
 def test_team_colours_lock_the_left_side_as_home() -> None:

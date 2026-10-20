@@ -1,10 +1,10 @@
-"""Temporal hold for the recommendation and the arrows drawn around it.
+"""Temporal hold for the recommendation and the single arrow drawn for it.
 
-The softmax argmax and the top pass can swap on adjacent frames when feet
-jitter by a metre. Displayed probabilities are an exponential average. The
-highlighted action changes only after the new leader has stayed ahead, and a
-pass arrow stays on the same teammate until they are no longer a legal
-receiver.
+The softmax argmax can swap on adjacent frames when feet jitter. Displayed
+probabilities are an exponential average, and the highlighted class changes
+only after the new leader has stayed ahead. A pass arrow stays on the same
+visible teammate until a better receiver has earned the switch. Shoot and
+hold are not drawn.
 """
 
 from __future__ import annotations
@@ -13,11 +13,10 @@ from dataclasses import dataclass, field
 
 from demo.options import (
     PRIMARY_ALPHA,
-    SECONDARY_ALPHA,
     OptionPlayer,
     TacticalOption,
+    build_options,
     is_opponent_goalkeeper,
-    opponent_goal,
     pass_window,
 )
 from inside_the_game.labels import ACTION_LABELS
@@ -137,6 +136,7 @@ class OverlayMemory:
         space: str,
         recommended: str,
     ) -> list[TacticalOption]:
+        """One primary arrow for the held class. No secondary passes, shots, or holds."""
         mates = {
             player.track_id: player
             for player in players
@@ -146,168 +146,150 @@ class OverlayMemory:
             and possessor_team in ("home", "away")
             and not is_opponent_goalkeeper(player, attacking_positive, bounds)
         }
-        by_id = {
+        if recommended == "pass":
+            return self._one_pass(options, mates, players, origin, possessor_team, bounds, attacking_positive, space)
+        if recommended == "dribble":
+            self.shown_passes = []
+            return self._one_dribble(
+                options, players, origin, possessor_team, bounds, attacking_positive, space
+            )
+        self.shown_passes = []
+        return []
+
+    def _one_pass(
+        self,
+        options: list[TacticalOption],
+        mates: dict[int, OptionPlayer],
+        players: list[OptionPlayer],
+        origin: tuple[float, float],
+        possessor_team: str,
+        bounds: tuple[float, float],
+        attacking_positive: bool,
+        space: str,
+    ) -> list[TacticalOption]:
+        low, high = pass_window(bounds, space)
+        if not any(item.kind == "pass" for item in options) and self.possessor_id is not None:
+            options = build_options(
+                origin,
+                players,
+                self.possessor_id,
+                possessor_team,
+                "pass",
+                bounds=bounds,
+                attacking_positive=attacking_positive,
+                space=space,
+            )
+        incoming = {
             item.target_id: item
             for item in options
             if item.kind == "pass" and item.target_id in mates
         }
-        for target_id in list(self.pass_pending):
-            if target_id not in by_id:
-                self.pass_pending[target_id] = 0
-        for target_id in by_id:
-            self.pass_pending[target_id] = self.pass_pending.get(target_id, 0) + 1
-
-        low, high = pass_window(bounds, space)
-        selected: list[int] = []
-        for target_id in self.shown_passes:
-            player = mates.get(target_id)
-            if player is None:
-                self.pass_absent.pop(target_id, None)
-                continue
-            distance = _dist(origin, player.xy)
-            legal = target_id in by_id or low * 0.7 <= distance <= high * 1.2
-            if not legal:
-                missed = self.pass_absent.get(target_id, 0) + 1
-                self.pass_absent[target_id] = missed
-                if missed > self.grace_frames:
-                    continue
+        stored = self.shown_passes[0] if self.shown_passes else None
+        if stored not in mates:
+            stored = None
+        else:
+            distance = _dist(origin, mates[stored].xy)
+            if not low * 0.75 <= distance <= high * 1.05:
+                stored = None
+        best = max(incoming.values(), key=lambda item: item.score) if incoming else None
+        chosen = stored
+        if chosen is None:
+            self.pass_pending.clear()
+            chosen = None if best is None else best.target_id
+        elif best is not None and best.target_id != chosen:
+            current_score = incoming[chosen].score if chosen in incoming else None
+            better = current_score is None or best.score > current_score + 0.04
+            if not better:
+                self.pass_pending.clear()
             else:
-                self.pass_absent[target_id] = 0
-            selected.append(target_id)
-
-        ranked = sorted(by_id, key=lambda target_id: by_id[target_id].score, reverse=True)
-        if not self.shown_passes:
-            for target_id in ranked:
-                if target_id not in selected:
-                    selected.append(target_id)
-                if len(selected) >= 3:
-                    break
+                count = self.pass_pending.get(best.target_id, 0) + 1
+                self.pass_pending = {best.target_id: count}
+                if count >= self.enter_frames:
+                    chosen = best.target_id
+                    self.pass_pending.clear()
         else:
-            for target_id in ranked:
-                if target_id in selected:
-                    continue
-                if self.pass_pending.get(target_id, 0) >= self.enter_frames:
-                    selected.append(target_id)
-                if len(selected) >= 3:
-                    break
-        selected = selected[:3]
-        self.shown_passes = list(selected)
-
-        built: list[TacticalOption] = []
-        for target_id in selected:
-            player = mates[target_id]
-            score = by_id[target_id].score if target_id in by_id else 0.0
-            built.append(
-                TacticalOption(
-                    kind="pass",
-                    origin=origin,
-                    target=player.xy,
-                    score=score,
-                    primary=False,
-                    alpha=SECONDARY_ALPHA,
-                    label="pass",
-                    target_id=target_id,
-                    slot=f"pass:{target_id}",
-                )
-            )
-
-        carries = [item for item in options if item.kind == "dribble"]
-        carries.sort(key=lambda item: item.slot)
-        built.extend(carries)
-
-        shot_now = next((item for item in options if item.kind == "shoot"), None)
-        if shot_now is not None:
-            self.shot_seen = True
-            self.shot_absent = 0
-        elif self.shot_seen:
-            self.shot_absent += 1
-        if shot_now is not None or (self.shot_seen and self.shot_absent <= self.grace_frames):
-            score = shot_now.score if shot_now is not None else 0.01
-            built.append(
-                TacticalOption(
-                    kind="shoot",
-                    origin=origin,
-                    target=opponent_goal(bounds, attacking_positive),
-                    score=score,
-                    primary=False,
-                    alpha=SECONDARY_ALPHA,
-                    label="shot",
-                    slot="shoot:goal",
-                )
-            )
-
-        hold = next((item for item in options if item.kind == "hold"), None)
-        if hold is not None:
-            built.append(
-                TacticalOption(
-                    kind="hold",
-                    origin=origin,
-                    target=origin,
-                    score=hold.score,
-                    primary=False,
-                    alpha=SECONDARY_ALPHA,
-                    label="hold",
-                    slot="hold",
-                )
-            )
-        return _mark_slot(built, self._primary_slot(built, recommended))
-
-    def _primary_slot(self, options: list[TacticalOption], recommended: str) -> str | None:
-        candidates = [item for item in options if item.kind == recommended and item.slot]
-        if not candidates:
-            self.primary_slot = None
-            self.primary_pending = None
-            self.primary_count = 0
-            return None
-        best = max(candidates, key=lambda item: item.score)
-        slots = {item.slot for item in candidates}
-        if self.primary_slot not in slots:
-            self.primary_slot = best.slot
-            self.primary_pending = None
-            self.primary_count = 0
-            return self.primary_slot
-        if best.slot == self.primary_slot:
-            self.primary_pending = None
-            self.primary_count = 0
-            return self.primary_slot
-        current = next(item for item in candidates if item.slot == self.primary_slot)
-        if best.score <= current.score + 0.04:
-            self.primary_pending = None
-            self.primary_count = 0
-            return self.primary_slot
-        if self.primary_pending != best.slot:
-            self.primary_pending = best.slot
-            self.primary_count = 1
-        else:
-            self.primary_count += 1
-        if self.primary_count >= self.switch_frames:
-            self.primary_slot = best.slot
-            self.primary_pending = None
-            self.primary_count = 0
-        return self.primary_slot
-
-
-def _mark_slot(options: list[TacticalOption], slot: str | None) -> list[TacticalOption]:
-    if slot is None:
-        return options
-    marked: list[TacticalOption] = []
-    for item in options:
-        primary = item.slot == slot
-        marked.append(
+            self.pass_pending.clear()
+        if chosen is None or chosen not in mates:
+            self.shown_passes = []
+            return []
+        self.shown_passes = [chosen]
+        player = mates[chosen]
+        score = incoming[chosen].score if chosen in incoming else 0.0
+        return [
             TacticalOption(
-                kind=item.kind,
-                origin=item.origin,
-                target=item.target,
-                score=item.score,
-                primary=primary,
-                alpha=PRIMARY_ALPHA if primary else item.alpha,
-                label=item.label,
-                target_id=item.target_id,
-                slot=item.slot,
+                kind="pass",
+                origin=origin,
+                target=player.xy,
+                score=score,
+                primary=True,
+                alpha=PRIMARY_ALPHA,
+                label="pass",
+                target_id=chosen,
+                slot=f"pass:{chosen}",
             )
-        )
-    marked.sort(key=lambda item: (item.primary, item.slot))
-    return marked
+        ]
+
+    def _one_dribble(
+        self,
+        options: list[TacticalOption],
+        players: list[OptionPlayer],
+        origin: tuple[float, float],
+        possessor_team: str,
+        bounds: tuple[float, float],
+        attacking_positive: bool,
+        space: str,
+    ) -> list[TacticalOption]:
+        carries = [item for item in options if item.kind == "dribble"]
+        if not carries and self.possessor_id is not None:
+            carries = build_options(
+                origin,
+                players,
+                self.possessor_id,
+                possessor_team,
+                "dribble",
+                bounds=bounds,
+                attacking_positive=attacking_positive,
+                space=space,
+            )
+        if not carries:
+            return []
+        best = max(carries, key=lambda item: item.score)
+        by_slot = {item.slot: item for item in carries}
+        chosen = best
+        if self.primary_slot in by_slot and self.primary_slot != best.slot:
+            current = by_slot[self.primary_slot]
+            if best.score <= current.score + 0.15:
+                chosen = current
+                self.primary_pending = None
+                self.primary_count = 0
+            else:
+                if self.primary_pending != best.slot:
+                    self.primary_pending = best.slot
+                    self.primary_count = 1
+                else:
+                    self.primary_count += 1
+                if self.primary_count < self.switch_frames:
+                    chosen = current
+                else:
+                    self.primary_pending = None
+                    self.primary_count = 0
+        else:
+            self.primary_pending = None
+            self.primary_count = 0
+        self.primary_slot = chosen.slot
+        return [
+            TacticalOption(
+                kind="dribble",
+                origin=chosen.origin,
+                target=chosen.target,
+                score=chosen.score,
+                primary=True,
+                alpha=PRIMARY_ALPHA,
+                label="carry",
+                target_id=None,
+                slot=chosen.slot,
+            )
+        ]
 
 
 def _dist(a: tuple[float, float], b: tuple[float, float]) -> float:
