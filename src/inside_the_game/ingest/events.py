@@ -1,9 +1,11 @@
-"""Synthetic match-event state. JSON and text only."""
+"""Match-event state. JSON and text only."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
+
+from inside_the_game.labels import ACTION_LABELS
 
 
 PITCH_LENGTH = 105.0
@@ -12,7 +14,11 @@ PITCH_WIDTH = 68.0
 
 @dataclass(frozen=True)
 class MatchEvent:
-    """One on-ball decision state from a synthetic match."""
+    """One on-ball decision state.
+
+    ``action`` is the training label when the event came from a labeled
+    source. System 1 does not read it. Unlabeled fixtures leave it unset.
+    """
 
     event_id: str
     match_id: str
@@ -28,10 +34,16 @@ class MatchEvent:
     pressure: float
     zone: str
     context: str
+    action: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.action is not None and self.action not in ACTION_LABELS:
+            raise ValueError(f"{self.event_id}: action must be one of {ACTION_LABELS}")
+        _validate_ranges(self)
 
     def to_json_state(self) -> dict[str, Any]:
         """Serializable state for System 1. No image or frame fields."""
-        return {
+        payload: dict[str, Any] = {
             "event_id": self.event_id,
             "match_id": self.match_id,
             "minute": self.minute,
@@ -45,6 +57,9 @@ class MatchEvent:
             "zone": self.zone,
             "context": self.context,
         }
+        if self.action is not None:
+            payload["action"] = self.action
+        return payload
 
 
 def event_from_dict(payload: dict[str, Any], *, match_id: str) -> MatchEvent:
@@ -68,9 +83,26 @@ def event_from_dict(payload: dict[str, Any], *, match_id: str) -> MatchEvent:
         pressure=float(payload.get("pressure", 0.0)),
         zone=str(payload.get("zone") or ""),
         context=str(payload.get("context") or ""),
+        action=_optional_action(payload),
     )
-    _validate_ranges(event)
     return event
+
+
+def zone_name(ball_x: float, ball_y: float, possession_team: str) -> str:
+    """Coarse pitch zone in the possession team's attacking direction."""
+    attacking_right = possession_team == "home"
+    attack_x = ball_x if attacking_right else PITCH_LENGTH - ball_x
+    attack_y = ball_y if attacking_right else PITCH_WIDTH - ball_y
+    in_wide = attack_y < 14.0 or attack_y > PITCH_WIDTH - 14.0
+    if attack_x >= 88.5 and 14.0 <= attack_y <= PITCH_WIDTH - 14.0:
+        return "attacking_box"
+    if attack_x >= 70.0 and in_wide:
+        return "attacking_wide"
+    if attack_x >= 70.0:
+        return "attacking_third"
+    if attack_x >= 35.0:
+        return "middle_third"
+    return "defensive_third"
 
 
 def _require_str(payload: dict[str, Any], key: str) -> str:
@@ -78,6 +110,15 @@ def _require_str(payload: dict[str, Any], key: str) -> str:
     if not isinstance(value, str) or not value:
         raise ValueError(f"event field {key} must be a non-empty string")
     return value
+
+
+def _optional_action(payload: dict[str, Any]) -> str | None:
+    if "action" not in payload or payload["action"] is None:
+        return None
+    action = payload["action"]
+    if action not in ACTION_LABELS:
+        raise ValueError(f"action must be one of {ACTION_LABELS}")
+    return str(action)
 
 
 def _require_int(payload: dict[str, Any], key: str) -> int:

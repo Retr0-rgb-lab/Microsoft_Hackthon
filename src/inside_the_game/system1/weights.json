@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "feature_names": [
+    "ball_x",
+    "ball_y",
+    "centrality",
+    "pressure",
+    "minute",
+    "goal_diff"
+  ],
+  "labels": [
+    "pass",
+    "shoot",
+    "dribble",
+    "hold"
+  ],
+  "bias": {
+    "pass": 1.412303,
+    "shoot": -1.653515,
+    "dribble": 0.751214,
+    "hold": -0.510002
+  },
+  "weights": {
+    "pass": [
+      -0.747702,
+      -0.145801,
+      -0.861612,
+      -1.019735,
+      0.287423,
+      0.277217
+    ],
+    "shoot": [
+      1.858643,
+      0.117769,
+      1.130539,
+      -0.91646,
+      0.304226,
+      0.283289
+    ],
+    "dribble": [
+      -0.544164,
+      0.029922,
+      -0.884672,
+      0.132064,
+      0.30836,
+      0.380712
+    ],
+    "hold": [
+      -0.566777,
+      -0.00189,
+      0.615744,
+      1.804131,
+      -0.900009,
+      -0.941218
+    ]
+  },
+  "training": {
+    "steps": 500,
+    "learning_rate": 1.2,
+    "l2": 0.02,
+    "class_weighted": true,
+    "counts": {
+      "pass": 1187,
+      "shoot": 35,
+      "dribble": 968,
+      "hold": 10
+    }
+  },
+  "fit_on": "statsbomb-open-data:69284 + synthetic:seed-7",
+  "mapping_rule": "Pass→pass, Shot→shoot, Carry/Dribble→dribble. Every other StatsBomb type is skipped and is not labeled hold. Mapped events missing a player or a location are skipped.",
+  "hold_labels": "Synthetic sequences only. StatsBomb context events are skipped, not labeled hold."
+}
