@@ -1,0 +1,59 @@
+{
+  "match_id": "syn-001",
+  "source": "synthetic",
+  "note": "JSON/text match state only. No images or video frames.",
+  "events": [
+    {
+      "event_id": "syn-001-01",
+      "minute": 12,
+      "second": 8,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {"x": 48.0, "y": 34.0},
+      "score": {"home": 0, "away": 0},
+      "possession_team": "home",
+      "pressure": 0.35,
+      "zone": "middle_third",
+      "context": "Open play in central midfield with two short passing options."
+    },
+    {
+      "event_id": "syn-001-02",
+      "minute": 27,
+      "second": 41,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {"x": 94.0, "y": 36.0},
+      "score": {"home": 0, "away": 0},
+      "possession_team": "home",
+      "pressure": 0.22,
+      "zone": "attacking_box",
+      "context": "Ball in the attacking box, goalkeeper slightly off the near post."
+    },
+    {
+      "event_id": "syn-001-03",
+      "minute": 51,
+      "second": 3,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {"x": 87.0, "y": 20.0},
+      "score": {"home": 1, "away": 0},
+      "possession_team": "away",
+      "pressure": 0.81,
+      "zone": "defensive_third",
+      "context": "Pressed on the left of the defensive third, back line nearby."
+    },
+    {
+      "event_id": "syn-001-04",
+      "minute": 73,
+      "second": 16,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {"x": 27.0, "y": 62.0},
+      "score": {"home": 1, "away": 1},
+      "possession_team": "away",
+      "pressure": 0.18,
+      "zone": "attacking_wide",
+      "context": "Space on the right touchline in the attacking third."
+    }
+  ]
+}

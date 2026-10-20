@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inside-the-game"
+version = "0.1.0"
+description = "MVP decision aid: full action distributions over pass, shoot, dribble, and hold."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# Optional System 1 backend. The softmax policy and the test suite do not need it.
+jev = ["typesafe-sdk"]
+
+[project.scripts]
+inside-the-game = "inside_the_game.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
