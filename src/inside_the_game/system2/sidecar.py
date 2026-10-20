@@ -50,3 +50,26 @@ def xt_vaep_sidecar(event: MatchEvent) -> XTVAEPSidecar:
             "socceraction.vaep.VAEP. Explanation sidecar only."
         ),
     )
+
+
+def sidecar_narrative(sidecar: XTVAEPSidecar) -> str:
+    """One sentence for the explanation.
+
+    The stub has no fitted value, so the sentence keeps the TODO instead of
+    inventing an xT or VAEP number. A later offline fit can fill the fields;
+    this function will then quote those numbers and still will not rank an action.
+    """
+    if sidecar.xt is None and sidecar.vaep_offensive is None and sidecar.vaep_defensive is None:
+        return f"xT/VAEP is not fitted for this event ({sidecar.status}). {sidecar.detail}"
+    parts: list[str] = []
+    if sidecar.xt is not None:
+        parts.append(f"xT {sidecar.xt:.3f}")
+    if sidecar.vaep_offensive is not None:
+        parts.append(f"VAEP offensive {sidecar.vaep_offensive:.3f}")
+    if sidecar.vaep_defensive is not None:
+        parts.append(f"VAEP defensive {sidecar.vaep_defensive:.3f}")
+    return (
+        "Explanation sidecar only, not an action ranking: "
+        + ", ".join(parts)
+        + f". Status: {sidecar.status}."
+    )

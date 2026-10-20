@@ -1,4 +1,4 @@
-"""Present the full action distribution as bars and arrow placeholders."""
+"""Present the full action distribution as bars, arrows, and the explanation."""
 
 from inside_the_game.present.overlay import ReplayOverlay, format_overlay, render_overlay
 

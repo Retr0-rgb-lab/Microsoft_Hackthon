@@ -1,4 +1,9 @@
-"""System 2 explain and personalize hooks. Foundry/LLM-shaped, offline."""
+"""System 2 explain. Default rationale is an offline template.
+
+``explain`` takes one match event and a System 1 distribution and returns
+short football text. A Foundry-shaped chat body is built and stored; it is
+not sent. Pass ``local_llm`` only to replace the template with a local model.
+"""
 
 from __future__ import annotations
 
@@ -7,7 +12,9 @@ from dataclasses import dataclass
 
 from inside_the_game.ingest.events import MatchEvent
 from inside_the_game.system1.policy import ActionDistribution
+from inside_the_game.system2.local_llm import LocalRationale
 from inside_the_game.system2.sidecar import XTVAEPSidecar, xt_vaep_sidecar
+from inside_the_game.system2.template import template_rationale
 
 
 _ROLES = ("neutral", "fan", "analyst", "player")
@@ -26,31 +33,53 @@ class ViewerProfile:
 
 @dataclass(frozen=True)
 class Explanation:
-    """Local explanation plus the message body a Foundry deployment would receive."""
+    """Offline rationale plus the message body a Foundry deployment would receive.
+
+    ``messages`` is local data. Nothing in this package posts it.
+    ``source`` is ``template`` unless the caller passed ``local_llm``.
+    """
 
     event_id: str
     text: str
     messages: tuple[dict[str, str], ...]
     sidecar: XTVAEPSidecar
     profile_role: str
+    source: str
 
 
 def explain(
     event: MatchEvent,
     distribution: ActionDistribution,
     profile: ViewerProfile | None = None,
+    *,
+    local_llm: LocalRationale | None = None,
 ) -> Explanation:
-    """Explain the full distribution. Probabilities are left unchanged."""
+    """Explain the full distribution. Probabilities are left unchanged.
+
+    The default path formats ``template_rationale`` and does not use the
+    network. ``local_llm`` is optional and off when omitted.
+    """
     viewer = profile or ViewerProfile()
     sidecar = xt_vaep_sidecar(event)
     messages = foundry_messages(event, distribution, sidecar, viewer)
-    text = personalize(_local_explanation(event, distribution, sidecar), viewer)
+    if local_llm is None:
+        raw = template_rationale(event, distribution, sidecar)
+        source = "template"
+    else:
+        raw = local_llm.rationale(event, distribution, viewer).strip()
+        if not raw:
+            raw = template_rationale(event, distribution, sidecar)
+            source = "template"
+        else:
+            source = "local_llm"
+    text = personalize(raw, viewer)
     return Explanation(
         event_id=event.event_id,
         text=text,
         messages=tuple(messages),
         sidecar=sidecar,
         profile_role=viewer.role,
+        source=source,
     )
 
 
@@ -95,21 +124,3 @@ def personalize(text: str, profile: ViewerProfile) -> str:
         "player": "For the player on the ball: ",
     }
     return prefixes[profile.role] + text
-
-
-def _local_explanation(
-    event: MatchEvent,
-    distribution: ActionDistribution,
-    sidecar: XTVAEPSidecar,
-) -> str:
-    shares = ", ".join(
-        f"{label} {probability:.0%}" for label, probability in distribution.probabilities.items()
-    )
-    return (
-        f"At {event.minute}:{event.second:02d}, {event.player} ({event.team}) "
-        f"has the ball at ({event.ball_x:.0f}, {event.ball_y:.0f}) "
-        f"with pressure {event.pressure:.2f}. "
-        f"The action distribution is {shares}. "
-        f"This decision aid shows the full distribution. "
-        f"xT/VAEP sidecar status: {sidecar.status}. {sidecar.detail}"
-    )

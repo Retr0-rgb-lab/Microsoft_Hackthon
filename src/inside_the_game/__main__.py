@@ -10,7 +10,6 @@ def main() -> None:
     frames = run_mvp()
     for frame in frames:
         print(format_overlay(frame.overlay))
-        print(frame.explanation.text)
         print()
 
 

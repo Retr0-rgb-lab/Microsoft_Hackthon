@@ -1,4 +1,4 @@
-"""Replay overlay: probability bars and arrow placeholders for every action."""
+"""Replay overlay: probability bars, arrow placeholders, and the rationale."""
 
 from __future__ import annotations
 
@@ -56,10 +56,15 @@ class ReplayOverlay:
     player: str
     actions: tuple[ActionOverlay, ...]
     disclaimer: str
+    explanation: str = ""
 
 
-def render_overlay(event: MatchEvent, distribution: ActionDistribution) -> ReplayOverlay:
-    """Build bars and arrows for all four actions, in label order."""
+def render_overlay(
+    event: MatchEvent,
+    distribution: ActionDistribution,
+    explanation: str | None = None,
+) -> ReplayOverlay:
+    """Build bars and arrows for all four actions, plus the rationale text."""
     targets = _arrow_targets(event)
     actions = []
     for label in ACTION_LABELS:
@@ -86,6 +91,7 @@ def render_overlay(event: MatchEvent, distribution: ActionDistribution) -> Repla
         player=event.player,
         actions=tuple(actions),
         disclaimer=DECISION_AID_NOTE,
+        explanation=(explanation or "").strip(),
     )
 
 
@@ -101,6 +107,8 @@ def format_overlay(overlay: ReplayOverlay) -> str:
             f"  {item.action:<7} {item.probability:0.3f}  {item.bar}  "
             f"arrow {item.arrow.glyph} ({target_x:.1f}, {target_y:.1f}) {item.arrow.note}"
         )
+    if overlay.explanation:
+        lines.append(f"explanation: {overlay.explanation}")
     return "\n".join(lines)
 
 
