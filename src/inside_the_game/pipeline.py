@@ -39,7 +39,7 @@ def run_mvp(
     for event in match_events:
         distribution = policy.predict(event)
         explanation = explain(event, distribution, profile)
-        overlay = render_overlay(event, distribution)
+        overlay = render_overlay(event, distribution, explanation.text)
         frames.append(
             DecisionFrame(
                 event=event,

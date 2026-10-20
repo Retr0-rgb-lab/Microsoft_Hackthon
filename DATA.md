@@ -83,4 +83,6 @@ If `weights.json` is missing, `SoftmaxActionPolicy` keeps the original hand-set 
 
 Wyscout and SoccerNet are optional later computer-vision sources. They are not downloaded or parsed in this repository.
 
-No third-party inference APIs.
+socceraction is not a dependency. xT / VAEP stays an explanation sidecar stub (`TODO` in `src/inside_the_game/system2/sidecar.py`). The rationale mentions that status and does not download a model.
+
+No third-party inference APIs. System 2's default `explain` path is a local template. A local model is used only when the caller passes `local_llm`.
