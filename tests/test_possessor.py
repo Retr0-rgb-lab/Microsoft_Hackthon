@@ -1,6 +1,6 @@
 """Possessor identity stays put when the ball disappears or jitters."""
 
-from demo.possessor import BallSmoother, PlayerFix, PossessorTracker
+from demo.possessor import BallMark, BallSmoother, FootTrail, PlayerFix, PossessorTracker
 from demo.tracking import TrackState, predict_tracks, velocities_from_previous
 
 
@@ -22,6 +22,24 @@ def test_nearest_player_with_hysteresis() -> None:
     assert sticky.track_id == 1
     stolen = tracker.update(_players(), (39.0, 20.5), ball_visible=True)
     assert stolen.track_id == 2
+
+
+def test_a_nearby_opponent_does_not_steal_the_ball_in_one_frame() -> None:
+    players = [
+        PlayerFix(1, (20.0, 34.0), "home"),
+        PlayerFix(2, (40.0, 20.0), "home"),
+        PlayerFix(3, (32.0, 40.0), "away"),
+    ]
+    tracker = PossessorTracker(max_distance=20.0, switch_ratio=1.35, switch_frames=3, commit_distance=1.0)
+    assert tracker.update(players, (21.0, 34.0), ball_visible=True).track_id == 1
+    # Away is clearly closer, but not on top of the ball, so the arrows stay.
+    for _ in range(2):
+        held = tracker.update(players, (30.0, 39.0), ball_visible=True)
+        assert held.track_id == 1
+        assert held.team == "home"
+    stolen = tracker.update(players, (30.0, 39.0), ball_visible=True)
+    assert stolen.track_id == 3
+    assert stolen.team == "away"
 
 
 def test_missed_ball_holds_then_expires() -> None:
@@ -58,6 +76,36 @@ def test_ball_smoother_coasts_and_rejects_a_jump() -> None:
     trusted = smoother.update((11.0, 10.0), visible=True, confidence=0.9, max_jump=5.0)
     assert trusted.held is False
     assert trusted.xy == (11.0, 10.0)
+
+
+def test_ball_mark_hides_a_jump_and_a_detection_far_from_the_feet() -> None:
+    mark = BallMark(max_jump=30.0, max_foot_gap=40.0, stable_needed=3)
+    foot = (100.0, 200.0)
+    assert mark.update((102.0, 198.0), visible=True, possessor_foot=foot) is None
+    assert mark.update((104.0, 202.0), visible=True, possessor_foot=foot) is None
+    shown = mark.update((103.0, 201.0), visible=True, possessor_foot=foot)
+    assert shown is not None
+    assert abs(shown[0] - 103.0) < 5.0
+    frozen = mark.update(None, visible=False, possessor_foot=foot)
+    assert frozen == shown
+    for _ in range(mark.hold_gaps):
+        frozen = mark.update(None, visible=False, possessor_foot=foot)
+    assert frozen is None
+    wild = BallMark(max_jump=30.0, max_foot_gap=40.0, stable_needed=2)
+    wild.update((10.0, 10.0), visible=True, possessor_foot=(12.0, 10.0))
+    assert wild.update((80.0, 10.0), visible=True, possessor_foot=(12.0, 10.0)) is None
+    far = BallMark(max_jump=30.0, max_foot_gap=15.0, stable_needed=1)
+    assert far.update((50.0, 10.0), visible=True, possessor_foot=(10.0, 10.0)) is None
+
+
+def test_foot_trail_stays_near_the_foot_instead_of_snapping_around() -> None:
+    trail = FootTrail(alpha=0.5)
+    first = trail.smooth(1, (0.0, 0.0), snap_at=50.0)
+    second = trail.smooth(1, (10.0, 0.0), snap_at=50.0)
+    assert first == (0.0, 0.0)
+    assert second == (5.0, 0.0)
+    snapped = trail.smooth(1, (400.0, 0.0), snap_at=50.0)
+    assert snapped == (400.0, 0.0)
 
 
 def test_tracks_advance_between_detections() -> None:

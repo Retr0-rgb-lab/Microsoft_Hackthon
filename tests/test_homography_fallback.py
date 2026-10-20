@@ -5,6 +5,7 @@ import pytest
 from demo.geometry import (
     apply_homography,
     assess_homography,
+    clip_polyline,
     invert_homography,
     is_detection_frame,
     pitch_vertices_m,
@@ -80,3 +81,12 @@ def test_stride_selects_every_nth_frame() -> None:
     ]
     with pytest.raises(ValueError):
         is_detection_frame(0, 0)
+
+
+def test_offscreen_shot_tip_stops_on_the_frame_border() -> None:
+    clipped = clip_polyline(((400.0, 500.0), (4000.0, 500.0), (5000.0, 500.0)), 1920.0, 1080.0)
+    assert clipped is not None
+    assert clipped[0] == (400.0, 500.0)
+    assert clipped[-1][0] == pytest.approx(1913.0)
+    assert clipped[-1][1] == pytest.approx(500.0)
+    assert all(0.0 <= point[0] <= 1920.0 and 0.0 <= point[1] <= 1080.0 for point in clipped)

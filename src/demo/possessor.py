@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass(frozen=True)
@@ -100,8 +100,14 @@ class PossessorTracker:
     max_distance: float = 6.0
     hold_frames: int = 15
     switch_ratio: float = 1.35
+    # A different team has to be nearer for this many visible frames before
+    # the arrows flip to their goal. One noisy ball box must not do it.
+    switch_frames: int = 5
+    commit_distance: float | None = None
     current_id: int | None = None
     missing: int = 0
+    pending_id: int | None = None
+    pending_count: int = 0
 
     def update(
         self,
@@ -165,11 +171,140 @@ class PossessorTracker:
         nearest_distance, nearest = ranked[0]
         current = indexed.get(self.current_id) if self.current_id is not None else None
         if current is None:
+            self.pending_id = None
+            self.pending_count = 0
             return nearest
         current_distance = _dist(current.xy, ball_xy)
         if current_distance <= self.max_distance and current_distance <= nearest_distance * self.switch_ratio:
+            self.pending_id = None
+            self.pending_count = 0
             return current
+        if nearest.track_id == current.track_id:
+            self.pending_id = None
+            self.pending_count = 0
+            return current
+        cross_team = (
+            nearest.team != current.team
+            and nearest.team in ("home", "away")
+            and current.team in ("home", "away")
+        )
+        commit = self.max_distance * 0.35 if self.commit_distance is None else self.commit_distance
+        if cross_team and nearest_distance > commit:
+            if self.pending_id == nearest.track_id:
+                self.pending_count += 1
+            else:
+                self.pending_id = nearest.track_id
+                self.pending_count = 1
+            if self.pending_count < self.switch_frames:
+                return current
+        self.pending_id = None
+        self.pending_count = 0
         return nearest
+
+
+@dataclass
+class FootTrail:
+    """Image-space foot point for the possessor ring and arrow tails.
+
+    A short average keeps the marker on the feet. A teleport (id reuse, a
+    cut) snaps instead of sliding across the frame.
+    """
+
+    alpha: float = 0.30
+    points: dict[int, tuple[float, float]] = field(default_factory=dict)
+
+    def smooth(
+        self,
+        track_id: int,
+        xy: tuple[float, float],
+        *,
+        snap_at: float,
+    ) -> tuple[float, float]:
+        previous = self.points.get(track_id)
+        if previous is None or _dist(previous, xy) >= snap_at:
+            self.points[track_id] = xy
+            return xy
+        blended = (
+            (1.0 - self.alpha) * previous[0] + self.alpha * xy[0],
+            (1.0 - self.alpha) * previous[1] + self.alpha * xy[1],
+        )
+        self.points[track_id] = blended
+        return blended
+
+    def retain(self, live: set[int]) -> None:
+        for track_id in list(self.points):
+            if track_id not in live:
+                del self.points[track_id]
+
+
+@dataclass
+class BallMark:
+    """Light ball graphic. Unstable or far-from-feet detections are hidden.
+
+    The mark does not coast on velocity. Possession still uses
+    ``BallSmoother``, which keeps the hold and the low-confidence jump reject.
+    """
+
+    max_jump: float = 80.0
+    max_foot_gap: float = 90.0
+    stable_needed: int = 3
+    hold_gaps: int = 3
+    alpha: float = 0.35
+    xy: tuple[float, float] | None = None
+    stable: int = 0
+    missing: int = 0
+    last: tuple[float, float] | None = None
+
+    def reset(self) -> None:
+        self.xy = None
+        self.stable = 0
+        self.missing = 0
+        self.last = None
+
+    def update(
+        self,
+        measured: tuple[float, float] | None,
+        *,
+        visible: bool,
+        possessor_foot: tuple[float, float] | None,
+    ) -> tuple[float, float] | None:
+        """Return a display point, or ``None`` when the detection is not calm.
+
+        A short gap (the frames ``--stride`` skips) keeps the last accepted
+        point still. It does not extrapolate velocity. A jump or a detection
+        far from the possessor's feet hides the mark.
+        """
+        if not visible or measured is None:
+            self.missing += 1
+            if self.missing > self.hold_gaps:
+                self.stable = 0
+                self.xy = None
+                return None
+            if self.xy is None or self.stable < self.stable_needed:
+                return None
+            return self.xy
+        self.missing = 0
+        if self.last is not None and _dist(measured, self.last) > self.max_jump:
+            self.stable = 0
+            self.last = measured
+            self.xy = None
+            return None
+        self.last = measured
+        if possessor_foot is not None and _dist(measured, possessor_foot) > self.max_foot_gap:
+            self.stable = 0
+            self.xy = None
+            return None
+        self.stable += 1
+        if self.xy is None:
+            self.xy = measured
+        else:
+            self.xy = (
+                (1.0 - self.alpha) * self.xy[0] + self.alpha * measured[0],
+                (1.0 - self.alpha) * self.xy[1] + self.alpha * measured[1],
+            )
+        if self.stable < self.stable_needed:
+            return None
+        return self.xy
 
 
 def _dist(a: tuple[float, float], b: tuple[float, float]) -> float:

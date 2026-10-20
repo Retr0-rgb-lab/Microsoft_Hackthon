@@ -118,10 +118,11 @@ def _blend_arrows(canvas, arrows: list[ArrowDraw], *, primary: bool, alpha: floa
         _head(overlay, arrow.points, color, 18 if primary else 12, thickness)
         if primary or arrow.kind == "shoot":
             end = arrow.points[-1]
+            label_x, label_y = _label_anchor(end, overlay.shape[1], overlay.shape[0])
             cv2.putText(
                 overlay,
                 arrow.label,
-                (int(end[0]) + 6, int(end[1]) - 6),
+                (label_x, label_y),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.5 if primary else 0.4,
                 color,
@@ -133,6 +134,21 @@ def _blend_arrows(canvas, arrows: list[ArrowDraw], *, primary: bool, alpha: floa
             radius = 16 if primary else 10
             cv2.circle(overlay, (int(foot[0]), int(foot[1])), radius, color, 2, cv2.LINE_AA)
     cv2.addWeighted(overlay, alpha, canvas, 1.0 - alpha, 0, canvas)
+
+
+def _label_anchor(end: tuple[float, float], width: int, height: int) -> tuple[int, int]:
+    """Keep the action name on the picture when the tip sits on the border."""
+    x = int(end[0]) + 8
+    y = int(end[1]) - 8
+    if x > width - 72:
+        x = int(end[0]) - 64
+    if x < 8:
+        x = 8
+    if y < 18:
+        y = int(end[1]) + 18
+    if y > height - 8:
+        y = height - 8
+    return x, y
 
 
 def _head(image, points, color, size, thickness) -> None:
@@ -169,7 +185,9 @@ def _players_and_ball(canvas, state: OverlayState) -> None:
     if state.ball is not None:
         ball = _ipoint(state.ball)
         if ball is not None:
-            cv2.circle(canvas, ball, 6, (255, 255, 255), -1, cv2.LINE_AA)
+            # Thin ring. A filled disc on a noisy box reads as a floating bug.
+            cv2.circle(canvas, ball, 8, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.circle(canvas, ball, 2, (255, 255, 255), -1, cv2.LINE_AA)
 
 
 def _panel(canvas, state: OverlayState) -> None:

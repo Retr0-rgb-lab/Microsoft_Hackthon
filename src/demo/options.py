@@ -3,6 +3,10 @@
 The highlighted arrow is the best geometric option of the action the softmax
 recommends. The other options stay on screen at a lower alpha. Coordinates
 are either pitch meters or image pixels; thresholds scale with the frame.
+
+Passes are pinned to a teammate's point. A shot is pinned to the opponent
+goal mouth on this same plane (105×68 m when ``space`` is ``pitch``). Neither
+arrow is allowed to end on an opponent.
 """
 
 from __future__ import annotations
@@ -33,6 +37,29 @@ class TacticalOption:
     primary: bool
     alpha: float
     label: str
+    target_id: int | None = None
+    slot: str = ""
+
+
+def attacking_positive_for(team: str) -> bool:
+    """Home defends x = 0, so home attacks toward the far goal."""
+    return team != "away"
+
+
+def opponent_goal(
+    bounds: tuple[float, float],
+    attacking_positive: bool,
+) -> tuple[float, float]:
+    """Centre of the goal the on-ball team is attacking, on ``bounds``."""
+    length, width = bounds
+    goal_x = length if attacking_positive else 0.0
+    return (goal_x, width / 2.0)
+
+
+def pass_window(bounds: tuple[float, float], space: str) -> tuple[float, float]:
+    """Minimum and maximum pass length on this plane."""
+    limits = _thresholds(bounds, space)
+    return (limits["pass_min"], limits["pass_max"])
 
 
 def build_options(
@@ -50,7 +77,8 @@ def build_options(
     if recommended not in ACTION_LABELS:
         raise ValueError(f"recommended must be one of {ACTION_LABELS}")
     limits = _thresholds(bounds, space)
-    passes = _passes(origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits)
+    mates = _teammates(players, possessor_id, possessor_team, attacking_positive, bounds)
+    passes = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
     carries = _carries(
         origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits
     )
@@ -63,22 +91,48 @@ def build_options(
         primary=False,
         alpha=SECONDARY_ALPHA,
         label="hold",
+        slot="hold",
     )
     pool = passes + carries + shots + [hold]
-    pool = _ensure_recommended(pool, origin, players, possessor_id, possessor_team, recommended, bounds, attacking_positive, limits)
+    pool = _ensure_recommended(
+        pool, origin, mates, recommended, bounds, attacking_positive, limits
+    )
+    pool = _pin_to_players_and_goal(pool, mates, bounds, attacking_positive)
     return _mark_primary(pool, recommended)
 
 
-def _passes(origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits):
+def _teammates(
+    players: list[OptionPlayer],
+    possessor_id: int,
+    possessor_team: str,
+    attacking_positive: bool,
+    bounds: tuple[float, float],
+) -> dict[int, OptionPlayer]:
+    """Same-team receivers. Never the opponent keeper, even if mislabelled."""
     if possessor_team not in ("home", "away"):
-        return []
-    found: list[TacticalOption] = []
-    opponents = [player for player in players if player.team not in (possessor_team, "unknown", "referee") and player.role != "referee"]
+        return {}
+    mates: dict[int, OptionPlayer] = {}
     for player in players:
         if player.track_id == possessor_id or player.role == "referee":
             continue
         if player.team != possessor_team:
             continue
+        if is_opponent_goalkeeper(player, attacking_positive, bounds):
+            continue
+        mates[player.track_id] = player
+    return mates
+
+
+def _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits):
+    if not mates:
+        return []
+    found: list[TacticalOption] = []
+    opponents = [
+        player
+        for player in players
+        if player.team not in (possessor_team, "unknown", "referee") and player.role != "referee"
+    ]
+    for player in mates.values():
         distance = _dist(origin, player.xy)
         if not limits["pass_min"] <= distance <= limits["pass_max"]:
             continue
@@ -96,6 +150,8 @@ def _passes(origin, players, possessor_id, possessor_team, bounds, attacking_pos
                 primary=False,
                 alpha=SECONDARY_ALPHA,
                 label="pass",
+                target_id=player.track_id,
+                slot=f"pass:{player.track_id}",
             )
         )
     found.sort(key=lambda item: item.score, reverse=True)
@@ -112,10 +168,14 @@ def _carries(origin, players, possessor_id, possessor_team, bounds, attacking_po
     ]
     length, width = bounds
     step = limits["dribble"]
-    directions = ((1.0, 0.0), (0.72, 0.55), (0.72, -0.55))
+    directions = (
+        ("forward", 1.0, 0.0),
+        ("left", 0.72, 0.55),
+        ("right", 0.72, -0.55),
+    )
     sign = 1.0 if attacking_positive else -1.0
     found: list[TacticalOption] = []
-    for along, across in directions:
+    for name, along, across in directions:
         raw = (origin[0] + sign * step * along, origin[1] + step * across * 0.65)
         target = (_clamp(raw[0], 0.0, length), _clamp(raw[1], 0.0, width))
         if _dist(origin, target) < step * 0.35:
@@ -132,6 +192,7 @@ def _carries(origin, players, possessor_id, possessor_team, bounds, attacking_po
                 primary=False,
                 alpha=SECONDARY_ALPHA,
                 label="carry",
+                slot=f"dribble:{name}",
             )
         )
     found.sort(key=lambda item: item.score, reverse=True)
@@ -142,45 +203,31 @@ def _shots(origin, bounds, attacking_positive, limits):
     attack = _attack(origin, bounds, attacking_positive)
     if attack < limits["shot_min_attack"]:
         return []
-    length, width = bounds
-    goal_x = length if attacking_positive else 0.0
-    return [
-        TacticalOption(
-            kind="shoot",
-            origin=origin,
-            target=(goal_x, width / 2.0),
-            score=0.02 * attack,
-            primary=False,
-            alpha=SECONDARY_ALPHA,
-            label="shot",
-        )
-    ]
+    return [_shot_option(origin, bounds, attacking_positive, score=0.02 * attack)]
 
 
-def _ensure_recommended(pool, origin, players, possessor_id, possessor_team, recommended, bounds, attacking_positive, limits):
+def _shot_option(origin, bounds, attacking_positive, score: float) -> TacticalOption:
+    return TacticalOption(
+        kind="shoot",
+        origin=origin,
+        target=opponent_goal(bounds, attacking_positive),
+        score=score,
+        primary=False,
+        alpha=SECONDARY_ALPHA,
+        label="shot",
+        slot="shoot:goal",
+    )
+
+
+def _ensure_recommended(pool, origin, mates, recommended, bounds, attacking_positive, limits):
     if any(item.kind == recommended for item in pool):
         return pool
     if recommended == "shoot":
-        length, width = bounds
-        goal_x = length if attacking_positive else 0.0
-        extra = TacticalOption(
-            kind="shoot",
-            origin=origin,
-            target=(goal_x, width / 2.0),
-            score=0.01,
-            primary=False,
-            alpha=SECONDARY_ALPHA,
-            label="shot",
-        )
-        return pool + [extra]
+        return pool + [_shot_option(origin, bounds, attacking_positive, score=0.01)]
     if recommended == "pass":
-        mates = [
-            player for player in players
-            if player.track_id != possessor_id and player.team == possessor_team and player.role != "referee"
-        ]
         if not mates:
             return pool
-        target = min(mates, key=lambda player: _dist(origin, player.xy))
+        target = min(mates.values(), key=lambda player: _dist(origin, player.xy))
         extra = TacticalOption(
             kind="pass",
             origin=origin,
@@ -189,6 +236,8 @@ def _ensure_recommended(pool, origin, players, possessor_id, possessor_team, rec
             primary=False,
             alpha=SECONDARY_ALPHA,
             label="pass",
+            target_id=target.track_id,
+            slot=f"pass:{target.track_id}",
         )
         return pool + [extra]
     if recommended == "dribble":
@@ -206,9 +255,52 @@ def _ensure_recommended(pool, origin, players, possessor_id, possessor_team, rec
             primary=False,
             alpha=SECONDARY_ALPHA,
             label="carry",
+            slot="dribble:forward",
         )
         return pool + [extra]
     return pool
+
+
+def _pin_to_players_and_goal(pool, mates, bounds, attacking_positive):
+    """Pass heads sit on a teammate. Shot heads sit on the opponent goal."""
+    goal = opponent_goal(bounds, attacking_positive)
+    pinned: list[TacticalOption] = []
+    for item in pool:
+        if item.kind == "shoot":
+            pinned.append(
+                TacticalOption(
+                    kind=item.kind,
+                    origin=item.origin,
+                    target=goal,
+                    score=item.score,
+                    primary=item.primary,
+                    alpha=item.alpha,
+                    label=item.label,
+                    target_id=None,
+                    slot="shoot:goal",
+                )
+            )
+            continue
+        if item.kind != "pass":
+            pinned.append(item)
+            continue
+        mate = mates.get(item.target_id) if item.target_id is not None else None
+        if mate is None:
+            continue
+        pinned.append(
+            TacticalOption(
+                kind="pass",
+                origin=item.origin,
+                target=mate.xy,
+                score=item.score,
+                primary=item.primary,
+                alpha=item.alpha,
+                label="pass",
+                target_id=mate.track_id,
+                slot=f"pass:{mate.track_id}",
+            )
+        )
+    return pinned
 
 
 def _mark_primary(pool: list[TacticalOption], recommended: str) -> list[TacticalOption]:
@@ -218,7 +310,7 @@ def _mark_primary(pool: list[TacticalOption], recommended: str) -> list[Tactical
     best = max(of_kind, key=lambda item: item.score)
     marked: list[TacticalOption] = []
     for item in pool:
-        primary = item is best
+        primary = item.slot == best.slot and item.kind == best.kind
         marked.append(
             TacticalOption(
                 kind=item.kind,
@@ -228,10 +320,25 @@ def _mark_primary(pool: list[TacticalOption], recommended: str) -> list[Tactical
                 primary=primary,
                 alpha=PRIMARY_ALPHA if primary else SECONDARY_ALPHA,
                 label=item.label,
+                target_id=item.target_id,
+                slot=item.slot,
             )
         )
     marked.sort(key=lambda item: item.primary)
     return marked
+
+
+def is_opponent_goalkeeper(
+    player: OptionPlayer,
+    attacking_positive: bool,
+    bounds: tuple[float, float],
+) -> bool:
+    """True when this keeper is standing in the goal being attacked."""
+    if player.role != "goalkeeper":
+        return False
+    goal_x, _goal_y = opponent_goal(bounds, attacking_positive)
+    reach = max(16.0, 0.12 * bounds[0])
+    return abs(player.xy[0] - goal_x) <= reach
 
 
 def _thresholds(bounds: tuple[float, float], space: str) -> dict[str, float]:

@@ -80,6 +80,32 @@ def test_image_fallback_options_stay_in_the_frame() -> None:
         assert item.origin == (400.0, 700.0)
 
 
+def test_shot_stays_on_the_opponent_goal_when_a_teammate_is_nearby() -> None:
+    options = build_options(
+        (80.0, 34.0),
+        [
+            OptionPlayer(1, (80.0, 34.0), "home"),
+            OptionPlayer(2, (104.0, 34.0), "home"),
+            OptionPlayer(3, (100.0, 34.0), "home", role="goalkeeper"),
+            OptionPlayer(4, (90.0, 40.0), "away"),
+        ],
+        possessor_id=1,
+        possessor_team="home",
+        recommended="shoot",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    passes = [item for item in options if item.kind == "pass"]
+    assert passes
+    assert all(item.target_id == 2 for item in passes)
+    assert all(item.target == (104.0, 34.0) for item in passes)
+    shot = next(item for item in options if item.kind == "shoot")
+    assert shot.target == (105.0, 34.0)
+    assert shot.target not in {item.target for item in passes}
+    assert shot.primary
+
+
 def test_team_colours_lock_the_left_side_as_home() -> None:
     book = TeamBook(min_separation=20.0)
     blue = (20.0, 40.0, 180.0)
@@ -100,3 +126,51 @@ def test_team_colours_lock_the_left_side_as_home() -> None:
     assert labels[3] == "away"
     assert labels[7] == "home"
     assert labels[1] != labels[3]
+
+
+def test_camped_attack_keeps_the_deep_side_and_the_keepers() -> None:
+    """A side camped in the opponent half must not be given that half's goal.
+
+    The mean pitch x of the blue shirts is further right than red, which used
+    to label blue as away and aim their shot at their own goal. The deepest
+    blue player is still the one beside the left goal.
+    """
+    book = TeamBook(min_separation=20.0)
+    blue = (20.0, 40.0, 180.0)
+    red = (180.0, 30.0, 30.0)
+    samples = [
+        (1, "player", blue, 22.0),
+        (2, "player", blue, 90.0),
+        (3, "player", blue, 92.0),
+        (4, "player", blue, 94.0),
+        (5, "player", red, 58.0),
+        (6, "player", red, 62.0),
+        (7, "player", red, 66.0),
+        (8, "player", red, 70.0),
+        (11, "goalkeeper", (8.0, 8.0, 8.0), 3.0),
+        (12, "goalkeeper", (240.0, 240.0, 240.0), 102.0),
+    ]
+    labels = book.update(samples)
+    assert labels[1] == "home"
+    assert labels[5] == "away"
+    assert labels[11] == "home"
+    assert labels[12] == "away"
+    blue_mean = (22.0 + 90.0 + 92.0 + 94.0) / 4.0
+    red_mean = (58.0 + 62.0 + 66.0 + 70.0) / 4.0
+    assert blue_mean > red_mean
+
+
+def test_one_bad_colour_frame_does_not_swap_a_teammate() -> None:
+    book = TeamBook(min_separation=20.0)
+    blue = (20.0, 40.0, 180.0)
+    red = (180.0, 30.0, 30.0)
+    steady = [
+        (1, "player", blue, 20.0),
+        (2, "player", red, 85.0),
+    ]
+    for _ in range(4):
+        labels = book.update(steady)
+    assert labels[1] == "home"
+    swapped = book.update([(1, "player", red, 20.0), (2, "player", red, 85.0)])
+    assert swapped[1] == "home"
+    assert swapped[2] == "away"

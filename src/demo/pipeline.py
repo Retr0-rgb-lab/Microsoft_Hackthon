@@ -14,6 +14,7 @@ from demo.geometry import (
     apply_homography,
     assess_homography,
     centre_circle_m,
+    clip_polyline,
     invert_homography,
     is_detection_frame,
     pitch_vertices_m,
@@ -21,9 +22,10 @@ from demo.geometry import (
     resolve_plane,
     scene_cut,
 )
-from demo.options import OptionPlayer, build_options
-from demo.possessor import BallSmoother, PlayerFix, PossessorTracker
+from demo.options import OptionPlayer, attacking_positive_for, build_options
+from demo.possessor import BallMark, BallSmoother, FootTrail, PlayerFix, PossessorTracker
 from demo.render import ArrowDraw, MinimapArrow, MinimapPlayer, OverlayState, PlayerDraw
+from demo.stabilize import OverlayMemory
 from demo.teams import TeamBook
 from demo.tracking import TrackState, predict_tracks, velocities_from_previous
 from inside_the_game.features.extract import FEATURE_NAMES
@@ -136,8 +138,15 @@ def run_clip(config: DemoConfig) -> RunStats:
     possessor_tracker = PossessorTracker(
         hold_frames=config.hold_frames,
         max_distance=0.12 * height,
+        switch_frames=6,
+        commit_distance=0.04 * height,
     )
     teams = TeamBook()
+    memory = OverlayMemory()
+    foot_trail = FootTrail()
+    # The drawn ball is a light mark. It is not the possession smoother: that
+    # one still holds through misses and rejects a low-confidence jump.
+    ball_mark = BallMark(max_jump=0.04 * width, max_foot_gap=0.08 * height)
     last_detect: list[TrackState] = []
     last_detect_idx = 0
     plane_matrix: tuple[tuple[float, float, float], ...] | None = None
@@ -163,6 +172,17 @@ def run_clip(config: DemoConfig) -> RunStats:
                     last_good_idx = -1
                     _reset_tracker(player_model)
                     last_detect = []
+                    memory.reset()
+                    foot_trail.retain(set())
+                    ball_mark.reset()
+                    ball_smoother = BallSmoother(hold_frames=config.hold_frames)
+                    possessor_tracker = PossessorTracker(
+                        hold_frames=config.hold_frames,
+                        max_distance=0.12 * height,
+                        switch_frames=6,
+                        commit_distance=0.04 * height,
+                    )
+                    teams = TeamBook()
             previous_tiny = tiny
 
             detect = is_detection_frame(frame_idx, config.stride)
@@ -240,18 +260,32 @@ def run_clip(config: DemoConfig) -> RunStats:
             colors = _jersey_colors(frame, display_tracks) if detect else {}
             samples = []
             pitch_feet: dict[int, tuple[float, float]] = {}
+            smooth_feet: dict[int, tuple[float, float]] = {}
+            live_ids: set[int] = set()
             for track in display_tracks:
-                pitch_xy = _foot_pitch(track.foot, image_to_pitch) if image_to_pitch is not None else None
-                if pitch_xy is not None:
-                    pitch_feet[track.track_id] = pitch_xy
+                live_ids.add(track.track_id)
+                smooth_feet[track.track_id] = foot_trail.smooth(
+                    track.track_id,
+                    track.foot,
+                    snap_at=0.22 * height,
+                )
+                raw_pitch = _foot_pitch(track.foot, image_to_pitch) if image_to_pitch is not None else None
+                smooth_pitch = (
+                    _foot_pitch(smooth_feet[track.track_id], image_to_pitch)
+                    if image_to_pitch is not None
+                    else None
+                )
+                if smooth_pitch is not None:
+                    pitch_feet[track.track_id] = smooth_pitch
                 samples.append(
                     (
                         track.track_id,
                         track.role,
                         colors.get(track.track_id),
-                        None if pitch_xy is None else pitch_xy[0],
+                        None if raw_pitch is None else raw_pitch[0],
                     )
                 )
+            foot_trail.retain(live_ids)
             if detect:
                 labels = teams.update(samples)
             else:
@@ -308,6 +342,15 @@ def run_clip(config: DemoConfig) -> RunStats:
                 stats.possessor_frames += 1
             if possessor.held:
                 stats.possessor_held += 1
+            possessor_foot = next(
+                (player.xy for player in players if player.track_id == possessor.track_id),
+                None,
+            )
+            display_ball = ball_mark.update(
+                ball_fix.xy if ball_fix.visible else None,
+                visible=ball_fix.visible,
+                possessor_foot=possessor_foot,
+            )
 
             overlay = _compose(
                 frame_shape=(height, width),
@@ -316,7 +359,9 @@ def run_clip(config: DemoConfig) -> RunStats:
                 players=players,
                 pitch_feet=pitch_feet,
                 possessor=possessor,
-                ball_fix=ball_fix,
+                display_ball=display_ball,
+                smooth_feet=smooth_feet,
+                memory=memory,
                 space=space,
                 mode=mode,
                 image_to_pitch=image_to_pitch,
@@ -374,7 +419,9 @@ def _compose(
     players,
     pitch_feet,
     possessor,
-    ball_fix,
+    display_ball,
+    smooth_feet,
+    memory,
     space,
     mode,
     image_to_pitch,
@@ -396,7 +443,7 @@ def _compose(
             PlayerDraw(
                 track_id=track.track_id,
                 bbox=track.bbox,
-                foot=track.foot,
+                foot=smooth_feet.get(track.track_id, track.foot),
                 team=str(team),
                 possessor=track.track_id == possessor_id,
             )
@@ -416,7 +463,7 @@ def _compose(
         badges.append("no possessor")
     state.badges = badges
 
-    state.ball = ball_fix.xy
+    state.ball = display_ball
     if pitch_to_image is not None:
         state.wireframe = _wireframe(pitch_to_image, frame_shape)
 
@@ -424,10 +471,23 @@ def _compose(
         state.note = "No on-ball player. Distribution hidden until the ball is with someone."
         return state
 
-    attacking_positive = possessor.team != "away"
-    possession_team = "away" if possessor.team == "away" else "home"
-    origin = possessor.xy
-    working = list(players)
+    if possessor.team not in ("home", "away"):
+        state.note = "Jersey colours are still splitting, so pass and shot arrows stay hidden."
+        return state
+
+    attacking_positive = attacking_positive_for(possessor.team)
+    possession_team = possessor.team
+    # Arrows and the possessor ring share the smoothed foot, not the ball box.
+    origin = smooth_feet.get(possessor.track_id, possessor.xy)
+    working = [
+        PlayerFix(
+            track_id=player.track_id,
+            xy=smooth_feet.get(player.track_id, player.xy),
+            team=player.team,
+            role=player.role,
+        )
+        for player in players
+    ]
     if space == "pitch":
         placed = []
         for player in players:
@@ -472,7 +532,7 @@ def _compose(
         score_away=score_away,
     )
     distribution = policy.predict_features(features)
-    recommended = max(distribution.probabilities, key=distribution.probabilities.get)
+    raw_recommended = max(distribution.probabilities, key=distribution.probabilities.get)
     option_players = [
         OptionPlayer(track_id=player.track_id, xy=player.xy, team=player.team, role=player.role)
         for player in working
@@ -481,11 +541,22 @@ def _compose(
         origin,
         option_players,
         possessor.track_id,
-        possession_team if possessor.team in ("home", "away") else "unknown",
-        recommended,
+        possession_team,
+        raw_recommended,
         bounds=bounds,
         attacking_positive=attacking_positive,
         space=space,
+    )
+    recommended, smoothed, options = memory.apply(
+        possessor.track_id,
+        distribution.probabilities,
+        options,
+        option_players,
+        origin,
+        possession_team,
+        bounds,
+        attacking_positive,
+        space,
     )
     for option in options:
         if space == "pitch" and pitch_to_image is not None:
@@ -495,6 +566,11 @@ def _compose(
             points = projected
         else:
             points = _image_segment(option.origin, option.target)
+        if option.kind != "hold":
+            clipped = clip_polyline(points, frame_width, frame_height)
+            if clipped is None:
+                continue
+            points = clipped
         state.arrows.append(
             ArrowDraw(kind=option.kind, points=points, primary=option.primary, label=option.label)
         )
@@ -516,14 +592,15 @@ def _compose(
         )
     if space == "pitch":
         state.minimap_ball = origin
-    elif ball_fix.xy is not None:
+    else:
         state.minimap_ball = image_xy_to_pitch_meters(
-            ball_fix.xy[0], ball_fix.xy[1], frame_width, frame_height
+            origin[0], origin[1], frame_width, frame_height
         )
-    state.probabilities = distribution.as_dict()
+    state.probabilities = smoothed
     state.recommended = recommended
+    state.badges.append("attacking the right goal" if attacking_positive else "attacking the left goal")
     zone = zone_name(ball_x, ball_y, possession_team).replace("_", " ")
-    share = distribution.probabilities[recommended]
+    share = smoothed[recommended]
     state.note = (
         f"recommended {recommended} {share:.0%}  ·  {zone}  ·  "
         f"pressure {features.pressure:.2f}  ·  full distribution in the bars"
@@ -587,18 +664,13 @@ def _image_segment(start, end, samples: int = 12) -> tuple[tuple[float, float], 
 
 
 def _resolve_sticky(teams: TeamBook, labels: dict[int, object]) -> dict[int, str]:
-    from demo.teams import _cluster_side
-
     resolved: dict[int, str] = {}
     for track_id, label in labels.items():
         if label == "referee":
             resolved[track_id] = "referee"
             continue
         index = teams.cluster_of.get(track_id)
-        if index is None:
-            resolved[track_id] = "unknown"
-        else:
-            resolved[track_id] = _cluster_side(teams.clusters, index)
+        resolved[track_id] = "unknown" if index is None else teams.label_for(index)
     return resolved
 
 
@@ -728,16 +800,22 @@ def _jersey_colors(frame, tracks: list[TrackState]) -> dict[int, tuple[float, fl
         x1, y1, x2, y2 = track.bbox
         box_w = x2 - x1
         box_h = y2 - y1
-        left = int(max(0, x1 + 0.30 * box_w))
-        right = int(min(width, x1 + 0.70 * box_w))
-        top = int(max(0, y1 + 0.18 * box_h))
-        bottom = int(min(height, y1 + 0.48 * box_h))
+        left = int(max(0, x1 + 0.38 * box_w))
+        right = int(min(width, x1 + 0.62 * box_w))
+        top = int(max(0, y1 + 0.22 * box_h))
+        bottom = int(min(height, y1 + 0.42 * box_h))
         if right - left < 2 or bottom - top < 2:
             continue
         patch = frame[top:bottom:2, left:right:2]
         if patch.size == 0:
             continue
-        median = np.median(patch.reshape(-1, 3), axis=0)
+        pixels = patch.reshape(-1, 3).astype(np.float32)
+        blue, green, red = pixels[:, 0], pixels[:, 1], pixels[:, 2]
+        grass = (green > 70.0) & (green > red + 25.0) & (green > blue + 25.0)
+        kept = pixels[~grass]
+        if len(kept) < 8:
+            kept = pixels
+        median = np.median(kept, axis=0)
         colors[track.track_id] = (float(median[2]), float(median[1]), float(median[0]))
     return colors
 

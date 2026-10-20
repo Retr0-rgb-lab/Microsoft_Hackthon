@@ -215,6 +215,81 @@ def project_segment(
     return tuple(points)
 
 
+def clip_polyline(
+    points: tuple[tuple[float, float], ...] | list[tuple[float, float]],
+    width: float,
+    height: float,
+    *,
+    margin: float = 6.0,
+) -> tuple[tuple[float, float], ...] | None:
+    """Keep the on-screen part of a polyline and stop at the frame border.
+
+    A shot at a goal outside the picture used to keep its tip off-screen, so
+    the visible stroke looked like it ended on whichever player it crossed.
+    The tip now sits on the border, still aimed at that goal.
+    """
+    if len(points) < 2:
+        return None
+    clipped: list[tuple[float, float]] = []
+    for start, end in zip(points, points[1:], strict=False):
+        segment = _clip_segment(start, end, width, height, margin)
+        if segment is None:
+            if clipped:
+                break
+            continue
+        left, right = segment
+        if not clipped:
+            clipped.append(left)
+        elif _hypot(left[0] - clipped[-1][0], left[1] - clipped[-1][1]) > 0.5:
+            clipped.append(left)
+        clipped.append(right)
+        if not _inside(end, width, height, margin):
+            break
+    if len(clipped) < 2:
+        return None
+    return tuple(clipped)
+
+
+def _clip_segment(
+    start: tuple[float, float],
+    end: tuple[float, float],
+    width: float,
+    height: float,
+    margin: float,
+) -> tuple[tuple[float, float], tuple[float, float]] | None:
+    left = margin
+    top = margin
+    right = width - 1.0 - margin
+    bottom = height - 1.0 - margin
+    dx = end[0] - start[0]
+    dy = end[1] - start[1]
+    t0, t1 = 0.0, 1.0
+    for p, q in ((-dx, start[0] - left), (dx, right - start[0]), (-dy, start[1] - top), (dy, bottom - start[1])):
+        if abs(p) < 1e-9:
+            if q < 0:
+                return None
+            continue
+        t = q / p
+        if p < 0:
+            if t > t1:
+                return None
+            t0 = max(t0, t)
+        else:
+            if t < t0:
+                return None
+            t1 = min(t1, t)
+    if t0 > t1:
+        return None
+    return (
+        (start[0] + t0 * dx, start[1] + t0 * dy),
+        (start[0] + t1 * dx, start[1] + t1 * dy),
+    )
+
+
+def _inside(point: tuple[float, float], width: float, height: float, margin: float) -> bool:
+    return margin <= point[0] <= width - 1.0 - margin and margin <= point[1] <= height - 1.0 - margin
+
+
 def _xm(cm: float) -> float:
     return cm / _LENGTH_CM * PITCH_LENGTH
 
