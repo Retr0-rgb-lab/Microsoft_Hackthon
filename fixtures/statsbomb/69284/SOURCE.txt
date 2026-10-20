@@ -1,0 +1,7 @@
+Match 69284, Women's World Cup 2019, Semi-finals
+Netherlands Women's 1–0 Sweden Women's (2019-07-03)
+4242 events, reduced to the fields this repository reads.
+Source: StatsBomb Open Data https://github.com/statsbomb/open-data
+License: Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)
+https://creativecommons.org/licenses/by-nc/4.0/
+Commercial use of this file needs separate permission from StatsBomb.

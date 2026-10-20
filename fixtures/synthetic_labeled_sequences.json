@@ -1,0 +1,1529 @@
+{
+  "match_id": "syn-labeled-7",
+  "source": "synthetic",
+  "seed": 7,
+  "cycles": 2,
+  "note": "Labeled synthetic sequences for demo and training. Actions are only pass, shoot, dribble, and hold. JSON/text state only.",
+  "events": [
+    {
+      "event_id": "syn-seq-7-000",
+      "minute": 1,
+      "second": 12,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 15.58,
+        "y": 33.16
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.17,
+      "zone": "defensive_third",
+      "context": "Goal kick to the centre-back in space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-001",
+      "minute": 1,
+      "second": 41,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 31.77,
+        "y": 21.03
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.24,
+      "zone": "defensive_third",
+      "context": "Square pass to the full-back along the touchline.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-002",
+      "minute": 2,
+      "second": 38,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 43.32,
+        "y": 33.01
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.31,
+      "zone": "middle_third",
+      "context": "Pass into the holding midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-003",
+      "minute": 3,
+      "second": 18,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 45.02,
+        "y": 35.82
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.8,
+      "zone": "middle_third",
+      "context": "Pressed from behind, the midfielder shields the ball.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-004",
+      "minute": 3,
+      "second": 50,
+      "team": "home",
+      "player": "I. Novak",
+      "ball": {
+        "x": 56.07,
+        "y": 50.31
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.36,
+      "zone": "middle_third",
+      "context": "Switch of play toward the far half-space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-005",
+      "minute": 4,
+      "second": 18,
+      "team": "home",
+      "player": "C. Adeyemi",
+      "ball": {
+        "x": 67.19,
+        "y": 57.75
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.36,
+      "zone": "middle_third",
+      "context": "Carry into space down the wing.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-006",
+      "minute": 4,
+      "second": 45,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 79.14,
+        "y": 61.12
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.41,
+      "zone": "attacking_wide",
+      "context": "Pass down the line to the winger.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-007",
+      "minute": 5,
+      "second": 44,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 87.08,
+        "y": 53.54
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.5,
+      "zone": "attacking_third",
+      "context": "Dribble inside off the full-back.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-008",
+      "minute": 6,
+      "second": 20,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 89.05,
+        "y": 38.17
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.42,
+      "zone": "attacking_box",
+      "context": "Cut-back toward the penalty spot.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-009",
+      "minute": 6,
+      "second": 51,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 97.11,
+        "y": 34.95
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.34,
+      "zone": "attacking_box",
+      "context": "Shot from inside the box.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-010",
+      "minute": 7,
+      "second": 29,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 85.01,
+        "y": 27.92
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.24,
+      "zone": "defensive_third",
+      "context": "Short restart to the right centre-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-011",
+      "minute": 8,
+      "second": 23,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 76.79,
+        "y": 22.11
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.26,
+      "zone": "defensive_third",
+      "context": "Centre-back steps out with the ball.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-012",
+      "minute": 8,
+      "second": 59,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 74.52,
+        "y": 24.61
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.74,
+      "zone": "defensive_third",
+      "context": "A striker closes down and the centre-back holds.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-013",
+      "minute": 9,
+      "second": 57,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 63.01,
+        "y": 50.38
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.29,
+      "zone": "middle_third",
+      "context": "Pass into the wide midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-014",
+      "minute": 11,
+      "second": 0,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 45.85,
+        "y": 44.92
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.34,
+      "zone": "middle_third",
+      "context": "Progressive pass into the half-space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-015",
+      "minute": 11,
+      "second": 46,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 34.84,
+        "y": 38.03
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.39,
+      "zone": "attacking_third",
+      "context": "Ball into the attacking midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-016",
+      "minute": 12,
+      "second": 53,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 26.01,
+        "y": 39.86
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.48,
+      "zone": "attacking_third",
+      "context": "Touch away from the marker toward the byline.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-017",
+      "minute": 13,
+      "second": 38,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 21.38,
+        "y": 52.36
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.81,
+      "zone": "attacking_third",
+      "context": "The winger is doubled and holds the ball up.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-018",
+      "minute": 14,
+      "second": 32,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 20.03,
+        "y": 36.98
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.49,
+      "zone": "attacking_third",
+      "context": "Lay-off to the onrushing midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-019",
+      "minute": 15,
+      "second": 41,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 12.61,
+        "y": 29.05
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.56,
+      "zone": "attacking_box",
+      "context": "Shot from the edge of the box.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-020",
+      "minute": 16,
+      "second": 47,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 25.19,
+        "y": 34.43
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.2,
+      "zone": "defensive_third",
+      "context": "Play out from the back after a goal kick.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-021",
+      "minute": 17,
+      "second": 57,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 37.73,
+        "y": 34.4
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.23,
+      "zone": "middle_third",
+      "context": "Central pass through the first line.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-022",
+      "minute": 18,
+      "second": 51,
+      "team": "home",
+      "player": "I. Novak",
+      "ball": {
+        "x": 51.65,
+        "y": 36.27
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.3,
+      "zone": "middle_third",
+      "context": "Midfielder drives at the defence.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-023",
+      "minute": 19,
+      "second": 29,
+      "team": "home",
+      "player": "C. Adeyemi",
+      "ball": {
+        "x": 63.64,
+        "y": 13.11
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.26,
+      "zone": "middle_third",
+      "context": "Release to the overlapping full-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-024",
+      "minute": 20,
+      "second": 19,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 75.0,
+        "y": 11.99
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.37,
+      "zone": "attacking_wide",
+      "context": "Pass along the touchline.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-025",
+      "minute": 21,
+      "second": 9,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 86.12,
+        "y": 18.92
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.49,
+      "zone": "attacking_third",
+      "context": "Full-back drives to the byline.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-026",
+      "minute": 22,
+      "second": 9,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 92.47,
+        "y": 29.8
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.51,
+      "zone": "attacking_box",
+      "context": "Low cross into the six-yard area.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-027",
+      "minute": 22,
+      "second": 58,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 100.1,
+        "y": 33.16
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "home",
+      "pressure": 0.6,
+      "zone": "attacking_box",
+      "context": "Close-range shot.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-028",
+      "minute": 23,
+      "second": 37,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 86.62,
+        "y": 19.17
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.23,
+      "zone": "defensive_third",
+      "context": "Keeper throws to the left-sided centre-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-029",
+      "minute": 24,
+      "second": 13,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 83.57,
+        "y": 17.19
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.7,
+      "zone": "defensive_third",
+      "context": "A forward presses and the centre-back pauses.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-030",
+      "minute": 25,
+      "second": 1,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 68.74,
+        "y": 8.44
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.23,
+      "zone": "middle_third",
+      "context": "Pass out to the full-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-031",
+      "minute": 25,
+      "second": 58,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 54.92,
+        "y": 5.63
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.33,
+      "zone": "middle_third",
+      "context": "Full-back carries past the first press.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-032",
+      "minute": 26,
+      "second": 52,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 44.04,
+        "y": 27.33
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.32,
+      "zone": "middle_third",
+      "context": "Pass inside to the number eight.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-033",
+      "minute": 27,
+      "second": 52,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 33.26,
+        "y": 32.24
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.36,
+      "zone": "attacking_third",
+      "context": "Vertical pass splitting the lines.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-034",
+      "minute": 28,
+      "second": 57,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 29.24,
+        "y": 34.74
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.8,
+      "zone": "attacking_third",
+      "context": "Back to goal, the forward holds off the centre-back.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-035",
+      "minute": 29,
+      "second": 50,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 23.81,
+        "y": 24.38
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.45,
+      "zone": "attacking_third",
+      "context": "Lay-off into the runner.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-036",
+      "minute": 30,
+      "second": 15,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 14.84,
+        "y": 25.91
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.54,
+      "zone": "attacking_box",
+      "context": "Touch into the box.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-037",
+      "minute": 31,
+      "second": 19,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 8.14,
+        "y": 29.1
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "possession_team": "away",
+      "pressure": 0.45,
+      "zone": "attacking_box",
+      "context": "Shot across the goalkeeper.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-038",
+      "minute": 31,
+      "second": 53,
+      "team": "home",
+      "player": "I. Novak",
+      "ball": {
+        "x": 16.32,
+        "y": 35.09
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.17,
+      "zone": "defensive_third",
+      "context": "Goal kick to the centre-back in space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-039",
+      "minute": 32,
+      "second": 48,
+      "team": "home",
+      "player": "C. Adeyemi",
+      "ball": {
+        "x": 30.09,
+        "y": 22.84
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.27,
+      "zone": "defensive_third",
+      "context": "Square pass to the full-back along the touchline.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-040",
+      "minute": 33,
+      "second": 42,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 43.95,
+        "y": 33.55
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.29,
+      "zone": "middle_third",
+      "context": "Pass into the holding midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-041",
+      "minute": 34,
+      "second": 28,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 46.58,
+        "y": 35.95
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.79,
+      "zone": "middle_third",
+      "context": "Pressed from behind, the midfielder shields the ball.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-042",
+      "minute": 35,
+      "second": 26,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 53.86,
+        "y": 51.08
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.36,
+      "zone": "middle_third",
+      "context": "Switch of play toward the far half-space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-043",
+      "minute": 36,
+      "second": 0,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 67.46,
+        "y": 58.99
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.35,
+      "zone": "middle_third",
+      "context": "Carry into space down the wing.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-044",
+      "minute": 36,
+      "second": 44,
+      "team": "home",
+      "player": "I. Novak",
+      "ball": {
+        "x": 80.15,
+        "y": 62.87
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.42,
+      "zone": "attacking_wide",
+      "context": "Pass down the line to the winger.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-045",
+      "minute": 37,
+      "second": 25,
+      "team": "home",
+      "player": "C. Adeyemi",
+      "ball": {
+        "x": 88.04,
+        "y": 54.98
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.47,
+      "zone": "attacking_wide",
+      "context": "Dribble inside off the full-back.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-046",
+      "minute": 38,
+      "second": 4,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 90.08,
+        "y": 38.67
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.43,
+      "zone": "attacking_box",
+      "context": "Cut-back toward the penalty spot.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-047",
+      "minute": 38,
+      "second": 43,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 97.27,
+        "y": 36.69
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.39,
+      "zone": "attacking_box",
+      "context": "Shot from inside the box.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-048",
+      "minute": 39,
+      "second": 20,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 84.27,
+        "y": 27.24
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.23,
+      "zone": "defensive_third",
+      "context": "Short restart to the right centre-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-049",
+      "minute": 39,
+      "second": 59,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 77.72,
+        "y": 22.02
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.28,
+      "zone": "defensive_third",
+      "context": "Centre-back steps out with the ball.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-050",
+      "minute": 40,
+      "second": 25,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 74.3,
+        "y": 24.07
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.72,
+      "zone": "defensive_third",
+      "context": "A striker closes down and the centre-back holds.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-051",
+      "minute": 41,
+      "second": 28,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 61.9,
+        "y": 50.13
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.32,
+      "zone": "middle_third",
+      "context": "Pass into the wide midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-052",
+      "minute": 42,
+      "second": 15,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 45.91,
+        "y": 44.32
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.32,
+      "zone": "middle_third",
+      "context": "Progressive pass into the half-space.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-053",
+      "minute": 42,
+      "second": 54,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 34.07,
+        "y": 38.39
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.42,
+      "zone": "attacking_third",
+      "context": "Ball into the attacking midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-054",
+      "minute": 43,
+      "second": 58,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 24.18,
+        "y": 40.05
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.47,
+      "zone": "attacking_third",
+      "context": "Touch away from the marker toward the byline.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-055",
+      "minute": 45,
+      "second": 4,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 22.0,
+        "y": 51.61
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.83,
+      "zone": "attacking_third",
+      "context": "The winger is doubled and holds the ball up.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-056",
+      "minute": 46,
+      "second": 14,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 18.4,
+        "y": 36.05
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.48,
+      "zone": "attacking_third",
+      "context": "Lay-off to the onrushing midfielder.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-057",
+      "minute": 47,
+      "second": 19,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 13.4,
+        "y": 27.28
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.58,
+      "zone": "attacking_box",
+      "context": "Shot from the edge of the box.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-058",
+      "minute": 48,
+      "second": 9,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 24.91,
+        "y": 34.58
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.18,
+      "zone": "defensive_third",
+      "context": "Play out from the back after a goal kick.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-059",
+      "minute": 48,
+      "second": 44,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 37.21,
+        "y": 33.1
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.24,
+      "zone": "middle_third",
+      "context": "Central pass through the first line.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-060",
+      "minute": 49,
+      "second": 38,
+      "team": "home",
+      "player": "M. Diallo",
+      "ball": {
+        "x": 52.74,
+        "y": 35.15
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.32,
+      "zone": "middle_third",
+      "context": "Midfielder drives at the defence.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-061",
+      "minute": 50,
+      "second": 33,
+      "team": "home",
+      "player": "R. Santos",
+      "ball": {
+        "x": 63.38,
+        "y": 13.64
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.28,
+      "zone": "middle_third",
+      "context": "Release to the overlapping full-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-062",
+      "minute": 51,
+      "second": 6,
+      "team": "home",
+      "player": "I. Novak",
+      "ball": {
+        "x": 72.85,
+        "y": 12.72
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.4,
+      "zone": "attacking_wide",
+      "context": "Pass along the touchline.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-063",
+      "minute": 51,
+      "second": 37,
+      "team": "home",
+      "player": "C. Adeyemi",
+      "ball": {
+        "x": 86.06,
+        "y": 19.04
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.47,
+      "zone": "attacking_third",
+      "context": "Full-back drives to the byline.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-064",
+      "minute": 52,
+      "second": 14,
+      "team": "home",
+      "player": "A. Okonkwo",
+      "ball": {
+        "x": 93.78,
+        "y": 29.31
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.51,
+      "zone": "attacking_box",
+      "context": "Low cross into the six-yard area.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-065",
+      "minute": 52,
+      "second": 57,
+      "team": "home",
+      "player": "L. Berg",
+      "ball": {
+        "x": 99.0,
+        "y": 34.63
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "home",
+      "pressure": 0.61,
+      "zone": "attacking_box",
+      "context": "Close-range shot.",
+      "action": "shoot"
+    },
+    {
+      "event_id": "syn-seq-7-066",
+      "minute": 53,
+      "second": 56,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 87.19,
+        "y": 18.89
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.23,
+      "zone": "defensive_third",
+      "context": "Keeper throws to the left-sided centre-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-067",
+      "minute": 54,
+      "second": 43,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 82.05,
+        "y": 15.61
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.72,
+      "zone": "defensive_third",
+      "context": "A forward presses and the centre-back pauses.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-068",
+      "minute": 55,
+      "second": 41,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 69.19,
+        "y": 7.0
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.25,
+      "zone": "middle_third",
+      "context": "Pass out to the full-back.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-069",
+      "minute": 56,
+      "second": 40,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 56.84,
+        "y": 5.97
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.34,
+      "zone": "middle_third",
+      "context": "Full-back carries past the first press.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-070",
+      "minute": 57,
+      "second": 16,
+      "team": "away",
+      "player": "J. Silva",
+      "ball": {
+        "x": 44.74,
+        "y": 27.34
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.28,
+      "zone": "middle_third",
+      "context": "Pass inside to the number eight.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-071",
+      "minute": 57,
+      "second": 50,
+      "team": "away",
+      "player": "S. Rahman",
+      "ball": {
+        "x": 33.06,
+        "y": 31.46
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.38,
+      "zone": "attacking_third",
+      "context": "Vertical pass splitting the lines.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-072",
+      "minute": 58,
+      "second": 35,
+      "team": "away",
+      "player": "N. Costa",
+      "ball": {
+        "x": 28.56,
+        "y": 33.93
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.77,
+      "zone": "attacking_third",
+      "context": "Back to goal, the forward holds off the centre-back.",
+      "action": "hold"
+    },
+    {
+      "event_id": "syn-seq-7-073",
+      "minute": 59,
+      "second": 6,
+      "team": "away",
+      "player": "E. Walsh",
+      "ball": {
+        "x": 22.08,
+        "y": 25.06
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.46,
+      "zone": "attacking_third",
+      "context": "Lay-off into the runner.",
+      "action": "pass"
+    },
+    {
+      "event_id": "syn-seq-7-074",
+      "minute": 59,
+      "second": 33,
+      "team": "away",
+      "player": "H. Klein",
+      "ball": {
+        "x": 14.35,
+        "y": 25.98
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.51,
+      "zone": "attacking_box",
+      "context": "Touch into the box.",
+      "action": "dribble"
+    },
+    {
+      "event_id": "syn-seq-7-075",
+      "minute": 60,
+      "second": 2,
+      "team": "away",
+      "player": "P. Moreau",
+      "ball": {
+        "x": 7.14,
+        "y": 29.73
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "possession_team": "away",
+      "pressure": 0.44,
+      "zone": "attacking_box",
+      "context": "Shot across the goalkeeper.",
+      "action": "shoot"
+    }
+  ]
+}

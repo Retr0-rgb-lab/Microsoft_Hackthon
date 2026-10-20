@@ -1,0 +1,21 @@
+{
+  "match_id": 69284,
+  "match_date": "2019-07-03",
+  "competition_id": 72,
+  "season_id": 30,
+  "competition": "Women's World Cup",
+  "season": "2019",
+  "competition_stage": "Semi-finals",
+  "home_team": {
+    "id": 851,
+    "name": "Netherlands Women's"
+  },
+  "away_team": {
+    "id": 858,
+    "name": "Sweden Women's"
+  },
+  "home_score": 1,
+  "away_score": 0,
+  "source": "https://github.com/statsbomb/open-data",
+  "license": "CC BY-NC 4.0"
+}

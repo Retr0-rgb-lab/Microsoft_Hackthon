@@ -4,23 +4,24 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Protocol
 
 from inside_the_game.features.extract import FeatureVector, extract_features
 from inside_the_game.ingest.events import MatchEvent
 from inside_the_game.labels import ACTION_LABELS, validate_distribution
+from inside_the_game.system1.fit import default_weights_path, load_linear_weights
 
 
-# Hand-set linear stub. Another thread can replace these weights with a fitted
-# classifier without changing ``predict``. Order matches FEATURE_NAMES:
-# ball_x, ball_y, centrality, pressure, minute, goal_diff.
-_BIAS: dict[str, float] = {
+# Hand-set linear stub. Used when ``weights.json`` is missing. Order matches
+# FEATURE_NAMES: ball_x, ball_y, centrality, pressure, minute, goal_diff.
+_STUB_BIAS: dict[str, float] = {
     "pass": 0.55,
     "shoot": -2.05,
     "dribble": -0.35,
     "hold": 0.25,
 }
-_WEIGHTS: dict[str, tuple[float, float, float, float, float, float]] = {
+_STUB_WEIGHTS: dict[str, tuple[float, float, float, float, float, float]] = {
     "pass": (0.10, 0.00, 0.45, -0.35, 0.00, 0.00),
     "shoot": (3.60, 0.00, 1.70, -1.40, 0.00, 0.00),
     "dribble": (1.70, 0.00, -1.35, -1.20, 0.00, 0.00),
@@ -50,7 +51,37 @@ class ActionDistribution:
 
 
 class SoftmaxActionPolicy:
-    """Default System 1. Event to features to softmax. No images, no network."""
+    """Default System 1. Event to features to softmax. No images, no network.
+
+    A weight file next to this module is the fitted policy. If that file is
+    absent, or ``weights_path`` points at a missing file, prediction uses the
+    hand-set stub. A present file that fails to parse is an error.
+    """
+
+    def __init__(self, weights_path: Path | None = None, *, force_stub: bool = False) -> None:
+        if force_stub:
+            self._use_stub()
+            return
+        path = default_weights_path() if weights_path is None else Path(weights_path)
+        if not path.is_file():
+            self._use_stub()
+            return
+        loaded = load_linear_weights(path)
+        self._bias = dict(loaded.bias)
+        self._weights = {label: tuple(loaded.weights[label]) for label in ACTION_LABELS}
+        self.weight_source = "file"
+        self.weights_path: Path | None = path
+
+    @classmethod
+    def stub(cls) -> SoftmaxActionPolicy:
+        """The original hand-set softmax, ignoring any weight file."""
+        return cls(force_stub=True)
+
+    def _use_stub(self) -> None:
+        self._bias = dict(_STUB_BIAS)
+        self._weights = {label: tuple(_STUB_WEIGHTS[label]) for label in ACTION_LABELS}
+        self.weight_source = "stub"
+        self.weights_path = None
 
     def predict(self, event: MatchEvent) -> ActionDistribution:
         return self.predict_features(extract_features(event))
@@ -58,7 +89,7 @@ class SoftmaxActionPolicy:
     def predict_features(self, features: FeatureVector) -> ActionDistribution:
         values = features.as_tuple()
         logits = [
-            _BIAS[label] + _dot(_WEIGHTS[label], values)
+            self._bias[label] + _dot(self._weights[label], values)
             for label in ACTION_LABELS
         ]
         return ActionDistribution(dict(zip(ACTION_LABELS, _softmax(logits), strict=True)))
