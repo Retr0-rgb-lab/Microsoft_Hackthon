@@ -1,7 +1,7 @@
-"""Inside the Game MVP scaffold.
+"""Inside the Game.
 
-Path: ingest synthetic events, System 1 action distribution, System 2
-explanation, replay overlay. Computer vision is out of scope.
+Events path: ingest, System 1, System 2, text overlay (``python -m inside_the_game``).
+Video path: ``python -m demo.run`` paints that same softmax on a broadcast clip.
 """
 
 from inside_the_game.labels import ACTION_LABELS
