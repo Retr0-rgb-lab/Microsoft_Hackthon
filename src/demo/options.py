@@ -2,7 +2,8 @@
 
 Softmax chooses the action class (pass, dribble, shoot, hold). It does not
 choose a receiver. When the class is pass, the arrow is the single best
-visible teammate. When it is dribble, the arrow is one short carry into open
+visible teammate, and that receiver's shirt must match the possessor in Lab
+and chroma. When it is dribble, the arrow is one short carry into open
 space. Shoot and hold stay in the probability bars and are not drawn as lines.
 Coordinates are pitch meters or image pixels; thresholds scale with the frame.
 """
@@ -12,6 +13,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 
+from demo.teams import jerseys_match
 from inside_the_game.labels import ACTION_LABELS
 
 
@@ -25,6 +27,7 @@ class OptionPlayer:
     xy: tuple[float, float]
     team: str
     role: str = "player"
+    jersey: tuple[float, float, float] | None = None
 
 
 @dataclass(frozen=True)
@@ -92,7 +95,7 @@ def build_options(
 
 def _primary_pass(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
     limits = _thresholds(bounds, space)
-    mates = _teammates(players, possessor_id, possessor_team, attacking_positive, bounds)
+    mates = eligible_receivers(players, possessor_id, possessor_team, attacking_positive, bounds)
     found = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
     if not found:
         return []
@@ -158,6 +161,33 @@ def _teammates(
             continue
         mates[player.track_id] = player
     return mates
+
+
+def eligible_receivers(
+    players: list[OptionPlayer],
+    possessor_id: int,
+    possessor_team: str,
+    attacking_positive: bool,
+    bounds: tuple[float, float],
+) -> dict[int, OptionPlayer]:
+    """Same-team receivers whose shirt is close enough to the possessor.
+
+    The geometric ranking still picks the arrow. This gate drops a body the
+    team label called a teammate when the shirt is the other kit. Own
+    goalkeepers are exempt: their team comes from the goal they stand in, so
+    a keeper shirt must not wipe outfield passes either. Once the possessor
+    shirt is known, a receiver with no sample is rejected.
+    """
+    mates = _teammates(players, possessor_id, possessor_team, attacking_positive, bounds)
+    possessor = next((player for player in players if player.track_id == possessor_id), None)
+    if possessor is not None and possessor.role == "goalkeeper":
+        return mates
+    possessor_jersey = None if possessor is None else possessor.jersey
+    return {
+        track_id: player
+        for track_id, player in mates.items()
+        if player.role == "goalkeeper" or jerseys_match(possessor_jersey, player.jersey)
+    }
 
 
 def _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits):
