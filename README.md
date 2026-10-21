@@ -70,9 +70,10 @@ python -m demo.run --input in.mp4 --output out.mp4 --stride 2
 
 What you see when someone has the ball:
 
-- Pass arrows to teammates, carry arrows into space, and a shot at the goal they are attacking.
-- The softmax's recommended action is the bright arrow. The other options stay up, more transparent.
-- Arrows are sampled on the 105×68 m pitch and projected back through the homography, so they lie on the broadcast plane.
+- One arrow, for the class the softmax recommends. A pass is a single line to a visible teammate. A dribble is one short dashed carry into open space, drawn in a different colour so it does not read as a pass. Shoot and hold stay in the probability bars and are not drawn as lines.
+- The softmax chooses pass versus dribble versus shoot versus hold. It does not choose the receiver. Pass ranking is forward progress and the space around the lane, with only a light penalty for length, so an open progressive pass can beat a short dump. The carry aims at the best forward gap, not a fixed set of three templates.
+- Possession is a small state machine: on the ball, contested, pass in flight, or loose. On the ball, distance, velocity match, and track continuity decide who has it. A fast ball that is not stuck to a foot is a pass in flight: teammates are ranked by who can meet the ball first, and the arrows follow that predicted receiver instead of whichever body the ball is nearest. A touch (the ball reaches a foot and the relative speed drops) commits the switch.
+- Arrows are sampled on the 105×68 m pitch and projected back through the homography, so they lie on the broadcast plane. If the pitch model cannot support a homography, the same arrow falls back to a straight line in the image.
 - A four-way probability bar sits in the corner. A 2D minimap is on by default (`--no-minimap` turns it off).
 - Jersey colours are clustered into two teams. Which side is home is the defensive tail (the deepest outfield players) plus the goal each goalkeeper is standing in, not the average of every shirt. Home defends the left goal and attacks toward x = 105, the same frame as the training features. Pass arrows are pinned to teammates. The shot is pinned to the opponent goal mouth.
 

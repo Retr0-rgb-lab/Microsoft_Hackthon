@@ -47,15 +47,9 @@ def test_recommendation_does_not_flip_on_a_one_frame_lead() -> None:
             1, dribble_heavy, _frame("dribble"), players, (70.0, 34.0), "home", (105.0, 68.0), True, "pitch"
         )
         assert label == "pass"
-        assert any(item.primary and item.kind == "pass" for item in arrows)
-    shot_targets = [item.target for item in arrows if item.kind == "shoot"]
-    assert shot_targets == [(105.0, 34.0)]
-    pass_ids = {item.target_id for item in arrows if item.kind == "pass"}
-    assert pass_ids
-    assert pass_ids.isdisjoint({4, 6})
-    assert 5 not in pass_ids or all(
-        item.target[0] < 20.0 for item in arrows if item.kind == "pass" and item.target_id == 5
-    )
+        assert len(arrows) == 1
+        assert arrows[0].primary and arrows[0].kind == "pass"
+        assert arrows[0].target_id not in {4, 5, 6}
 
 
 def test_pass_arrows_keep_the_same_teammates_when_a_new_one_appears() -> None:
@@ -66,9 +60,10 @@ def test_pass_arrows_keep_the_same_teammates_when_a_new_one_appears() -> None:
     _, _, first = memory.apply(
         1, probs, options, players, (70.0, 34.0), "home", (105.0, 68.0), True, "pitch"
     )
-    original = {item.target_id for item in first if item.kind == "pass"}
-    assert original
-    assert 4 not in original
+    assert len(first) == 1
+    assert first[0].kind == "pass"
+    original = first[0].target_id
+    assert original in {2, 3}
     extra = players + [OptionPlayer(9, (86.0, 20.0), "home")]
     intruder = build_options(
         (70.0, 34.0),
@@ -83,12 +78,25 @@ def test_pass_arrows_keep_the_same_teammates_when_a_new_one_appears() -> None:
     _, _, second = memory.apply(
         1, probs, intruder, extra, (70.0, 34.0), "home", (105.0, 68.0), True, "pitch"
     )
-    assert {item.target_id for item in second if item.kind == "pass"} == original
-    for item in second:
-        if item.kind == "pass":
-            assert item.target_id in {2, 3, 5}
-        if item.kind == "shoot":
-            assert item.target == (105.0, 34.0)
+    assert len(second) == 1
+    assert second[0].kind == "pass"
+    assert second[0].target_id == original
+    assert second[0].primary
+
+
+def test_held_dribble_still_draws_when_this_frame_was_scored_as_a_pass() -> None:
+    """The displayed class can lag the raw argmax. The arrow follows the class on screen."""
+    memory = OverlayMemory(switch_frames=6, lead_margin=0.08, ema=0.3)
+    players = _players()
+    dribble_heavy = {"pass": 0.2, "dribble": 0.6, "shoot": 0.1, "hold": 0.1}
+    label, _, arrows = memory.apply(
+        1, dribble_heavy, _frame("pass"), players, (70.0, 34.0), "home", (105.0, 68.0), True, "pitch"
+    )
+    assert label == "dribble"
+    assert len(arrows) == 1
+    assert arrows[0].kind == "dribble"
+    assert arrows[0].primary
+    assert arrows[0].target_id is None
 
 
 def test_nearby_frames_keep_the_same_primary_pass() -> None:

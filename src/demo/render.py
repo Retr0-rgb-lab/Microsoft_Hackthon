@@ -71,6 +71,15 @@ _KIND_BGR = {
 _PRIMARY_BGR = (40, 240, 255)
 
 
+def arrows_to_draw(arrows: list[ArrowDraw]) -> list[ArrowDraw]:
+    """The single pass or carry. Shoot, hold, and secondary arrows stay off the pitch."""
+    return [
+        arrow
+        for arrow in arrows
+        if arrow.primary and arrow.kind in {"pass", "dribble"} and len(arrow.points) >= 2
+    ]
+
+
 def draw_overlay(frame, state: OverlayState):
     """Return a BGR frame with the tactical overlay painted on."""
     import cv2
@@ -78,12 +87,13 @@ def draw_overlay(frame, state: OverlayState):
     canvas = frame.copy()
     if state.wireframe:
         _blend_polylines(canvas, state.wireframe, (210, 230, 210), 1, 0.45)
-    secondary = [arrow for arrow in state.arrows if not arrow.primary and len(arrow.points) >= 2]
-    primary = [arrow for arrow in state.arrows if arrow.primary and len(arrow.points) >= 2]
-    if secondary:
-        _blend_arrows(canvas, secondary, primary=False, alpha=0.38)
-    if primary:
-        _blend_arrows(canvas, primary, primary=True, alpha=0.95)
+    drawn = arrows_to_draw(state.arrows)
+    carries = [arrow for arrow in drawn if arrow.kind == "dribble"]
+    passes = [arrow for arrow in drawn if arrow.kind == "pass"]
+    if carries:
+        _blend_arrows(canvas, carries, primary=True, alpha=0.95)
+    if passes:
+        _blend_arrows(canvas, passes, primary=True, alpha=0.95)
     _players_and_ball(canvas, state)
     if state.show_minimap:
         _minimap(canvas, state)
@@ -109,13 +119,22 @@ def _blend_arrows(canvas, arrows: list[ArrowDraw], *, primary: bool, alpha: floa
 
     overlay = canvas.copy()
     for arrow in arrows:
-        color = _PRIMARY_BGR if primary else _KIND_BGR.get(arrow.kind, (255, 255, 255))
-        thickness = 4 if primary else 2
+        # A carry is a short dashed orange shaft. A pass stays a solid line, so
+        # the two never share a colour or a stroke.
+        if arrow.kind == "dribble":
+            color = _KIND_BGR["dribble"]
+            thickness = 3
+        else:
+            color = _PRIMARY_BGR if primary else _KIND_BGR.get(arrow.kind, (255, 255, 255))
+            thickness = 4 if primary else 2
         chain = _chain(arrow.points)
         if chain is None:
             continue
-        cv2.polylines(overlay, [chain], False, color, thickness, cv2.LINE_AA)
-        _head(overlay, arrow.points, color, 18 if primary else 12, thickness)
+        if arrow.kind == "dribble":
+            _dashed(overlay, arrow.points, color, thickness)
+        else:
+            cv2.polylines(overlay, [chain], False, color, thickness, cv2.LINE_AA)
+        _head(overlay, arrow.points, color, 14 if arrow.kind == "dribble" else (18 if primary else 12), thickness)
         if primary or arrow.kind == "shoot":
             end = arrow.points[-1]
             label_x, label_y = _label_anchor(end, overlay.shape[1], overlay.shape[0])
@@ -134,6 +153,35 @@ def _blend_arrows(canvas, arrows: list[ArrowDraw], *, primary: bool, alpha: floa
             radius = 16 if primary else 10
             cv2.circle(overlay, (int(foot[0]), int(foot[1])), radius, color, 2, cv2.LINE_AA)
     cv2.addWeighted(overlay, alpha, canvas, 1.0 - alpha, 0, canvas)
+
+
+def _dashed(image, points, color, thickness, dash: float = 14.0, gap: float = 9.0) -> None:
+    import cv2
+
+    converted = [_ipoint(point) for point in points]
+    if any(point is None for point in converted):
+        return
+    for start, end in zip(converted, converted[1:]):
+        length = _hypot(end[0] - start[0], end[1] - start[1])
+        if length < 1.0:
+            continue
+        direction = ((end[0] - start[0]) / length, (end[1] - start[1]) / length)
+        cursor = 0.0
+        drawing = True
+        while cursor < length:
+            span = dash if drawing else gap
+            nxt = min(length, cursor + span)
+            if drawing:
+                cv2.line(
+                    image,
+                    (int(start[0] + direction[0] * cursor), int(start[1] + direction[1] * cursor)),
+                    (int(start[0] + direction[0] * nxt), int(start[1] + direction[1] * nxt)),
+                    color,
+                    thickness,
+                    cv2.LINE_AA,
+                )
+            cursor = nxt
+            drawing = not drawing
 
 
 def _label_anchor(end: tuple[float, float], width: int, height: int) -> tuple[int, int]:
@@ -285,12 +333,13 @@ def _minimap(canvas, state: OverlayState) -> None:
     halfway = px((PITCH_LENGTH / 2.0, 0.0))[0]
     cv2.line(canvas, (halfway, y0), (halfway, y0 + map_h), (160, 180, 160), 1, cv2.LINE_AA)
     for arrow in state.minimap_arrows:
-        color = _PRIMARY_BGR if arrow.primary else _KIND_BGR.get(arrow.kind, (220, 220, 220))
-        thickness = 2 if arrow.primary else 1
-        if arrow.kind == "hold":
-            cv2.circle(canvas, px(arrow.origin), 4, color, 1, cv2.LINE_AA)
+        if not arrow.primary or arrow.kind not in {"pass", "dribble"}:
             continue
-        cv2.arrowedLine(canvas, px(arrow.origin), px(arrow.target), color, thickness, cv2.LINE_AA, tipLength=0.25)
+        if arrow.kind == "dribble":
+            color = _KIND_BGR["dribble"]
+        else:
+            color = _PRIMARY_BGR
+        cv2.arrowedLine(canvas, px(arrow.origin), px(arrow.target), color, 2, cv2.LINE_AA, tipLength=0.25)
     for player in state.minimap_players:
         color = _TEAM_BGR.get(player.team, _TEAM_BGR["unknown"])
         radius = 4 if player.possessor else 3

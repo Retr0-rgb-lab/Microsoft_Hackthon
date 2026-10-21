@@ -1,6 +1,16 @@
 """Possessor identity stays put when the ball disappears or jitters."""
 
-from demo.possessor import BallMark, BallSmoother, FootTrail, PlayerFix, PossessorTracker
+from demo.possessor import (
+    CONTESTED,
+    LOOSE,
+    ON_BALL,
+    PASS_IN_FLIGHT,
+    BallMark,
+    BallSmoother,
+    FootTrail,
+    PlayerFix,
+    PossessorTracker,
+)
 from demo.tracking import TrackState, predict_tracks, velocities_from_previous
 
 
@@ -56,12 +66,152 @@ def test_missed_ball_holds_then_expires() -> None:
     assert expired.source == "none"
 
 
+def test_velocity_match_beats_a_slightly_closer_bystander() -> None:
+    tracker = PossessorTracker(
+        max_distance=15.0,
+        velocity_weight=0.8,
+        switch_ratio=1.05,
+        commit_distance=0.4,
+        flight_speed=8.0,
+        touch_rel_speed=1.2,
+    )
+    players = [
+        PlayerFix(1, (10.0, 10.0), "home", velocity=(0.0, 0.0)),
+        PlayerFix(2, (10.0, 13.0), "home", velocity=(5.0, 0.0)),
+    ]
+    # Player 1 is closer (1.4 vs 1.6) but the ball is moving with player 2.
+    fix = tracker.update(players, (10.0, 11.4), ball_visible=True, ball_velocity=(5.0, 0.0))
+    assert fix.track_id == 2
+    assert fix.state == ON_BALL
+    assert fix.team == "home"
+
+
+def test_pass_in_flight_picks_a_teammate_intercept_not_the_nearest_body() -> None:
+    tracker = PossessorTracker(
+        max_distance=12.0,
+        commit_distance=2.5,
+        flight_speed=4.0,
+        touch_rel_speed=1.5,
+        receiver_speed=3.0,
+        control_scale=2.0,
+    )
+    players = [
+        PlayerFix(1, (0.0, 0.0), "home"),
+        PlayerFix(2, (30.0, 0.0), "home"),
+        PlayerFix(3, (14.0, 8.0), "away"),
+    ]
+    owned = tracker.update(players, (1.0, 0.0), ball_visible=True, ball_velocity=(0.0, 0.0))
+    assert owned.track_id == 1
+    assert owned.state == ON_BALL
+    # The away player is the nearest body and inside the old nearest-player
+    # radius, but the ball is clear of every foot and still moving quickly.
+    flight = tracker.update(players, (14.0, 0.0), ball_visible=True, ball_velocity=(8.0, 0.0))
+    assert flight.state == PASS_IN_FLIGHT
+    assert flight.source == "pass"
+    assert flight.predicted_id == 2
+    assert flight.track_id == 2
+    assert flight.team == "home"
+    arrived = [
+        PlayerFix(1, (0.0, 0.0), "home"),
+        PlayerFix(2, (30.0, 0.0), "home", velocity=(0.3, 0.0)),
+        PlayerFix(3, (14.0, 8.0), "away"),
+    ]
+    touch = tracker.update(arrived, (29.4, 0.0), ball_visible=True, ball_velocity=(0.3, 0.0))
+    assert touch.track_id == 2
+    assert touch.state == ON_BALL
+    assert touch.source == "ball"
+    assert touch.predicted_id is None
+
+
+def test_fast_jitter_beside_the_possessor_does_not_launch_a_pass() -> None:
+    tracker = PossessorTracker(
+        max_distance=20.0,
+        commit_distance=4.0,
+        flight_speed=3.0,
+        touch_rel_speed=1.0,
+        velocity_weight=0.55,
+    )
+    players = [
+        PlayerFix(1, (10.0, 10.0), "home"),
+        PlayerFix(2, (30.0, 10.0), "home"),
+    ]
+    assert tracker.update(players, (10.4, 10.0), ball_visible=True, ball_velocity=(0.0, 0.0)).track_id == 1
+    held = tracker.update(players, (12.0, 10.4), ball_visible=True, ball_velocity=(8.0, 0.0))
+    assert held.track_id == 1
+    assert held.state == ON_BALL
+    assert held.team == "home"
+
+
+def test_failed_intercept_keeps_the_passer_instead_of_a_near_opponent() -> None:
+    tracker = PossessorTracker(
+        max_distance=18.0,
+        commit_distance=2.0,
+        flight_speed=3.0,
+        touch_rel_speed=1.0,
+        receiver_speed=0.4,
+        flight_horizon=4.0,
+    )
+    players = [
+        PlayerFix(1, (0.0, 0.0), "home"),
+        PlayerFix(2, (6.0, 40.0), "home"),
+        PlayerFix(3, (14.0, 7.0), "away"),
+    ]
+    assert tracker.update(players, (0.5, 0.0), ball_visible=True).track_id == 1
+    kept = tracker.update(players, (12.0, 0.0), ball_visible=True, ball_velocity=(8.0, 0.0))
+    assert kept.track_id == 1
+    assert kept.team == "home"
+    assert kept.state != PASS_IN_FLIGHT
+
+
+def test_fast_ball_with_no_teammate_on_the_ray_stays_loose() -> None:
+    tracker = PossessorTracker(
+        max_distance=8.0,
+        commit_distance=1.5,
+        flight_speed=3.0,
+        touch_rel_speed=1.0,
+        receiver_speed=1.0,
+        flight_horizon=6.0,
+    )
+    players = [
+        PlayerFix(1, (0.0, 0.0), "home"),
+        PlayerFix(2, (4.0, 40.0), "home"),
+        PlayerFix(3, (18.0, 6.0), "away"),
+    ]
+    tracker.update(players, (0.4, 0.0), ball_visible=True, ball_velocity=(0.0, 0.0))
+    loose = tracker.update(players, (16.0, 0.0), ball_visible=True, ball_velocity=(7.0, 0.0))
+    assert loose.state == LOOSE
+    assert loose.track_id is None
+    assert loose.source == "loose"
+
+
+def test_two_players_on_the_ball_are_contested_until_the_touch_sticks() -> None:
+    tracker = PossessorTracker(
+        max_distance=20.0,
+        switch_ratio=1.35,
+        switch_frames=3,
+        commit_distance=1.0,
+        flight_speed=10.0,
+    )
+    players = [
+        PlayerFix(1, (20.0, 34.0), "home"),
+        PlayerFix(3, (21.2, 34.0), "away"),
+    ]
+    first = tracker.update(players, (20.4, 34.0), ball_visible=True, ball_velocity=(0.0, 0.0))
+    assert first.track_id == 1
+    assert first.state == CONTESTED
+    nudged = tracker.update(players, (21.0, 34.0), ball_visible=True, ball_velocity=(0.2, 0.0))
+    assert nudged.track_id == 1
+    assert nudged.state == CONTESTED
+    assert nudged.team == "home"
+
+
 def test_visible_loose_ball_does_not_keep_the_old_possessor() -> None:
     tracker = PossessorTracker(max_distance=5.0, hold_frames=5)
     tracker.update(_players(), (20.5, 34.0), ball_visible=True)
     loose = tracker.update(_players(), (80.0, 10.0), ball_visible=True)
     assert loose.source == "loose"
     assert loose.track_id is None
+    assert loose.state == LOOSE
 
 
 def test_ball_smoother_coasts_and_rejects_a_jump() -> None:
