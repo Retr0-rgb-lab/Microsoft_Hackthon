@@ -16,7 +16,7 @@ from demo.options import (
     OptionPlayer,
     TacticalOption,
     build_options,
-    is_opponent_goalkeeper,
+    eligible_receivers,
     pass_window,
 )
 from inside_the_game.labels import ACTION_LABELS
@@ -137,15 +137,13 @@ class OverlayMemory:
         recommended: str,
     ) -> list[TacticalOption]:
         """One primary arrow for the held class. No secondary passes, shots, or holds."""
-        mates = {
-            player.track_id: player
-            for player in players
-            if player.track_id != self.possessor_id
-            and player.role != "referee"
-            and player.team == possessor_team
-            and possessor_team in ("home", "away")
-            and not is_opponent_goalkeeper(player, attacking_positive, bounds)
-        }
+        mates = eligible_receivers(
+            players,
+            -1 if self.possessor_id is None else self.possessor_id,
+            possessor_team,
+            attacking_positive,
+            bounds,
+        )
         if recommended == "pass":
             return self._one_pass(options, mates, players, origin, possessor_team, bounds, attacking_positive, space)
         if recommended == "dribble":

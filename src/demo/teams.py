@@ -16,11 +16,13 @@ An optional home-jersey lock (``TeamBook(home_jersey=...)``, the
 ``--home-jersey`` flag, or ``INSIDE_THE_GAME_HOME_JERSEY``) pins cluster 0
 to those RGB samples and skips the tail flip. Leave it unset and the online
 2-means above is unchanged. Striped kits pass both samples
-(``white-black``); sampling in HSV or Lab is left to the colour model.
+(``white-black``). ``summarize_jersey`` keeps a fluorescent shirt and drops
+pitch green; ``jerseys_match`` is the pass-target colour gate.
 """
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 from inside_the_game.ingest.events import PITCH_LENGTH
@@ -392,3 +394,160 @@ def _nearest(color: tuple[float, float, float], clusters: list[_Cluster]) -> int
 
 def _rgb_dist(a: tuple[float, float, float], b: tuple[float, float, float]) -> float:
     return sum((left - right) ** 2 for left, right in zip(a, b, strict=True)) ** 0.5
+
+
+# Chroma classes, not a single ΔE. White and black stripes are both dull
+# (C* under 14) and can sit ~100 apart. Neon green is vivid (C* over 32) and
+# must not match either stripe, even when the sticky team label is wrong.
+_LOW_CHROMA = 14.0
+_HIGH_CHROMA = 32.0
+_STRIPE_LAB_MAX = 105.0
+_CHROMA_LAB_MAX = 52.0
+_GRASS_HUE = (75.0, 165.0)
+_NEON_SATURATION = 0.68
+_NEON_VALUE = 0.55
+_SATURATED_SHARE = 0.35
+_LAB_CHROMA_SAMPLE = 32.0
+_MIN_JERSEY_PIXELS = 8
+
+
+def _hsv(rgb: tuple[float, float, float]) -> tuple[float, float, float]:
+    """Hue in degrees, saturation, and value, each from an 0–255 sRGB triple."""
+    red, green, blue = (channel / 255.0 for channel in rgb)
+    peak = max(red, green, blue)
+    floor = min(red, green, blue)
+    span = peak - floor
+    if span == 0.0 or peak == 0.0:
+        return 0.0, 0.0, peak
+    if peak == red:
+        hue = 60.0 * (((green - blue) / span) % 6.0)
+    elif peak == green:
+        hue = 60.0 * (((blue - red) / span) + 2.0)
+    else:
+        hue = 60.0 * (((red - green) / span) + 4.0)
+    if hue < 0.0:
+        hue += 360.0
+    return hue, span / peak, peak
+
+
+def _linear_srgb(channel: float) -> float:
+    value = channel / 255.0
+    if value <= 0.04045:
+        return value / 12.92
+    return ((value + 0.055) / 1.055) ** 2.4
+
+
+def srgb_to_lab(rgb: tuple[float, float, float]) -> tuple[float, float, float]:
+    """CIE Lab (D65) for an 0–255 sRGB colour."""
+    red, green, blue = (_linear_srgb(channel) for channel in rgb)
+    x = red * 0.4124564 + green * 0.3575761 + blue * 0.1804375
+    y = red * 0.2126729 + green * 0.7151522 + blue * 0.0721750
+    z = red * 0.0193339 + green * 0.1191920 + blue * 0.9503041
+    white = (0.95047, 1.0, 1.08883)
+
+    def pivot(channel: float, reference: float) -> float:
+        ratio = channel / reference
+        if ratio > (6.0 / 29.0) ** 3:
+            return ratio ** (1.0 / 3.0)
+        return ratio / (3.0 * (6.0 / 29.0) ** 2) + 4.0 / 29.0
+
+    fx, fy, fz = (pivot(channel, reference) for channel, reference in zip((x, y, z), white, strict=True))
+    return (116.0 * fy - 16.0, 500.0 * (fx - fy), 200.0 * (fy - fz))
+
+
+def _chroma(rgb: tuple[float, float, float]) -> float:
+    _lightness, a_star, b_star = srgb_to_lab(rgb)
+    return math.hypot(a_star, b_star)
+
+
+def lab_distance(
+    left: tuple[float, float, float],
+    right: tuple[float, float, float],
+) -> float:
+    """CIE76 distance between two 0–255 sRGB colours."""
+    return math.dist(srgb_to_lab(left), srgb_to_lab(right))
+
+
+def is_pitch_grass(rgb: tuple[float, float, float]) -> bool:
+    """Pitch green in the grass hue band, excluding fluorescent shirts.
+
+    Broadcast neon sits in the same hue as the pitch but is far more saturated.
+    The old ``G > R + 25`` mask deleted both, then the white number was left
+    as the shirt colour.
+    """
+    hue, saturation, value = _hsv(rgb)
+    low, high = _GRASS_HUE
+    if not (low <= hue <= high and saturation >= 0.25 and value >= 0.18):
+        return False
+    if saturation >= _NEON_SATURATION and value >= _NEON_VALUE:
+        return False
+    return True
+
+
+def _median_rgb(pixels: list[tuple[float, float, float]]) -> tuple[float, float, float]:
+    count = len(pixels)
+    mid = count // 2
+    channels: list[float] = []
+    for axis in range(3):
+        ordered = sorted(pixel[axis] for pixel in pixels)
+        if count % 2:
+            channels.append(float(ordered[mid]))
+        else:
+            channels.append(0.5 * (ordered[mid - 1] + ordered[mid]))
+    return (channels[0], channels[1], channels[2])
+
+
+def _saturated(rgb: tuple[float, float, float]) -> bool:
+    _hue, saturation, _value = _hsv(rgb)
+    return saturation >= _SATURATED_SHARE or _chroma(rgb) >= _LAB_CHROMA_SAMPLE
+
+
+def summarize_jersey(
+    pixels: list[tuple[float, float, float]],
+) -> tuple[float, float, float] | None:
+    """Median shirt colour after the grass gate. Grass-only crops return None.
+
+    When a vivid kit still has white numbers, the saturated pixels are the
+    shirt. A striped kit has almost no saturation, so the median of what
+    remains (white and black) is the sample the home-jersey lock compares.
+    """
+    kept = [pixel for pixel in pixels if not is_pitch_grass(pixel)]
+    if len(kept) < _MIN_JERSEY_PIXELS:
+        return None
+    vivid = [pixel for pixel in kept if _saturated(pixel)]
+    need = max(_MIN_JERSEY_PIXELS, int(0.30 * len(kept)))
+    return _median_rgb(vivid if len(vivid) >= need else kept)
+
+
+def _chroma_class(chroma: float) -> str:
+    if chroma < _LOW_CHROMA:
+        return "low"
+    if chroma > _HIGH_CHROMA:
+        return "high"
+    return "mid"
+
+
+def jerseys_match(
+    possessor: tuple[float, float, float] | None,
+    receiver: tuple[float, float, float] | None,
+) -> bool:
+    """Whether two sampled shirts are the same kit.
+
+    Both missing keeps the existing team-label path. One missing fails closed
+    once a shirt has been seen. A dull stripe and a vivid neon never match,
+    whatever their ΔE. Two dull colours may be as far apart as white and black.
+    """
+    if possessor is None and receiver is None:
+        return True
+    if possessor is None or receiver is None:
+        return False
+    possessor_c = _chroma(possessor)
+    receiver_c = _chroma(receiver)
+    if {_chroma_class(possessor_c), _chroma_class(receiver_c)} == {"low", "high"}:
+        return False
+    limit = (
+        _STRIPE_LAB_MAX
+        if possessor_c < _LOW_CHROMA and receiver_c < _LOW_CHROMA
+        else _CHROMA_LAB_MAX
+    )
+    return lab_distance(possessor, receiver) <= limit
