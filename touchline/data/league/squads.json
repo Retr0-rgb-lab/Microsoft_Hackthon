@@ -1,0 +1,5992 @@
+{
+  "schema_version": "1.0.0",
+  "season": "2026/27",
+  "competition": "Northwater League (synthetic)",
+  "synthetic_matches": true,
+  "synthetic_squads": true,
+  "source": {
+    "note": "Fictional rosters produced by generate.py. Names, shirts, nationalities and dates of birth are procedural and are not taken from any real competition squad list."
+  },
+  "teams": [
+    {
+      "club_id": "HBR",
+      "name": "Harbor FC",
+      "short_name": "Harbor",
+      "stadium": "Harbor Park",
+      "colors": {
+        "primary": "#1F6F5B",
+        "secondary": "#F4EDE4"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.15,
+        "defense": 1.1,
+        "passing": 1.1,
+        "pressing": 1.08
+      },
+      "players": [
+        {
+          "player_id": "HBR-01",
+          "name": "Aldric Aldwyn",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Norway",
+          "date_of_birth": "1993-03-01",
+          "age": 33
+        },
+        {
+          "player_id": "HBR-02",
+          "name": "Bram Aldwyn",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Portugal",
+          "date_of_birth": "1993-04-17",
+          "age": 33
+        },
+        {
+          "player_id": "HBR-03",
+          "name": "Cedric Aldwyn",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Ghana",
+          "date_of_birth": "1993-06-03",
+          "age": 33
+        },
+        {
+          "player_id": "HBR-04",
+          "name": "Doran Aldwyn",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Japan",
+          "date_of_birth": "1993-07-20",
+          "age": 33
+        },
+        {
+          "player_id": "HBR-05",
+          "name": "Elric Aldwyn",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Canada",
+          "date_of_birth": "1993-09-05",
+          "age": 33
+        },
+        {
+          "player_id": "HBR-06",
+          "name": "Fenn Aldwyn",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Morocco",
+          "date_of_birth": "1993-10-22",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-07",
+          "name": "Galen Aldwyn",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Croatia",
+          "date_of_birth": "1993-12-08",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-08",
+          "name": "Hart Aldwyn",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Senegal",
+          "date_of_birth": "1994-01-24",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-09",
+          "name": "Ivo Aldwyn",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Sweden",
+          "date_of_birth": "1994-03-12",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-10",
+          "name": "Joss Aldwyn",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Chile",
+          "date_of_birth": "1994-04-28",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-11",
+          "name": "Kael Aldwyn",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Austria",
+          "date_of_birth": "1994-06-14",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-12",
+          "name": "Leif Aldwyn",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "1994-07-31",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-13",
+          "name": "Merrick Aldwyn",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "1994-09-16",
+          "age": 32
+        },
+        {
+          "player_id": "HBR-14",
+          "name": "Nils Aldwyn",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "1994-11-02",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-15",
+          "name": "Orin Aldwyn",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "1994-12-19",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-16",
+          "name": "Perrin Aldwyn",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "1995-02-04",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-17",
+          "name": "Quill Aldwyn",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "1995-03-23",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-18",
+          "name": "Rowan Aldwyn",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "1995-05-09",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-19",
+          "name": "Soren Aldwyn",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "1995-06-25",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-20",
+          "name": "Tarin Aldwyn",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1995-08-11",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-21",
+          "name": "Ulric Aldwyn",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Norway",
+          "date_of_birth": "1995-09-27",
+          "age": 31
+        },
+        {
+          "player_id": "HBR-22",
+          "name": "Vesper Aldwyn",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Portugal",
+          "date_of_birth": "1995-11-13",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-23",
+          "name": "Wystan Aldwyn",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Ghana",
+          "date_of_birth": "1995-12-30",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-24",
+          "name": "Yorick Aldwyn",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Japan",
+          "date_of_birth": "1996-02-15",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-25",
+          "name": "Zane Aldwyn",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Canada",
+          "date_of_birth": "1996-04-02",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-26",
+          "name": "Ansel Aldwyn",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Morocco",
+          "date_of_birth": "1996-05-19",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-27",
+          "name": "Bramwell Aldwyn",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Croatia",
+          "date_of_birth": "1996-07-05",
+          "age": 30
+        },
+        {
+          "player_id": "HBR-28",
+          "name": "Corin Aldwyn",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Senegal",
+          "date_of_birth": "1996-08-21",
+          "age": 30
+        }
+      ]
+    },
+    {
+      "club_id": "MTN",
+      "name": "Mountain FC",
+      "short_name": "Mountain",
+      "stadium": "Mountain Ground",
+      "colors": {
+        "primary": "#5C4A86",
+        "secondary": "#E7E2F2"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.02,
+        "defense": 1.0,
+        "passing": 1.01,
+        "pressing": 1.0
+      },
+      "players": [
+        {
+          "player_id": "MTN-01",
+          "name": "Darrow Aldwyn",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Sweden",
+          "date_of_birth": "1996-10-07",
+          "age": 30
+        },
+        {
+          "player_id": "MTN-02",
+          "name": "Eamon Aldwyn",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Chile",
+          "date_of_birth": "1996-11-23",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-03",
+          "name": "Fletcher Aldwyn",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Austria",
+          "date_of_birth": "1997-01-09",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-04",
+          "name": "Garrick Aldwyn",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Nigeria",
+          "date_of_birth": "1997-02-25",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-05",
+          "name": "Hollis Aldwyn",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Denmark",
+          "date_of_birth": "1997-04-13",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-06",
+          "name": "Ingram Aldwyn",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Uruguay",
+          "date_of_birth": "1997-05-30",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-07",
+          "name": "Jory Aldwyn",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Switzerland",
+          "date_of_birth": "1997-07-16",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-08",
+          "name": "Keelan Aldwyn",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Mali",
+          "date_of_birth": "1997-09-01",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-09",
+          "name": "Larkin Aldwyn",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Poland",
+          "date_of_birth": "1997-10-18",
+          "age": 29
+        },
+        {
+          "player_id": "MTN-10",
+          "name": "Malin Aldwyn",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "South Korea",
+          "date_of_birth": "1997-12-04",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-11",
+          "name": "Nevin Aldwyn",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Scotland",
+          "date_of_birth": "1998-01-20",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-12",
+          "name": "Osric Aldwyn",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1998-03-08",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-13",
+          "name": "Aldric Bexley",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "1998-04-24",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-14",
+          "name": "Bram Bexley",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "1998-06-10",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-15",
+          "name": "Cedric Bexley",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "1998-07-27",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-16",
+          "name": "Doran Bexley",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "1998-09-12",
+          "age": 28
+        },
+        {
+          "player_id": "MTN-17",
+          "name": "Elric Bexley",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "1998-10-29",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-18",
+          "name": "Fenn Bexley",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "1998-12-15",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-19",
+          "name": "Galen Bexley",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "1999-01-31",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-20",
+          "name": "Hart Bexley",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Senegal",
+          "date_of_birth": "1999-03-19",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-21",
+          "name": "Ivo Bexley",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Sweden",
+          "date_of_birth": "1999-05-05",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-22",
+          "name": "Joss Bexley",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Chile",
+          "date_of_birth": "1999-06-21",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-23",
+          "name": "Kael Bexley",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Austria",
+          "date_of_birth": "1999-08-07",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-24",
+          "name": "Leif Bexley",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Nigeria",
+          "date_of_birth": "1999-09-23",
+          "age": 27
+        },
+        {
+          "player_id": "MTN-25",
+          "name": "Merrick Bexley",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Denmark",
+          "date_of_birth": "1999-11-09",
+          "age": 26
+        },
+        {
+          "player_id": "MTN-26",
+          "name": "Nils Bexley",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Uruguay",
+          "date_of_birth": "1999-12-26",
+          "age": 26
+        },
+        {
+          "player_id": "MTN-27",
+          "name": "Orin Bexley",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Switzerland",
+          "date_of_birth": "2000-02-11",
+          "age": 26
+        },
+        {
+          "player_id": "MTN-28",
+          "name": "Perrin Bexley",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Mali",
+          "date_of_birth": "2000-03-29",
+          "age": 26
+        }
+      ]
+    },
+    {
+      "club_id": "RVD",
+      "name": "Riverdale Athletic",
+      "short_name": "Riverdale",
+      "stadium": "Riverdale Bowl",
+      "colors": {
+        "primary": "#C46B2F",
+        "secondary": "#1E2A24"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.98,
+        "defense": 0.98,
+        "passing": 0.98,
+        "pressing": 1.04
+      },
+      "players": [
+        {
+          "player_id": "RVD-01",
+          "name": "Quill Bexley",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Poland",
+          "date_of_birth": "2000-05-15",
+          "age": 26
+        },
+        {
+          "player_id": "RVD-02",
+          "name": "Rowan Bexley",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "South Korea",
+          "date_of_birth": "2000-07-01",
+          "age": 26
+        },
+        {
+          "player_id": "RVD-03",
+          "name": "Soren Bexley",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Scotland",
+          "date_of_birth": "2000-08-17",
+          "age": 26
+        },
+        {
+          "player_id": "RVD-04",
+          "name": "Tarin Bexley",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2000-10-03",
+          "age": 26
+        },
+        {
+          "player_id": "RVD-05",
+          "name": "Ulric Bexley",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Norway",
+          "date_of_birth": "2000-11-19",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-06",
+          "name": "Vesper Bexley",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Portugal",
+          "date_of_birth": "2001-01-05",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-07",
+          "name": "Wystan Bexley",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ghana",
+          "date_of_birth": "2001-02-21",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-08",
+          "name": "Yorick Bexley",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Japan",
+          "date_of_birth": "2001-04-09",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-09",
+          "name": "Zane Bexley",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Canada",
+          "date_of_birth": "2001-05-26",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-10",
+          "name": "Ansel Bexley",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Morocco",
+          "date_of_birth": "2001-07-12",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-11",
+          "name": "Bramwell Bexley",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Croatia",
+          "date_of_birth": "2001-08-28",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-12",
+          "name": "Corin Bexley",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "2001-10-14",
+          "age": 25
+        },
+        {
+          "player_id": "RVD-13",
+          "name": "Darrow Bexley",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "2001-11-30",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-14",
+          "name": "Eamon Bexley",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "2002-01-16",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-15",
+          "name": "Fletcher Bexley",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "2002-03-04",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-16",
+          "name": "Garrick Bexley",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "2002-04-20",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-17",
+          "name": "Hollis Bexley",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "2002-06-06",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-18",
+          "name": "Ingram Bexley",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "2002-07-23",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-19",
+          "name": "Jory Bexley",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "2002-09-08",
+          "age": 24
+        },
+        {
+          "player_id": "RVD-20",
+          "name": "Keelan Bexley",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Mali",
+          "date_of_birth": "2002-10-25",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-21",
+          "name": "Larkin Bexley",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Poland",
+          "date_of_birth": "2002-12-11",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-22",
+          "name": "Malin Bexley",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "South Korea",
+          "date_of_birth": "2003-01-27",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-23",
+          "name": "Nevin Bexley",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Scotland",
+          "date_of_birth": "2003-03-15",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-24",
+          "name": "Osric Bexley",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2003-05-01",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-25",
+          "name": "Aldric Cairn",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Norway",
+          "date_of_birth": "2003-06-17",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-26",
+          "name": "Bram Cairn",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Portugal",
+          "date_of_birth": "2003-08-03",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-27",
+          "name": "Cedric Cairn",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ghana",
+          "date_of_birth": "2003-09-19",
+          "age": 23
+        },
+        {
+          "player_id": "RVD-28",
+          "name": "Doran Cairn",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Japan",
+          "date_of_birth": "2003-11-05",
+          "age": 22
+        }
+      ]
+    },
+    {
+      "club_id": "CDR",
+      "name": "Cedar United",
+      "short_name": "Cedar",
+      "stadium": "Cedar Lane",
+      "colors": {
+        "primary": "#2F6B3A",
+        "secondary": "#F2F6EF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.97,
+        "defense": 0.99,
+        "passing": 0.96,
+        "pressing": 1.03
+      },
+      "players": [
+        {
+          "player_id": "CDR-01",
+          "name": "Elric Cairn",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Canada",
+          "date_of_birth": "2003-12-22",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-02",
+          "name": "Fenn Cairn",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Morocco",
+          "date_of_birth": "2004-02-07",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-03",
+          "name": "Galen Cairn",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Croatia",
+          "date_of_birth": "2004-03-25",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-04",
+          "name": "Hart Cairn",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Senegal",
+          "date_of_birth": "2004-05-11",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-05",
+          "name": "Ivo Cairn",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Sweden",
+          "date_of_birth": "2004-06-27",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-06",
+          "name": "Joss Cairn",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Chile",
+          "date_of_birth": "2004-08-13",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-07",
+          "name": "Kael Cairn",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Austria",
+          "date_of_birth": "2004-09-29",
+          "age": 22
+        },
+        {
+          "player_id": "CDR-08",
+          "name": "Leif Cairn",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Nigeria",
+          "date_of_birth": "2004-11-15",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-09",
+          "name": "Merrick Cairn",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Denmark",
+          "date_of_birth": "2005-01-01",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-10",
+          "name": "Nils Cairn",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Uruguay",
+          "date_of_birth": "2005-02-17",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-11",
+          "name": "Orin Cairn",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Switzerland",
+          "date_of_birth": "2005-04-05",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-12",
+          "name": "Perrin Cairn",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "2005-05-22",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-13",
+          "name": "Quill Cairn",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "2005-07-08",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-14",
+          "name": "Rowan Cairn",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "2005-08-24",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-15",
+          "name": "Soren Cairn",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "2005-10-10",
+          "age": 21
+        },
+        {
+          "player_id": "CDR-16",
+          "name": "Tarin Cairn",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2005-11-26",
+          "age": 20
+        },
+        {
+          "player_id": "CDR-17",
+          "name": "Ulric Cairn",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "2006-01-12",
+          "age": 20
+        },
+        {
+          "player_id": "CDR-18",
+          "name": "Vesper Cairn",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "2006-02-28",
+          "age": 20
+        },
+        {
+          "player_id": "CDR-19",
+          "name": "Wystan Cairn",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "2006-04-16",
+          "age": 20
+        },
+        {
+          "player_id": "CDR-20",
+          "name": "Yorick Cairn",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Japan",
+          "date_of_birth": "1993-04-11",
+          "age": 33
+        },
+        {
+          "player_id": "CDR-21",
+          "name": "Zane Cairn",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Canada",
+          "date_of_birth": "1993-05-28",
+          "age": 33
+        },
+        {
+          "player_id": "CDR-22",
+          "name": "Ansel Cairn",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Morocco",
+          "date_of_birth": "1993-07-14",
+          "age": 33
+        },
+        {
+          "player_id": "CDR-23",
+          "name": "Bramwell Cairn",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Croatia",
+          "date_of_birth": "1993-08-30",
+          "age": 33
+        },
+        {
+          "player_id": "CDR-24",
+          "name": "Corin Cairn",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Senegal",
+          "date_of_birth": "1993-10-16",
+          "age": 33
+        },
+        {
+          "player_id": "CDR-25",
+          "name": "Darrow Cairn",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Sweden",
+          "date_of_birth": "1993-12-02",
+          "age": 32
+        },
+        {
+          "player_id": "CDR-26",
+          "name": "Eamon Cairn",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Chile",
+          "date_of_birth": "1994-01-18",
+          "age": 32
+        },
+        {
+          "player_id": "CDR-27",
+          "name": "Fletcher Cairn",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Austria",
+          "date_of_birth": "1994-03-06",
+          "age": 32
+        },
+        {
+          "player_id": "CDR-28",
+          "name": "Garrick Cairn",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Nigeria",
+          "date_of_birth": "1994-04-22",
+          "age": 32
+        }
+      ]
+    },
+    {
+      "club_id": "BRK",
+      "name": "Bracken Town",
+      "short_name": "Bracken",
+      "stadium": "Bracken Field",
+      "colors": {
+        "primary": "#8C3D55",
+        "secondary": "#F7F1E8"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.0,
+        "defense": 0.99,
+        "passing": 1.03,
+        "pressing": 1.03
+      },
+      "players": [
+        {
+          "player_id": "BRK-01",
+          "name": "Hollis Cairn",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Denmark",
+          "date_of_birth": "1994-06-08",
+          "age": 32
+        },
+        {
+          "player_id": "BRK-02",
+          "name": "Ingram Cairn",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Uruguay",
+          "date_of_birth": "1994-07-25",
+          "age": 32
+        },
+        {
+          "player_id": "BRK-03",
+          "name": "Jory Cairn",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Switzerland",
+          "date_of_birth": "1994-09-10",
+          "age": 32
+        },
+        {
+          "player_id": "BRK-04",
+          "name": "Keelan Cairn",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Mali",
+          "date_of_birth": "1994-10-27",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-05",
+          "name": "Larkin Cairn",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Poland",
+          "date_of_birth": "1994-12-13",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-06",
+          "name": "Malin Cairn",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "South Korea",
+          "date_of_birth": "1995-01-29",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-07",
+          "name": "Nevin Cairn",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Scotland",
+          "date_of_birth": "1995-03-17",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-08",
+          "name": "Osric Cairn",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1995-05-03",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-09",
+          "name": "Aldric Dovetail",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Norway",
+          "date_of_birth": "1995-06-19",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-10",
+          "name": "Bram Dovetail",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Portugal",
+          "date_of_birth": "1995-08-05",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-11",
+          "name": "Cedric Dovetail",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Ghana",
+          "date_of_birth": "1995-09-21",
+          "age": 31
+        },
+        {
+          "player_id": "BRK-12",
+          "name": "Doran Dovetail",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "1995-11-07",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-13",
+          "name": "Elric Dovetail",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "1995-12-24",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-14",
+          "name": "Fenn Dovetail",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "1996-02-09",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-15",
+          "name": "Galen Dovetail",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "1996-03-27",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-16",
+          "name": "Hart Dovetail",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "1996-05-13",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-17",
+          "name": "Ivo Dovetail",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "1996-06-29",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-18",
+          "name": "Joss Dovetail",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "1996-08-15",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-19",
+          "name": "Kael Dovetail",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "1996-10-01",
+          "age": 30
+        },
+        {
+          "player_id": "BRK-20",
+          "name": "Leif Dovetail",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Nigeria",
+          "date_of_birth": "1996-11-17",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-21",
+          "name": "Merrick Dovetail",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Denmark",
+          "date_of_birth": "1997-01-03",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-22",
+          "name": "Nils Dovetail",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Uruguay",
+          "date_of_birth": "1997-02-19",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-23",
+          "name": "Orin Dovetail",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Switzerland",
+          "date_of_birth": "1997-04-07",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-24",
+          "name": "Perrin Dovetail",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Mali",
+          "date_of_birth": "1997-05-24",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-25",
+          "name": "Quill Dovetail",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Poland",
+          "date_of_birth": "1997-07-10",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-26",
+          "name": "Rowan Dovetail",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "South Korea",
+          "date_of_birth": "1997-08-26",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-27",
+          "name": "Soren Dovetail",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Scotland",
+          "date_of_birth": "1997-10-12",
+          "age": 29
+        },
+        {
+          "player_id": "BRK-28",
+          "name": "Tarin Dovetail",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1997-11-28",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "club_id": "WLN",
+      "name": "Welland City",
+      "short_name": "Welland",
+      "stadium": "Welland Gate",
+      "colors": {
+        "primary": "#245E78",
+        "secondary": "#F3F7F8"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.08,
+        "defense": 1.06,
+        "passing": 1.07,
+        "pressing": 1.04
+      },
+      "players": [
+        {
+          "player_id": "WLN-01",
+          "name": "Ulric Dovetail",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Norway",
+          "date_of_birth": "1998-01-14",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-02",
+          "name": "Vesper Dovetail",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Portugal",
+          "date_of_birth": "1998-03-02",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-03",
+          "name": "Wystan Dovetail",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Ghana",
+          "date_of_birth": "1998-04-18",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-04",
+          "name": "Yorick Dovetail",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Japan",
+          "date_of_birth": "1998-06-04",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-05",
+          "name": "Zane Dovetail",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Canada",
+          "date_of_birth": "1998-07-21",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-06",
+          "name": "Ansel Dovetail",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Morocco",
+          "date_of_birth": "1998-09-06",
+          "age": 28
+        },
+        {
+          "player_id": "WLN-07",
+          "name": "Bramwell Dovetail",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Croatia",
+          "date_of_birth": "1998-10-23",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-08",
+          "name": "Corin Dovetail",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Senegal",
+          "date_of_birth": "1998-12-09",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-09",
+          "name": "Darrow Dovetail",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Sweden",
+          "date_of_birth": "1999-01-25",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-10",
+          "name": "Eamon Dovetail",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Chile",
+          "date_of_birth": "1999-03-13",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-11",
+          "name": "Fletcher Dovetail",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Austria",
+          "date_of_birth": "1999-04-29",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-12",
+          "name": "Garrick Dovetail",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "1999-06-15",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-13",
+          "name": "Hollis Dovetail",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "1999-08-01",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-14",
+          "name": "Ingram Dovetail",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "1999-09-17",
+          "age": 27
+        },
+        {
+          "player_id": "WLN-15",
+          "name": "Jory Dovetail",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "1999-11-03",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-16",
+          "name": "Keelan Dovetail",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "1999-12-20",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-17",
+          "name": "Larkin Dovetail",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "2000-02-05",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-18",
+          "name": "Malin Dovetail",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "2000-03-23",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-19",
+          "name": "Nevin Dovetail",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "2000-05-09",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-20",
+          "name": "Osric Dovetail",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2000-06-25",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-21",
+          "name": "Aldric Elmwick",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Norway",
+          "date_of_birth": "2000-08-11",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-22",
+          "name": "Bram Elmwick",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Portugal",
+          "date_of_birth": "2000-09-27",
+          "age": 26
+        },
+        {
+          "player_id": "WLN-23",
+          "name": "Cedric Elmwick",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Ghana",
+          "date_of_birth": "2000-11-13",
+          "age": 25
+        },
+        {
+          "player_id": "WLN-24",
+          "name": "Doran Elmwick",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Japan",
+          "date_of_birth": "2000-12-30",
+          "age": 25
+        },
+        {
+          "player_id": "WLN-25",
+          "name": "Elric Elmwick",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Canada",
+          "date_of_birth": "2001-02-15",
+          "age": 25
+        },
+        {
+          "player_id": "WLN-26",
+          "name": "Fenn Elmwick",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Morocco",
+          "date_of_birth": "2001-04-03",
+          "age": 25
+        },
+        {
+          "player_id": "WLN-27",
+          "name": "Galen Elmwick",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Croatia",
+          "date_of_birth": "2001-05-20",
+          "age": 25
+        },
+        {
+          "player_id": "WLN-28",
+          "name": "Hart Elmwick",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Senegal",
+          "date_of_birth": "2001-07-06",
+          "age": 25
+        }
+      ]
+    },
+    {
+      "club_id": "NQY",
+      "name": "Northquay",
+      "short_name": "Northquay",
+      "stadium": "Northquay Park",
+      "colors": {
+        "primary": "#3E6E8C",
+        "secondary": "#F4F1EA"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.9,
+        "defense": 0.92,
+        "passing": 0.91,
+        "pressing": 0.97
+      },
+      "players": [
+        {
+          "player_id": "NQY-01",
+          "name": "Ivo Elmwick",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Sweden",
+          "date_of_birth": "2001-08-22",
+          "age": 25
+        },
+        {
+          "player_id": "NQY-02",
+          "name": "Joss Elmwick",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Chile",
+          "date_of_birth": "2001-10-08",
+          "age": 25
+        },
+        {
+          "player_id": "NQY-03",
+          "name": "Kael Elmwick",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Austria",
+          "date_of_birth": "2001-11-24",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-04",
+          "name": "Leif Elmwick",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Nigeria",
+          "date_of_birth": "2002-01-10",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-05",
+          "name": "Merrick Elmwick",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Denmark",
+          "date_of_birth": "2002-02-26",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-06",
+          "name": "Nils Elmwick",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Uruguay",
+          "date_of_birth": "2002-04-14",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-07",
+          "name": "Orin Elmwick",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Switzerland",
+          "date_of_birth": "2002-05-31",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-08",
+          "name": "Perrin Elmwick",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Mali",
+          "date_of_birth": "2002-07-17",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-09",
+          "name": "Quill Elmwick",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Poland",
+          "date_of_birth": "2002-09-02",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-10",
+          "name": "Rowan Elmwick",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "South Korea",
+          "date_of_birth": "2002-10-19",
+          "age": 24
+        },
+        {
+          "player_id": "NQY-11",
+          "name": "Soren Elmwick",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Scotland",
+          "date_of_birth": "2002-12-05",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-12",
+          "name": "Tarin Elmwick",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2003-01-21",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-13",
+          "name": "Ulric Elmwick",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "2003-03-09",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-14",
+          "name": "Vesper Elmwick",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "2003-04-25",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-15",
+          "name": "Wystan Elmwick",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "2003-06-11",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-16",
+          "name": "Yorick Elmwick",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "2003-07-28",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-17",
+          "name": "Zane Elmwick",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "2003-09-13",
+          "age": 23
+        },
+        {
+          "player_id": "NQY-18",
+          "name": "Ansel Elmwick",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "2003-10-30",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-19",
+          "name": "Bramwell Elmwick",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "2003-12-16",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-20",
+          "name": "Corin Elmwick",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Senegal",
+          "date_of_birth": "2004-02-01",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-21",
+          "name": "Darrow Elmwick",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Sweden",
+          "date_of_birth": "2004-03-19",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-22",
+          "name": "Eamon Elmwick",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Chile",
+          "date_of_birth": "2004-05-05",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-23",
+          "name": "Fletcher Elmwick",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Austria",
+          "date_of_birth": "2004-06-21",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-24",
+          "name": "Garrick Elmwick",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Nigeria",
+          "date_of_birth": "2004-08-07",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-25",
+          "name": "Hollis Elmwick",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Denmark",
+          "date_of_birth": "2004-09-23",
+          "age": 22
+        },
+        {
+          "player_id": "NQY-26",
+          "name": "Ingram Elmwick",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Uruguay",
+          "date_of_birth": "2004-11-09",
+          "age": 21
+        },
+        {
+          "player_id": "NQY-27",
+          "name": "Jory Elmwick",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Switzerland",
+          "date_of_birth": "2004-12-26",
+          "age": 21
+        },
+        {
+          "player_id": "NQY-28",
+          "name": "Keelan Elmwick",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Mali",
+          "date_of_birth": "2005-02-11",
+          "age": 21
+        }
+      ]
+    },
+    {
+      "club_id": "SLM",
+      "name": "Saltmere",
+      "short_name": "Saltmere",
+      "stadium": "Saltmere Ground",
+      "colors": {
+        "primary": "#1E4C6B",
+        "secondary": "#D7A15E"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.98,
+        "defense": 1.02,
+        "passing": 0.97,
+        "pressing": 1.05
+      },
+      "players": [
+        {
+          "player_id": "SLM-01",
+          "name": "Larkin Elmwick",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Poland",
+          "date_of_birth": "2005-03-30",
+          "age": 21
+        },
+        {
+          "player_id": "SLM-02",
+          "name": "Malin Elmwick",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "South Korea",
+          "date_of_birth": "2005-05-16",
+          "age": 21
+        },
+        {
+          "player_id": "SLM-03",
+          "name": "Nevin Elmwick",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Scotland",
+          "date_of_birth": "2005-07-02",
+          "age": 21
+        },
+        {
+          "player_id": "SLM-04",
+          "name": "Osric Elmwick",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2005-08-18",
+          "age": 21
+        },
+        {
+          "player_id": "SLM-05",
+          "name": "Aldric Farrow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Norway",
+          "date_of_birth": "2005-10-04",
+          "age": 21
+        },
+        {
+          "player_id": "SLM-06",
+          "name": "Bram Farrow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Portugal",
+          "date_of_birth": "2005-11-20",
+          "age": 20
+        },
+        {
+          "player_id": "SLM-07",
+          "name": "Cedric Farrow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ghana",
+          "date_of_birth": "2006-01-06",
+          "age": 20
+        },
+        {
+          "player_id": "SLM-08",
+          "name": "Doran Farrow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Japan",
+          "date_of_birth": "2006-02-22",
+          "age": 20
+        },
+        {
+          "player_id": "SLM-09",
+          "name": "Elric Farrow",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Canada",
+          "date_of_birth": "2006-04-10",
+          "age": 20
+        },
+        {
+          "player_id": "SLM-10",
+          "name": "Fenn Farrow",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Morocco",
+          "date_of_birth": "1993-04-05",
+          "age": 33
+        },
+        {
+          "player_id": "SLM-11",
+          "name": "Galen Farrow",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Croatia",
+          "date_of_birth": "1993-05-22",
+          "age": 33
+        },
+        {
+          "player_id": "SLM-12",
+          "name": "Hart Farrow",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "1993-07-08",
+          "age": 33
+        },
+        {
+          "player_id": "SLM-13",
+          "name": "Ivo Farrow",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "1993-08-24",
+          "age": 33
+        },
+        {
+          "player_id": "SLM-14",
+          "name": "Joss Farrow",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "1993-10-10",
+          "age": 33
+        },
+        {
+          "player_id": "SLM-15",
+          "name": "Kael Farrow",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "1993-11-26",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-16",
+          "name": "Leif Farrow",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "1994-01-12",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-17",
+          "name": "Merrick Farrow",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "1994-02-28",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-18",
+          "name": "Nils Farrow",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "1994-04-16",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-19",
+          "name": "Orin Farrow",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "1994-06-02",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-20",
+          "name": "Perrin Farrow",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Mali",
+          "date_of_birth": "1994-07-19",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-21",
+          "name": "Quill Farrow",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Poland",
+          "date_of_birth": "1994-09-04",
+          "age": 32
+        },
+        {
+          "player_id": "SLM-22",
+          "name": "Rowan Farrow",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "South Korea",
+          "date_of_birth": "1994-10-21",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-23",
+          "name": "Soren Farrow",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Scotland",
+          "date_of_birth": "1994-12-07",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-24",
+          "name": "Tarin Farrow",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1995-01-23",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-25",
+          "name": "Ulric Farrow",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Norway",
+          "date_of_birth": "1995-03-11",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-26",
+          "name": "Vesper Farrow",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Portugal",
+          "date_of_birth": "1995-04-27",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-27",
+          "name": "Wystan Farrow",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ghana",
+          "date_of_birth": "1995-06-13",
+          "age": 31
+        },
+        {
+          "player_id": "SLM-28",
+          "name": "Yorick Farrow",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Japan",
+          "date_of_birth": "1995-07-30",
+          "age": 31
+        }
+      ]
+    },
+    {
+      "club_id": "OKR",
+      "name": "Oakmere Rovers",
+      "short_name": "Oakmere",
+      "stadium": "Oakmere Park",
+      "colors": {
+        "primary": "#1D4E89",
+        "secondary": "#E8EEF5"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.94,
+        "defense": 0.97,
+        "passing": 0.95,
+        "pressing": 0.98
+      },
+      "players": [
+        {
+          "player_id": "OKR-01",
+          "name": "Zane Farrow",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Canada",
+          "date_of_birth": "1995-09-15",
+          "age": 31
+        },
+        {
+          "player_id": "OKR-02",
+          "name": "Ansel Farrow",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Morocco",
+          "date_of_birth": "1995-11-01",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-03",
+          "name": "Bramwell Farrow",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Croatia",
+          "date_of_birth": "1995-12-18",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-04",
+          "name": "Corin Farrow",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Senegal",
+          "date_of_birth": "1996-02-03",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-05",
+          "name": "Darrow Farrow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Sweden",
+          "date_of_birth": "1996-03-21",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-06",
+          "name": "Eamon Farrow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Chile",
+          "date_of_birth": "1996-05-07",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-07",
+          "name": "Fletcher Farrow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Austria",
+          "date_of_birth": "1996-06-23",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-08",
+          "name": "Garrick Farrow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Nigeria",
+          "date_of_birth": "1996-08-09",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-09",
+          "name": "Hollis Farrow",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Denmark",
+          "date_of_birth": "1996-09-25",
+          "age": 30
+        },
+        {
+          "player_id": "OKR-10",
+          "name": "Ingram Farrow",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Uruguay",
+          "date_of_birth": "1996-11-11",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-11",
+          "name": "Jory Farrow",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Switzerland",
+          "date_of_birth": "1996-12-28",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-12",
+          "name": "Keelan Farrow",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "1997-02-13",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-13",
+          "name": "Larkin Farrow",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "1997-04-01",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-14",
+          "name": "Malin Farrow",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "1997-05-18",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-15",
+          "name": "Nevin Farrow",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "1997-07-04",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-16",
+          "name": "Osric Farrow",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1997-08-20",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-17",
+          "name": "Aldric Goss",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "1997-10-06",
+          "age": 29
+        },
+        {
+          "player_id": "OKR-18",
+          "name": "Bram Goss",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "1997-11-22",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-19",
+          "name": "Cedric Goss",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "1998-01-08",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-20",
+          "name": "Doran Goss",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Japan",
+          "date_of_birth": "1998-02-24",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-21",
+          "name": "Elric Goss",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Canada",
+          "date_of_birth": "1998-04-12",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-22",
+          "name": "Fenn Goss",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Morocco",
+          "date_of_birth": "1998-05-29",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-23",
+          "name": "Galen Goss",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Croatia",
+          "date_of_birth": "1998-07-15",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-24",
+          "name": "Hart Goss",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Senegal",
+          "date_of_birth": "1998-08-31",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-25",
+          "name": "Ivo Goss",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Sweden",
+          "date_of_birth": "1998-10-17",
+          "age": 28
+        },
+        {
+          "player_id": "OKR-26",
+          "name": "Joss Goss",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Chile",
+          "date_of_birth": "1998-12-03",
+          "age": 27
+        },
+        {
+          "player_id": "OKR-27",
+          "name": "Kael Goss",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Austria",
+          "date_of_birth": "1999-01-19",
+          "age": 27
+        },
+        {
+          "player_id": "OKR-28",
+          "name": "Leif Goss",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Nigeria",
+          "date_of_birth": "1999-03-07",
+          "age": 27
+        }
+      ]
+    },
+    {
+      "club_id": "FNB",
+      "name": "Fenharbor",
+      "short_name": "Fenharbor",
+      "stadium": "Fen Gate",
+      "colors": {
+        "primary": "#F7F4EE",
+        "secondary": "#243028"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.96,
+        "defense": 0.98,
+        "passing": 0.99,
+        "pressing": 0.98
+      },
+      "players": [
+        {
+          "player_id": "FNB-01",
+          "name": "Merrick Goss",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Denmark",
+          "date_of_birth": "1999-04-23",
+          "age": 27
+        },
+        {
+          "player_id": "FNB-02",
+          "name": "Nils Goss",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Uruguay",
+          "date_of_birth": "1999-06-09",
+          "age": 27
+        },
+        {
+          "player_id": "FNB-03",
+          "name": "Orin Goss",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Switzerland",
+          "date_of_birth": "1999-07-26",
+          "age": 27
+        },
+        {
+          "player_id": "FNB-04",
+          "name": "Perrin Goss",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Mali",
+          "date_of_birth": "1999-09-11",
+          "age": 27
+        },
+        {
+          "player_id": "FNB-05",
+          "name": "Quill Goss",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Poland",
+          "date_of_birth": "1999-10-28",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-06",
+          "name": "Rowan Goss",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "South Korea",
+          "date_of_birth": "1999-12-14",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-07",
+          "name": "Soren Goss",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Scotland",
+          "date_of_birth": "2000-01-30",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-08",
+          "name": "Tarin Goss",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2000-03-17",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-09",
+          "name": "Ulric Goss",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Norway",
+          "date_of_birth": "2000-05-03",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-10",
+          "name": "Vesper Goss",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Portugal",
+          "date_of_birth": "2000-06-19",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-11",
+          "name": "Wystan Goss",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Ghana",
+          "date_of_birth": "2000-08-05",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-12",
+          "name": "Yorick Goss",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "2000-09-21",
+          "age": 26
+        },
+        {
+          "player_id": "FNB-13",
+          "name": "Zane Goss",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "2000-11-07",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-14",
+          "name": "Ansel Goss",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "2000-12-24",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-15",
+          "name": "Bramwell Goss",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "2001-02-09",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-16",
+          "name": "Corin Goss",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "2001-03-28",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-17",
+          "name": "Darrow Goss",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "2001-05-14",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-18",
+          "name": "Eamon Goss",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "2001-06-30",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-19",
+          "name": "Fletcher Goss",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "2001-08-16",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-20",
+          "name": "Garrick Goss",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Nigeria",
+          "date_of_birth": "2001-10-02",
+          "age": 25
+        },
+        {
+          "player_id": "FNB-21",
+          "name": "Hollis Goss",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Denmark",
+          "date_of_birth": "2001-11-18",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-22",
+          "name": "Ingram Goss",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Uruguay",
+          "date_of_birth": "2002-01-04",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-23",
+          "name": "Jory Goss",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Switzerland",
+          "date_of_birth": "2002-02-20",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-24",
+          "name": "Keelan Goss",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Mali",
+          "date_of_birth": "2002-04-08",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-25",
+          "name": "Larkin Goss",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Poland",
+          "date_of_birth": "2002-05-25",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-26",
+          "name": "Malin Goss",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "South Korea",
+          "date_of_birth": "2002-07-11",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-27",
+          "name": "Nevin Goss",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Scotland",
+          "date_of_birth": "2002-08-27",
+          "age": 24
+        },
+        {
+          "player_id": "FNB-28",
+          "name": "Osric Goss",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2002-10-13",
+          "age": 24
+        }
+      ]
+    },
+    {
+      "club_id": "KST",
+      "name": "Kestrel Athletic",
+      "short_name": "Kestrel",
+      "stadium": "Kestrel Moor",
+      "colors": {
+        "primary": "#E0A23A",
+        "secondary": "#2A241C"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.89,
+        "defense": 0.91,
+        "passing": 0.9,
+        "pressing": 0.98
+      },
+      "players": [
+        {
+          "player_id": "KST-01",
+          "name": "Aldric Heddle",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Norway",
+          "date_of_birth": "2002-11-29",
+          "age": 23
+        },
+        {
+          "player_id": "KST-02",
+          "name": "Bram Heddle",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Portugal",
+          "date_of_birth": "2003-01-15",
+          "age": 23
+        },
+        {
+          "player_id": "KST-03",
+          "name": "Cedric Heddle",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Ghana",
+          "date_of_birth": "2003-03-03",
+          "age": 23
+        },
+        {
+          "player_id": "KST-04",
+          "name": "Doran Heddle",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Japan",
+          "date_of_birth": "2003-04-19",
+          "age": 23
+        },
+        {
+          "player_id": "KST-05",
+          "name": "Elric Heddle",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Canada",
+          "date_of_birth": "2003-06-05",
+          "age": 23
+        },
+        {
+          "player_id": "KST-06",
+          "name": "Fenn Heddle",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Morocco",
+          "date_of_birth": "2003-07-22",
+          "age": 23
+        },
+        {
+          "player_id": "KST-07",
+          "name": "Galen Heddle",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Croatia",
+          "date_of_birth": "2003-09-07",
+          "age": 23
+        },
+        {
+          "player_id": "KST-08",
+          "name": "Hart Heddle",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Senegal",
+          "date_of_birth": "2003-10-24",
+          "age": 22
+        },
+        {
+          "player_id": "KST-09",
+          "name": "Ivo Heddle",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Sweden",
+          "date_of_birth": "2003-12-10",
+          "age": 22
+        },
+        {
+          "player_id": "KST-10",
+          "name": "Joss Heddle",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Chile",
+          "date_of_birth": "2004-01-26",
+          "age": 22
+        },
+        {
+          "player_id": "KST-11",
+          "name": "Kael Heddle",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Austria",
+          "date_of_birth": "2004-03-13",
+          "age": 22
+        },
+        {
+          "player_id": "KST-12",
+          "name": "Leif Heddle",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "2004-04-29",
+          "age": 22
+        },
+        {
+          "player_id": "KST-13",
+          "name": "Merrick Heddle",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "2004-06-15",
+          "age": 22
+        },
+        {
+          "player_id": "KST-14",
+          "name": "Nils Heddle",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "2004-08-01",
+          "age": 22
+        },
+        {
+          "player_id": "KST-15",
+          "name": "Orin Heddle",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "2004-09-17",
+          "age": 22
+        },
+        {
+          "player_id": "KST-16",
+          "name": "Perrin Heddle",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "2004-11-03",
+          "age": 21
+        },
+        {
+          "player_id": "KST-17",
+          "name": "Quill Heddle",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "2004-12-20",
+          "age": 21
+        },
+        {
+          "player_id": "KST-18",
+          "name": "Rowan Heddle",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "2005-02-05",
+          "age": 21
+        },
+        {
+          "player_id": "KST-19",
+          "name": "Soren Heddle",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "2005-03-24",
+          "age": 21
+        },
+        {
+          "player_id": "KST-20",
+          "name": "Tarin Heddle",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2005-05-10",
+          "age": 21
+        },
+        {
+          "player_id": "KST-21",
+          "name": "Ulric Heddle",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Norway",
+          "date_of_birth": "2005-06-26",
+          "age": 21
+        },
+        {
+          "player_id": "KST-22",
+          "name": "Vesper Heddle",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Portugal",
+          "date_of_birth": "2005-08-12",
+          "age": 21
+        },
+        {
+          "player_id": "KST-23",
+          "name": "Wystan Heddle",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Ghana",
+          "date_of_birth": "2005-09-28",
+          "age": 21
+        },
+        {
+          "player_id": "KST-24",
+          "name": "Yorick Heddle",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Japan",
+          "date_of_birth": "2005-11-14",
+          "age": 20
+        },
+        {
+          "player_id": "KST-25",
+          "name": "Zane Heddle",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Canada",
+          "date_of_birth": "2005-12-31",
+          "age": 20
+        },
+        {
+          "player_id": "KST-26",
+          "name": "Ansel Heddle",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Morocco",
+          "date_of_birth": "2006-02-16",
+          "age": 20
+        },
+        {
+          "player_id": "KST-27",
+          "name": "Bramwell Heddle",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Croatia",
+          "date_of_birth": "2006-04-04",
+          "age": 20
+        },
+        {
+          "player_id": "KST-28",
+          "name": "Corin Heddle",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Senegal",
+          "date_of_birth": "1993-03-30",
+          "age": 33
+        }
+      ]
+    },
+    {
+      "club_id": "LNT",
+      "name": "Lantern FC",
+      "short_name": "Lantern",
+      "stadium": "Lantern Yard",
+      "colors": {
+        "primary": "#3558A8",
+        "secondary": "#F6F3EA"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.9,
+        "defense": 0.92,
+        "passing": 0.92,
+        "pressing": 0.99
+      },
+      "players": [
+        {
+          "player_id": "LNT-01",
+          "name": "Darrow Heddle",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Sweden",
+          "date_of_birth": "1993-05-16",
+          "age": 33
+        },
+        {
+          "player_id": "LNT-02",
+          "name": "Eamon Heddle",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Chile",
+          "date_of_birth": "1993-07-02",
+          "age": 33
+        },
+        {
+          "player_id": "LNT-03",
+          "name": "Fletcher Heddle",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Austria",
+          "date_of_birth": "1993-08-18",
+          "age": 33
+        },
+        {
+          "player_id": "LNT-04",
+          "name": "Garrick Heddle",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Nigeria",
+          "date_of_birth": "1993-10-04",
+          "age": 33
+        },
+        {
+          "player_id": "LNT-05",
+          "name": "Hollis Heddle",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Denmark",
+          "date_of_birth": "1993-11-20",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-06",
+          "name": "Ingram Heddle",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Uruguay",
+          "date_of_birth": "1994-01-06",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-07",
+          "name": "Jory Heddle",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Switzerland",
+          "date_of_birth": "1994-02-22",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-08",
+          "name": "Keelan Heddle",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Mali",
+          "date_of_birth": "1994-04-10",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-09",
+          "name": "Larkin Heddle",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Poland",
+          "date_of_birth": "1994-05-27",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-10",
+          "name": "Malin Heddle",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "South Korea",
+          "date_of_birth": "1994-07-13",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-11",
+          "name": "Nevin Heddle",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Scotland",
+          "date_of_birth": "1994-08-29",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-12",
+          "name": "Osric Heddle",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1994-10-15",
+          "age": 32
+        },
+        {
+          "player_id": "LNT-13",
+          "name": "Aldric Inkwell",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "1994-12-01",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-14",
+          "name": "Bram Inkwell",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "1995-01-17",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-15",
+          "name": "Cedric Inkwell",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "1995-03-05",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-16",
+          "name": "Doran Inkwell",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "1995-04-21",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-17",
+          "name": "Elric Inkwell",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "1995-06-07",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-18",
+          "name": "Fenn Inkwell",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "1995-07-24",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-19",
+          "name": "Galen Inkwell",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "1995-09-09",
+          "age": 31
+        },
+        {
+          "player_id": "LNT-20",
+          "name": "Hart Inkwell",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Senegal",
+          "date_of_birth": "1995-10-26",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-21",
+          "name": "Ivo Inkwell",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Sweden",
+          "date_of_birth": "1995-12-12",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-22",
+          "name": "Joss Inkwell",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Chile",
+          "date_of_birth": "1996-01-28",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-23",
+          "name": "Kael Inkwell",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Austria",
+          "date_of_birth": "1996-03-15",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-24",
+          "name": "Leif Inkwell",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Nigeria",
+          "date_of_birth": "1996-05-01",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-25",
+          "name": "Merrick Inkwell",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Denmark",
+          "date_of_birth": "1996-06-17",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-26",
+          "name": "Nils Inkwell",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Uruguay",
+          "date_of_birth": "1996-08-03",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-27",
+          "name": "Orin Inkwell",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Switzerland",
+          "date_of_birth": "1996-09-19",
+          "age": 30
+        },
+        {
+          "player_id": "LNT-28",
+          "name": "Perrin Inkwell",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Mali",
+          "date_of_birth": "1996-11-05",
+          "age": 29
+        }
+      ]
+    },
+    {
+      "club_id": "DSK",
+      "name": "Duskford",
+      "short_name": "Duskford",
+      "stadium": "Duskford Arena",
+      "colors": {
+        "primary": "#F4F1EA",
+        "secondary": "#31406A"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.92,
+        "defense": 0.92,
+        "passing": 0.93,
+        "pressing": 1.0
+      },
+      "players": [
+        {
+          "player_id": "DSK-01",
+          "name": "Quill Inkwell",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Poland",
+          "date_of_birth": "1996-12-22",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-02",
+          "name": "Rowan Inkwell",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "South Korea",
+          "date_of_birth": "1997-02-07",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-03",
+          "name": "Soren Inkwell",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Scotland",
+          "date_of_birth": "1997-03-26",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-04",
+          "name": "Tarin Inkwell",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1997-05-12",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-05",
+          "name": "Ulric Inkwell",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Norway",
+          "date_of_birth": "1997-06-28",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-06",
+          "name": "Vesper Inkwell",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Portugal",
+          "date_of_birth": "1997-08-14",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-07",
+          "name": "Wystan Inkwell",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ghana",
+          "date_of_birth": "1997-09-30",
+          "age": 29
+        },
+        {
+          "player_id": "DSK-08",
+          "name": "Yorick Inkwell",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Japan",
+          "date_of_birth": "1997-11-16",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-09",
+          "name": "Zane Inkwell",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Canada",
+          "date_of_birth": "1998-01-02",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-10",
+          "name": "Ansel Inkwell",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Morocco",
+          "date_of_birth": "1998-02-18",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-11",
+          "name": "Bramwell Inkwell",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Croatia",
+          "date_of_birth": "1998-04-06",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-12",
+          "name": "Corin Inkwell",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "1998-05-23",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-13",
+          "name": "Darrow Inkwell",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "1998-07-09",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-14",
+          "name": "Eamon Inkwell",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "1998-08-25",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-15",
+          "name": "Fletcher Inkwell",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "1998-10-11",
+          "age": 28
+        },
+        {
+          "player_id": "DSK-16",
+          "name": "Garrick Inkwell",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "1998-11-27",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-17",
+          "name": "Hollis Inkwell",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "1999-01-13",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-18",
+          "name": "Ingram Inkwell",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "1999-03-01",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-19",
+          "name": "Jory Inkwell",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "1999-04-17",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-20",
+          "name": "Keelan Inkwell",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Mali",
+          "date_of_birth": "1999-06-03",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-21",
+          "name": "Larkin Inkwell",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Poland",
+          "date_of_birth": "1999-07-20",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-22",
+          "name": "Malin Inkwell",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "South Korea",
+          "date_of_birth": "1999-09-05",
+          "age": 27
+        },
+        {
+          "player_id": "DSK-23",
+          "name": "Nevin Inkwell",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Scotland",
+          "date_of_birth": "1999-10-22",
+          "age": 26
+        },
+        {
+          "player_id": "DSK-24",
+          "name": "Osric Inkwell",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1999-12-08",
+          "age": 26
+        },
+        {
+          "player_id": "DSK-25",
+          "name": "Aldric Jarrow",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Norway",
+          "date_of_birth": "2000-01-24",
+          "age": 26
+        },
+        {
+          "player_id": "DSK-26",
+          "name": "Bram Jarrow",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Portugal",
+          "date_of_birth": "2000-03-11",
+          "age": 26
+        },
+        {
+          "player_id": "DSK-27",
+          "name": "Cedric Jarrow",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ghana",
+          "date_of_birth": "2000-04-27",
+          "age": 26
+        },
+        {
+          "player_id": "DSK-28",
+          "name": "Doran Jarrow",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Japan",
+          "date_of_birth": "2000-06-13",
+          "age": 26
+        }
+      ]
+    },
+    {
+      "club_id": "PEL",
+      "name": "Pelican Town",
+      "short_name": "Pelican",
+      "stadium": "Pelican Wharf",
+      "colors": {
+        "primary": "#B23A48",
+        "secondary": "#F6F1E7"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.14,
+        "defense": 1.08,
+        "passing": 1.09,
+        "pressing": 1.1
+      },
+      "players": [
+        {
+          "player_id": "PEL-01",
+          "name": "Elric Jarrow",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Canada",
+          "date_of_birth": "2000-07-30",
+          "age": 26
+        },
+        {
+          "player_id": "PEL-02",
+          "name": "Fenn Jarrow",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Morocco",
+          "date_of_birth": "2000-09-15",
+          "age": 26
+        },
+        {
+          "player_id": "PEL-03",
+          "name": "Galen Jarrow",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Croatia",
+          "date_of_birth": "2000-11-01",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-04",
+          "name": "Hart Jarrow",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Senegal",
+          "date_of_birth": "2000-12-18",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-05",
+          "name": "Ivo Jarrow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Sweden",
+          "date_of_birth": "2001-02-03",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-06",
+          "name": "Joss Jarrow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Chile",
+          "date_of_birth": "2001-03-22",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-07",
+          "name": "Kael Jarrow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Austria",
+          "date_of_birth": "2001-05-08",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-08",
+          "name": "Leif Jarrow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Nigeria",
+          "date_of_birth": "2001-06-24",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-09",
+          "name": "Merrick Jarrow",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Denmark",
+          "date_of_birth": "2001-08-10",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-10",
+          "name": "Nils Jarrow",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Uruguay",
+          "date_of_birth": "2001-09-26",
+          "age": 25
+        },
+        {
+          "player_id": "PEL-11",
+          "name": "Orin Jarrow",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Switzerland",
+          "date_of_birth": "2001-11-12",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-12",
+          "name": "Perrin Jarrow",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "2001-12-29",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-13",
+          "name": "Quill Jarrow",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "2002-02-14",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-14",
+          "name": "Rowan Jarrow",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "2002-04-02",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-15",
+          "name": "Soren Jarrow",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "2002-05-19",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-16",
+          "name": "Tarin Jarrow",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2002-07-05",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-17",
+          "name": "Ulric Jarrow",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "2002-08-21",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-18",
+          "name": "Vesper Jarrow",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "2002-10-07",
+          "age": 24
+        },
+        {
+          "player_id": "PEL-19",
+          "name": "Wystan Jarrow",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "2002-11-23",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-20",
+          "name": "Yorick Jarrow",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Japan",
+          "date_of_birth": "2003-01-09",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-21",
+          "name": "Zane Jarrow",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Canada",
+          "date_of_birth": "2003-02-25",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-22",
+          "name": "Ansel Jarrow",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Morocco",
+          "date_of_birth": "2003-04-13",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-23",
+          "name": "Bramwell Jarrow",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Croatia",
+          "date_of_birth": "2003-05-30",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-24",
+          "name": "Corin Jarrow",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Senegal",
+          "date_of_birth": "2003-07-16",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-25",
+          "name": "Darrow Jarrow",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Sweden",
+          "date_of_birth": "2003-09-01",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-26",
+          "name": "Eamon Jarrow",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Chile",
+          "date_of_birth": "2003-10-18",
+          "age": 23
+        },
+        {
+          "player_id": "PEL-27",
+          "name": "Fletcher Jarrow",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Austria",
+          "date_of_birth": "2003-12-04",
+          "age": 22
+        },
+        {
+          "player_id": "PEL-28",
+          "name": "Garrick Jarrow",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Nigeria",
+          "date_of_birth": "2004-01-20",
+          "age": 22
+        }
+      ]
+    },
+    {
+      "club_id": "ASH",
+      "name": "Ashcombe",
+      "short_name": "Ashcombe",
+      "stadium": "Ashcombe Park",
+      "colors": {
+        "primary": "#7BA3C9",
+        "secondary": "#243044"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.12,
+        "defense": 1.12,
+        "passing": 1.12,
+        "pressing": 1.06
+      },
+      "players": [
+        {
+          "player_id": "ASH-01",
+          "name": "Hollis Jarrow",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Denmark",
+          "date_of_birth": "2004-03-07",
+          "age": 22
+        },
+        {
+          "player_id": "ASH-02",
+          "name": "Ingram Jarrow",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Uruguay",
+          "date_of_birth": "2004-04-23",
+          "age": 22
+        },
+        {
+          "player_id": "ASH-03",
+          "name": "Jory Jarrow",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Switzerland",
+          "date_of_birth": "2004-06-09",
+          "age": 22
+        },
+        {
+          "player_id": "ASH-04",
+          "name": "Keelan Jarrow",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Mali",
+          "date_of_birth": "2004-07-26",
+          "age": 22
+        },
+        {
+          "player_id": "ASH-05",
+          "name": "Larkin Jarrow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Poland",
+          "date_of_birth": "2004-09-11",
+          "age": 22
+        },
+        {
+          "player_id": "ASH-06",
+          "name": "Malin Jarrow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "South Korea",
+          "date_of_birth": "2004-10-28",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-07",
+          "name": "Nevin Jarrow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Scotland",
+          "date_of_birth": "2004-12-14",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-08",
+          "name": "Osric Jarrow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2005-01-30",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-09",
+          "name": "Aldric Keene",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Norway",
+          "date_of_birth": "2005-03-18",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-10",
+          "name": "Bram Keene",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Portugal",
+          "date_of_birth": "2005-05-04",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-11",
+          "name": "Cedric Keene",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Ghana",
+          "date_of_birth": "2005-06-20",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-12",
+          "name": "Doran Keene",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "2005-08-06",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-13",
+          "name": "Elric Keene",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "2005-09-22",
+          "age": 21
+        },
+        {
+          "player_id": "ASH-14",
+          "name": "Fenn Keene",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "2005-11-08",
+          "age": 20
+        },
+        {
+          "player_id": "ASH-15",
+          "name": "Galen Keene",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "2005-12-25",
+          "age": 20
+        },
+        {
+          "player_id": "ASH-16",
+          "name": "Hart Keene",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "2006-02-10",
+          "age": 20
+        },
+        {
+          "player_id": "ASH-17",
+          "name": "Ivo Keene",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "2006-03-29",
+          "age": 20
+        },
+        {
+          "player_id": "ASH-18",
+          "name": "Joss Keene",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "1993-03-24",
+          "age": 33
+        },
+        {
+          "player_id": "ASH-19",
+          "name": "Kael Keene",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "1993-05-10",
+          "age": 33
+        },
+        {
+          "player_id": "ASH-20",
+          "name": "Leif Keene",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Nigeria",
+          "date_of_birth": "1993-06-26",
+          "age": 33
+        },
+        {
+          "player_id": "ASH-21",
+          "name": "Merrick Keene",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Denmark",
+          "date_of_birth": "1993-08-12",
+          "age": 33
+        },
+        {
+          "player_id": "ASH-22",
+          "name": "Nils Keene",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Uruguay",
+          "date_of_birth": "1993-09-28",
+          "age": 33
+        },
+        {
+          "player_id": "ASH-23",
+          "name": "Orin Keene",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Switzerland",
+          "date_of_birth": "1993-11-14",
+          "age": 32
+        },
+        {
+          "player_id": "ASH-24",
+          "name": "Perrin Keene",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Mali",
+          "date_of_birth": "1993-12-31",
+          "age": 32
+        },
+        {
+          "player_id": "ASH-25",
+          "name": "Quill Keene",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Poland",
+          "date_of_birth": "1994-02-16",
+          "age": 32
+        },
+        {
+          "player_id": "ASH-26",
+          "name": "Rowan Keene",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "South Korea",
+          "date_of_birth": "1994-04-04",
+          "age": 32
+        },
+        {
+          "player_id": "ASH-27",
+          "name": "Soren Keene",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Scotland",
+          "date_of_birth": "1994-05-21",
+          "age": 32
+        },
+        {
+          "player_id": "ASH-28",
+          "name": "Tarin Keene",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1994-07-07",
+          "age": 32
+        }
+      ]
+    },
+    {
+      "club_id": "VLM",
+      "name": "Vellum United",
+      "short_name": "Vellum",
+      "stadium": "Vellum Street",
+      "colors": {
+        "primary": "#C45C4A",
+        "secondary": "#F6E7A8"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.0,
+        "defense": 1.01,
+        "passing": 1.0,
+        "pressing": 1.02
+      },
+      "players": [
+        {
+          "player_id": "VLM-01",
+          "name": "Ulric Keene",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Norway",
+          "date_of_birth": "1994-08-23",
+          "age": 32
+        },
+        {
+          "player_id": "VLM-02",
+          "name": "Vesper Keene",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Portugal",
+          "date_of_birth": "1994-10-09",
+          "age": 32
+        },
+        {
+          "player_id": "VLM-03",
+          "name": "Wystan Keene",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Ghana",
+          "date_of_birth": "1994-11-25",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-04",
+          "name": "Yorick Keene",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Japan",
+          "date_of_birth": "1995-01-11",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-05",
+          "name": "Zane Keene",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Canada",
+          "date_of_birth": "1995-02-27",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-06",
+          "name": "Ansel Keene",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Morocco",
+          "date_of_birth": "1995-04-15",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-07",
+          "name": "Bramwell Keene",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Croatia",
+          "date_of_birth": "1995-06-01",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-08",
+          "name": "Corin Keene",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Senegal",
+          "date_of_birth": "1995-07-18",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-09",
+          "name": "Darrow Keene",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Sweden",
+          "date_of_birth": "1995-09-03",
+          "age": 31
+        },
+        {
+          "player_id": "VLM-10",
+          "name": "Eamon Keene",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Chile",
+          "date_of_birth": "1995-10-20",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-11",
+          "name": "Fletcher Keene",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Austria",
+          "date_of_birth": "1995-12-06",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-12",
+          "name": "Garrick Keene",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "1996-01-22",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-13",
+          "name": "Hollis Keene",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "1996-03-09",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-14",
+          "name": "Ingram Keene",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "1996-04-25",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-15",
+          "name": "Jory Keene",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "1996-06-11",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-16",
+          "name": "Keelan Keene",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "1996-07-28",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-17",
+          "name": "Larkin Keene",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "1996-09-13",
+          "age": 30
+        },
+        {
+          "player_id": "VLM-18",
+          "name": "Malin Keene",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "1996-10-30",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-19",
+          "name": "Nevin Keene",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "1996-12-16",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-20",
+          "name": "Osric Keene",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1997-02-01",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-21",
+          "name": "Aldric Loxley",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Norway",
+          "date_of_birth": "1997-03-20",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-22",
+          "name": "Bram Loxley",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Portugal",
+          "date_of_birth": "1997-05-06",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-23",
+          "name": "Cedric Loxley",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Ghana",
+          "date_of_birth": "1997-06-22",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-24",
+          "name": "Doran Loxley",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Japan",
+          "date_of_birth": "1997-08-08",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-25",
+          "name": "Elric Loxley",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Canada",
+          "date_of_birth": "1997-09-24",
+          "age": 29
+        },
+        {
+          "player_id": "VLM-26",
+          "name": "Fenn Loxley",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Morocco",
+          "date_of_birth": "1997-11-10",
+          "age": 28
+        },
+        {
+          "player_id": "VLM-27",
+          "name": "Galen Loxley",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Croatia",
+          "date_of_birth": "1997-12-27",
+          "age": 28
+        },
+        {
+          "player_id": "VLM-28",
+          "name": "Hart Loxley",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Senegal",
+          "date_of_birth": "1998-02-12",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "club_id": "CRC",
+      "name": "Coracle FC",
+      "short_name": "Coracle",
+      "stadium": "Coracle Dock",
+      "colors": {
+        "primary": "#2C3038",
+        "secondary": "#E6E2DA"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.04,
+        "defense": 1.07,
+        "passing": 1.02,
+        "pressing": 1.08
+      },
+      "players": [
+        {
+          "player_id": "CRC-01",
+          "name": "Ivo Loxley",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Sweden",
+          "date_of_birth": "1998-03-31",
+          "age": 28
+        },
+        {
+          "player_id": "CRC-02",
+          "name": "Joss Loxley",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Chile",
+          "date_of_birth": "1998-05-17",
+          "age": 28
+        },
+        {
+          "player_id": "CRC-03",
+          "name": "Kael Loxley",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Austria",
+          "date_of_birth": "1998-07-03",
+          "age": 28
+        },
+        {
+          "player_id": "CRC-04",
+          "name": "Leif Loxley",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Nigeria",
+          "date_of_birth": "1998-08-19",
+          "age": 28
+        },
+        {
+          "player_id": "CRC-05",
+          "name": "Merrick Loxley",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Denmark",
+          "date_of_birth": "1998-10-05",
+          "age": 28
+        },
+        {
+          "player_id": "CRC-06",
+          "name": "Nils Loxley",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Uruguay",
+          "date_of_birth": "1998-11-21",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-07",
+          "name": "Orin Loxley",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Switzerland",
+          "date_of_birth": "1999-01-07",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-08",
+          "name": "Perrin Loxley",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Mali",
+          "date_of_birth": "1999-02-23",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-09",
+          "name": "Quill Loxley",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Poland",
+          "date_of_birth": "1999-04-11",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-10",
+          "name": "Rowan Loxley",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "South Korea",
+          "date_of_birth": "1999-05-28",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-11",
+          "name": "Soren Loxley",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Scotland",
+          "date_of_birth": "1999-07-14",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-12",
+          "name": "Tarin Loxley",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1999-08-30",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-13",
+          "name": "Ulric Loxley",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "1999-10-16",
+          "age": 27
+        },
+        {
+          "player_id": "CRC-14",
+          "name": "Vesper Loxley",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "1999-12-02",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-15",
+          "name": "Wystan Loxley",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "2000-01-18",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-16",
+          "name": "Yorick Loxley",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "2000-03-05",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-17",
+          "name": "Zane Loxley",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "2000-04-21",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-18",
+          "name": "Ansel Loxley",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "2000-06-07",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-19",
+          "name": "Bramwell Loxley",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "2000-07-24",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-20",
+          "name": "Corin Loxley",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Senegal",
+          "date_of_birth": "2000-09-09",
+          "age": 26
+        },
+        {
+          "player_id": "CRC-21",
+          "name": "Darrow Loxley",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Sweden",
+          "date_of_birth": "2000-10-26",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-22",
+          "name": "Eamon Loxley",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Chile",
+          "date_of_birth": "2000-12-12",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-23",
+          "name": "Fletcher Loxley",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Austria",
+          "date_of_birth": "2001-01-28",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-24",
+          "name": "Garrick Loxley",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Nigeria",
+          "date_of_birth": "2001-03-16",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-25",
+          "name": "Hollis Loxley",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Denmark",
+          "date_of_birth": "2001-05-02",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-26",
+          "name": "Ingram Loxley",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Uruguay",
+          "date_of_birth": "2001-06-18",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-27",
+          "name": "Jory Loxley",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Switzerland",
+          "date_of_birth": "2001-08-04",
+          "age": 25
+        },
+        {
+          "player_id": "CRC-28",
+          "name": "Keelan Loxley",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Mali",
+          "date_of_birth": "2001-09-20",
+          "age": 25
+        }
+      ]
+    },
+    {
+      "club_id": "YRW",
+      "name": "Yarrow Athletic",
+      "short_name": "Yarrow",
+      "stadium": "Yarrow Field",
+      "colors": {
+        "primary": "#C4483C",
+        "secondary": "#F7F4EF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.96,
+        "defense": 1.0,
+        "passing": 0.95,
+        "pressing": 0.99
+      },
+      "players": [
+        {
+          "player_id": "YRW-01",
+          "name": "Larkin Loxley",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Poland",
+          "date_of_birth": "2001-11-06",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-02",
+          "name": "Malin Loxley",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "South Korea",
+          "date_of_birth": "2001-12-23",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-03",
+          "name": "Nevin Loxley",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Scotland",
+          "date_of_birth": "2002-02-08",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-04",
+          "name": "Osric Loxley",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2002-03-27",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-05",
+          "name": "Aldric Marlow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Norway",
+          "date_of_birth": "2002-05-13",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-06",
+          "name": "Bram Marlow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Portugal",
+          "date_of_birth": "2002-06-29",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-07",
+          "name": "Cedric Marlow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ghana",
+          "date_of_birth": "2002-08-15",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-08",
+          "name": "Doran Marlow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Japan",
+          "date_of_birth": "2002-10-01",
+          "age": 24
+        },
+        {
+          "player_id": "YRW-09",
+          "name": "Elric Marlow",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Canada",
+          "date_of_birth": "2002-11-17",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-10",
+          "name": "Fenn Marlow",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Morocco",
+          "date_of_birth": "2003-01-03",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-11",
+          "name": "Galen Marlow",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Croatia",
+          "date_of_birth": "2003-02-19",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-12",
+          "name": "Hart Marlow",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "2003-04-07",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-13",
+          "name": "Ivo Marlow",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "2003-05-24",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-14",
+          "name": "Joss Marlow",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "2003-07-10",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-15",
+          "name": "Kael Marlow",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "2003-08-26",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-16",
+          "name": "Leif Marlow",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Nigeria",
+          "date_of_birth": "2003-10-12",
+          "age": 23
+        },
+        {
+          "player_id": "YRW-17",
+          "name": "Merrick Marlow",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Denmark",
+          "date_of_birth": "2003-11-28",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-18",
+          "name": "Nils Marlow",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Uruguay",
+          "date_of_birth": "2004-01-14",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-19",
+          "name": "Orin Marlow",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Switzerland",
+          "date_of_birth": "2004-03-01",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-20",
+          "name": "Perrin Marlow",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Mali",
+          "date_of_birth": "2004-04-17",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-21",
+          "name": "Quill Marlow",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Poland",
+          "date_of_birth": "2004-06-03",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-22",
+          "name": "Rowan Marlow",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "South Korea",
+          "date_of_birth": "2004-07-20",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-23",
+          "name": "Soren Marlow",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Scotland",
+          "date_of_birth": "2004-09-05",
+          "age": 22
+        },
+        {
+          "player_id": "YRW-24",
+          "name": "Tarin Marlow",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "2004-10-22",
+          "age": 21
+        },
+        {
+          "player_id": "YRW-25",
+          "name": "Ulric Marlow",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Norway",
+          "date_of_birth": "2004-12-08",
+          "age": 21
+        },
+        {
+          "player_id": "YRW-26",
+          "name": "Vesper Marlow",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Portugal",
+          "date_of_birth": "2005-01-24",
+          "age": 21
+        },
+        {
+          "player_id": "YRW-27",
+          "name": "Wystan Marlow",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ghana",
+          "date_of_birth": "2005-03-12",
+          "age": 21
+        },
+        {
+          "player_id": "YRW-28",
+          "name": "Yorick Marlow",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Japan",
+          "date_of_birth": "2005-04-28",
+          "age": 21
+        }
+      ]
+    },
+    {
+      "club_id": "GLN",
+      "name": "Glenwick",
+      "short_name": "Glenwick",
+      "stadium": "Glenwick Park",
+      "colors": {
+        "primary": "#D24B5A",
+        "secondary": "#F8F4EE"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.91,
+        "defense": 0.93,
+        "passing": 0.92,
+        "pressing": 0.99
+      },
+      "players": [
+        {
+          "player_id": "GLN-01",
+          "name": "Zane Marlow",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Canada",
+          "date_of_birth": "2005-06-14",
+          "age": 21
+        },
+        {
+          "player_id": "GLN-02",
+          "name": "Ansel Marlow",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Morocco",
+          "date_of_birth": "2005-07-31",
+          "age": 21
+        },
+        {
+          "player_id": "GLN-03",
+          "name": "Bramwell Marlow",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Croatia",
+          "date_of_birth": "2005-09-16",
+          "age": 21
+        },
+        {
+          "player_id": "GLN-04",
+          "name": "Corin Marlow",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Senegal",
+          "date_of_birth": "2005-11-02",
+          "age": 20
+        },
+        {
+          "player_id": "GLN-05",
+          "name": "Darrow Marlow",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Sweden",
+          "date_of_birth": "2005-12-19",
+          "age": 20
+        },
+        {
+          "player_id": "GLN-06",
+          "name": "Eamon Marlow",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Chile",
+          "date_of_birth": "2006-02-04",
+          "age": 20
+        },
+        {
+          "player_id": "GLN-07",
+          "name": "Fletcher Marlow",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Austria",
+          "date_of_birth": "2006-03-23",
+          "age": 20
+        },
+        {
+          "player_id": "GLN-08",
+          "name": "Garrick Marlow",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Nigeria",
+          "date_of_birth": "1993-03-18",
+          "age": 33
+        },
+        {
+          "player_id": "GLN-09",
+          "name": "Hollis Marlow",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Denmark",
+          "date_of_birth": "1993-05-04",
+          "age": 33
+        },
+        {
+          "player_id": "GLN-10",
+          "name": "Ingram Marlow",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Uruguay",
+          "date_of_birth": "1993-06-20",
+          "age": 33
+        },
+        {
+          "player_id": "GLN-11",
+          "name": "Jory Marlow",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Switzerland",
+          "date_of_birth": "1993-08-06",
+          "age": 33
+        },
+        {
+          "player_id": "GLN-12",
+          "name": "Keelan Marlow",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Mali",
+          "date_of_birth": "1993-09-22",
+          "age": 33
+        },
+        {
+          "player_id": "GLN-13",
+          "name": "Larkin Marlow",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Poland",
+          "date_of_birth": "1993-11-08",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-14",
+          "name": "Malin Marlow",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "South Korea",
+          "date_of_birth": "1993-12-25",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-15",
+          "name": "Nevin Marlow",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Scotland",
+          "date_of_birth": "1994-02-10",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-16",
+          "name": "Osric Marlow",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1994-03-29",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-17",
+          "name": "Aldric Netherby",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Norway",
+          "date_of_birth": "1994-05-15",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-18",
+          "name": "Bram Netherby",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Portugal",
+          "date_of_birth": "1994-07-01",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-19",
+          "name": "Cedric Netherby",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Ghana",
+          "date_of_birth": "1994-08-17",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-20",
+          "name": "Doran Netherby",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Japan",
+          "date_of_birth": "1994-10-03",
+          "age": 32
+        },
+        {
+          "player_id": "GLN-21",
+          "name": "Elric Netherby",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Canada",
+          "date_of_birth": "1994-11-19",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-22",
+          "name": "Fenn Netherby",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Morocco",
+          "date_of_birth": "1995-01-05",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-23",
+          "name": "Galen Netherby",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Croatia",
+          "date_of_birth": "1995-02-21",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-24",
+          "name": "Hart Netherby",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Senegal",
+          "date_of_birth": "1995-04-09",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-25",
+          "name": "Ivo Netherby",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Sweden",
+          "date_of_birth": "1995-05-26",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-26",
+          "name": "Joss Netherby",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Chile",
+          "date_of_birth": "1995-07-12",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-27",
+          "name": "Kael Netherby",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Austria",
+          "date_of_birth": "1995-08-28",
+          "age": 31
+        },
+        {
+          "player_id": "GLN-28",
+          "name": "Leif Netherby",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Nigeria",
+          "date_of_birth": "1995-10-14",
+          "age": 31
+        }
+      ]
+    },
+    {
+      "club_id": "THF",
+      "name": "Thornferry",
+      "short_name": "Thornferry",
+      "stadium": "Thornferry End",
+      "colors": {
+        "primary": "#F7F5F0",
+        "secondary": "#24315C"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.03,
+        "defense": 1.02,
+        "passing": 1.02,
+        "pressing": 1.01
+      },
+      "players": [
+        {
+          "player_id": "THF-01",
+          "name": "Merrick Netherby",
+          "shirt_number": 1,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Denmark",
+          "date_of_birth": "1995-11-30",
+          "age": 30
+        },
+        {
+          "player_id": "THF-02",
+          "name": "Nils Netherby",
+          "shirt_number": 2,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Uruguay",
+          "date_of_birth": "1996-01-16",
+          "age": 30
+        },
+        {
+          "player_id": "THF-03",
+          "name": "Orin Netherby",
+          "shirt_number": 3,
+          "position": "GK",
+          "position_detail": "Goalkeeper",
+          "nationality": "Switzerland",
+          "date_of_birth": "1996-03-03",
+          "age": 30
+        },
+        {
+          "player_id": "THF-04",
+          "name": "Perrin Netherby",
+          "shirt_number": 4,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Mali",
+          "date_of_birth": "1996-04-19",
+          "age": 30
+        },
+        {
+          "player_id": "THF-05",
+          "name": "Quill Netherby",
+          "shirt_number": 5,
+          "position": "DEF",
+          "position_detail": "Left Back",
+          "nationality": "Poland",
+          "date_of_birth": "1996-06-05",
+          "age": 30
+        },
+        {
+          "player_id": "THF-06",
+          "name": "Rowan Netherby",
+          "shirt_number": 6,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "South Korea",
+          "date_of_birth": "1996-07-22",
+          "age": 30
+        },
+        {
+          "player_id": "THF-07",
+          "name": "Soren Netherby",
+          "shirt_number": 7,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Scotland",
+          "date_of_birth": "1996-09-07",
+          "age": 30
+        },
+        {
+          "player_id": "THF-08",
+          "name": "Tarin Netherby",
+          "shirt_number": 8,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1996-10-24",
+          "age": 29
+        },
+        {
+          "player_id": "THF-09",
+          "name": "Ulric Netherby",
+          "shirt_number": 9,
+          "position": "DEF",
+          "position_detail": "Central Defender",
+          "nationality": "Norway",
+          "date_of_birth": "1996-12-10",
+          "age": 29
+        },
+        {
+          "player_id": "THF-10",
+          "name": "Vesper Netherby",
+          "shirt_number": 10,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Portugal",
+          "date_of_birth": "1997-01-26",
+          "age": 29
+        },
+        {
+          "player_id": "THF-11",
+          "name": "Wystan Netherby",
+          "shirt_number": 11,
+          "position": "DEF",
+          "position_detail": "Right Back",
+          "nationality": "Ghana",
+          "date_of_birth": "1997-03-14",
+          "age": 29
+        },
+        {
+          "player_id": "THF-12",
+          "name": "Yorick Netherby",
+          "shirt_number": 12,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Japan",
+          "date_of_birth": "1997-04-30",
+          "age": 29
+        },
+        {
+          "player_id": "THF-13",
+          "name": "Zane Netherby",
+          "shirt_number": 13,
+          "position": "MID",
+          "position_detail": "Defensive Midfielder",
+          "nationality": "Canada",
+          "date_of_birth": "1997-06-16",
+          "age": 29
+        },
+        {
+          "player_id": "THF-14",
+          "name": "Ansel Netherby",
+          "shirt_number": 14,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Morocco",
+          "date_of_birth": "1997-08-02",
+          "age": 29
+        },
+        {
+          "player_id": "THF-15",
+          "name": "Bramwell Netherby",
+          "shirt_number": 15,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Croatia",
+          "date_of_birth": "1997-09-18",
+          "age": 29
+        },
+        {
+          "player_id": "THF-16",
+          "name": "Corin Netherby",
+          "shirt_number": 16,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Senegal",
+          "date_of_birth": "1997-11-04",
+          "age": 28
+        },
+        {
+          "player_id": "THF-17",
+          "name": "Darrow Netherby",
+          "shirt_number": 17,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Sweden",
+          "date_of_birth": "1997-12-21",
+          "age": 28
+        },
+        {
+          "player_id": "THF-18",
+          "name": "Eamon Netherby",
+          "shirt_number": 18,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Chile",
+          "date_of_birth": "1998-02-06",
+          "age": 28
+        },
+        {
+          "player_id": "THF-19",
+          "name": "Fletcher Netherby",
+          "shirt_number": 19,
+          "position": "MID",
+          "position_detail": "Central Midfielder",
+          "nationality": "Austria",
+          "date_of_birth": "1998-03-25",
+          "age": 28
+        },
+        {
+          "player_id": "THF-20",
+          "name": "Garrick Netherby",
+          "shirt_number": 20,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Nigeria",
+          "date_of_birth": "1998-05-11",
+          "age": 28
+        },
+        {
+          "player_id": "THF-21",
+          "name": "Hollis Netherby",
+          "shirt_number": 21,
+          "position": "FWD",
+          "position_detail": "Left Winger",
+          "nationality": "Denmark",
+          "date_of_birth": "1998-06-27",
+          "age": 28
+        },
+        {
+          "player_id": "THF-22",
+          "name": "Ingram Netherby",
+          "shirt_number": 22,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Uruguay",
+          "date_of_birth": "1998-08-13",
+          "age": 28
+        },
+        {
+          "player_id": "THF-23",
+          "name": "Jory Netherby",
+          "shirt_number": 23,
+          "position": "FWD",
+          "position_detail": "Right Winger",
+          "nationality": "Switzerland",
+          "date_of_birth": "1998-09-29",
+          "age": 28
+        },
+        {
+          "player_id": "THF-24",
+          "name": "Keelan Netherby",
+          "shirt_number": 24,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "Mali",
+          "date_of_birth": "1998-11-15",
+          "age": 27
+        },
+        {
+          "player_id": "THF-25",
+          "name": "Larkin Netherby",
+          "shirt_number": 25,
+          "position": "FWD",
+          "position_detail": "Centre Forward",
+          "nationality": "Poland",
+          "date_of_birth": "1999-01-01",
+          "age": 27
+        },
+        {
+          "player_id": "THF-26",
+          "name": "Malin Netherby",
+          "shirt_number": 26,
+          "position": "FWD",
+          "position_detail": "Striker",
+          "nationality": "South Korea",
+          "date_of_birth": "1999-02-17",
+          "age": 27
+        },
+        {
+          "player_id": "THF-27",
+          "name": "Nevin Netherby",
+          "shirt_number": 27,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Scotland",
+          "date_of_birth": "1999-04-05",
+          "age": 27
+        },
+        {
+          "player_id": "THF-28",
+          "name": "Osric Netherby",
+          "shirt_number": 28,
+          "position": "FWD",
+          "position_detail": "Forward",
+          "nationality": "Ivory Coast",
+          "date_of_birth": "1999-05-22",
+          "age": 27
+        }
+      ]
+    }
+  ]
+}

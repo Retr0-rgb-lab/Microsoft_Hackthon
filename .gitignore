@@ -5,6 +5,17 @@ __pycache__/
 *.egg-info/
 dist/
 build/
-data/
+# Repository-root downloads only. The trimmed Touchline sample under touchline/data is tracked.
+/data/
+
+# Touchline bulk outputs. Regenerate with touchline/generate.py.
+# Two sample match directories are tracked; full tracking and the other fixtures are not.
+touchline/data/**/tracking.jsonl
+touchline/data/league/matches/*
+!touchline/data/league/matches/NW26-W01-THF-HBR/
+!touchline/data/league/matches/NW26-W01-THF-HBR/**
+!touchline/data/league/matches/NW26-W03-ASH-MTN/
+!touchline/data/league/matches/NW26-W03-ASH-MTN/**
+touchline/data/league-alt/
 node_modules/
 web/public/preview.mp4
