@@ -28,7 +28,6 @@ from inside_the_game.ingest.events import PITCH_LENGTH, PITCH_WIDTH, MatchEvent,
 
 STATSBOMB_LENGTH = 120.0
 STATSBOMB_WIDTH = 80.0
-VENDORED_MATCH_ID = "69284"
 PRESSURE_MARKED = 0.82
 PRESSURE_OPEN = 0.18
 
@@ -71,19 +70,12 @@ def map_statsbomb_type(type_name: str) -> str | None:
     return TYPE_TO_ACTION.get(type_name)
 
 
-def default_statsbomb_match_dir() -> Path:
-    """Vendored match checked in at ``fixtures/statsbomb/69284``."""
-    here = Path(__file__).resolve()
-    for parent in here.parents:
-        candidate = parent / "fixtures" / "statsbomb" / VENDORED_MATCH_ID
-        if (candidate / "events.json").is_file() and (candidate / "match.json").is_file():
-            return candidate
-    raise FileNotFoundError("vendored StatsBomb match 69284 not found")
+def load_statsbomb_labeled(match_dir: Path) -> MappedStatsBombMatch:
+    """Read ``match.json`` and ``events.json`` from ``match_dir``.
 
-
-def load_statsbomb_labeled(match_dir: Path | None = None) -> MappedStatsBombMatch:
-    """Read a match directory of ``match.json`` and ``events.json``."""
-    directory = Path(match_dir) if match_dir is not None else default_statsbomb_match_dir()
+    There is no checked-in match. Callers pass a directory they already have.
+    """
+    directory = Path(match_dir)
     match = json.loads((directory / "match.json").read_text(encoding="utf-8"))
     events = json.loads((directory / "events.json").read_text(encoding="utf-8"))
     if not isinstance(match, dict) or not isinstance(events, list):
@@ -91,7 +83,7 @@ def load_statsbomb_labeled(match_dir: Path | None = None) -> MappedStatsBombMatc
     return map_statsbomb_match(events, match)
 
 
-def load_statsbomb_events(match_dir: Path | None = None) -> tuple[MatchEvent, ...]:
+def load_statsbomb_events(match_dir: Path) -> tuple[MatchEvent, ...]:
     """Mapped events only, in kickoff order, ready for ``extract_features``."""
     mapped = load_statsbomb_labeled(match_dir)
     return tuple(item.event for item in mapped.events)

@@ -8,7 +8,6 @@ import urllib.request
 import pytest
 
 from inside_the_game.ingest.loader import load_events
-from inside_the_game.ingest.statsbomb import load_statsbomb_labeled
 from inside_the_game.labels import ACTION_LABELS
 from inside_the_game.pipeline import run_mvp
 from inside_the_game.system1.policy import SoftmaxActionPolicy
@@ -16,23 +15,18 @@ from inside_the_game.system2.explain import ViewerProfile, explain
 from inside_the_game.system2.local_llm import load_local_llm
 
 
-def test_explain_returns_rationale_for_synthetic_and_statsbomb_states() -> None:
+def test_explain_returns_rationale_for_synthetic_states() -> None:
     policy = SoftmaxActionPolicy()
-    synthetic = load_events()[0]
-    synthetic_text = explain(synthetic, policy.predict(synthetic))
-    _assert_offline_rationale(synthetic_text.text)
-    assert synthetic_text.source == "template"
-    assert synthetic_text.event_id == synthetic.event_id
-    assert "TODO" in synthetic_text.text
-    assert synthetic_text.sidecar.xt is None
-
-    mapped = load_statsbomb_labeled()
-    assert mapped.events
-    statsbomb = mapped.events[0].event
-    statsbomb_text = explain(statsbomb, policy.predict(statsbomb))
-    _assert_offline_rationale(statsbomb_text.text)
-    assert statsbomb_text.source == "template"
-    assert statsbomb.player in statsbomb_text.text
+    events = load_events()
+    assert len(events) >= 2
+    for synthetic in events:
+        synthetic_text = explain(synthetic, policy.predict(synthetic))
+        _assert_offline_rationale(synthetic_text.text)
+        assert synthetic_text.source == "template"
+        assert synthetic_text.event_id == synthetic.event_id
+        assert "TODO" in synthetic_text.text
+        assert synthetic_text.sidecar.xt is None
+        assert synthetic.player in synthetic_text.text
 
 
 def test_default_path_does_not_call_the_network(monkeypatch: pytest.MonkeyPatch) -> None:

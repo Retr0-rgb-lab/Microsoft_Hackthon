@@ -1,42 +1,32 @@
 """Assemble offline training rows for the System 1 softmax.
 
 Rows are ``(feature tuple, action label)`` using the same ``extract_features``
-path as inference. Sources are the vendored StatsBomb match and the synthetic
-generator. Nothing here downloads data or calls an inference API.
+path as inference. The source is the synthetic generator. Nothing here
+downloads data or calls an inference API. The checked-in softmax is fit
+separately, on synthetic ``decision_point`` rows, by ``scripts/train_softmax.py``.
 """
 
 from __future__ import annotations
 
 from collections.abc import Sequence
-from pathlib import Path
 
 from inside_the_game.features.extract import extract_features
-from inside_the_game.ingest.statsbomb import load_statsbomb_labeled
 from inside_the_game.ingest.synthetic import DEFAULT_SEED, generate_events
 
 
-SOURCES = ("statsbomb", "synthetic", "both")
-
-
 def collect_rows(
-    source: str = "both",
+    source: str = "synthetic",
     *,
     seed: int = DEFAULT_SEED,
-    statsbomb_dir: Path | None = None,
 ) -> list[tuple[tuple[float, float, float, float, float, float], str]]:
-    """Feature rows for ``source`` (statsbomb, synthetic, or both)."""
-    if source not in SOURCES:
-        raise ValueError(f"source must be one of {SOURCES}")
+    """Feature rows from the synthetic generator."""
+    if source != "synthetic":
+        raise ValueError("source must be synthetic")
     rows: list[tuple[tuple[float, float, float, float, float, float], str]] = []
-    if source in ("statsbomb", "both"):
-        mapped = load_statsbomb_labeled(statsbomb_dir)
-        for item in mapped.events:
-            rows.append((extract_features(item.event).as_tuple(), item.action))
-    if source in ("synthetic", "both"):
-        for event in generate_events(seed=seed):
-            if event.action is None:
-                raise ValueError(f"{event.event_id} is missing a synthetic label")
-            rows.append((extract_features(event).as_tuple(), event.action))
+    for event in generate_events(seed=seed):
+        if event.action is None:
+            raise ValueError(f"{event.event_id} is missing a synthetic label")
+        rows.append((extract_features(event).as_tuple(), event.action))
     return rows
 
 
