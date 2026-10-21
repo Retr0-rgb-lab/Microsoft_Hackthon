@@ -68,14 +68,14 @@ python scripts/generate_synthetic.py --output fixtures/synthetic_labeled_sequenc
 
 Checked-in file: `src/inside_the_game/system1/weights.json`.
 
-That file was fit with `--source both`: the vendored StatsBomb match (pass, shoot, and dribble from real events) plus synthetic sequences at seed 7 (which supply hold, and more of the other three). Training is multinomial logistic regression on the six scaffold features, class-weighted, with no third-party model. Carry is common in this StatsBomb match, so the dribble class is large; the weight file records the counts (pass 1187, shoot 35, dribble 968, hold 10).
+That file is the v1 fit: multinomial logistic regression on the six scaffold features, class-weighted, using only synthetic `decision_point` events from `touchline/data/samples/sample_25hz_10min` (match `SYN-SINGLE-0001`). It does not read StatsBomb or any real-club feed. Counts are pass 73, shoot 2, dribble 41, hold 8. Hold is a short carry (progress under 4 m) with an opponent inside 3 m. See [docs/v1-model-selection.md](docs/v1-model-selection.md).
 
 ```bash
-python scripts/train_softmax.py --source both
-python scripts/train_softmax.py --source synthetic --output /tmp/synthetic-weights.json
+python scripts/train_softmax.py
+python scripts/train_softmax.py --output /tmp/synth-weights.json --steps 100
 ```
 
-`--source statsbomb` alone cannot fit the four-way softmax: the mapping skips non-actions, so the match has no hold labels. Use `--source both` when the fit should include the real-event sample.
+`fixtures/statsbomb/` is still on disk for the open-data mapping tests. The weight fit does not open it. Backend can remove that tree after this lands, once those tests no longer need it.
 
 If `weights.json` is missing, `SoftmaxActionPolicy` keeps the original hand-set stub.
 

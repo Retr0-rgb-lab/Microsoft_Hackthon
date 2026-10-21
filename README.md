@@ -7,7 +7,7 @@ This is a decision aid. For each synthetic on-ball state it shows the full proba
 ## Locked architecture
 
 1. **Ingest** synthetic match events (JSON/text state).
-2. **System 1** maps that state to `P(pass | shoot | dribble | hold)`. The default backend is a lightweight linear softmax over numeric features. It loads `src/inside_the_game/system1/weights.json` when that file is present and otherwise uses the hand-set stub. An optional [TypeSafe Jev Choice](https://docs.typesafe.ai/primitives/choice) hook accepts the same JSON/text state and is unused when `typesafe-sdk` is not installed. No images. Jev stays off on the MVP path.
+2. **System 1** maps that state to `P(pass | shoot | dribble | hold)`. The default backend is a lightweight linear softmax over numeric features. It loads `src/inside_the_game/system1/weights.json` when that file is present and otherwise uses the hand-set stub. Those weights are fit on synthetic `decision_point` events only (`docs/v1-model-selection.md`). The same softmax accepts a SynthData tracking frame through `predict_tracking`. An optional [TypeSafe Jev Choice](https://docs.typesafe.ai/primitives/choice) hook accepts the same JSON/text state and is unused when `typesafe-sdk` is not installed. No images. Jev stays off on the MVP path.
 3. **Video demo** (`python -m demo.run`) runs detection, ByteTrack, pitch homography, and this same softmax, then paints options on the broadcast. The events path below does not need those dependencies. See [Video demo](#video-demo).
 4. **System 2** takes a match event plus the System 1 distribution and returns a short football rationale (`explain`). The default is an offline template: no network and no API key. An optional local model implements the same call only when the caller passes `local_llm`; `load_local_llm()` is `None`, so the hook stays off. A Foundry-shaped chat body is still built in memory and is not sent. socceraction xT / VAEP stays a stub sidecar (`TODO`) and is named in the rationale without a fitted value.
 5. **Present** emits replay overlay arrows, probability bars for all four actions, and the System 2 explanation in the same overlay.
@@ -150,7 +150,7 @@ How to point the stage at a local preview, including a file from `python -m demo
 pytest
 ```
 
-`pytest` checks the four-way distribution with the checked-in weights and with the stub fallback, the offline System 2 rationale (synthetic and StatsBomb states, with the network blocked), the overlay explanation beside all four probabilities, the StatsBomb event-type mapping, and the synthetic generator's labels. See [DATA.md](DATA.md) for the open-data license, the mapping rule, and the commands that regenerate fixtures or fetch more matches.
+`pytest` checks the four-way distribution with the checked-in weights and with the stub fallback, the tracking path on a synthetic `decision_point` (four-class probabilities, pass targets, carry path), the weight fit's refusal to read StatsBomb, the offline System 2 rationale (synthetic and StatsBomb states, with the network blocked), the overlay explanation beside all four probabilities, the StatsBomb event-type mapping, and the synthetic generator's labels. See [DATA.md](DATA.md) for the open-data license and the mapping rule, and [docs/v1-model-selection.md](docs/v1-model-selection.md) for the v1 softmax, completion score, and Foundry narration.
 
 ## Layout
 
