@@ -112,6 +112,48 @@ def test_pass_rejects_a_mislabeled_neon_and_keeps_the_stripe() -> None:
     assert options[0].target == (72.0, 46.0)
 
 
+def test_secondary_passes_skip_the_other_kit() -> None:
+    options = _pass(
+        [
+            OptionPlayer(1, (40.0, 34.0), "home", jersey=WHITE),
+            OptionPlayer(2, (52.0, 24.0), "home", jersey=GRAY),
+            OptionPlayer(3, (58.0, 40.0), "home", jersey=BLACK),
+            OptionPlayer(8, (70.0, 30.0), "home", jersey=NEON),
+            OptionPlayer(9, (90.0, 34.0), "away", jersey=NEON),
+        ]
+    )
+    assert options
+    assert options[0].primary
+    assert all(item.kind == "pass" for item in options)
+    assert all(item.target_id in {2, 3} for item in options)
+    assert all(item.target_id != 8 for item in options)
+    assert sum(not item.primary for item in options) <= 2
+
+
+def test_dribble_secondary_pass_obeys_the_jersey_gate() -> None:
+    options = build_options(
+        (30.0, 34.0),
+        [
+            OptionPlayer(1, (30.0, 34.0), "home", jersey=WHITE),
+            OptionPlayer(2, (44.0, 22.0), "home", jersey=NEON),
+            OptionPlayer(3, (48.0, 46.0), "home", jersey=GRAY),
+            OptionPlayer(7, (60.0, 34.0), "away", jersey=NEON),
+        ],
+        possessor_id=1,
+        possessor_team="home",
+        recommended="dribble",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    carries = [item for item in options if item.kind == "dribble"]
+    passes = [item for item in options if item.kind == "pass"]
+    assert len(carries) == 1 and carries[0].primary
+    assert len(passes) == 1
+    assert not passes[0].primary
+    assert passes[0].target_id == 3
+
+
 def test_pass_is_empty_when_every_in_range_shirt_is_the_other_kit() -> None:
     options = _pass(
         [

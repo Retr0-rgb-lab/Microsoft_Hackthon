@@ -22,7 +22,13 @@ from demo.geometry import (
     resolve_plane,
     scene_cut,
 )
-from demo.options import OptionPlayer, attacking_positive_for, build_options, eligible_receivers
+from demo.options import (
+    OptionPlayer,
+    attacking_positive_for,
+    build_options,
+    compose_drawn,
+    eligible_receivers,
+)
 from demo.possessor import BallMark, BallSmoother, FootTrail, PlayerFix, PossessorTracker
 from demo.render import ArrowDraw, MinimapArrow, MinimapPlayer, OverlayState, PlayerDraw
 from demo.stabilize import OverlayMemory
@@ -553,7 +559,7 @@ def _compose(
         )
         for player in working
     ]
-    options = build_options(
+    fresh = build_options(
         origin,
         option_players,
         possessor.track_id,
@@ -563,10 +569,12 @@ def _compose(
         attacking_positive=attacking_positive,
         space=space,
     )
-    recommended, smoothed, options = memory.apply(
+    # The hold locks the primary only. Dim alternatives are chosen after that.
+    primary_only = [item for item in fresh if item.primary]
+    recommended, smoothed, held = memory.apply(
         possessor.track_id,
         distribution.probabilities,
-        options,
+        primary_only,
         option_players,
         origin,
         possession_team,
@@ -574,19 +582,34 @@ def _compose(
         attacking_positive,
         space,
     )
-    visible_mates = set(
-        eligible_receivers(
+    if recommended in ("pass", "dribble") and recommended != raw_recommended:
+        fresh = build_options(
+            origin,
+            option_players,
+            possessor.track_id,
+            possession_team,
+            recommended,
+            bounds=bounds,
+            attacking_positive=attacking_positive,
+            space=space,
+        )
+    elif recommended not in ("pass", "dribble"):
+        fresh = []
+    teammates = {
+        track_id: player.xy
+        for track_id, player in eligible_receivers(
             option_players,
             possessor.track_id,
             possession_team,
             attacking_positive,
             bounds,
-        )
-    )
+        ).items()
+    }
+    options = compose_drawn(recommended, held, fresh, teammates)
     for option in options:
-        if not option.primary or option.kind not in ("pass", "dribble"):
+        if option.kind not in ("pass", "dribble"):
             continue
-        if option.kind == "pass" and option.target_id not in visible_mates:
+        if option.kind == "pass" and option.target_id not in teammates:
             continue
         if space == "pitch" and pitch_to_image is not None:
             projected = project_segment(pitch_to_image, option.origin, option.target)
@@ -601,7 +624,13 @@ def _compose(
                 continue
             points = clipped
         state.arrows.append(
-            ArrowDraw(kind=option.kind, points=points, primary=option.primary, label=option.label)
+            ArrowDraw(
+                kind=option.kind,
+                points=points,
+                primary=option.primary,
+                label=option.label,
+                alpha=option.alpha,
+            )
         )
         if space == "pitch":
             origin_m, target_m = option.origin, option.target

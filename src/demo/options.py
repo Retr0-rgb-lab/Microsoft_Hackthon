@@ -1,24 +1,26 @@
-"""One on-ball arrow: the best pass or the best carry for the softmax class.
+"""On-ball arrows for the softmax class: one bright primary, a few dim alternatives.
 
 Softmax chooses the action class (pass, dribble, shoot, hold). It does not
-choose a receiver. When the class is pass, the arrow is the single best
-visible teammate, and that receiver's shirt must match the possessor in Lab
-and chroma. When it is dribble, the arrow is one short carry into open
-space. Shoot and hold stay in the probability bars and are not drawn as lines.
-Coordinates are pitch meters or image pixels; thresholds scale with the frame.
+choose a receiver. A pass recommendation draws the best visible teammate bright
+and up to two next-best teammates dimmer. Every pass receiver's shirt must
+match the possessor in Lab and chroma. A dribble recommendation draws one
+short carry into open space, plus at most one dim pass. Shoot and hold stay in
+the probability bars. Coordinates are pitch meters or image pixels; thresholds
+scale with the frame.
 """
 
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from demo.teams import jerseys_match
 from inside_the_game.labels import ACTION_LABELS
 
 
 PRIMARY_ALPHA = 0.95
-SECONDARY_ALPHA = 0.34
+SECONDARY_ALPHA = 0.40
+MAX_SECONDARIES = 2
 
 
 @dataclass(frozen=True)
@@ -75,50 +77,69 @@ def build_options(
     attacking_positive: bool,
     space: str = "pitch",
 ) -> list[TacticalOption]:
-    """The one arrow for ``recommended``. Shoot and hold draw nothing.
+    """Primary arrow for ``recommended``, plus at most two dimmer alternatives.
 
     ``recommended`` is the System 1 class. Pass targets come from the geometric
-    ranking below, never from the softmax itself.
+    ranking below, never from the softmax itself. Shoot and hold draw nothing.
     """
     if recommended not in ACTION_LABELS:
         raise ValueError(f"recommended must be one of {ACTION_LABELS}")
     if recommended == "pass":
-        return _primary_pass(
+        return _display_passes(
             origin, players, possessor_id, possessor_team, bounds, attacking_positive, space
         )
     if recommended == "dribble":
-        return _primary_carry(
+        return _display_carry(
             origin, players, possessor_id, possessor_team, bounds, attacking_positive, space
         )
     return []
 
 
-def _primary_pass(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
+def compose_drawn(
+    recommended: str,
+    held: list[TacticalOption],
+    fresh: list[TacticalOption],
+    teammates: dict[int, tuple[float, float]] | None = None,
+) -> list[TacticalOption]:
+    """Held primary, plus this frame's limited alternatives.
+
+    ``held`` is the temporally locked arrow. ``fresh`` is ``build_options`` for
+    the same class. When ``teammates`` is given, every pass is re-pinned to that
+    live position and a pass with no entry there is dropped.
+    """
+    if recommended == "pass":
+        return _compose_passes(held, fresh, teammates)
+    if recommended == "dribble":
+        return _compose_carry(held, fresh, teammates)
+    return []
+
+
+def _display_passes(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
     limits = _thresholds(bounds, space)
     mates = eligible_receivers(players, possessor_id, possessor_team, attacking_positive, bounds)
     found = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
-    if not found:
-        return []
-    best = max(found, key=lambda item: item.score)
-    mate = mates.get(best.target_id) if best.target_id is not None else None
-    if mate is None:
-        return []
-    return [
-        TacticalOption(
-            kind="pass",
-            origin=origin,
-            target=mate.xy,
-            score=best.score,
-            primary=True,
-            alpha=PRIMARY_ALPHA,
-            label="pass",
-            target_id=mate.track_id,
-            slot=f"pass:{mate.track_id}",
+    shown: list[TacticalOption] = []
+    for item in found:
+        mate = mates.get(item.target_id) if item.target_id is not None else None
+        if mate is None:
+            continue
+        primary = not shown
+        shown.append(
+            replace(
+                item,
+                target=mate.xy,
+                primary=primary,
+                alpha=PRIMARY_ALPHA if primary else SECONDARY_ALPHA,
+                label="pass",
+                target_id=mate.track_id,
+            )
         )
-    ]
+        if len(shown) >= 1 + MAX_SECONDARIES:
+            break
+    return shown
 
 
-def _primary_carry(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
+def _display_carry(origin, players, possessor_id, possessor_team, bounds, attacking_positive, space):
     limits = _thresholds(bounds, space)
     found = _carries(
         origin, players, possessor_id, possessor_team, bounds, attacking_positive, limits
@@ -126,19 +147,91 @@ def _primary_carry(origin, players, possessor_id, possessor_team, bounds, attack
     if not found:
         return []
     best = max(found, key=lambda item: item.score)
+    carry = replace(best, primary=True, alpha=PRIMARY_ALPHA, label="carry", target_id=None)
+    mates = eligible_receivers(players, possessor_id, possessor_team, attacking_positive, bounds)
+    passes = _passes(origin, mates, players, possessor_team, bounds, attacking_positive, limits)
+    if not passes:
+        return [carry]
+    alt = passes[0]
+    mate = mates.get(alt.target_id) if alt.target_id is not None else None
+    if mate is None:
+        return [carry]
     return [
-        TacticalOption(
-            kind="dribble",
-            origin=origin,
-            target=best.target,
-            score=best.score,
-            primary=True,
-            alpha=PRIMARY_ALPHA,
-            label="carry",
-            target_id=None,
-            slot=best.slot,
-        )
+        carry,
+        replace(
+            alt,
+            target=mate.xy,
+            primary=False,
+            alpha=SECONDARY_ALPHA,
+            label="pass",
+            target_id=mate.track_id,
+        ),
     ]
+
+
+def _compose_passes(held, fresh, teammates):
+    primary = next((item for item in held if item.primary and item.kind == "pass"), None)
+    if primary is None:
+        primary = next((item for item in fresh if item.primary and item.kind == "pass"), None)
+    if primary is None:
+        return []
+    pinned = _pin_pass(replace(primary, primary=True, alpha=PRIMARY_ALPHA, label="pass"), teammates)
+    if pinned is None:
+        return []
+    secondaries: list[TacticalOption] = []
+    for item in _pass_pool(fresh):
+        if item.target_id == pinned.target_id:
+            continue
+        alt = _pin_pass(replace(item, primary=False, alpha=SECONDARY_ALPHA, label="pass"), teammates)
+        if alt is None:
+            continue
+        secondaries.append(alt)
+        if len(secondaries) >= MAX_SECONDARIES:
+            break
+    return [pinned, *secondaries]
+
+
+def _compose_carry(held, fresh, teammates):
+    primary = next((item for item in held if item.kind == "dribble"), None)
+    if primary is None:
+        primary = next((item for item in fresh if item.kind == "dribble" and item.primary), None)
+    if primary is None:
+        return []
+    carry = replace(primary, kind="dribble", primary=True, alpha=PRIMARY_ALPHA, label="carry", target_id=None)
+    for item in _pass_pool(fresh):
+        alt = _pin_pass(replace(item, primary=False, alpha=SECONDARY_ALPHA, label="pass"), teammates)
+        if alt is None:
+            continue
+        return [carry, alt]
+    return [carry]
+
+
+def _pass_pool(options: list[TacticalOption]) -> list[TacticalOption]:
+    best: dict[int, TacticalOption] = {}
+    for item in options:
+        if item.kind != "pass" or item.target_id is None:
+            continue
+        current = best.get(item.target_id)
+        if current is None or item.score > current.score:
+            best[item.target_id] = item
+    return sorted(best.values(), key=lambda item: item.score, reverse=True)
+
+
+def _pin_pass(
+    item: TacticalOption,
+    teammates: dict[int, tuple[float, float]] | None,
+) -> TacticalOption | None:
+    """Drop a pass that does not end on a teammate still in this frame."""
+    if item.kind != "pass":
+        return item
+    if item.target_id is None:
+        return None
+    if teammates is None:
+        return item
+    xy = teammates.get(item.target_id)
+    if xy is None:
+        return None
+    return replace(item, target=xy, target_id=item.target_id)
 
 
 def _teammates(

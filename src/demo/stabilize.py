@@ -136,7 +136,7 @@ class OverlayMemory:
         space: str,
         recommended: str,
     ) -> list[TacticalOption]:
-        """One primary arrow for the held class. No secondary passes, shots, or holds."""
+        """One primary arrow for the held class. Dim alternatives are added at draw time."""
         mates = eligible_receivers(
             players,
             -1 if self.possessor_id is None else self.possessor_id,
@@ -177,6 +177,9 @@ class OverlayMemory:
                 attacking_positive=attacking_positive,
                 space=space,
             )
+            # The hold compares the locked receiver with the single best pass.
+            # Extra dim passes must not change that decision.
+            options = [item for item in options if item.primary] or options[:1]
         incoming = {
             item.target_id: item
             for item in options
@@ -249,6 +252,7 @@ class OverlayMemory:
                 attacking_positive=attacking_positive,
                 space=space,
             )
+        carries = [item for item in carries if item.kind == "dribble"]
         if not carries:
             return []
         best = max(carries, key=lambda item: item.score)

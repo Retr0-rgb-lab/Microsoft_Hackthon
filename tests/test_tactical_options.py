@@ -1,6 +1,14 @@
 """The softmax class picks the arrow. Geometry picks the one receiver or carry."""
 
-from demo.options import PRIMARY_ALPHA, OptionPlayer, build_options, opponent_goal
+from demo.options import (
+    PRIMARY_ALPHA,
+    SECONDARY_ALPHA,
+    OptionPlayer,
+    TacticalOption,
+    build_options,
+    compose_drawn,
+    opponent_goal,
+)
 from demo.teams import TeamBook
 
 
@@ -26,15 +34,26 @@ def test_passes_go_to_one_visible_teammate() -> None:
         attacking_positive=True,
         space="pitch",
     )
-    assert len(options) == 1
+    assert 1 <= len(options) <= 3
     arrow = options[0]
     assert arrow.kind == "pass"
     assert arrow.primary
     assert arrow.alpha == PRIMARY_ALPHA
-    assert arrow.target_id in {2, 3, 6}
-    assert arrow.target != (88.0, 34.0)
-    assert arrow.target != (84.0, 20.0)
-    assert arrow.target_id != 4
+    assert sum(not item.primary for item in options) <= 2
+    mates = {2: (92.0, 28.0), 3: (70.0, 48.0), 6: (60.0, 34.0)}
+    seen: set[int] = set()
+    for item in options:
+        assert item.kind == "pass"
+        assert item.target_id in mates
+        assert item.target_id not in seen
+        seen.add(item.target_id)
+        assert item.target == mates[item.target_id]
+        assert item.target != (88.0, 34.0)
+        assert item.target != (84.0, 20.0)
+        if item.primary:
+            assert item.alpha == PRIMARY_ALPHA
+        else:
+            assert item.alpha == SECONDARY_ALPHA
 
 
 def test_shoot_and_hold_draw_no_lines() -> None:
@@ -65,16 +84,24 @@ def test_dribble_is_one_short_carry_toward_the_attack() -> None:
         attacking_positive=False,
         space="pitch",
     )
-    assert len(options) == 1
-    carry = options[0]
-    assert carry.kind == "dribble"
+    carries = [item for item in options if item.kind == "dribble"]
+    passes = [item for item in options if item.kind == "pass"]
+    assert len(carries) == 1
+    assert len(passes) <= 1
+    carry = carries[0]
     assert carry.primary
+    assert carry.alpha == PRIMARY_ALPHA
     assert carry.target_id is None
     assert carry.target[0] < 20.0
     length = ((carry.target[0] - 20.0) ** 2 + (carry.target[1] - 34.0) ** 2) ** 0.5
     assert length < 9.0
     # Not a pass drawn at the teammate standing on the left.
     assert abs(carry.target[0] - 12.0) > 1.0 or abs(carry.target[1] - 40.0) > 1.0
+    for alt in passes:
+        assert not alt.primary
+        assert alt.alpha == SECONDARY_ALPHA
+        assert alt.target_id == 2
+        assert alt.target == (12.0, 40.0)
 
 
 def test_image_fallback_options_stay_in_the_frame() -> None:
@@ -95,12 +122,14 @@ def test_image_fallback_options_stay_in_the_frame() -> None:
             attacking_positive=True,
             space="image",
         )
-        assert len(options) == 1
-        item = options[0]
-        assert item.kind == recommended
-        assert 0.0 <= item.target[0] <= width
-        assert 0.0 <= item.target[1] <= height
-        assert item.origin == (400.0, 700.0)
+        assert options
+        assert options[0].primary
+        assert options[0].kind == recommended
+        assert sum(item.kind == "dribble" for item in options) <= 1
+        for item in options:
+            assert 0.0 <= item.target[0] <= width
+            assert 0.0 <= item.target[1] <= height
+            assert item.origin == (400.0, 700.0)
     passed = build_options(
         (400.0, 700.0),
         players,
@@ -156,7 +185,7 @@ def test_open_progressive_pass_beats_a_tiny_dump() -> None:
         attacking_positive=True,
         space="pitch",
     )
-    assert len(options) == 1
+    assert options
     arrow = options[0]
     dump = ((56.0 - 50.0) ** 2 + (42.0 - 34.0) ** 2) ** 0.5
     progressive = 76.0 - 50.0
@@ -164,6 +193,8 @@ def test_open_progressive_pass_beats_a_tiny_dump() -> None:
     assert arrow.target_id == 3
     assert arrow.target == (76.0, 34.0)
     assert arrow.primary
+    assert all(item.target_id in {2, 3} for item in options)
+    assert sum(item.kind == "dribble" for item in options) == 0
 
 
 def test_dribble_aims_at_open_space_instead_of_a_player() -> None:
@@ -183,8 +214,10 @@ def test_dribble_aims_at_open_space_instead_of_a_player() -> None:
         attacking_positive=True,
         space="pitch",
     )
-    assert len(options) == 1
-    carry = options[0]
+    carries = [item for item in options if item.kind == "dribble"]
+    assert len(carries) == 1
+    assert len(options) <= 2
+    carry = carries[0]
     assert carry.kind == "dribble"
     assert carry.target_id is None
     assert carry.target[0] > 40.0
@@ -263,3 +296,108 @@ def test_one_bad_colour_frame_does_not_swap_a_teammate() -> None:
     swapped = book.update([(1, "player", red, 20.0), (2, "player", red, 85.0)])
     assert swapped[1] == "home"
     assert swapped[2] == "away"
+
+
+def test_pass_primary_plus_at_most_two_teammate_secondaries() -> None:
+    players = [
+        OptionPlayer(1, (40.0, 34.0), "home"),
+        OptionPlayer(2, (52.0, 24.0), "home"),
+        OptionPlayer(3, (58.0, 40.0), "home"),
+        OptionPlayer(4, (48.0, 48.0), "home"),
+        OptionPlayer(5, (70.0, 30.0), "home"),
+        OptionPlayer(8, (90.0, 34.0), "away"),
+        OptionPlayer(9, (55.0, 10.0), "away", role="goalkeeper"),
+    ]
+    options = build_options(
+        (40.0, 34.0),
+        players,
+        possessor_id=1,
+        possessor_team="home",
+        recommended="pass",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    assert len(options) == 3
+    assert options[0].primary and options[0].alpha == PRIMARY_ALPHA
+    assert sum(not item.primary for item in options) == 2
+    mate_xy = {player.track_id: player.xy for player in players if player.team == "home" and player.track_id != 1}
+    for item in options:
+        assert item.kind == "pass"
+        assert item.target_id in mate_xy
+        assert item.target == mate_xy[item.target_id]
+        assert item.target_id not in {8, 9}
+    assert options[0].score >= options[1].score >= options[2].score
+
+
+def test_dribble_draws_one_carry_and_at_most_one_visible_pass() -> None:
+    options = build_options(
+        (30.0, 34.0),
+        [
+            OptionPlayer(1, (30.0, 34.0), "home"),
+            OptionPlayer(2, (44.0, 22.0), "home"),
+            OptionPlayer(3, (48.0, 46.0), "home"),
+            OptionPlayer(7, (60.0, 34.0), "away"),
+        ],
+        possessor_id=1,
+        possessor_team="home",
+        recommended="dribble",
+        bounds=(105.0, 68.0),
+        attacking_positive=True,
+        space="pitch",
+    )
+    carries = [item for item in options if item.kind == "dribble"]
+    passes = [item for item in options if item.kind == "pass"]
+    assert len(carries) == 1
+    assert carries[0].primary and carries[0].target_id is None
+    assert len(passes) == 1
+    assert not passes[0].primary
+    assert passes[0].alpha == SECONDARY_ALPHA
+    assert passes[0].target_id in {2, 3}
+    assert passes[0].target == {2: (44.0, 22.0), 3: (48.0, 46.0)}[passes[0].target_id]
+
+
+def test_compose_drops_passes_that_are_not_live_teammates() -> None:
+    held = [
+        TacticalOption("pass", (40.0, 34.0), (90.0, 34.0), 5.0, True, PRIMARY_ALPHA, "pass", 8, "pass:8"),
+    ]
+    fresh = [
+        TacticalOption("pass", (40.0, 34.0), (52.0, 24.0), 4.0, True, PRIMARY_ALPHA, "pass", 2, "pass:2"),
+        TacticalOption("pass", (40.0, 34.0), (70.0, 34.0), 3.0, False, SECONDARY_ALPHA, "pass", 4, "pass:4"),
+        TacticalOption("shoot", (40.0, 34.0), (105.0, 34.0), 9.0, True, PRIMARY_ALPHA, "shot", None, "shoot"),
+        TacticalOption("dribble", (40.0, 34.0), (46.0, 30.0), 2.0, False, SECONDARY_ALPHA, "carry", None, "dribble:10"),
+    ]
+    # The held id is an opponent. Nothing is drawn, including the fresh passes.
+    assert compose_drawn("pass", held, fresh, teammates={2: (52.0, 24.0)}) == []
+    redrawn = compose_drawn(
+        "pass",
+        [TacticalOption("pass", (40.0, 34.0), (1.0, 1.0), 5.0, True, 0.2, "pass", 2, "pass:2")],
+        fresh,
+        teammates={2: (52.0, 24.0)},
+    )
+    assert len(redrawn) == 1
+    assert redrawn[0].primary
+    assert redrawn[0].target_id == 2
+    assert redrawn[0].target == (52.0, 24.0)
+    assert redrawn[0].alpha == PRIMARY_ALPHA
+    assert all(item.kind == "pass" for item in redrawn)
+
+
+def test_compose_dribble_keeps_the_held_carry_and_one_pass() -> None:
+    held = [
+        TacticalOption("dribble", (30.0, 34.0), (38.0, 28.0), 3.0, True, PRIMARY_ALPHA, "carry", None, "dribble:-20"),
+    ]
+    fresh = [
+        TacticalOption("dribble", (30.0, 34.0), (39.0, 40.0), 4.0, True, PRIMARY_ALPHA, "carry", None, "dribble:20"),
+        TacticalOption("dribble", (30.0, 34.0), (36.0, 34.0), 1.0, False, SECONDARY_ALPHA, "carry", None, "dribble:0"),
+        TacticalOption("pass", (30.0, 34.0), (44.0, 22.0), 6.0, False, SECONDARY_ALPHA, "pass", 2, "pass:2"),
+        TacticalOption("pass", (30.0, 34.0), (99.0, 10.0), 5.0, False, SECONDARY_ALPHA, "pass", 7, "pass:7"),
+        TacticalOption("hold", (30.0, 34.0), (30.0, 34.0), 1.0, True, PRIMARY_ALPHA, "hold", None, "hold"),
+    ]
+    drawn = compose_drawn("dribble", held, fresh, teammates={2: (44.0, 22.0)})
+    assert [item.kind for item in drawn] == ["dribble", "pass"]
+    assert drawn[0].primary and drawn[0].slot == "dribble:-20"
+    assert drawn[0].target == (38.0, 28.0)
+    assert not drawn[1].primary and drawn[1].target_id == 2 and drawn[1].target == (44.0, 22.0)
+    assert compose_drawn("shoot", held, fresh, teammates={2: (44.0, 22.0)}) == []
+    assert compose_drawn("hold", held, fresh, teammates={2: (44.0, 22.0)}) == []
