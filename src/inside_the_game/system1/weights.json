@@ -15,43 +15,43 @@
     "hold"
   ],
   "bias": {
-    "pass": 1.412303,
-    "shoot": -1.653515,
-    "dribble": 0.751214,
-    "hold": -0.510002
+    "pass": 0.748946,
+    "shoot": -1.759132,
+    "dribble": 1.35806,
+    "hold": -0.347874
   },
   "weights": {
     "pass": [
-      -0.747702,
-      -0.145801,
-      -0.861612,
-      -1.019735,
-      0.287423,
-      0.277217
+      -0.341403,
+      -0.018062,
+      -0.640424,
+      -0.12043,
+      0.046017,
+      0.0
     ],
     "shoot": [
-      1.858643,
-      0.117769,
-      1.130539,
-      -0.91646,
-      0.304226,
-      0.283289
+      1.143911,
+      -0.476216,
+      1.519002,
+      0.301983,
+      -0.241995,
+      0.0
     ],
     "dribble": [
-      -0.544164,
-      0.029922,
-      -0.884672,
-      0.132064,
-      0.30836,
-      0.380712
+      -0.636363,
+      -0.011619,
+      -0.656369,
+      -0.672988,
+      0.087347,
+      0.0
     ],
     "hold": [
-      -0.566777,
-      -0.00189,
-      0.615744,
-      1.804131,
-      -0.900009,
-      -0.941218
+      -0.166145,
+      0.505897,
+      -0.222209,
+      0.491435,
+      0.108632,
+      0.0
     ]
   },
   "training": {
@@ -60,13 +60,17 @@
     "l2": 0.02,
     "class_weighted": true,
     "counts": {
-      "pass": 1187,
-      "shoot": 35,
-      "dribble": 968,
-      "hold": 10
+      "pass": 73,
+      "shoot": 2,
+      "dribble": 41,
+      "hold": 8
     }
   },
-  "fit_on": "statsbomb-open-data:69284 + synthetic:seed-7",
-  "mapping_rule": "Pass→pass, Shot→shoot, Carry/Dribble→dribble. Every other StatsBomb type is skipped and is not labeled hold. Mapped events missing a player or a location are skipped.",
-  "hold_labels": "Synthetic sequences only. StatsBomb context events are skipped, not labeled hold."
+  "fit_on": "synthdata:SYN-SINGLE-0001:decision_point",
+  "sample": "touchline/data/samples/sample_25hz_10min",
+  "event_types": [
+    "decision_point"
+  ],
+  "label_rule": "decision_point chosen option: pass→pass, shot→shoot, carry→dribble, except a carry with progress_m < 4 and the nearest opponent within 3 m → hold. No other event type is a training row.",
+  "coordinate_system": "centre_spot metres, pitch 105x68, attack_dir ±1; FORMAT section 6 flip so the acting team attacks +x"
 }

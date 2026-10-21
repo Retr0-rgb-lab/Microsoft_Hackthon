@@ -11,7 +11,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "numpy>=1.26"]
 # Optional System 1 backend. The softmax policy and the test suite do not need it.
 jev = ["typesafe-sdk"]
 # Video demo. The events tests do not import these.

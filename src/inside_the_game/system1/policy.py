@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Protocol
+from typing import Any, Protocol
 
 from inside_the_game.features.extract import FeatureVector, extract_features
+from inside_the_game.features.from_tracking import features_from_tracking
 from inside_the_game.ingest.events import MatchEvent
 from inside_the_game.labels import ACTION_LABELS, validate_distribution
 from inside_the_game.system1.fit import default_weights_path, load_linear_weights
@@ -85,6 +87,23 @@ class SoftmaxActionPolicy:
 
     def predict(self, event: MatchEvent) -> ActionDistribution:
         return self.predict_features(extract_features(event))
+
+    def predict_tracking(
+        self,
+        frame: Mapping[str, Any],
+        event: Mapping[str, Any],
+        team_of: Mapping[str, str],
+    ) -> ActionDistribution:
+        """Distribution for one SynthData decision_point and its tracking frame.
+
+        The frame replaces a video or CV observation. Coordinates stay in the
+        sample pitch (centre spot, metres, ``attack_dir`` ±1) until
+        ``features_from_tracking`` applies the section 6 attack flip. The
+        returned distribution is still pass, shoot, dribble, and hold.
+        """
+        if event.get("type") != "decision_point":
+            raise ValueError("predict_tracking expects a decision_point event")
+        return self.predict_features(features_from_tracking(frame, event, team_of))
 
     def predict_features(self, features: FeatureVector) -> ActionDistribution:
         values = features.as_tuple()
