@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inside the Game · pitch sample</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="view" aria-label="Synthetic pitch with 22 geometric players and a ball"></canvas>
+      <header class="hud">
+        <div class="brand">
+          <p class="eyebrow">Inside the Game</p>
+          <h1>Pitch sample</h1>
+          <p class="sub" id="clip-label">Synthetic tracking · 105 × 68 m</p>
+        </div>
+        <div class="cam-toggle" role="group" aria-label="Camera">
+          <button id="cam-broadcast" type="button" lang="zh" aria-pressed="true" aria-label="Broadcast camera">转播</button>
+          <button id="cam-top" type="button" lang="zh" aria-pressed="false" aria-label="Top-down camera">俯视</button>
+        </div>
+      </header>
+      <footer class="status">
+        <p id="status" role="status">Loading synthetic clip…</p>
+        <p class="legend"><span class="swatch home"></span>HOME <span class="swatch away"></span>AWAY</p>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
