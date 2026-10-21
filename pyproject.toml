@@ -14,6 +14,13 @@ dependencies = []
 dev = ["pytest>=8"]
 # Optional System 1 backend. The softmax policy and the test suite do not need it.
 jev = ["typesafe-sdk"]
+# Video demo. The events tests do not import these.
+demo = [
+    "numpy>=1.26",
+    "opencv-python-headless>=4.8",
+    "ultralytics>=8.3",
+    "torch>=2.2",
+]
 
 [project.scripts]
 inside-the-game = "inside_the_game.__main__:main"

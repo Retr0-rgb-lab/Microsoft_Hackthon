@@ -8,7 +8,7 @@ This is a decision aid. For each synthetic on-ball state it shows the full proba
 
 1. **Ingest** synthetic match events (JSON/text state).
 2. **System 1** maps that state to `P(pass | shoot | dribble | hold)`. The default backend is a lightweight linear softmax over numeric features. It loads `src/inside_the_game/system1/weights.json` when that file is present and otherwise uses the hand-set stub. An optional [TypeSafe Jev Choice](https://docs.typesafe.ai/primitives/choice) hook accepts the same JSON/text state and is unused when `typesafe-sdk` is not installed. No images. Jev stays off on the MVP path.
-3. **Optional CV late-fusion** would be overlay-only. It is **deferred** and is not in this repository path.
+3. **Video demo** (`python -m demo.run`) runs detection, ByteTrack, pitch homography, and this same softmax, then paints options on the broadcast. The events path below does not need those dependencies. See [Video demo](#video-demo).
 4. **System 2** takes a match event plus the System 1 distribution and returns a short football rationale (`explain`). The default is an offline template: no network and no API key. An optional local model implements the same call only when the caller passes `local_llm`; `load_local_llm()` is `None`, so the hook stays off. A Foundry-shaped chat body is still built in memory and is not sent. socceraction xT / VAEP stays a stub sidecar (`TODO`) and is named in the rationale without a fitted value.
 5. **Present** emits replay overlay arrows, probability bars for all four actions, and the System 2 explanation in the same overlay.
 
@@ -18,7 +18,7 @@ MVP path in this pull request: **1 → 2 → 4 → 5**.
 fixtures → ingest → features → system1 softmax → system2 explain → present
                                     ↘ optional Jev Choice (text/JSON, not required)
 system2 sidecar: socceraction xT/VAEP TODO (named in the rationale, not fitted)
-CV late-fusion: deferred
+video: python -m demo.run  (YOLO + ByteTrack + homography + the same softmax)
 ```
 
 ## Install
@@ -56,6 +56,74 @@ explain(event, distribution, local_llm=MyLocalModel())
 ```
 
 `load_local_llm()` returns `None`. Setting an API key or `INSIDE_THE_GAME_LOCAL_LLM` does not enable a model.
+
+## Video demo
+
+One command reads a broadcast mp4 and writes an mp4 with on-ball options drawn on the pitch:
+
+```bash
+pip install -e ".[demo]"
+python -m demo.run --input in.mp4 --output out.mp4 --stride 2
+```
+
+`--stride 2` runs the player detector on every other frame. The frames in between advance each track with the velocity measured since the last detection (Ultralytics ByteTrack assigns the ids on detection frames). `--pitch-every` (default 15) is how often the keypoint model recomputes the homography.
+
+What you see when someone has the ball:
+
+- Pass arrows to teammates, carry arrows into space, and a shot at the goal they are attacking.
+- The softmax's recommended action is the bright arrow. The other options stay up, more transparent.
+- Arrows are sampled on the 105×68 m pitch and projected back through the homography, so they lie on the broadcast plane.
+- A four-way probability bar sits in the corner. A 2D minimap is on by default (`--no-minimap` turns it off).
+- Jersey colours are clustered into two teams. Which side is home is the defensive tail (the deepest outfield players) plus the goal each goalkeeper is standing in, not the average of every shirt. Home defends the left goal and attacks toward x = 105, the same frame as the training features. Pass arrows are pinned to teammates. The shot is pinned to the opponent goal mouth.
+
+The six softmax inputs are `ball_x`, `ball_y`, `centrality`, `pressure`, `minute`, `goal_diff`, in that order and in the same units as `weights.json`. `features_from_cv` builds a `MatchEvent` and calls `extract_features`, so a pitch-meter observation cannot drift from training. `--minute` (default 45) and `--score-home` / `--score-away` (default 0–0) fill the two values a broadcast frame does not contain. Pressure is opponent distance on the StatsBomb scale: 0.82 inside 3 m, 0.18 beyond 12 m.
+
+If the pitch model cannot support a homography, the frame falls back to image coordinates: arrows are straight lines in the picture, the bar still runs, and the panel says `image coordinates`. A recent good homography is reused for `--homography-hold` frames (default 30) unless a hard cut is detected, in which case the old matrix is dropped. If the ball detector misses, the last possessor is held for `--hold-frames` frames (default 18) and the ball is coasted; a one-frame jump with low confidence is ignored. The drawn possessor ring sits on a smoothed foot point. A light ball mark is painted only after a few stable detections near those feet, so a noisy box does not drag a dot around the frame. The highlighted action and the pass receivers are held across adjacent frames. A player from the other team has to be nearer the ball for several frames before possession, and therefore the goal being attacked, flips. If that goal is outside the picture, the shot tip stops on the frame edge still aimed at it, instead of looking like it ends on a player.
+
+Weights download on first use into `data/models/` (gitignored):
+
+| Role | Hugging Face id |
+| --- | --- |
+| Players, goalkeepers, referees, ball | [`martinjolif/yolo-football-player-detection`](https://huggingface.co/martinjolif/yolo-football-player-detection) (YOLO11m) |
+| Ball bypass when the main detector is unsure | [`martinjolif/yolo-football-ball-detection`](https://huggingface.co/martinjolif/yolo-football-ball-detection) (YOLO11n) |
+| 32 pitch keypoints → homography | [`martinjolif/yolo-football-pitch-detection`](https://huggingface.co/martinjolif/yolo-football-pitch-detection) (YOLOv8x pose) |
+
+Tracker: Ultralytics ByteTrack (`bytetrack.yaml`), not a separate weight file. No SportsLabKit, no hosted inference API. CPU is the default (`--device cpu`).
+
+### Clips
+
+The checked-in tree does not contain video. The two clips used to exercise the demo are 1080p, 25 fps, 30 s tactical-camera excerpts circulated with the [roboflow/sports](https://github.com/roboflow/sports) samples. They match the public DFL Bundesliga Data Shootout footage (Kaggle competition data). Use them for research and non-commercial demo only; do not commit them.
+
+```bash
+pip install gdown
+mkdir -p data/clips
+gdown 1OG8K6wqUw9t7lp9ms1M48DxRhwTYciK- -O data/clips/08fd33_0.mp4
+gdown 19PGw55V8aA6GZu5-Aac5_9mCy3fNxmEf -O data/clips/2e57b9_0.mp4
+```
+
+`08fd33_0.mp4` is the primary end-to-end clip. `2e57b9_0.mp4` pans harder and is the homography stress test. A 10 second preview of the first clip, detecting every second frame:
+
+```bash
+python -m demo.run \
+  --input data/clips/08fd33_0.mp4 \
+  --output preview_08fd33_10s.mp4 \
+  --seconds 10 \
+  --stride 2 \
+  --screenshot-dir preview_frames \
+  --screenshot-times 2,5,8
+```
+
+The run prints a JSON summary beside the mp4: wall-clock output fps and mean detector time. On this CPU (no GPU, PyTorch CPU, 1080p, `--stride 2`, `--pitch-every 15`):
+
+| Clip | Frames | Wall clock | Output fps | Player | Pitch | Ball | Homography ok | Possessor frames | Of which the ball was held |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `08fd33_0` first 10 s | 250 | 38.3 s | 6.5 | 135 ms | 316 ms | 34 ms | 250/250 | 219 | 168 |
+| `08fd33_0` full 30 s | 750 | 103.2 s | 7.3 | 140 ms | 317 ms | 32 ms | 750/750 | 624 | 453 |
+| `2e57b9_0` full 30 s (pan) | 750 | 100.2 s | 7.5 | 133 ms | 309 ms | 32 ms | 750/750 | 631 | 472 |
+
+The ball bypass ran on almost every detection frame; the player model's own ball box is often under 0.35 confidence. Possession was still available on about five of every six frames because a miss keeps the last possessor for `--hold-frames`.
+
+These two clips never dropped the homography: the pan in `2e57b9_0` still left enough pitch keypoints, and neither file contains a hard cut (`scene_cuts` 0). A cut, a zoom that hides the markings, or a keypoint fit over the reprojection gate falls back to image coordinates for that frame (the bars and arrows stay up; the panel reads `image coordinates`) instead of stopping. That path is covered by unit tests. Attacking direction follows the deepest outfield players and the goalkeepers' goals, so a team camped in the opponent half is not flipped just because its average x moved forward. The lock can still be wrong if neither side leaves a player near its own goal and both keepers are missed. `--minute` and the score are not read from the broadcast.
 
 ## Tests
 
