@@ -1,0 +1,785 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:synthetic-football:records:0.1.0",
+  "title": "Synthetic football data format v0.1 (draft)",
+  "description": "Records: metadata.json -> #/$defs/metadata; tracking.jsonl lines -> #/$defs/tracking; events.jsonl lines -> #/$defs/event; states.jsonl lines -> #/$defs/state. Coordinates: origin at centre spot, metres, x along the 105 m axis, y along the 68 m axis, z up; facing in radians, 0 = +x, CCW positive. See FORMAT.md.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/tracking"
+    },
+    {
+      "$ref": "#/$defs/event"
+    },
+    {
+      "$ref": "#/$defs/state"
+    },
+    {
+      "$ref": "#/$defs/metadata"
+    }
+  ],
+  "$defs": {
+    "score": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "location": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": -55.5,
+          "maximum": 55.5
+        },
+        {
+          "type": "number",
+          "minimum": -37,
+          "maximum": 37
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "items": false
+    },
+    "player_id": {
+      "type": "string",
+      "pattern": "^[HA](0[1-9]|1[0-1])$"
+    },
+    "team_id": {
+      "enum": [
+        "HOME",
+        "AWAY"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "format_version",
+        "match_id",
+        "synthetic",
+        "fictional_entities",
+        "frame_hz",
+        "duration_ms",
+        "frame_count",
+        "coordinate_system",
+        "periods",
+        "teams",
+        "players",
+        "columns"
+      ],
+      "properties": {
+        "format_version": {
+          "const": "0.1.0"
+        },
+        "synthetic": {
+          "const": true
+        },
+        "fictional_entities": {
+          "const": true
+        },
+        "frame_hz": {
+          "type": "integer",
+          "minimum": 10,
+          "default": 25
+        },
+        "min_frame_hz": {
+          "const": 10
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1000
+        },
+        "frame_count": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "coordinate_system": {
+          "type": "object",
+          "required": [
+            "origin",
+            "units",
+            "pitch_length_m",
+            "pitch_width_m"
+          ],
+          "properties": {
+            "origin": {
+              "const": "centre_spot"
+            },
+            "units": {
+              "const": "m"
+            },
+            "pitch_length_m": {
+              "const": 105
+            },
+            "pitch_width_m": {
+              "const": 68
+            }
+          }
+        },
+        "periods": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "period",
+              "start_ms",
+              "duration_ms",
+              "home_attack_dir"
+            ],
+            "properties": {
+              "home_attack_dir": {
+                "enum": [
+                  1,
+                  -1
+                ]
+              }
+            }
+          }
+        },
+        "teams": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "player_id",
+              "team_id",
+              "jersey_number",
+              "name",
+              "position"
+            ],
+            "properties": {
+              "player_id": {
+                "$ref": "#/$defs/player_id"
+              },
+              "team_id": {
+                "$ref": "#/$defs/team_id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "player": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": false,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/player_id"
+        },
+        {
+          "type": "number",
+          "minimum": -52.5,
+          "maximum": 52.5
+        },
+        {
+          "type": "number",
+          "minimum": -34,
+          "maximum": 34
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number",
+          "minimum": -3.1417,
+          "maximum": 3.1417
+        }
+      ]
+    },
+    "tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_id",
+        "t_ms",
+        "period",
+        "period_ms",
+        "attack_dir",
+        "in_play",
+        "phase",
+        "action_id",
+        "possession_team_id",
+        "ball_owner_id",
+        "score",
+        "players",
+        "ball"
+      ],
+      "properties": {
+        "frame_id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "t_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "period": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "period_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "attack_dir": {
+          "enum": [
+            1,
+            -1
+          ],
+          "description": "+1: HOME attacks +x in this frame"
+        },
+        "in_play": {
+          "type": "boolean"
+        },
+        "phase": {
+          "enum": [
+            "carry",
+            "pass",
+            "shot",
+            "restart_setup",
+            "ended"
+          ]
+        },
+        "action_id": {
+          "type": "string"
+        },
+        "possession_team_id": {
+          "enum": [
+            "HOME",
+            "AWAY",
+            null
+          ]
+        },
+        "ball_owner_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "score": {
+          "$ref": "#/$defs/score"
+        },
+        "players": {
+          "type": "array",
+          "minItems": 22,
+          "maxItems": 22,
+          "items": {
+            "$ref": "#/$defs/player"
+          }
+        },
+        "ball": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": false,
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": -55.5,
+              "maximum": 55.5
+            },
+            {
+              "type": "number",
+              "minimum": -37,
+              "maximum": 37
+            },
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "option_id",
+        "type",
+        "target_player_id",
+        "end_location",
+        "success_prob",
+        "progress_m",
+        "xt_end",
+        "xt_gain",
+        "offside",
+        "offside_margin_m"
+      ],
+      "properties": {
+        "option_id": {
+          "type": "string",
+          "pattern": "^o[0-9]+$"
+        },
+        "type": {
+          "enum": [
+            "pass",
+            "carry",
+            "shot"
+          ]
+        },
+        "target_player_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/player_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "end_location": {
+          "$ref": "#/$defs/location"
+        },
+        "success_prob": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "progress_m": {
+          "type": "number"
+        },
+        "xt_end": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "xt_gain": {
+          "type": "number"
+        },
+        "offside": {
+          "type": "boolean"
+        },
+        "offside_margin_m": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "event_id",
+        "sequence",
+        "match_id",
+        "type",
+        "period",
+        "period_ms",
+        "start_ms",
+        "end_ms",
+        "available_at_ms",
+        "possession_id"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^e[0-9]{6}$"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "match_id": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "period_start",
+            "period_end",
+            "match_end",
+            "possession_change",
+            "restart",
+            "pressure",
+            "carry",
+            "pass",
+            "interception",
+            "shot",
+            "save",
+            "stoppage",
+            "action_cancelled",
+            "decision_point",
+            "offside",
+            "ball_out"
+          ]
+        },
+        "period": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "period_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "start_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "available_at_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "possession_id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "team_id": {
+          "$ref": "#/$defs/team_id"
+        },
+        "location": {
+          "$ref": "#/$defs/location"
+        },
+        "start_location": {
+          "$ref": "#/$defs/location"
+        },
+        "end_location": {
+          "$ref": "#/$defs/location"
+        },
+        "related_event_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "restart_type": {
+          "enum": [
+            "kick_off",
+            "throw_in",
+            "corner",
+            "goal_kick",
+            "indirect_free_kick",
+            "keeper_restart"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "pass"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "player_id",
+              "recipient_id",
+              "actual_receiver_id",
+              "outcome",
+              "start_location",
+              "end_location",
+              "decision_event_id"
+            ],
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "complete",
+                  "intercepted",
+                  "out",
+                  "offside"
+                ]
+              },
+              "actual_receiver_id": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/player_id"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "decision_point"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "player_id",
+              "location",
+              "xt_start",
+              "options",
+              "chosen_index",
+              "chosen_option_id",
+              "policy"
+            ],
+            "properties": {
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/$defs/option"
+                }
+              },
+              "chosen_index": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "offside"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "player_id",
+              "location",
+              "offside_margin_m",
+              "pass_event_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ball_out"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "last_touch_team_id",
+              "line",
+              "location",
+              "next_restart",
+              "restart_team_id"
+            ],
+            "properties": {
+              "line": {
+                "enum": [
+                  "touchline",
+                  "goal_line"
+                ]
+              },
+              "next_restart": {
+                "enum": [
+                  "throw_in",
+                  "corner",
+                  "goal_kick"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "restart"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "player_id",
+              "restart_type"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "shot"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "team_id",
+              "player_id",
+              "outcome",
+              "xg",
+              "score"
+            ],
+            "properties": {
+              "outcome": {
+                "enum": [
+                  "goal",
+                  "saved",
+                  "off_target"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "t_ms",
+        "period",
+        "score",
+        "in_play",
+        "last_event_sequence",
+        "stats"
+      ],
+      "properties": {
+        "t_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "period": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "score": {
+          "$ref": "#/$defs/score"
+        },
+        "in_play": {
+          "type": "boolean"
+        },
+        "last_event_sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stats": {
+          "type": "object",
+          "required": [
+            "HOME",
+            "AWAY"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "HOME": {
+              "$ref": "#/$defs/stats"
+            },
+            "AWAY": {
+              "$ref": "#/$defs/stats"
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passes",
+        "completed_passes",
+        "shots",
+        "shots_on_target",
+        "interceptions",
+        "pressure_events",
+        "offsides",
+        "ball_out",
+        "possession_seconds",
+        "possession_pct",
+        "pass_accuracy_pct"
+      ],
+      "properties": {
+        "passes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed_passes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shots_on_target": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "interceptions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pressure_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "offsides": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ball_out": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "possession_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "possession_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "pass_accuracy_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}

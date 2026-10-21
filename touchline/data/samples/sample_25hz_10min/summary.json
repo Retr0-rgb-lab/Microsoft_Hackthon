@@ -1,0 +1,90 @@
+{
+  "match_id": "SYN-SINGLE-0001",
+  "seed": 8,
+  "frame_hz": 25,
+  "duration_seconds": 600,
+  "tracking_frames": 15001,
+  "player_position_records": 330022,
+  "state_snapshots": 601,
+  "event_count": 521,
+  "event_counts": {
+    "period_start": 1,
+    "possession_change": 36,
+    "restart": 6,
+    "carry": 124,
+    "decision_point": 124,
+    "pressure": 109,
+    "pass": 73,
+    "interception": 31,
+    "offside": 1,
+    "stoppage": 6,
+    "shot": 2,
+    "ball_out": 5,
+    "action_cancelled": 1,
+    "period_end": 1,
+    "match_end": 1
+  },
+  "restart_counts": {
+    "kick_off": 1,
+    "indirect_free_kick": 1,
+    "goal_kick": 1,
+    "corner": 1,
+    "throw_in": 2
+  },
+  "final_score": [
+    0,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 38,
+      "completed_passes": 21,
+      "shots": 2,
+      "shots_on_target": 0,
+      "interceptions": 16,
+      "pressure_events": 52,
+      "offsides": 0,
+      "ball_out": 3,
+      "possession_seconds": 285.8,
+      "possession_pct": 53.38,
+      "pass_accuracy_pct": 55.26
+    },
+    "AWAY": {
+      "passes": 35,
+      "completed_passes": 17,
+      "shots": 0,
+      "shots_on_target": 0,
+      "interceptions": 15,
+      "pressure_events": 57,
+      "offsides": 1,
+      "ball_out": 2,
+      "possession_seconds": 249.6,
+      "possession_pct": 46.62,
+      "pass_accuracy_pct": 48.57
+    }
+  },
+  "distance_m": {
+    "H01": 276.7,
+    "H02": 1263.3,
+    "H03": 1341.4,
+    "H04": 1308.7,
+    "H05": 1263.3,
+    "H06": 1375.2,
+    "H07": 1479.3,
+    "H08": 1401.1,
+    "H09": 1672.4,
+    "H10": 1713.7,
+    "H11": 1674.6,
+    "A01": 301.4,
+    "A02": 1274.8,
+    "A03": 1359.1,
+    "A04": 1315.4,
+    "A05": 1233.8,
+    "A06": 1406.3,
+    "A07": 1606.8,
+    "A08": 1478.3,
+    "A09": 1588.6,
+    "A10": 1737.1,
+    "A11": 1575.2
+  }
+}

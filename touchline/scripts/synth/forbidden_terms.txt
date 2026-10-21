@@ -1,0 +1,651 @@
+# One term per line; case-insensitive whole-word match. Real clubs, venues, leagues, brands, real player names.
+AC Milan
+AFC Bournemouth
+Aaron Anselmino
+Aaron Bott
+Aaron Hickey
+Aaron Wan-Bissaka
+Abdoul Ouattara
+Abdukodir Khusanov
+Abdul Fatawu
+Abdulkadir Omur
+Adam Smith
+Adam Wharton
+Adidas
+Adrien Truffert
+Aidan Harris
+Ainsley Maitland-Niles
+Aladji Bamba
+Alan Browne
+Alejandro Garnacho
+Alex Borto
+Alex Cairns
+Alex Iwobi
+Alex Palmer
+Alex Scott
+Alex Toth
+Alexander Isak
+Alexis Mac Allister
+Alfie Cresswell
+Alisson Becker
+Allan
+Alvaro Rodriguez
+Alysson
+Amad Diallo
+Amadou Onana
+Amar Dedic
+Amario Cozier-Duberry
+Amex Stadium
+Amine Adli
+Anan Khalaili
+Andrey Santos
+Andy Robertson
+Anfield
+Anis Mehmeti
+Anthony Elanga
+Antoine Semenyo
+Anton Stach
+Antonee Robinson
+Antoni Milambo
+Antonin Kinsky
+Antonio Silva
+Ao Tanaka
+Archie Gray
+Arnaud Kalimuendo
+Arsenal
+Aston Villa
+Atletico Madrid
+Aurele Amenda
+Axel Disasi
+Ayden Heaven
+Ayyoub Bouaddi
+Azor Matusiwa
+Bafode Diakite
+Barcelona
+Bart Verbruggen
+Bayern
+Bazoumana Toure
+Ben Chilwell
+Ben Davies
+Ben Gannon-Doak
+Ben White
+Ben Wilson
+Ben Winterburn
+Benjamin Fredrick
+Benjamin Lecomte
+Benjamin Sesko
+Bernd Leno
+Bobby Thomas
+Borussia Dortmund
+Boubacar Kamara
+Bournemouth
+Bradley Barcola
+Bradley Burrowes
+Brandon Austin
+Brandon Thomas-Asante
+Brenden Aaronson
+Brennan Johnson
+Brentford
+Brian Brobbey
+Brian Madjo
+Brighton
+Brighton & Hove Albion
+Brooke Norton-Cuffy
+Bruno Fernandes
+Bruno Guimaraes
+Bryan Mbeumo
+Bukayo Saka
+Bundesliga
+CBS Arena
+Caelan Avenell
+Caleb Yirenkyi
+Callum Hudson-Odoi
+Callum Mills
+Callum Wilson
+Calvin Bassey
+Caoimhin Kelleher
+Carl Rushworth
+Carlos Baleba
+Cedric Kipre
+Cesar Palacios
+Chadi Riad
+Champions League
+Charalampos Kostoulas
+Charlie Hughes
+Charly Alcaraz
+Cheick Doucoure
+Chelsea
+Chema Andres
+Chemsdine Talbi
+Chris Richards
+Chris Rigg
+Chris Wood
+Christian Norgaard
+Christian Walton
+Christos Tzolis
+Chuba Akpom
+City Ground
+Claudio Echeverri
+Cody Gakpo
+Cole Palmer
+Conor Bradley
+Conor Gallagher
+Costinha
+Coventry
+Coventry City
+Craven Cottage
+Cristhian Mosquera
+Crystal Palace
+Daichi Kamada
+Daizen Maeda
+Dan Ballard
+Dan Bentley
+Dan Burn
+Dan Ndoye
+Dango Ouattara
+Daniel James
+Daniel Jebbison
+Daniel Munoz
+Danny Welbeck
+Dara O'Shea
+Dario Osorio
+Darnell Furlong
+David Affengruber
+David Brooks
+David Button
+David Raya
+Dayann Methalie
+Dean Henderson
+Declan Rice
+Dejan Kulusevski
+Dermot Mee
+Destiny Udogie
+Diego Gomez
+Dillon Phillips
+Diogo Dalot
+Djordje Petrovic
+Dominic Calvert-Lewin
+Dominic Solanke
+Dominik Szoboszlai
+Dwight McNeil
+EPL
+Eberechi Eze
+Eddie Nketiah
+El Hadji Malick Diouf
+Eliot Matazo
+Elland Road
+Ellery Balcombe
+Elliot Anderson
+Elliot Stroud
+Ellis Simms
+Emersonn
+Emile Smith Rowe
+Emiliano Buendia
+Emiliano Martinez
+Emirates Stadium
+Emmanuel Emegha
+Enzo Fernandez
+Enzo Le Fee
+Ephron Mason-Clark
+Erling Haaland
+Estevao
+Ethan Ampadu
+Ethan Nwaneri
+Ethan Pinnock
+Etihad
+Etihad Stadium
+Evan Ferguson
+Evanilson
+Evann Guessand
+Everton
+Ewen Jaouen
+Exequiel Palacios
+Ezri Konsa
+FIFA
+Fabian Schar
+Fabio Carvalho
+Federico Chiesa
+Femi Azeez
+Ferdi Kadioglu
+Florentino
+Florian Wirtz
+Frank Onyeka
+Fraser Barnsley
+Fraser Forster
+Freddie Woodman
+Fulham
+Gabriel Gudmundsson
+Gabriel Magalhaes
+Gabriel Slonina
+George Hemmings
+Georginio Rutter
+Geovany Quenda
+Geronimo Rulli
+Gianluigi Donnarumma
+Giorgi Mamardashvili
+Giovanni Leoni
+Gonzalo Garcia
+Granit Xhaka
+Gtech Community Stadium
+Gustavo Hamer
+Gustavo Nunes
+Haaland
+Habib Diarra
+Haji Wright
+Hakon Valdimarsson
+Harrison Armstrong
+Harrison Reed
+Harry Amass
+Harry Maguire
+Harry Wilson
+Harvey Barnes
+Harvey Davies
+Hayden Hackney
+Hidemasa Morita
+Hill Dickinson Stadium
+Honest Ahanor
+Hotspur
+Hugo Ekitike
+Hugo Larsson
+Hull City
+Ian Maatsen
+Ibrahim Mbaye
+Ibrahim Osman
+Ibrahim Sangare
+Igor Jesus
+Igor Thiago
+Ilia Gruev
+Iliman Ndiaye
+Illan Meslier
+Ilyas Ansah
+Inter Milan
+Ipswich Town
+Isaac Mabaya
+Ismaila Sarr
+Issa Diop
+Jack Butland
+Jack Clarke
+Jack Fletcher
+Jack Grealish
+Jack Hinshelwood
+Jack Rudoni
+Jack Taylor
+Jacob Greaves
+Jacob Knightbridge
+Jacob Murphy
+Jacob Ramsey
+Jaden Philogene
+Jaidon Anthony
+Jair Cunha
+Jaka Bijol
+Jake Bidwell
+Jake O'Brien
+James Garner
+James Hill
+James Justin
+James Maddison
+James McAtee
+James McConnell
+James Tarkowski
+James Trafford
+James Wright
+Jamie Gittens
+Jan Paul van Hecke
+Jannik Schuster
+Jaouen Hadjam
+Jarrad Branthwaite
+Jason Steele
+Jay Dasilva
+Jaydee Canvot
+Jayden Bogle
+Jayden Danns
+Jayden Lienou
+Jean-Matteo Bahoya
+Jean-Philippe Mateta
+Jefferson Lerma
+Jens Hjerto-Dahl
+Jeremie Frimpong
+Jeremy Doku
+Jeremy Jacquet
+Joachim Andersen
+Joao Gomes
+Joao Pedro
+Jocelin Ta Bi
+Joe Gelhardt
+Joe Gomez
+Joe Rodon
+Joe Willock
+Joel Latibeaudiere
+Joelinton
+Johan Manzambi
+John Egan
+John McGinn
+John Victor
+Jonah Kusi-Asare
+Jordan Henderson
+Jordan Pickford
+Jorge Cuenca
+Jorgen Strand Larsen
+Jorrel Hato
+Josh Acheampong
+Josh Dasilva
+Josh Eccles
+Josh King
+Joshua Zirkzee
+Josko Gvardiol
+Juanlu Sanchez
+Jules Ahoka
+Julian Araujo
+Julio Enciso
+Julio Soler
+Junior Kroupi
+Jurrien Timber
+Justin Kluivert
+Juventus
+Kaden Braithwaite
+Kai Havertz
+Kaine Kesler-Hayden
+Kaoru Mitoma
+Karl Darlow
+Kasey McAteer
+Keane Lewis-Potter
+Kenny Tete
+Kepa Arrizabalaga
+Kevin
+Kevin Danso
+Kevin Schade
+Kiernan Dewsbury-Hall
+Kim Ji-Soo
+Kjell Scherpen
+Kobbie Mainoo
+Konstantinos Tzolakis
+Kostas Tsimikas
+Kristoffer Ajer
+La Liga
+LaLiga
+Lamare Bogarde
+Leeds
+Leeds United
+Leif Davis
+Leny Yoro
+Leo Shahar
+Leon Goretzka
+Levi Colwill
+Lewie Coyle
+Lewis Cook
+Lewis Dunk
+Lewis Hall
+Lewis Koumas
+Lewis Miley
+Liam Delap
+Ligue 1
+Lisandro Martinez
+Liverpool
+Loum Tchaouna
+Luc De Fougerolles
+Luca Netz
+Luca Williams-Barnett
+Lucas Bergvall
+Lucas Gourna-Douath
+Lucas Herrington
+Luka Lynch
+Luka Vuskovic
+Lukas Hornicek
+Lukas Nmecha
+Luke Chambers
+Luke O'Nien
+Luke Shaw
+Luke Woolfenden
+MKM Stadium
+Macaulay Zepa
+Mahdi Nicoll-Jazuli
+Malick Fofana
+Malick Thiaw
+Malick Yalcouye
+Malo Gusto
+Mamadou Sangare
+Man City
+Man United
+Man Utd
+Manchester City
+Manchester United
+Manuel Angel
+Manuel Ugarte
+Marc Guehi
+Marcelino Nunez
+Marco Bizot
+Marco Palestra
+Marcos Senesi
+Marcus Bettinelli
+Marcus Rashford
+Marcus Tavernier
+Mark Gillespie
+Mark Travers
+Martin Dubravka
+Martin Odegaard
+Martin Zubimendi
+Mason Mount
+Mateo Kovacic
+Mateus Fernandes
+Matheus Cunha
+Matheus Franca
+Matheus Nunes
+Mathias Jensen
+Mathys Tel
+Matias Fernandez-Pardo
+Mats Wieffer
+Matt Crooks
+Matt Grimes
+Matt O'Riley
+Matt Targett
+Matteo Ruggeri
+Matthijs de Ligt
+Matty Cash
+Matz Sels
+Max Aarons
+Max Dowman
+Maxence Lacroix
+Maxim De Cuyper
+Mbappe
+Melker Ellborg
+Melvin Bard
+Merlin Rohl
+Messi
+Michael Allen
+Michael Kayode
+Michael Keane
+Michael Svoboda
+Michael Zetterer
+Michele Di Gregorio
+Micky van de Ven
+Mike Penders
+Mikel Merino
+Mikey Moore
+Mikkel Damsgaard
+Milan van Ewijk
+Milos Kerkez
+Modou Keba Cisse
+Mohamed Belloumi
+Mohamed-Ali Cho
+Mohammed Kudus
+Moises Caicedo
+Morato
+Morgan Gibbs-White
+Morgan Rogers
+Murillo
+Mykhailo Mudryk
+Myles Lewis-Skelly
+Nathan Collins
+Neco Williams
+Nehemiah Oriola
+Newcastle
+Newcastle United
+Nick Pope
+Nico Elvedi
+Nico Gonzalez
+Nico O'Reilly
+Nicolas Dominguez
+Nicolas Jackson
+Nicolo Savona
+Nike
+Nikola Milenkovic
+Nilson Angulo
+Noah Okafor
+Noah Sadiki
+Nobel Mendy
+Noni Madueke
+Nordi Mukiele
+Nottingham Forest
+Noussair Mazraoui
+Ola Aina
+Old Trafford
+Oliver McBurnie
+Olivier Boscagli
+Olutayo Subuloye
+Omar Alderete
+Omar Marmoush
+Oscar Bobb
+Oscar Mingueza
+Ousmane Diomande
+PL-SYN
+PL26
+PSG
+Paddy McNair
+Paris Saint-Germain
+Pascal Gross
+Pascal Struijk
+Patrick Dorgu
+Pau Torres
+Pedro Neto
+Pedro Porro
+Pep Chavarria
+Phil Foden
+Piero Hincapie
+Portman Road
+Premier League
+Premier League (synthetic)
+Promise David
+Puma
+Quinten Timber
+Rayan
+Rayan Ait-Nouri
+Rayan Cherki
+Real Madrid
+Reece James
+Regan Slater
+Reinildo Mandava
+Remi Matthews
+Riccardo Calafiori
+Rico Henry
+Rico Lewis
+Rio Ngumoha
+Robin Roefs
+Rodrigo Bentancur
+Rodrigo Muniz
+Romaine Mundle
+Romeo Lavia
+Ronald Araujo
+Ronaldo
+Rory Mahady
+Ross Barkley
+Ruben Dias
+Ryan Christie
+Ryan Giles
+Ryan Gravenberch
+Ryan McAidoo
+Ryan Sessegnon
+Ryan Yates
+Sander Berge
+Sandro Tonali
+Sasa Lukic
+Savio
+Sean Longstaff
+Sean Steur
+Selhurst Park
+Semi Ajayi
+Senne Lammens
+Sepp van den Berg
+Serie A
+Shea Charles
+Shea Lacey
+Sidiki Cherif
+Simon Moore
+Sindre Egeli
+Sorba Thomas
+Spurs
+St James
+Stadium of Light
+Stamford Bridge
+Stefanos Tzimas
+Stephen Mfuni
+Steven Benda
+Sunderland
+Sven Botman
+Taiwo Awoniyi
+Takehiro Tomiyasu
+Tammy Abraham
+Tarik Muharemovic
+Tatsuhiro Sakamoto
+Taylor Harwood-Bellis
+Teddy Sharman-Lowe
+Thierno Barry
+Thomas Meunier
+Tim Iroegbunam
+Timothy Castagne
+Tino Livramento
+Tom Cairney
+Tom Heaton
+Tom King
+Tom McGill
+Tosin Adarabioyo
+Tottenham
+Tottenham Hotspur
+Tottenham Hotspur Stadium
+Trai Hume
+Trey Nyoni
+Triston Rowe
+Tyler Adams
+Tyler Dibling
+Tyler Fletcher
+Tymur Tutierov
+Tyrick Mitchell
+Tyrique George
+Tyrone Mings
+UEFA
+Valentin Barco
+Veljko Milosavljevic
+Victor Lindelof
+Victor Munoz
+Victor Torp
+Viktor Gyokeres
+Villa Park
+Virgil van Dijk
+Vitalii Mykolenko
+Vitality Stadium
+Vitaly Janelt
+Vitezslav Jaros
+Vitor Reis
+Walter Benitez
+Wataru Endo
+Wembley
+Wesley Fofana
+Will Hughes
+William Osula
+William Saliba
+Wilson Isidor
+Wilson Odobert
+Xaver Schlager
+Xavi Simons
+Yankuba Minteh
+Yann Gboho
+Yasin Ayari
+Yehor Yarmoliuk
+Yeremy Pino
+Yoane Wissa
+Youri Tielemans
+Zach Abbott
+Zadok Yohanna
+Zavier Gozo
+Zian Flemming
+Zion Suzuki
+premierleague

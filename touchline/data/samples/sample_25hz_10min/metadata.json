@@ -1,0 +1,275 @@
+{
+  "format_version": "0.1.0",
+  "schema_version": "0.1.0",
+  "match_id": "SYN-SINGLE-0001",
+  "synthetic": true,
+  "fictional_entities": true,
+  "seed": 8,
+  "generator": "generate.py v3.0.0-draft",
+  "frame_hz": 25,
+  "min_frame_hz": 10,
+  "duration_ms": 600000,
+  "frame_count": 15001,
+  "clip": true,
+  "coordinate_system": {
+    "origin": "centre_spot",
+    "units": "m",
+    "pitch_length_m": 105,
+    "pitch_width_m": 68,
+    "x": "along the long axis (touchline direction), range [-52.5, 52.5]",
+    "y": "along the short axis (goal-line direction), range [-34, 34]; right-handed with x and z",
+    "z": "up, ground = 0",
+    "facing": "radians in (-pi, pi]; 0 = +x, counter-clockwise positive",
+    "attack_dir": "+1 = HOME attacks towards +x in this frame, -1 = towards -x; AWAY is always the opposite",
+    "goals": {
+      "x_neg": [
+        -52.5,
+        0
+      ],
+      "x_pos": [
+        52.5,
+        0
+      ],
+      "goal_width_m": 7.32
+    }
+  },
+  "periods": [
+    {
+      "period": 1,
+      "start_ms": 0,
+      "duration_ms": 600000,
+      "home_attack_dir": 1
+    }
+  ],
+  "teams": [
+    {
+      "team_id": "HOME",
+      "club_id": "HBR",
+      "name": "Harbor FC",
+      "short_name": "Harbor",
+      "colors": {
+        "primary": "#0B6E4F",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3"
+    },
+    {
+      "team_id": "AWAY",
+      "club_id": "MTN",
+      "name": "Mountain FC",
+      "short_name": "Mountain",
+      "colors": {
+        "primary": "#6B4C9A",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3"
+    }
+  ],
+  "venue": {
+    "name": "Harbor Park",
+    "fictional": true
+  },
+  "players": [
+    {
+      "player_id": "H01",
+      "team_id": "HOME",
+      "jersey_number": 1,
+      "name": "Ivo Elderby",
+      "position": "GK",
+      "starter": true
+    },
+    {
+      "player_id": "H02",
+      "team_id": "HOME",
+      "jersey_number": 2,
+      "name": "Elio Juniperr",
+      "position": "LB",
+      "starter": true
+    },
+    {
+      "player_id": "H03",
+      "team_id": "HOME",
+      "jersey_number": 3,
+      "name": "Niall Dunmore",
+      "position": "LCB",
+      "starter": true
+    },
+    {
+      "player_id": "H04",
+      "team_id": "HOME",
+      "jersey_number": 4,
+      "name": "Hollis Vantress",
+      "position": "RCB",
+      "starter": true
+    },
+    {
+      "player_id": "H05",
+      "team_id": "HOME",
+      "jersey_number": 5,
+      "name": "Jory Coldmere",
+      "position": "RB",
+      "starter": true
+    },
+    {
+      "player_id": "H06",
+      "team_id": "HOME",
+      "jersey_number": 6,
+      "name": "Soren Whitlow",
+      "position": "LCM",
+      "starter": true
+    },
+    {
+      "player_id": "H07",
+      "team_id": "HOME",
+      "jersey_number": 7,
+      "name": "Oren Elderby",
+      "position": "DM",
+      "starter": true
+    },
+    {
+      "player_id": "H08",
+      "team_id": "HOME",
+      "jersey_number": 8,
+      "name": "Yanis Vantress",
+      "position": "RCM",
+      "starter": true
+    },
+    {
+      "player_id": "H09",
+      "team_id": "HOME",
+      "jersey_number": 9,
+      "name": "Zev Underhill",
+      "position": "LW",
+      "starter": true
+    },
+    {
+      "player_id": "H10",
+      "team_id": "HOME",
+      "jersey_number": 10,
+      "name": "Pell Kestrell",
+      "position": "ST",
+      "starter": true
+    },
+    {
+      "player_id": "H11",
+      "team_id": "HOME",
+      "jersey_number": 11,
+      "name": "Vero Zellmer",
+      "position": "RW",
+      "starter": true
+    },
+    {
+      "player_id": "A01",
+      "team_id": "AWAY",
+      "jersey_number": 1,
+      "name": "Wren Ashgrove",
+      "position": "GK",
+      "starter": true
+    },
+    {
+      "player_id": "A02",
+      "team_id": "AWAY",
+      "jersey_number": 2,
+      "name": "Jory Elderby",
+      "position": "LB",
+      "starter": true
+    },
+    {
+      "player_id": "A03",
+      "team_id": "AWAY",
+      "jersey_number": 3,
+      "name": "Zev Ashgrove",
+      "position": "LCB",
+      "starter": true
+    },
+    {
+      "player_id": "A04",
+      "team_id": "AWAY",
+      "jersey_number": 4,
+      "name": "Yanis Kestrell",
+      "position": "RCB",
+      "starter": true
+    },
+    {
+      "player_id": "A05",
+      "team_id": "AWAY",
+      "jersey_number": 5,
+      "name": "Tavi Coldmere",
+      "position": "RB",
+      "starter": true
+    },
+    {
+      "player_id": "A06",
+      "team_id": "AWAY",
+      "jersey_number": 6,
+      "name": "Rafe Quarrie",
+      "position": "LCM",
+      "starter": true
+    },
+    {
+      "player_id": "A07",
+      "team_id": "AWAY",
+      "jersey_number": 7,
+      "name": "Elio Whitlow",
+      "position": "DM",
+      "starter": true
+    },
+    {
+      "player_id": "A08",
+      "team_id": "AWAY",
+      "jersey_number": 8,
+      "name": "Aren Fallowe",
+      "position": "RCM",
+      "starter": true
+    },
+    {
+      "player_id": "A09",
+      "team_id": "AWAY",
+      "jersey_number": 9,
+      "name": "Yanis Ashgrove",
+      "position": "LW",
+      "starter": true
+    },
+    {
+      "player_id": "A10",
+      "team_id": "AWAY",
+      "jersey_number": 10,
+      "name": "Cael Zellmer",
+      "position": "ST",
+      "starter": true
+    },
+    {
+      "player_id": "A11",
+      "team_id": "AWAY",
+      "jersey_number": 11,
+      "name": "Zev Inglebrook",
+      "position": "RW",
+      "starter": true
+    }
+  ],
+  "columns": {
+    "tracking.players": [
+      "player_id",
+      "x_m",
+      "y_m",
+      "vx_mps",
+      "vy_mps",
+      "facing_rad"
+    ],
+    "tracking.ball": [
+      "x_m",
+      "y_m",
+      "z_m",
+      "vx_mps",
+      "vy_mps",
+      "vz_mps"
+    ]
+  },
+  "limitations": [
+    "Procedural motion, not a physics simulator; ball height is a parabolic arc, no bounce.",
+    "Single formation (4-3-3); no tackles, dribble duels, fouls or cards in v0.1.",
+    "Offside uses a simplified Law 11 test at pass time; no interfering-with-play nuance.",
+    "All teams, players and venues are fictional.",
+    "Outcomes exist only in resolved events at available_at_ms; do not expose future events during replay."
+  ]
+}
