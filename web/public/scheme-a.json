@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "title": "Inside the Game",
+  "scheme": "Scheme A",
+  "duration_seconds": 5400,
+  "initial_moment_id": "m6322",
+  "disclaimer": "Decision aid. This is the full distribution over pass, shoot, dribble, and hold — not a single optimal action.",
+  "moments": [
+    {
+      "id": "m1234",
+      "t_seconds": 754,
+      "recommended": "hold",
+      "distribution": { "pass": 0.31, "shoot": 0.09, "dribble": 0.19, "hold": 0.41 },
+      "primary_explain": "Hold keeps the rest defence set while runners arrive",
+      "secondary_explain": "Outlet pass to the pivot is the spare lane",
+      "system2_rationale": "Pressure is high, so the distribution still leaves an out-ball.",
+      "players": [
+        { "id": "h-poss", "team": "home", "possessor": true, "frame": { "x": 0.3, "y": 0.64 }, "pitch": { "x": 26, "y": 40 } },
+        { "id": "h-pivot", "team": "home", "possessor": false, "frame": { "x": 0.42, "y": 0.5 }, "pitch": { "x": 36, "y": 28 } },
+        { "id": "h-fb", "team": "home", "possessor": false, "frame": { "x": 0.22, "y": 0.74 }, "pitch": { "x": 20, "y": 54 } },
+        { "id": "h-wide", "team": "home", "possessor": false, "frame": { "x": 0.48, "y": 0.72 }, "pitch": { "x": 40, "y": 52 } },
+        { "id": "a1", "team": "away", "possessor": false, "frame": { "x": 0.38, "y": 0.56 }, "pitch": { "x": 34, "y": 34 } },
+        { "id": "a2", "team": "away", "possessor": false, "frame": { "x": 0.52, "y": 0.46 }, "pitch": { "x": 48, "y": 24 } },
+        { "id": "a3", "team": "away", "possessor": false, "frame": { "x": 0.6, "y": 0.66 }, "pitch": { "x": 58, "y": 46 } },
+        { "id": "a4", "team": "away", "possessor": false, "frame": { "x": 0.7, "y": 0.52 }, "pitch": { "x": 72, "y": 32 } }
+      ],
+      "arrows": [
+        {
+          "kind": "hold",
+          "primary": true,
+          "from_frame": { "x": 0.3, "y": 0.64 },
+          "to_frame": { "x": 0.33, "y": 0.64 },
+          "from_pitch": { "x": 26, "y": 40 },
+          "to_pitch": { "x": 29, "y": 40 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.3, "y": 0.64 },
+          "to_frame": { "x": 0.42, "y": 0.5 },
+          "from_pitch": { "x": 26, "y": 40 },
+          "to_pitch": { "x": 36, "y": 28 }
+        }
+      ]
+    },
+    {
+      "id": "m2507",
+      "t_seconds": 1507,
+      "recommended": "pass",
+      "distribution": { "pass": 0.38, "shoot": 0.12, "dribble": 0.29, "hold": 0.21 },
+      "primary_explain": "Pass switches play and opens the far side",
+      "secondary_explain": "Secondary pass to the checking midfielder is the spare lane",
+      "system2_rationale": "The press is stretched across the middle third.",
+      "players": [
+        { "id": "h-poss", "team": "home", "possessor": true, "frame": { "x": 0.4, "y": 0.66 }, "pitch": { "x": 44, "y": 40 } },
+        { "id": "h-far", "team": "home", "possessor": false, "frame": { "x": 0.64, "y": 0.44 }, "pitch": { "x": 68, "y": 22 } },
+        { "id": "h-check", "team": "home", "possessor": false, "frame": { "x": 0.5, "y": 0.52 }, "pitch": { "x": 54, "y": 32 } },
+        { "id": "h-drop", "team": "home", "possessor": false, "frame": { "x": 0.28, "y": 0.58 }, "pitch": { "x": 32, "y": 34 } },
+        { "id": "a1", "team": "away", "possessor": false, "frame": { "x": 0.48, "y": 0.42 }, "pitch": { "x": 52, "y": 22 } },
+        { "id": "a2", "team": "away", "possessor": false, "frame": { "x": 0.58, "y": 0.58 }, "pitch": { "x": 62, "y": 40 } },
+        { "id": "a3", "team": "away", "possessor": false, "frame": { "x": 0.72, "y": 0.5 }, "pitch": { "x": 78, "y": 30 } },
+        { "id": "a4", "team": "away", "possessor": false, "frame": { "x": 0.36, "y": 0.76 }, "pitch": { "x": 38, "y": 54 } }
+      ],
+      "arrows": [
+        {
+          "kind": "pass",
+          "primary": true,
+          "from_frame": { "x": 0.4, "y": 0.66 },
+          "to_frame": { "x": 0.64, "y": 0.44 },
+          "from_pitch": { "x": 44, "y": 40 },
+          "to_pitch": { "x": 68, "y": 22 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.4, "y": 0.66 },
+          "to_frame": { "x": 0.5, "y": 0.52 },
+          "from_pitch": { "x": 44, "y": 40 },
+          "to_pitch": { "x": 54, "y": 32 }
+        }
+      ]
+    },
+    {
+      "id": "m3741",
+      "t_seconds": 2261,
+      "recommended": "dribble",
+      "distribution": { "pass": 0.27, "shoot": 0.11, "dribble": 0.46, "hold": 0.16 },
+      "primary_explain": "Carry through the open channel before the cover slides",
+      "secondary_explain": "Secondary pass to the overlapping full-back is the release",
+      "system2_rationale": "Space is in front of the ball if the first defender is beaten.",
+      "players": [
+        { "id": "h-poss", "team": "home", "possessor": true, "frame": { "x": 0.42, "y": 0.66 }, "pitch": { "x": 46, "y": 40 } },
+        { "id": "h-fb", "team": "home", "possessor": false, "frame": { "x": 0.66, "y": 0.48 }, "pitch": { "x": 70, "y": 26 } },
+        { "id": "h-near", "team": "home", "possessor": false, "frame": { "x": 0.3, "y": 0.5 }, "pitch": { "x": 34, "y": 30 } },
+        { "id": "h-support", "team": "home", "possessor": false, "frame": { "x": 0.34, "y": 0.74 }, "pitch": { "x": 36, "y": 52 } },
+        { "id": "a1", "team": "away", "possessor": false, "frame": { "x": 0.5, "y": 0.46 }, "pitch": { "x": 56, "y": 24 } },
+        { "id": "a2", "team": "away", "possessor": false, "frame": { "x": 0.58, "y": 0.7 }, "pitch": { "x": 62, "y": 50 } },
+        { "id": "a3", "team": "away", "possessor": false, "frame": { "x": 0.74, "y": 0.58 }, "pitch": { "x": 80, "y": 38 } },
+        { "id": "a4", "team": "away", "possessor": false, "frame": { "x": 0.46, "y": 0.4 }, "pitch": { "x": 50, "y": 18 } }
+      ],
+      "arrows": [
+        {
+          "kind": "dribble",
+          "primary": true,
+          "from_frame": { "x": 0.42, "y": 0.66 },
+          "to_frame": { "x": 0.56, "y": 0.56 },
+          "from_pitch": { "x": 46, "y": 40 },
+          "to_pitch": { "x": 60, "y": 34 }
+        },
+        {
+          "kind": "dribble",
+          "primary": false,
+          "from_frame": { "x": 0.42, "y": 0.66 },
+          "to_frame": { "x": 0.48, "y": 0.52 },
+          "from_pitch": { "x": 46, "y": 40 },
+          "to_pitch": { "x": 54, "y": 30 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.42, "y": 0.66 },
+          "to_frame": { "x": 0.66, "y": 0.48 },
+          "from_pitch": { "x": 46, "y": 40 },
+          "to_pitch": { "x": 70, "y": 26 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.42, "y": 0.66 },
+          "to_frame": { "x": 0.3, "y": 0.5 },
+          "from_pitch": { "x": 46, "y": 40 },
+          "to_pitch": { "x": 34, "y": 30 }
+        }
+      ]
+    },
+    {
+      "id": "m5018",
+      "t_seconds": 3018,
+      "recommended": "shoot",
+      "distribution": { "pass": 0.22, "shoot": 0.48, "dribble": 0.17, "hold": 0.13 },
+      "primary_explain": "Shot from the edge is available with the keeper set",
+      "secondary_explain": "Cut-back pass to the penalty spot is the spare option",
+      "system2_rationale": "The angle is narrow, so the shot share stays beside the pass.",
+      "players": [
+        { "id": "h-poss", "team": "home", "possessor": true, "frame": { "x": 0.72, "y": 0.54 }, "pitch": { "x": 78, "y": 34 } },
+        { "id": "h-spot", "team": "home", "possessor": false, "frame": { "x": 0.6, "y": 0.62 }, "pitch": { "x": 66, "y": 42 } },
+        { "id": "h-wide", "team": "home", "possessor": false, "frame": { "x": 0.8, "y": 0.7 }, "pitch": { "x": 84, "y": 52 } },
+        { "id": "h-support", "team": "home", "possessor": false, "frame": { "x": 0.5, "y": 0.48 }, "pitch": { "x": 54, "y": 26 } },
+        { "id": "a1", "team": "away", "possessor": false, "frame": { "x": 0.78, "y": 0.46 }, "pitch": { "x": 86, "y": 28 } },
+        { "id": "a2", "team": "away", "possessor": false, "frame": { "x": 0.66, "y": 0.5 }, "pitch": { "x": 72, "y": 30 } },
+        { "id": "a3", "team": "away", "possessor": false, "frame": { "x": 0.84, "y": 0.6 }, "pitch": { "x": 92, "y": 40 } },
+        { "id": "a4", "team": "away", "possessor": false, "frame": { "x": 0.58, "y": 0.72 }, "pitch": { "x": 60, "y": 54 } }
+      ],
+      "arrows": [
+        {
+          "kind": "shoot",
+          "primary": true,
+          "from_frame": { "x": 0.72, "y": 0.54 },
+          "to_frame": { "x": 0.96, "y": 0.48 },
+          "from_pitch": { "x": 78, "y": 34 },
+          "to_pitch": { "x": 105, "y": 34 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.72, "y": 0.54 },
+          "to_frame": { "x": 0.6, "y": 0.62 },
+          "from_pitch": { "x": 78, "y": 34 },
+          "to_pitch": { "x": 66, "y": 42 }
+        }
+      ]
+    },
+    {
+      "id": "m6322",
+      "t_seconds": 3802,
+      "recommended": "pass",
+      "distribution": { "pass": 0.43, "shoot": 0.16, "dribble": 0.27, "hold": 0.14 },
+      "primary_explain": "Pass to forward channel creates central overload",
+      "secondary_explain": "Secondary pass into the half-space keeps the overload",
+      "system2_rationale": "High probability of breaking the press.",
+      "players": [
+        { "id": "h-poss", "team": "home", "possessor": true, "frame": { "x": 0.36, "y": 0.7 }, "pitch": { "x": 40, "y": 44 } },
+        { "id": "h-fwd", "team": "home", "possessor": false, "frame": { "x": 0.68, "y": 0.46 }, "pitch": { "x": 72, "y": 26 } },
+        { "id": "h-hs", "team": "home", "possessor": false, "frame": { "x": 0.51, "y": 0.55 }, "pitch": { "x": 56, "y": 32 } },
+        { "id": "h-wide", "team": "home", "possessor": false, "frame": { "x": 0.61, "y": 0.66 }, "pitch": { "x": 58, "y": 48 } },
+        { "id": "h-drop", "team": "home", "possessor": false, "frame": { "x": 0.28, "y": 0.5 }, "pitch": { "x": 30, "y": 28 } },
+        { "id": "h-lb", "team": "home", "possessor": false, "frame": { "x": 0.22, "y": 0.64 }, "pitch": { "x": 26, "y": 18 } },
+        { "id": "a1", "team": "away", "possessor": false, "frame": { "x": 0.46, "y": 0.42 }, "pitch": { "x": 60, "y": 24 } },
+        { "id": "a2", "team": "away", "possessor": false, "frame": { "x": 0.58, "y": 0.38 }, "pitch": { "x": 68, "y": 20 } },
+        { "id": "a3", "team": "away", "possessor": false, "frame": { "x": 0.76, "y": 0.56 }, "pitch": { "x": 80, "y": 40 } },
+        { "id": "a4", "team": "away", "possessor": false, "frame": { "x": 0.44, "y": 0.76 }, "pitch": { "x": 46, "y": 54 } },
+        { "id": "a5", "team": "away", "possessor": false, "frame": { "x": 0.82, "y": 0.74 }, "pitch": { "x": 86, "y": 50 } }
+      ],
+      "arrows": [
+        {
+          "kind": "pass",
+          "primary": true,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.68, "y": 0.46 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 72, "y": 26 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.51, "y": 0.55 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 56, "y": 32 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.61, "y": 0.66 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 58, "y": 48 }
+        },
+        {
+          "kind": "pass",
+          "primary": false,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.22, "y": 0.64 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 26, "y": 18 }
+        },
+        {
+          "kind": "dribble",
+          "primary": false,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.46, "y": 0.62 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 50, "y": 40 }
+        },
+        {
+          "kind": "shoot",
+          "primary": false,
+          "from_frame": { "x": 0.36, "y": 0.7 },
+          "to_frame": { "x": 0.92, "y": 0.36 },
+          "from_pitch": { "x": 40, "y": 44 },
+          "to_pitch": { "x": 102, "y": 30 }
+        }
+      ]
+    }
+  ]
+}
