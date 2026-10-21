@@ -76,4 +76,14 @@ python3 generate.py --weeks 4 --tracking none --retain-matches 2
 python3 generate.py --mode single --output data
 ```
 
-`--retain-matches` simulates every fixture, writes the league index, and then keeps the week-1 opener and the week-3 featured match (the explorer default when no home club is selected). Omit the flag to keep all match directories. `tracking.jsonl` and `data/league-alt/` are gitignored. Details are in `README.md`.
+`--retain-matches` simulates every fixture, writes the league index, and then keeps the week-1 opener and the week-3 featured match (the explorer default when no home club is selected). Omit the flag to keep all match directories. League `tracking.jsonl` files and `data/league-alt/` are gitignored. The one exception is the SynthData clip below. Details are in `README.md`.
+
+## SynthData 25 Hz sample
+
+`data/samples/sample_25hz_10min/` is a separate checked-in clip from the v0.1 single-match generator in `scripts/synth/`. It is not produced by `generate.py` and it does not replace the Northwater League sample above.
+
+- Frame rate 25 Hz, 10 minutes (15,001 frames). Pitch 105 × 68 m. Origin is the centre spot.
+- Fictional Harbor FC (HOME) vs Mountain FC (AWAY), played at fictional Harbor Park.
+- `data/samples/sample_25hz_10min/tracking.jsonl` is tracked on purpose. Every other `tracking.jsonl` under `data/`, other league match directories, `data/league-alt/`, and the generator default `scripts/synth/data/` stay gitignored.
+
+Regenerate steps and the notes for Frontend and SysModel are in `data/samples/README.md`.

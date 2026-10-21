@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "frame_hz": 25,
+  "tracking_frames": 15001,
+  "events": 521,
+  "event_counts": {
+    "period_start": 1,
+    "possession_change": 36,
+    "restart": 6,
+    "carry": 124,
+    "decision_point": 124,
+    "pressure": 109,
+    "pass": 73,
+    "interception": 31,
+    "offside": 1,
+    "stoppage": 6,
+    "shot": 2,
+    "ball_out": 5,
+    "action_cancelled": 1,
+    "period_end": 1,
+    "match_end": 1
+  },
+  "restart_counts": {
+    "kick_off": 1,
+    "indirect_free_kick": 1,
+    "goal_kick": 1,
+    "corner": 1,
+    "throw_in": 2
+  },
+  "final_score": [
+    0,
+    0
+  ],
+  "max_player_speed_mps": 7.201,
+  "max_player_acceleration_mps2": 3.531,
+  "max_turn_rate_radps": 9.427,
+  "max_ball_speed_mps": 28.712,
+  "decision_points_linked": 124,
+  "offside_crosschecks": 39,
+  "decision_option_offside_crosschecks": 1117,
+  "ball_out_crosschecks": 5,
+  "forbidden_scan": {
+    "terms": 650,
+    "files": 6,
+    "hits": 0
+  },
+  "scope": "Internal consistency + rule cross-checks; not validation against real football distributions."
+}

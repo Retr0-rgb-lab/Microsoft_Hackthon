@@ -10,12 +10,19 @@ build/
 
 # Touchline bulk outputs. Regenerate with touchline/generate.py.
 # Two sample match directories are tracked; full tracking and the other fixtures are not.
-touchline/data/**/tracking.jsonl
+# Directory exceptions come first. The tracking rule is last so a generated
+# tracking.jsonl inside a kept match directory stays ignored.
+# The only tracked tracking.jsonl is the SynthData 25 Hz clip
+# (see touchline/data/samples/README.md).
 touchline/data/league/matches/*
 !touchline/data/league/matches/NW26-W01-THF-HBR/
 !touchline/data/league/matches/NW26-W01-THF-HBR/**
 !touchline/data/league/matches/NW26-W03-ASH-MTN/
 !touchline/data/league/matches/NW26-W03-ASH-MTN/**
 touchline/data/league-alt/
+# Default output of touchline/scripts/synth/generate.py (a full 100 min at 25 Hz is large).
+touchline/scripts/synth/data/
+touchline/data/**/tracking.jsonl
+!touchline/data/samples/sample_25hz_10min/tracking.jsonl
 node_modules/
 web/public/preview.mp4
