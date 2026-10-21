@@ -133,6 +133,17 @@ The ball bypass ran on almost every detection frame; the player model's own ball
 
 These two clips never dropped the homography: the pan in `2e57b9_0` still left enough pitch keypoints, and neither file contains a hard cut (`scene_cuts` 0). A cut, a zoom that hides the markings, or a keypoint fit over the reprojection gate falls back to image coordinates for that frame (the bars and arrows stay up; the panel reads `image coordinates`) instead of stopping. That path is covered by unit tests. Attacking direction follows the deepest outfield players and the goalkeepers' goals, so a team camped in the opponent half is not flipped just because its average x moved forward. The lock can still be wrong if neither side leaves a player near its own goal and both keepers are missed. `--minute` and the score are not read from the broadcast.
 
+## Scheme A shell
+
+The on-ball screen is a web shell in [`web/`](web/README.md): video stage, four-way softmax sidebar, and a timeline of key possessions. It is not a league portal. From `web/`:
+
+```bash
+npm install
+npm run dev
+```
+
+How to point the stage at a local preview, including a file from `python -m demo.run`, is in [web/README.md](web/README.md).
+
 ## Tests
 
 ```bash
@@ -155,6 +166,7 @@ src/inside_the_game/
   present/         bars, arrow placeholders, and the explanation for all four actions
   pipeline.py      1 → 2 → 4 → 5
 scripts/           download_statsbomb, generate_synthetic, train_softmax
+web/               Scheme A shell (video stage, sidebar, possession timeline)
 tests/
 DATA.md
 ```
