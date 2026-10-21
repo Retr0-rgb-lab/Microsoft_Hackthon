@@ -55,6 +55,8 @@ class DemoConfig:
     minute: int = 45
     score_home: int = 0
     score_away: int = 0
+    # Empty keeps the online 2-means defensive tail. Samples pin cluster 0 as home.
+    home_jersey: tuple[tuple[float, float, float], ...] = ()
     device: str = "cpu"
     imgsz: int = 640
     ball_imgsz: int = 960
@@ -136,7 +138,7 @@ def run_clip(config: DemoConfig) -> RunStats:
     # Possession is decided in the image, where the ball and the feet actually are.
     # A ground-plane projection of the ball centre is a poor contact point.
     possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
-    teams = TeamBook()
+    teams = _team_book(config)
     memory = OverlayMemory()
     foot_trail = FootTrail()
     # The drawn ball is a light mark. It is not the possession smoother: that
@@ -172,7 +174,7 @@ def run_clip(config: DemoConfig) -> RunStats:
                     ball_mark.reset()
                     ball_smoother = BallSmoother(hold_frames=config.hold_frames)
                     possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
-                    teams = TeamBook()
+                    teams = _team_book(config)
             previous_tiny = tiny
 
             detect = is_detection_frame(frame_idx, config.stride)
@@ -669,6 +671,15 @@ def _image_segment(start, end, samples: int = 12) -> tuple[tuple[float, float], 
             )
         )
     return tuple(points)
+
+
+def _team_book(config: DemoConfig) -> TeamBook:
+    """Team book for this run, including a scene-cut reset.
+
+    The home-jersey lock has to survive the reset, or the next shot would
+    cluster the striped kit again and pass targets would pin the wrong side.
+    """
+    return TeamBook(home_jersey=config.home_jersey)
 
 
 def _resolve_sticky(teams: TeamBook, labels: dict[int, object]) -> dict[int, str]:

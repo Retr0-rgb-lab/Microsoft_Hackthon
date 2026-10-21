@@ -76,6 +76,13 @@ What you see when someone has the ball:
 - Arrows are sampled on the 105×68 m pitch and projected back through the homography, so they lie on the broadcast plane. If the pitch model cannot support a homography, the same arrow falls back to a straight line in the image.
 - A four-way probability bar sits in the corner. A 2D minimap is on by default (`--no-minimap` turns it off).
 - Jersey colours are clustered into two teams. Which side is home is the defensive tail (the deepest outfield players) plus the goal each goalkeeper is standing in, not the average of every shirt. Home defends the left goal and attacks toward x = 105, the same frame as the training features. Pass arrows are pinned to teammates. The shot is pinned to the opponent goal mouth.
+- A striped home kit (black and white against neon green) can split across the two colour means, so the home team id drifts and a pass arrow pins an opponent. Lock the kit for that run and cluster 0 stays home. Omit the flag and the defensive-tail 2-means is unchanged.
+
+```bash
+python -m demo.run --input in.mp4 --output out.mp4 --home-jersey white-black
+```
+
+`--home-jersey` accepts `white-black`, `black-white`, `white`, `black`, `rgb:R,G,B`, or a pair joined with `+` (`rgb:245,245,245+rgb:16,16,16`). Repeat the flag for another sample. The same spec is read from `INSIDE_THE_GAME_HOME_JERSEY` when the flag is omitted. For the Fail-frame clip, pass `white-black` (or two RGB samples from the striped shirt) so pass targets stay on that kit. `TeamBook(home_jersey=...)` is the same lock for an in-process caller.
 
 The six softmax inputs are `ball_x`, `ball_y`, `centrality`, `pressure`, `minute`, `goal_diff`, in that order and in the same units as `weights.json`. `features_from_cv` builds a `MatchEvent` and calls `extract_features`, so a pitch-meter observation cannot drift from training. `--minute` (default 45) and `--score-home` / `--score-away` (default 0–0) fill the two values a broadcast frame does not contain. Pressure is opponent distance on the StatsBomb scale: 0.82 inside 3 m, 0.18 beyond 12 m.
 
