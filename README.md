@@ -150,22 +150,21 @@ How to point the stage at a local preview, including a file from `python -m demo
 pytest
 ```
 
-`pytest` checks the four-way distribution with the checked-in weights and with the stub fallback, the tracking path on a synthetic `decision_point` (four-class probabilities, pass targets, carry path), the weight fit's refusal to read StatsBomb, the offline System 2 rationale (synthetic and StatsBomb states, with the network blocked), the overlay explanation beside all four probabilities, the StatsBomb event-type mapping, and the synthetic generator's labels. See [DATA.md](DATA.md) for the open-data license and the mapping rule, and [docs/v1-model-selection.md](docs/v1-model-selection.md) for the v1 softmax, completion score, and Foundry narration.
+`pytest` checks the four-way distribution with the checked-in weights and with the stub fallback, the tracking path on a synthetic `decision_point` (four-class probabilities, pass targets, carry path), the weight fit on the synthetic sample, the offline System 2 rationale on synthetic states (with the network blocked), the overlay explanation beside all four probabilities, and the synthetic generator's labels. See [DATA.md](DATA.md) and [docs/v1-model-selection.md](docs/v1-model-selection.md) for the v1 softmax, completion score, and Foundry narration.
 
 ## Layout
 
 ```
 fixtures/synthetic_match_events.json
 fixtures/synthetic_labeled_sequences.json
-fixtures/statsbomb/69284/          one vendored StatsBomb open-data match
 src/inside_the_game/
-  ingest/          match-event schema, JSON loader, StatsBomb map, synthetic generator
+  ingest/          match-event schema, JSON loader, synthetic generator
   features/        event → numeric features
   system1/         softmax policy, fitted weights.json, optional Jev Choice hook
   system2/         offline explain template, optional local model hook, xT/VAEP sidecar stub
   present/         bars, arrow placeholders, and the explanation for all four actions
   pipeline.py      1 → 2 → 4 → 5
-scripts/           download_statsbomb, generate_synthetic, train_softmax
+scripts/           generate_synthetic, train_softmax
 web/               Scheme A shell (video stage, sidebar, possession timeline)
 tests/
 DATA.md

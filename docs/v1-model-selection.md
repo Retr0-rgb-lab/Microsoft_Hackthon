@@ -93,7 +93,3 @@ The Microsoft Agent Framework run orchestrates four tools, in this order:
 ## Sample
 
 The clip is `touchline/data/samples/sample_25hz_10min/` (15,001 frames at 25 Hz). Field definitions and the section 6 read pattern are in `touchline/scripts/synth/FORMAT.md`. How to regenerate the clip is in `touchline/data/samples/README.md`. The loader indexes frames by `frame_id`, which is `round(available_at_ms * frame_hz / 1000)`.
-
-## StatsBomb fixtures
-
-v1 weights do not read `fixtures/statsbomb/`. The open-data mapping tests still import that directory. Backend can remove `fixtures/statsbomb/` after this lands, once those mapping tests are dropped or pointed at a synthetic event stream. Do not refit the softmax on that tree.
