@@ -21,6 +21,7 @@ Files in the directory:
 
 - `metadata.json` — frame rate, pitch, teams, players, column layout
 - `tracking.jsonl` — player and ball state per frame
+- `clip.jsonl` — first 751 lines of `tracking.jsonl` (frames 0–750, 0–30 s). `touchline/scene` plays this by default so the page does not parse the full file. Rebuild it with `head -n 751 tracking.jsonl > clip.jsonl` after a regenerate. The viewer loads the full file at `http://127.0.0.1:5174/?clip=tracking.jsonl`.
 - `events.jsonl` — events in `available_at_ms` order, including `decision_point`
 - `states.jsonl` — one score and running-stat snapshot per second
 - `summary.json` — final score, event counts, distances

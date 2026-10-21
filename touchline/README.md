@@ -268,3 +268,14 @@ the original generated replay files remain source data. The homepage, match
 picker and match header share the mapped dates. Only prior rounds show scores
 and report links in the calendar. Calendar coverage and score visibility are
 checked by `tests/calendar.test.js` as part of `npm test`.
+
+## 3D pitch sample
+
+`scene/` is a separate Vite + three.js view of the synthetic 25 Hz clip in `data/samples/sample_25hz_10min/`. It draws the pitch, 22 geometric players, and the ball. It is not the league dashboard. From `scene/`:
+
+```sh
+npm install
+npm run dev
+```
+
+Open http://127.0.0.1:5174 . Playback uses `clip.jsonl` (first 30 seconds). The full 10-minute `tracking.jsonl` in that folder plays at `http://127.0.0.1:5174/?clip=tracking.jsonl`. Details are in `scene/README.md`.
