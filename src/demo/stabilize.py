@@ -16,7 +16,7 @@ from demo.options import (
     OptionPlayer,
     TacticalOption,
     build_options,
-    is_opponent_goalkeeper,
+    eligible_receivers,
     pass_window,
 )
 from inside_the_game.labels import ACTION_LABELS
@@ -136,16 +136,14 @@ class OverlayMemory:
         space: str,
         recommended: str,
     ) -> list[TacticalOption]:
-        """One primary arrow for the held class. No secondary passes, shots, or holds."""
-        mates = {
-            player.track_id: player
-            for player in players
-            if player.track_id != self.possessor_id
-            and player.role != "referee"
-            and player.team == possessor_team
-            and possessor_team in ("home", "away")
-            and not is_opponent_goalkeeper(player, attacking_positive, bounds)
-        }
+        """One primary arrow for the held class. Dim alternatives are added at draw time."""
+        mates = eligible_receivers(
+            players,
+            -1 if self.possessor_id is None else self.possessor_id,
+            possessor_team,
+            attacking_positive,
+            bounds,
+        )
         if recommended == "pass":
             return self._one_pass(options, mates, players, origin, possessor_team, bounds, attacking_positive, space)
         if recommended == "dribble":
@@ -179,6 +177,9 @@ class OverlayMemory:
                 attacking_positive=attacking_positive,
                 space=space,
             )
+            # The hold compares the locked receiver with the single best pass.
+            # Extra dim passes must not change that decision.
+            options = [item for item in options if item.primary] or options[:1]
         incoming = {
             item.target_id: item
             for item in options
@@ -251,6 +252,7 @@ class OverlayMemory:
                 attacking_positive=attacking_positive,
                 space=space,
             )
+        carries = [item for item in carries if item.kind == "dribble"]
         if not carries:
             return []
         best = max(carries, key=lambda item: item.score)

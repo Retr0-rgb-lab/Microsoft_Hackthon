@@ -22,11 +22,17 @@ from demo.geometry import (
     resolve_plane,
     scene_cut,
 )
-from demo.options import OptionPlayer, attacking_positive_for, build_options
+from demo.options import (
+    OptionPlayer,
+    attacking_positive_for,
+    build_options,
+    compose_drawn,
+    eligible_receivers,
+)
 from demo.possessor import BallMark, BallSmoother, FootTrail, PlayerFix, PossessorTracker
 from demo.render import ArrowDraw, MinimapArrow, MinimapPlayer, OverlayState, PlayerDraw
 from demo.stabilize import OverlayMemory
-from demo.teams import TeamBook
+from demo.teams import TeamBook, summarize_jersey
 from demo.tracking import TrackState, predict_tracks, velocities_from_previous
 from inside_the_game.features.extract import FEATURE_NAMES
 from inside_the_game.features.from_cv import (
@@ -55,6 +61,8 @@ class DemoConfig:
     minute: int = 45
     score_home: int = 0
     score_away: int = 0
+    # Empty keeps the online 2-means defensive tail. Samples pin cluster 0 as home.
+    home_jersey: tuple[tuple[float, float, float], ...] = ()
     device: str = "cpu"
     imgsz: int = 640
     ball_imgsz: int = 960
@@ -136,7 +144,8 @@ def run_clip(config: DemoConfig) -> RunStats:
     # Possession is decided in the image, where the ball and the feet actually are.
     # A ground-plane projection of the ball centre is a poor contact point.
     possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
-    teams = TeamBook()
+    teams = _team_book(config)
+    jersey_memory: dict[int, tuple[float, float, float]] = {}
     memory = OverlayMemory()
     foot_trail = FootTrail()
     # The drawn ball is a light mark. It is not the possession smoother: that
@@ -172,7 +181,8 @@ def run_clip(config: DemoConfig) -> RunStats:
                     ball_mark.reset()
                     ball_smoother = BallSmoother(hold_frames=config.hold_frames)
                     possessor_tracker = _possessor_tracker(config.hold_frames, width, height)
-                    teams = TeamBook()
+                    teams = _team_book(config)
+                    jersey_memory = {}
             previous_tiny = tiny
 
             detect = is_detection_frame(frame_idx, config.stride)
@@ -277,6 +287,10 @@ def run_clip(config: DemoConfig) -> RunStats:
                 )
             foot_trail.retain(live_ids)
             if detect:
+                jersey_memory.update(colors)
+                for track_id in list(jersey_memory):
+                    if track_id not in live_ids:
+                        del jersey_memory[track_id]
                 labels = teams.update(samples)
             else:
                 labels = _resolve_sticky(
@@ -369,6 +383,7 @@ def run_clip(config: DemoConfig) -> RunStats:
                 show_minimap=config.minimap,
                 frame_width=width,
                 frame_height=height,
+                jerseys=jersey_memory,
             )
             painted = _paint(frame, overlay)
             writer.write(painted)
@@ -429,6 +444,7 @@ def _compose(
     show_minimap,
     frame_width,
     frame_height,
+    jerseys=None,
 ) -> OverlayState:
     state = OverlayState(show_minimap=show_minimap)
     possessor_id = possessor.track_id
@@ -532,11 +548,18 @@ def _compose(
     )
     distribution = policy.predict_features(features)
     raw_recommended = max(distribution.probabilities, key=distribution.probabilities.get)
+    remembered = {} if jerseys is None else jerseys
     option_players = [
-        OptionPlayer(track_id=player.track_id, xy=player.xy, team=player.team, role=player.role)
+        OptionPlayer(
+            track_id=player.track_id,
+            xy=player.xy,
+            team=player.team,
+            role=player.role,
+            jersey=remembered.get(player.track_id),
+        )
         for player in working
     ]
-    options = build_options(
+    fresh = build_options(
         origin,
         option_players,
         possessor.track_id,
@@ -546,10 +569,12 @@ def _compose(
         attacking_positive=attacking_positive,
         space=space,
     )
-    recommended, smoothed, options = memory.apply(
+    # The hold locks the primary only. Dim alternatives are chosen after that.
+    primary_only = [item for item in fresh if item.primary]
+    recommended, smoothed, held = memory.apply(
         possessor.track_id,
         distribution.probabilities,
-        options,
+        primary_only,
         option_players,
         origin,
         possession_team,
@@ -557,15 +582,34 @@ def _compose(
         attacking_positive,
         space,
     )
-    visible_mates = {
-        player.track_id
-        for player in working
-        if player.team == possession_team and player.role != "referee" and player.track_id != possessor.track_id
+    if recommended in ("pass", "dribble") and recommended != raw_recommended:
+        fresh = build_options(
+            origin,
+            option_players,
+            possessor.track_id,
+            possession_team,
+            recommended,
+            bounds=bounds,
+            attacking_positive=attacking_positive,
+            space=space,
+        )
+    elif recommended not in ("pass", "dribble"):
+        fresh = []
+    teammates = {
+        track_id: player.xy
+        for track_id, player in eligible_receivers(
+            option_players,
+            possessor.track_id,
+            possession_team,
+            attacking_positive,
+            bounds,
+        ).items()
     }
+    options = compose_drawn(recommended, held, fresh, teammates)
     for option in options:
-        if not option.primary or option.kind not in ("pass", "dribble"):
+        if option.kind not in ("pass", "dribble"):
             continue
-        if option.kind == "pass" and option.target_id not in visible_mates:
+        if option.kind == "pass" and option.target_id not in teammates:
             continue
         if space == "pitch" and pitch_to_image is not None:
             projected = project_segment(pitch_to_image, option.origin, option.target)
@@ -580,7 +624,13 @@ def _compose(
                 continue
             points = clipped
         state.arrows.append(
-            ArrowDraw(kind=option.kind, points=points, primary=option.primary, label=option.label)
+            ArrowDraw(
+                kind=option.kind,
+                points=points,
+                primary=option.primary,
+                label=option.label,
+                alpha=option.alpha,
+            )
         )
         if space == "pitch":
             origin_m, target_m = option.origin, option.target
@@ -669,6 +719,15 @@ def _image_segment(start, end, samples: int = 12) -> tuple[tuple[float, float], 
             )
         )
     return tuple(points)
+
+
+def _team_book(config: DemoConfig) -> TeamBook:
+    """Team book for this run, including a scene-cut reset.
+
+    The home-jersey lock has to survive the reset, or the next shot would
+    cluster the striped kit again and pass targets would pin the wrong side.
+    """
+    return TeamBook(home_jersey=config.home_jersey)
 
 
 def _resolve_sticky(teams: TeamBook, labels: dict[int, object]) -> dict[int, str]:
@@ -798,8 +857,12 @@ def _best_ball(result) -> tuple[tuple[float, float], float] | None:
 
 
 def _jersey_colors(frame, tracks: list[TrackState]) -> dict[int, tuple[float, float, float]]:
-    import numpy as np
+    """Torso colour after the HSV chroma gate.
 
+    Pitch green is removed. A fluorescent shirt stays, including when white
+    numbers sit on it. A grass-only crop contributes no colour: there is no
+    fallback onto the pitch pixels that used to poison the median.
+    """
     height, width = frame.shape[:2]
     colors: dict[int, tuple[float, float, float]] = {}
     for track in tracks:
@@ -817,14 +880,12 @@ def _jersey_colors(frame, tracks: list[TrackState]) -> dict[int, tuple[float, fl
         patch = frame[top:bottom:2, left:right:2]
         if patch.size == 0:
             continue
-        pixels = patch.reshape(-1, 3).astype(np.float32)
-        blue, green, red = pixels[:, 0], pixels[:, 1], pixels[:, 2]
-        grass = (green > 70.0) & (green > red + 25.0) & (green > blue + 25.0)
-        kept = pixels[~grass]
-        if len(kept) < 8:
-            kept = pixels
-        median = np.median(kept, axis=0)
-        colors[track.track_id] = (float(median[2]), float(median[1]), float(median[0]))
+        flat = patch.reshape(-1, 3)
+        pixels = [(float(pixel[2]), float(pixel[1]), float(pixel[0])) for pixel in flat]
+        summary = summarize_jersey(pixels)
+        if summary is None:
+            continue
+        colors[track.track_id] = summary
     return colors
 
 

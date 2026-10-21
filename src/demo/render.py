@@ -14,6 +14,7 @@ class ArrowDraw:
     points: tuple[tuple[float, float], ...]
     primary: bool
     label: str
+    alpha: float = 0.95
 
 
 @dataclass(frozen=True)
@@ -69,15 +70,17 @@ _KIND_BGR = {
     "hold": (230, 230, 230),
 }
 _PRIMARY_BGR = (40, 240, 255)
+# Pale cyan so a 0.40 blend still reads on the grass. The primary stays the bright shaft.
+_SECONDARY_PASS_BGR = (210, 255, 255)
 
 
 def arrows_to_draw(arrows: list[ArrowDraw]) -> list[ArrowDraw]:
-    """The single pass or carry. Shoot, hold, and secondary arrows stay off the pitch."""
-    return [
-        arrow
-        for arrow in arrows
-        if arrow.primary and arrow.kind in {"pass", "dribble"} and len(arrow.points) >= 2
-    ]
+    """Primary pass or carry, plus at most two dimmer passes.
+
+    Shoot and hold stay off the pitch. A second carry is dropped, and a dribble
+    recommendation keeps at most one alternate pass.
+    """
+    return _limit_arrows(arrows, require_points=True)
 
 
 def draw_overlay(frame, state: OverlayState):
@@ -87,18 +90,40 @@ def draw_overlay(frame, state: OverlayState):
     canvas = frame.copy()
     if state.wireframe:
         _blend_polylines(canvas, state.wireframe, (210, 230, 210), 1, 0.45)
-    drawn = arrows_to_draw(state.arrows)
-    carries = [arrow for arrow in drawn if arrow.kind == "dribble"]
-    passes = [arrow for arrow in drawn if arrow.kind == "pass"]
-    if carries:
-        _blend_arrows(canvas, carries, primary=True, alpha=0.95)
-    if passes:
-        _blend_arrows(canvas, passes, primary=True, alpha=0.95)
+    _paint_arrows(canvas, arrows_to_draw(state.arrows))
     _players_and_ball(canvas, state)
     if state.show_minimap:
         _minimap(canvas, state)
     _panel(canvas, state)
     return canvas
+
+
+def _limit_arrows(arrows, *, require_points: bool):
+    usable = []
+    for arrow in arrows:
+        if arrow.kind not in {"pass", "dribble"}:
+            continue
+        if require_points and len(getattr(arrow, "points", ())) < 2:
+            continue
+        usable.append(arrow)
+    primary = next((arrow for arrow in usable if arrow.primary), None)
+    if primary is None or primary.kind not in {"pass", "dribble"}:
+        return []
+    if primary.kind == "dribble":
+        secondaries = [arrow for arrow in usable if not arrow.primary and arrow.kind == "pass"][:1]
+    else:
+        secondaries = [arrow for arrow in usable if not arrow.primary and arrow.kind == "pass"][:2]
+    return [primary, *secondaries]
+
+
+def _paint_arrows(canvas, arrows: list[ArrowDraw]) -> None:
+    """Dim alternatives first, then the bright primary, each at its own alpha."""
+    batches: dict[tuple[bool, float], list[ArrowDraw]] = {}
+    for arrow in arrows:
+        key = (arrow.primary, round(float(arrow.alpha), 2))
+        batches.setdefault(key, []).append(arrow)
+    for is_primary, alpha in sorted(batches, key=lambda key: (key[0], key[1])):
+        _blend_arrows(canvas, batches[(is_primary, alpha)], primary=is_primary, alpha=alpha)
 
 
 def _blend_polylines(canvas, polylines, color, thickness, alpha) -> None:
@@ -124,9 +149,12 @@ def _blend_arrows(canvas, arrows: list[ArrowDraw], *, primary: bool, alpha: floa
         if arrow.kind == "dribble":
             color = _KIND_BGR["dribble"]
             thickness = 3
+        elif primary:
+            color = _PRIMARY_BGR
+            thickness = 4
         else:
-            color = _PRIMARY_BGR if primary else _KIND_BGR.get(arrow.kind, (255, 255, 255))
-            thickness = 4 if primary else 2
+            color = _SECONDARY_PASS_BGR
+            thickness = 3
         chain = _chain(arrow.points)
         if chain is None:
             continue
@@ -332,14 +360,19 @@ def _minimap(canvas, state: OverlayState) -> None:
 
     halfway = px((PITCH_LENGTH / 2.0, 0.0))[0]
     cv2.line(canvas, (halfway, y0), (halfway, y0 + map_h), (160, 180, 160), 1, cv2.LINE_AA)
-    for arrow in state.minimap_arrows:
-        if not arrow.primary or arrow.kind not in {"pass", "dribble"}:
-            continue
+    for arrow in _limit_arrows(state.minimap_arrows, require_points=False):
         if arrow.kind == "dribble":
             color = _KIND_BGR["dribble"]
-        else:
+            thickness = 2
+        elif arrow.primary:
             color = _PRIMARY_BGR
-        cv2.arrowedLine(canvas, px(arrow.origin), px(arrow.target), color, 2, cv2.LINE_AA, tipLength=0.25)
+            thickness = 2
+        else:
+            color = _SECONDARY_PASS_BGR
+            thickness = 1
+        cv2.arrowedLine(
+            canvas, px(arrow.origin), px(arrow.target), color, thickness, cv2.LINE_AA, tipLength=0.25
+        )
     for player in state.minimap_players:
         color = _TEAM_BGR.get(player.team, _TEAM_BGR["unknown"])
         radius = 4 if player.possessor else 3

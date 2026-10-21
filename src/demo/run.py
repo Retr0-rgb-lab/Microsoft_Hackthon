@@ -1,17 +1,29 @@
 """Command line for the broadcast overlay.
 
 ``python -m demo.run --input in.mp4 --output out.mp4 --stride 2``
+
+Lock the home kit when stripe samples would otherwise swap team ids:
+
+``python -m demo.run --input in.mp4 --output out.mp4 --home-jersey white-black``
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 from demo.pipeline import DemoConfig, run_clip
+from demo.teams import HOME_JERSEY_ENV, HomeJerseySpecError, parse_home_jersey_specs
 
 
 def main(argv: list[str] | None = None) -> int:
+    config = build_config(argv)
+    run_clip(config)
+    return 0
+
+
+def build_config(argv: list[str] | None = None) -> DemoConfig:
     parser = argparse.ArgumentParser(
         description=(
             "Overlay on-ball pass, carry, and shot options on a football broadcast. "
@@ -36,6 +48,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--minute", type=int, default=45, help="Match minute used in the softmax vector.")
     parser.add_argument("--score-home", type=int, default=0)
     parser.add_argument("--score-away", type=int, default=0)
+    parser.add_argument(
+        "--home-jersey",
+        action="append",
+        default=None,
+        metavar="SPEC",
+        help=(
+            "Lock this kit as home for the whole run so the jersey team id does not "
+            "flip. SPEC is white-black, black-white, white, black, rgb:R,G,B, or a "
+            "pair joined by + (rgb:245,245,245+rgb:16,16,16). Repeat the flag to add "
+            "another sample. Omit it to keep the online 2-means defensive-tail "
+            f"assignment. Falls back to {HOME_JERSEY_ENV} when the flag is omitted."
+        ),
+    )
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--imgsz", type=int, default=640, help="Player detector image size.")
     parser.add_argument("--ball-imgsz", type=int, default=960)
@@ -67,6 +92,7 @@ def main(argv: list[str] | None = None) -> int:
     if not args.input.is_file():
         parser.error(f"input not found: {args.input}")
     times = tuple(float(piece) for piece in args.screenshot_times.split(",") if piece.strip())
+    home_jersey = _home_jersey_from_args(parser, args.home_jersey)
     config = DemoConfig(
         input_path=args.input,
         output_path=args.output,
@@ -75,6 +101,7 @@ def main(argv: list[str] | None = None) -> int:
         minute=args.minute,
         score_home=args.score_home,
         score_away=args.score_away,
+        home_jersey=home_jersey,
         device=args.device,
         imgsz=args.imgsz,
         ball_imgsz=args.ball_imgsz,
@@ -87,8 +114,24 @@ def main(argv: list[str] | None = None) -> int:
         screenshot_dir=args.screenshot_dir,
         screenshot_times=times,
     )
-    run_clip(config)
-    return 0
+    return config
+
+
+def _home_jersey_from_args(
+    parser: argparse.ArgumentParser,
+    values: list[str] | None,
+) -> tuple[tuple[float, float, float], ...]:
+    specs = values
+    if not specs:
+        env = os.environ.get(HOME_JERSEY_ENV, "").strip()
+        specs = [env] if env else []
+    if not specs:
+        return ()
+    try:
+        return parse_home_jersey_specs(specs)
+    except HomeJerseySpecError as exc:
+        parser.error(str(exc))
+    raise AssertionError("unreachable")
 
 
 if __name__ == "__main__":
