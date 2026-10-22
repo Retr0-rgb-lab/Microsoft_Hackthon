@@ -119,4 +119,4 @@ for e in (e for e in events if e['type'] == 'decision_point'):
 - 没有抢断、过人对抗、犯规和牌，pressure 也只是距离标签。
 - 界外球、角球的开球点在场内 1.5 m 处（受球员靠近边线时的刹车模型限制）。
 - 越位只在传球瞬间判定，不考虑"干扰比赛"等细节。
-- 决策策略是启发式规则（`policy: heuristic_v0`），xT 和 xG 都是简单的解析公式。
+- 新生成的比赛在 `decision_point.policy` 写 `value_v1`（按选项价值选取，不再用 `heuristic_v0` 抽签）。xT 和 xG 仍是原来的解析公式。已入库的种子 8 切片保持 `heuristic_v0`。

@@ -5,6 +5,10 @@ receiver. Pass targets and the carry path are geometry on the same frame,
 scored by pitch-control × xT, in centre-spot metres:
 
 ``{"target_id", "path": [[x, y], ...], "score"}``
+
+``ghost_route`` returns one of those geometries for a suggested class. A shot
+is scored as ``success_prob * 0.80`` and is not sent through pitch control.
+``decide_from_tracking`` still returns primary_pass, secondary_pass, and carry.
 """
 
 from __future__ import annotations
@@ -14,6 +18,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from inside_the_game.features.from_tracking import (
+    HALF_LENGTH_M,
     PITCH_LENGTH_M,
     PITCH_WIDTH_M,
     attack_multiplier,
@@ -24,6 +29,11 @@ from inside_the_game.system1.policy import SoftmaxActionPolicy
 
 CARRY_STEPS = 5
 FALLBACK_CARRY_M = 6.0
+
+# Static xT at the goal mouth in the attack frame (x = 52.5, y = 0).
+# expected_threat's box formula there is 0.25 + 0.55 = 0.80. Shot routes
+# multiply success_prob by this constant and do not call pitch control.
+GOAL_MOUTH_XT = 0.80
 
 
 @dataclass(frozen=True)
@@ -67,6 +77,34 @@ def decide_from_tracking(
         "secondary_pass": None if secondary is None else secondary.as_dict(),
         "carry": carry.as_dict(),
     }
+
+
+def ghost_route(
+    frame: Mapping[str, Any],
+    event: Mapping[str, Any],
+    team_of: Mapping[str, str],
+    suggested_class: str,
+) -> dict[str, Any] | None:
+    """One route for ``suggested_class``.
+
+    ``pass`` is the primary onside pass (pitch-control × xT). ``dribble`` is
+    the carry path. ``shoot`` is a straight segment to the shot option's end,
+    scored ``success_prob * 0.80`` (static xT at the goal mouth), not pitch
+    control at the goal. ``hold`` returns no route.
+    """
+    label = str(suggested_class)
+    if label == "hold":
+        return None
+    start = _player_xy(frame, str(event["player_id"]))
+    if label == "pass":
+        chosen = _value_pass(start, event)
+        return None if chosen is None else chosen.as_dict()
+    if label == "dribble":
+        return _carry_path(frame, event, team_of, start).as_dict()
+    if label == "shoot":
+        shot = _shot_segment(frame, event, start)
+        return None if shot is None else shot.as_dict()
+    raise ValueError(f"suggested class {suggested_class!r} is not pass, shoot, dribble, or hold")
 
 
 def score_paths(
@@ -164,6 +202,63 @@ def _carry_path(
     scores = completion_value(ends, frame, str(event["team_id"]), team_of)
     end, score = max(zip(ends, scores, strict=True), key=lambda item: item[1])
     return PitchPath(target_id=carrier, path=_segment(start, end, CARRY_STEPS), score=score)
+
+
+def _value_pass(start: tuple[float, float], event: Mapping[str, Any]) -> PitchPath | None:
+    """Onside pass with the highest value_v1 score.
+
+    Value is ``success_prob * max(progress_m, 0)``, the same comparison the
+    generator uses when it picks. Ties break toward a higher success
+    probability, then a smaller ``option_id``. Pitch-control ranking stays
+    on ``decide_from_tracking``; this path is only the ghost.
+    """
+    ranked: list[tuple[float, float, str, str, tuple[float, float]]] = []
+    for option in event["options"]:
+        if option.get("type") != "pass" or option.get("offside"):
+            continue
+        target_id = option.get("target_player_id")
+        if not target_id:
+            continue
+        success = float(option["success_prob"])
+        value = success * max(float(option["progress_m"]), 0.0)
+        ranked.append((value, success, str(option.get("option_id") or ""), str(target_id), _xy(option["end_location"])))
+    if not ranked:
+        return None
+    _value, _success, _option_id, target_id, end = min(
+        ranked,
+        key=lambda item: (-item[0], -item[1], item[2]),
+    )
+    return PitchPath(target_id=target_id, path=_segment(start, end), score=_value)
+
+
+def _shot_segment(
+    frame: Mapping[str, Any],
+    event: Mapping[str, Any],
+    start: tuple[float, float],
+) -> PitchPath | None:
+    """Straight line toward the shot end. Score is xG times goal-mouth xT.
+
+    The goal mouth is not passed to ``completion_value``. Pitch control in
+    front of the goalkeeper would bury every shot.
+    """
+    shots = [option for option in event["options"] if option.get("type") == "shot"]
+    if not shots:
+        return None
+    chosen = min(
+        shots,
+        key=lambda option: (
+            -float(option.get("success_prob") or 0.0),
+            str(option.get("option_id") or ""),
+        ),
+    )
+    end_location = chosen.get("end_location")
+    if end_location:
+        end = _xy(end_location)
+    else:
+        multiplier = attack_multiplier(int(frame["attack_dir"]), str(event["team_id"]))
+        end = (HALF_LENGTH_M * multiplier, 0.0)
+    score = float(chosen["success_prob"]) * GOAL_MOUTH_XT
+    return PitchPath(target_id="", path=_segment(start, end), score=score)
 
 
 def _segment(
