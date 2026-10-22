@@ -29,7 +29,11 @@ DT = 1 / HZ
 HALF = 3000            # seconds per period (45 + 5)
 DURATION = 6000        # seconds simulated
 MIN_HZ = 10
-DEFAULT_MATCH = 'SYN-SINGLE-0001'
+DEFAULT_MATCH = 'SYN-SINGLE-0001'  # checked-in seed-8 slice only; new matches use SYN-SINGLE-<seed>
+SHOT_GAIN_M = 20
+# Miss split kept from the old [.12, .43, .45] weights, now conditional on a miss.
+SHOT_MISS_SAVED = 0.43
+SHOT_MISS_WIDE = 0.45
 BASE = [(6, 34), (24, 9), (27, 25), (27, 43), (24, 59),
         (43, 18), (40, 34), (43, 50), (62, 10), (65, 34), (62, 58)]
 POSITIONS = ['GK', 'LB', 'LCB', 'RCB', 'RB', 'LCM', 'DM', 'RCM', 'LW', 'ST', 'RW']
@@ -69,6 +73,44 @@ def out_xy(x, y):
     return [round(x - 52.5, 3), round(34 - y, 3)]
 
 
+def in_xy(x, y):
+    """Centre-spot metres -> internal, clamped 0.5 m inside the pitch."""
+    return clamp(x + 52.5, 0.5, 104.5), clamp(34 - y, 0.5, 67.5)
+
+
+ROSTER = [f'H{n:02d}' for n in range(1, 12)] + [f'A{n:02d}' for n in range(1, 12)]
+
+
+def parse_formation(path):
+    """22 slots in centre-spot metres. Returns (ordered xy, ball_owner_id or None)."""
+    raw = json.loads(Path(path).read_text(encoding='utf-8'))
+    ball_owner_id = None
+    if isinstance(raw, dict):
+        slots = raw.get('slots')
+        ball_owner_id = raw.get('ball_owner_id')
+    else:
+        slots = raw
+    if not isinstance(slots, list) or len(slots) != 22:
+        raise ValueError('formation needs 22 slots in centre-spot metres')
+    by_id = {}
+    for slot in slots:
+        if not isinstance(slot, dict):
+            raise ValueError('each formation slot must be an object with player_id, x, y')
+        pid = slot.get('player_id')
+        if pid not in ROSTER or pid in by_id:
+            raise ValueError(f'formation player_id must be a unique roster id, got {pid!r}')
+        team_name = 'HOME' if pid[0] == 'H' else 'AWAY'
+        if slot.get('team_id', team_name) != team_name:
+            raise ValueError(f'{pid} team_id does not match the roster')
+        try:
+            by_id[pid] = (float(slot['x']), float(slot['y']))
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f'{pid} needs numeric x and y in centre-spot metres') from exc
+    if ball_owner_id is not None and ball_owner_id not in by_id:
+        raise ValueError(f'ball_owner_id {ball_owner_id!r} is not one of the 22 slots')
+    return [by_id[pid] for pid in ROSTER], ball_owner_id
+
+
 def encode(obj):
     return json.dumps(obj, ensure_ascii=False, separators=(',', ':'), allow_nan=False)
 
@@ -82,10 +124,10 @@ def frame_ms(frame):
 
 
 class Match:
-    def __init__(self, seed, match_id=DEFAULT_MATCH):
+    def __init__(self, seed, match_id=None, formation=None):
         self.rng = random.Random(seed)
         self.seed = seed
-        self.match_id = match_id
+        self.match_id = f'SYN-SINGLE-{seed}' if match_id is None else match_id
         self.home, self.away = HOME, AWAY
         self.t = 0.
         self.period = 1
@@ -93,6 +135,11 @@ class Match:
         pool = [f'{a} {b}' for a in FIRST for b in LAST]
         names.shuffle(pool)
         self.players = []
+        # Local anchors in "our attack is +x" coordinates. Away is mirrored once here
+        # from BASE; a coach formation is already in centre-spot metres and must not be mirrored again.
+        self.anchors = [BASE[i % 11] for i in range(22)]
+        self.custom_formation = False
+        self.opening_owner = None
         for team in range(2):
             for number, (x, y) in enumerate(BASE, 1):
                 self.players.append({
@@ -101,6 +148,8 @@ class Match:
                     'vx': 0., 'vy': 0., 'facing': 0. if team == 0 else math.pi,
                     'active': True, 'position': POSITIONS[number - 1], 'starter': True,
                     'name': pool.pop(), 'shirt_number': number})
+        if formation is not None:
+            self._install_formation(*formation)
         self.player_by_id = {p['id']: p for p in self.players}
         self.distances = {p['id']: 0. for p in self.players}
         self.position_records = 0
@@ -120,7 +169,31 @@ class Match:
         self.pressure_last = {}
         self.action = None
         self.emit('period_start', period=1)
-        self.start_restart(0, (52.5, 34), 'kick_off', minimum=12)
+        if self.opening_owner is None:
+            self.start_restart(0, (52.5, 34), 'kick_off', minimum=12)
+        else:
+            self.owner = self.opening_owner
+            self.ball = self.foot(self.owner)
+            self.last_ball = self.ball[:]
+            self.set_possession(self.players[self.owner]['team'], 'drill_start')
+            self.start_carry_after_restart()
+
+    def _install_formation(self, slots, ball_owner_id):
+        """Replace BASE anchors. `slots` are centre-spot (x, y) in roster order."""
+        for i, (x, y) in enumerate(slots):
+            ix, iy = in_xy(x, y)
+            p = self.players[i]
+            p['x'], p['y'] = ix, iy
+            p['vx'] = p['vy'] = 0.
+            p['facing'] = 0. if p['team'] == 0 else math.pi
+            # Home local == internal. Away local_x folds once so direction == -1 lands on ix.
+            self.anchors[i] = (ix, iy) if p['team'] == 0 else (105 - ix, iy)
+        self.custom_formation = any(
+            abs(self.anchors[i][0] - BASE[i % 11][0]) > 1e-3 or
+            abs(self.anchors[i][1] - BASE[i % 11][1]) > 1e-3
+            for i in range(22))
+        if ball_owner_id is not None:
+            self.opening_owner = next(i for i, p in enumerate(self.players) if p['id'] == ball_owner_id)
 
     # ---- helpers -------------------------------------------------------
     def direction(self, team):
@@ -188,10 +261,13 @@ class Match:
         bx, by = self.ball[:2]
         local_ball = self.progress(bx, team)
         own = self.possession_team == team
-        base_x, base_y = BASE[slot]
-        if slot == 0:
+        base_x, base_y = self.anchors[index]
+        if slot == 0 and not self.custom_formation:
             x = clamp(5 + .05 * (local_ball - 45), 2.5, 11)
             y = clamp(34 + .15 * (by - 34), 26, 42)
+        elif slot == 0:
+            x = clamp(base_x + .05 * (local_ball - 45), 1, 104)
+            y = clamp(base_y + .15 * (by - 34), 1, 67)
         else:
             x = clamp(base_x + .35 * (local_ball - 52.5) + (7 if own else -3), 7, 97)
             y = clamp(base_y + .18 * (by - 34) + 1.5 * math.sin(self.t * .18 + index * 1.4), 2, 66)
@@ -296,6 +372,34 @@ class Match:
         angle = abs(math.atan2(7.32 * (105 - px), (105 - px) ** 2 + (y - 34) ** 2 - 3.66 ** 2))
         return clamp(1 / (1 + math.exp(-(-1.1 + 1.6 * angle - .09 * d))), .01, .7)
 
+    def _nearest_opponent(self, team, x, y):
+        opps = self.opponents(team)
+        if not opps:
+            return float('inf')
+        return min(norm(self.players[j]['x'] - x, self.players[j]['y'] - y) for j in opps)
+
+    def _shot_option(self, direction, x, y, team):
+        """Goal-line aim is fixed on the option. A goal uses xG; misses stay 0.43:0.45."""
+        goal_x = 105. if direction == 1 else 0.
+        xg = round(self.xg(x, y, team), 4)
+        if self.rng.random() < xg:
+            outcome = 'goal'
+        elif self.rng.random() < SHOT_MISS_SAVED / (SHOT_MISS_SAVED + SHOT_MISS_WIDE):
+            outcome = 'saved'
+        else:
+            outcome = 'off_target'
+        if outcome == 'off_target':
+            aim_y = 34 + self.rng.choice([-1, 1]) * self.rng.uniform(4.2, 8)
+        else:
+            aim_y = 34 + self.rng.uniform(-2.8, 2.8)
+        return [goal_x, aim_y], xg, outcome
+
+    @staticmethod
+    def _option_value(opt):
+        if opt['type'] == 'shot':
+            return opt['success_prob'] * SHOT_GAIN_M
+        return opt['success_prob'] * max(opt['progress_m'], 0)
+
     def choose_action(self):
         p = self.players[self.owner]
         team = p['team']
@@ -317,27 +421,11 @@ class Match:
             press = sum(1 for j in self.opponents(team) if norm(self.players[j]['x'] - p['x'], self.players[j]['y'] - p['y']) < 5)
             options.append({'type': 'carry', 'idx': None, 'target': target,
                             'p': clamp(.95 - .12 * press, .4, .95), 'offside': False, 'margin': None})
-            goal_x = 105. if d == 1 else 0.
-            options.append({'type': 'shot', 'idx': None, 'target': [goal_x, 34.],
-                            'p': self.xg(p['x'], p['y'], team), 'offside': False, 'margin': None})
+            shot_target, shot_p, shot_outcome = self._shot_option(d, p['x'], p['y'], team)
+            options.append({'type': 'shot', 'idx': None, 'target': shot_target,
+                            'p': shot_p, 'offside': False, 'margin': None,
+                            'shot_outcome': shot_outcome})
         progress0 = self.progress(bx, team)
-        # Selection keeps the original mix: occasional shots, ~36 % carries, else a pass.
-        chosen = None
-        if p['number'] != 1 and progress0 > 78 and abs(p['y'] - 34) < 24 and self.rng.random() < .06:
-            chosen = next(o for o in options if o['type'] == 'shot')
-        elif p['number'] != 1 and self.rng.random() < .36:
-            chosen = next(o for o in options if o['type'] == 'carry')
-        else:
-            passes = [o for o in options if o['type'] == 'pass']
-            weights = []
-            for o in passes:
-                q = self.players[o['idx']]
-                dist = norm(q['x'] - p['x'], q['y'] - p['y'])
-                adv = self.progress(q['x'], team) - self.progress(p['x'], team)
-                w = math.exp(-abs(dist - 17) / 18 + clamp(adv / 23, -1, 1.3)) * (.5 + o['p'])
-                weights.append(w * (.2 if o['offside'] else 1.))
-            chosen = self.rng.choices(passes, weights)[0]
-        chosen_index = options.index(chosen)
         listed = []
         for k, o in enumerate(options):
             tx, ty = o['target']
@@ -350,15 +438,38 @@ class Match:
                            'xt_gain': round(self.xt(tx, ty, team) - xt0, 4),
                            'offside': o['offside'],
                            'offside_margin_m': None if o['margin'] is None else round(o['margin'], 3)})
+        # Offside passes stay in options[] but do not compete. Ties: higher success_prob, then smaller option_id.
+        eligible = [k for k, o in enumerate(listed) if not o['offside']]
+        pool = eligible or list(range(len(listed)))
+        winner = min(pool, key=lambda k: (
+            -self._option_value(listed[k]), -listed[k]['success_prob'], listed[k]['option_id']))
+        chosen = options[winner]
+        row = listed[winner]
+        label_value = self._option_value(row)
+        nearest = self._nearest_opponent(team, p['x'], p['y'])
+        all_zero = not eligible or all(self._option_value(listed[k]) == 0 for k in eligible)
+        if all_zero or (row['type'] == 'carry' and row['progress_m'] < 4 and nearest <= 3):
+            label_class, route_kind, route_target_id, route_end = 'hold', '', None, None
+        elif row['type'] == 'pass':
+            label_class, route_kind = 'pass', 'pass'
+            route_target_id, route_end = row['target_player_id'], row['end_location']
+        elif row['type'] == 'shot':
+            label_class, route_kind = 'shoot', 'shoot'
+            route_target_id, route_end = None, row['end_location']
+        else:
+            label_class, route_kind = 'dribble', 'dribble'
+            route_target_id, route_end = p['id'], row['end_location']
         dp = self.emit('decision_point', team_id=self.team_id(team), player_id=p['id'],
                        location=out_xy(bx, by), xt_start=round(xt0, 4), options=listed,
-                       chosen_index=chosen_index, chosen_option_id=f'o{chosen_index + 1}',
-                       policy='heuristic_v0')
+                       chosen_index=winner, chosen_option_id=row['option_id'],
+                       policy='value_v1', label_class=label_class,
+                       label_value=round(label_value, 6), shot_gain_m=SHOT_GAIN_M,
+                       route_kind=route_kind, route_target_id=route_target_id, route_end=route_end)
         if chosen['type'] == 'shot':
-            self.start_shot(dp)
+            self.start_shot(chosen, dp)
         elif chosen['type'] == 'carry':
             self.new_action('carry', self.rng.uniform(1.6, 4.8), actor=self.owner, team=team,
-                            target=chosen['target'], decision=dp)
+                            target=chosen['target'], decision=dp, success_prob=row['success_prob'])
         else:
             self.start_pass(chosen, dp)
 
@@ -412,19 +523,16 @@ class Match:
                         decision=dp, height=1.8 if distance > 25 and self.rng.random() < .3 else 0.)
         self.owner = None
 
-    def start_shot(self, dp):
-        p = self.players[self.owner]
-        team = p['team']
-        goal_x = 105. if self.direction(team) == 1 else 0.
-        outcome = self.rng.choices(['goal', 'saved', 'off_target'], [.12, .43, .45])[0]
-        y = 34 + self.rng.uniform(-2.8, 2.8) if outcome != 'off_target' else 34 + self.rng.choice([-1, 1]) * self.rng.uniform(4.2, 8)
+    def start_shot(self, o, dp):
+        """Fly to the goal-line point already stored on the shot option."""
+        team = self.players[self.owner]['team']
+        goal_x, aim_y = o['target']
         receiver = (1 - team) * 11
-        keeper = self.players[receiver]
-        target = [keeper['x'], keeper['y'], .6] if outcome == 'saved' else [goal_x, y, self.rng.uniform(.2, 1.7)]
+        target = [goal_x, aim_y, self.rng.uniform(.2, 1.7)]
         distance = norm(target[0] - self.ball[0], target[1] - self.ball[1])
         self.new_action('shot', max(.4, distance / self.rng.uniform(20, 30)), actor=self.owner, team=team,
-                        receiver=receiver, target=target, outcome=outcome, decision=dp,
-                        xg=round(self.xg(p['x'], p['y'], team), 4))
+                        receiver=receiver, target=target, outcome=o['shot_outcome'], decision=dp,
+                        xg=round(o['p'], 4))
         self.owner = None
 
     def update_ball(self):
@@ -438,9 +546,6 @@ class Match:
             self.ball[2] = a['height'] * 4 * u * (1 - u)
         elif a['kind'] == 'shot':
             target = a['target']
-            if a['outcome'] == 'saved':
-                q = self.players[a['receiver']]
-                target = [q['x'], q['y'], .6]
             self.ball = [(1 - u) * a['start_ball'][j] + u * target[j] for j in range(3)]
             self.ball[2] += .8 * 4 * u * (1 - u)
         elif a['kind'] == 'restart_setup':
@@ -501,6 +606,22 @@ class Match:
             self.start_carry_after_restart()
         elif a['kind'] == 'carry':
             self.emit('carry', start=a['start'], player_id=self.players[a['actor']]['id'], **common)
+            prob = a.get('success_prob')
+            if prob is not None and self.rng.random() >= prob:
+                carrier = self.players[a['actor']]
+                nearest, nearest_d = None, None
+                for j in self.opponents(a['team']):
+                    q = self.players[j]
+                    dist = norm(q['x'] - carrier['x'], q['y'] - carrier['y'])
+                    if dist <= 5 and (nearest_d is None or dist < nearest_d):
+                        nearest, nearest_d = j, dist
+                if nearest is not None:
+                    self.owner = nearest
+                    self.ball = self.foot(nearest)
+                    self.last_ball = self.ball[:]
+                    self.set_possession(self.players[nearest]['team'], 'turnover')
+                    self.start_carry_after_restart()
+                    return
             self.choose_action()
         elif a['kind'] == 'pass':
             team = a['team']
@@ -655,14 +776,17 @@ def build_metadata(sim):
             'attack_dir': '+1 = HOME attacks towards +x in this frame, -1 = towards -x; AWAY is always the opposite',
             'goals': {'x_neg': [-52.5, 0], 'x_pos': [52.5, 0], 'goal_width_m': 7.32}},
         'periods': periods,
-        'teams': [{k: t[k] for k in ('team_id', 'club_id', 'name', 'short_name', 'colors', 'formation')} for t in (HOME, AWAY)],
+        'teams': [{**{k: t[k] for k in ('team_id', 'club_id', 'name', 'short_name', 'colors', 'formation')},
+                   'formation': 'custom' if sim.custom_formation else t['formation']}
+                  for t in (HOME, AWAY)],
         'venue': {'name': HOME['venue'], 'fictional': True},
         'players': [{'player_id': p['id'], 'team_id': sim.team_id(p['team']), 'jersey_number': p['shirt_number'],
                      'name': p['name'], 'position': p['position'], 'starter': True} for p in sim.players],
         'columns': {'tracking.players': ['player_id', 'x_m', 'y_m', 'vx_mps', 'vy_mps', 'facing_rad'],
                     'tracking.ball': ['x_m', 'y_m', 'z_m', 'vx_mps', 'vy_mps', 'vz_mps']},
         'limitations': ['Procedural motion, not a physics simulator; ball height is a parabolic arc, no bounce.',
-                        'Single formation (4-3-3); no tackles, dribble duels, fouls or cards in v0.1.',
+                        ('Custom formation anchors.' if sim.custom_formation else 'Single formation (4-3-3).')
+                        + ' No tackles, dribble duels, fouls or cards in v0.1.',
                         'Offside uses a simplified Law 11 test at pass time; no interfering-with-play nuance.',
                         'All teams, players and venues are fictional.',
                         'Outcomes exist only in resolved events at available_at_ms; do not expose future events during replay.']}
@@ -678,10 +802,10 @@ def build_summary(sim):
             'distance_m': {pid: round(d, 1) for pid, d in sim.distances.items()}}
 
 
-def generate(out, seed):
+def generate(out, seed, formation=None):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    sim = Match(seed)
+    sim = Match(seed, formation=formation)
     metadata = build_metadata(sim)
     (out / 'metadata.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n')
     with (out / 'tracking.jsonl').open('w') as tr, (out / 'states.jsonl').open('w') as st:
@@ -712,13 +836,21 @@ def main():
                     help='simulated minutes (default 100 = two 50-min periods; <=50 gives a period-1 clip)')
     ap.add_argument('--seed', type=int, default=20261019)
     ap.add_argument('--output', type=Path, default=Path(__file__).resolve().parent / 'data')
+    ap.add_argument('--formation', type=Path, default=None,
+                    help='optional JSON: 22 slots in centre-spot metres (player_id, x, y); movement anchors')
     a = ap.parse_args()
     if a.hz < MIN_HZ:
         ap.error(f'--hz must be >= {MIN_HZ}')
     if not 1 <= a.minutes <= 100:
         ap.error('--minutes must be 1..100')
+    formation = None
+    if a.formation is not None:
+        try:
+            formation = parse_formation(a.formation)
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
+            ap.error(str(exc))
     HZ, DT, DURATION = a.hz, 1 / a.hz, a.minutes * 60
-    generate(a.output, a.seed)
+    generate(a.output, a.seed, formation)
 
 
 if __name__ == '__main__':

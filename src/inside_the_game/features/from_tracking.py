@@ -18,7 +18,8 @@ and every player ``(x, y, vx, vy)`` is multiplied by ``d``. Facing follows
 
 Only that frame and the decision_point itself are read. A later pass, shot,
 or carry event is not an input. The six scaffold features are unchanged, so
-``SoftmaxActionPolicy`` stays the four-way softmax.
+``SoftmaxActionPolicy`` stays the four-way softmax. ``features_value_v1`` is a
+separate eight-number vector and does not replace those six.
 """
 
 from __future__ import annotations
@@ -54,6 +55,38 @@ LABEL_RULE = (
     "carry→dribble, except a carry with progress_m < 4 and the nearest "
     "opponent within 3 m → hold. No other event type is a training row."
 )
+
+# Ten value_v1 inputs. Not the six scaffold names: no centrality, minute,
+# or goal_diff. Order is the training column order.
+VALUE_V1_FEATURE_NAMES: tuple[str, ...] = (
+    "ball_x",
+    "ball_y",
+    "nearest_opponent_m",
+    "opponents_within_5m",
+    "best_onside_pass_success",
+    "best_onside_pass_progress_m",
+    "carry_progress_m",
+    "shot_xg",
+    "best_pass_value",
+    "carry_value",
+)
+
+# Scales for features_value_v1. The comment on that function is the contract.
+_VALUE_V1_NEAREST_SCALE_M = 30.0
+_VALUE_V1_WITHIN_M = 5.0
+_VALUE_V1_WITHIN_SCALE = 4.0
+_VALUE_V1_PASS_PROGRESS_M = 40.0
+_VALUE_V1_CARRY_PROGRESS_M = 20.0
+_VALUE_V1_OPTION_VALUE_M = 20.0
+_VALUE_V1_OPTION_VALUE_CLIP = 2.0
+
+VALUE_V1_LABEL_RULE = (
+    "value_v1 decision_point: the training label is the event label_class. "
+    "A file whose policy is heuristic_v0 is refused and is not mixed into the fit."
+)
+
+HOLDOUT_MATCH_IDS = frozenset({"SYN-HOLDOUT-0001", "SYN-HOLDOUT-0002"})
+HOLDOUT_SEEDS = frozenset({9001, 9002})
 
 
 def default_sample_dir() -> Path:
@@ -249,6 +282,143 @@ def decision_point_rows(
     return rows
 
 
+# value_v1 normalization, after the section 6 attack flip (centre spot, metres).
+# This frame at available_at_ms and this decision's options only. Later events
+# are not read. centrality, minute, and goal_diff are not in the vector.
+# ball_x: own goal line 0, opponent goal line 1 (attack-flipped metres / 105)
+# ball_y: attack-flipped width fraction in [0, 1] (metres / 68)
+# nearest_opponent_m: nearest opponent metres / 30, clipped to [0, 1]
+# opponents_within_5m: opponents with distance < 5 m, divided by 4, clipped to [0, 1]
+# best_onside_pass_success: max success_prob among passes with offside false, else 0
+# best_onside_pass_progress_m: max(progress_m, 0) of those passes / 40, clipped to [0, 1], else 0
+# carry_progress_m: max(carry progress_m, 0) / 20, clipped to [0, 1], else 0
+# shot_xg: max shot success_prob, else 0
+# best_pass_value: max over onside passes of success_prob * max(progress_m, 0) / 20, clipped to [0, 2]
+# carry_value: that carry's success_prob * max(progress_m, 0) / 20, clipped to [0, 2]
+# The products are what value_v1 compares. A linear softmax cannot form them
+# from the separate success and progress columns.
+def features_value_v1(
+    frame: Mapping[str, Any],
+    event: Mapping[str, Any],
+    team_of: Mapping[str, str],
+) -> tuple[float, ...]:
+    """Ten value_v1 numbers. See the normalization comment above."""
+    _require_decision_point(event)
+    ball_x, ball_y = _attack_ball_units(frame, str(event["team_id"]))
+    distances = opponent_distances_m(frame, str(event["player_id"]), str(event["team_id"]), team_of)
+    nearest = min(distances) / _VALUE_V1_NEAREST_SCALE_M
+    within = sum(1 for distance in distances if distance < _VALUE_V1_WITHIN_M) / _VALUE_V1_WITHIN_SCALE
+    successes: list[float] = []
+    progresses: list[float] = []
+    carries: list[float] = []
+    shots: list[float] = []
+    for option in event["options"]:
+        kind = option.get("type")
+        if kind == "pass" and not option.get("offside"):
+            successes.append(float(option["success_prob"]))
+            progresses.append(max(float(option["progress_m"]), 0.0))
+        elif kind == "carry":
+            carries.append(max(float(option["progress_m"]), 0.0))
+        elif kind == "shot":
+            shots.append(float(option["success_prob"]))
+    best_success = max(successes) if successes else 0.0
+    best_progress = (max(progresses) / _VALUE_V1_PASS_PROGRESS_M) if progresses else 0.0
+    carry = (max(carries) / _VALUE_V1_CARRY_PROGRESS_M) if carries else 0.0
+    shot_xg = max(shots) if shots else 0.0
+    pass_values = [
+        float(option["success_prob"]) * max(float(option["progress_m"]), 0.0)
+        for option in event["options"]
+        if option.get("type") == "pass" and not option.get("offside")
+    ]
+    carry_values = [
+        float(option["success_prob"]) * max(float(option["progress_m"]), 0.0)
+        for option in event["options"]
+        if option.get("type") == "carry"
+    ]
+    best_pass_value = (max(pass_values) / _VALUE_V1_OPTION_VALUE_M) if pass_values else 0.0
+    carry_value = (max(carry_values) / _VALUE_V1_OPTION_VALUE_M) if carry_values else 0.0
+    return (
+        ball_x,
+        ball_y,
+        _clamp(nearest, 0.0, 1.0),
+        _clamp(within, 0.0, 1.0),
+        best_success,
+        _clamp(best_progress, 0.0, 1.0),
+        _clamp(carry, 0.0, 1.0),
+        shot_xg,
+        _clamp(best_pass_value, 0.0, _VALUE_V1_OPTION_VALUE_CLIP),
+        _clamp(carry_value, 0.0, _VALUE_V1_OPTION_VALUE_CLIP),
+    )
+
+
+def label_value_v1(event: Mapping[str, Any]) -> str:
+    """Training label for a value_v1 decision_point: the event's ``label_class``."""
+    _require_decision_point(event)
+    policy = event.get("policy")
+    if policy != "value_v1":
+        raise ValueError(
+            f"{event.get('event_id')}: value_v1 training reads label_class only when "
+            f"policy is value_v1, got {policy!r}"
+        )
+    label = event.get("label_class")
+    if label not in ACTION_LABELS:
+        raise ValueError(
+            f"{event.get('event_id')}: label_class {label!r} is outside {ACTION_LABELS}"
+        )
+    return str(label)
+
+
+def value_v1_rows(
+    match: SynthMatch,
+) -> list[tuple[tuple[float, ...], str]]:
+    """One value_v1 row per decision_point. The label is ``label_class``."""
+    rows: list[tuple[tuple[float, ...], str]] = []
+    for event in match.events:
+        if event.get("type") != "decision_point":
+            continue
+        frame = frame_for_decision(match, event)
+        rows.append((features_value_v1(frame, event, match.team_of), label_value_v1(event)))
+    if not rows:
+        raise ValueError(f"{match.root} has no decision_point events")
+    return rows
+
+
+def guard_value_v1_sample(match: SynthMatch) -> None:
+    """Refuse a sample that must not be fit as value_v1.
+
+    Refuses match ids ``SYN-HOLDOUT-0001`` and ``SYN-HOLDOUT-0002``, seeds
+    9001 and 9002, any path with a ``holdout`` directory, and a file whose
+    decision_point policy is ``heuristic_v0``.
+    """
+    if _path_has_holdout(match.root):
+        raise ValueError(f"{match.root} is inside a holdout directory; refusing to fit value_v1")
+    match_id = match.match_id
+    if match_id in HOLDOUT_MATCH_IDS:
+        raise ValueError(f"{match_id} is a holdout match; refusing to fit value_v1")
+    seed = _optional_int(match.metadata.get("seed"))
+    if seed in HOLDOUT_SEEDS:
+        raise ValueError(f"seed {seed} is a holdout seed; refusing to fit value_v1")
+    decisions = [event for event in match.events if event.get("type") == "decision_point"]
+    if not decisions:
+        raise ValueError(f"{match.root} has no decision_point events to fit value_v1")
+    for event in decisions:
+        policy = event.get("policy")
+        if policy == "heuristic_v0":
+            raise ValueError(
+                f"{match.root} policy is heuristic_v0; refusing to fit value_v1 on that file"
+            )
+        if policy != "value_v1":
+            raise ValueError(
+                f"{match.root} decision {event.get('event_id')} policy is {policy!r}, not value_v1"
+            )
+        label_value_v1(event)
+
+
+def path_has_holdout_dir(path: Path) -> bool:
+    """True when any directory in ``path`` is named holdout."""
+    return _path_has_holdout(path)
+
+
 def opponent_distances_m(
     frame: Mapping[str, Any],
     player_id: str,
@@ -298,6 +468,34 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
         if line.strip():
             rows.append(json.loads(line))
     return rows
+
+
+def _attack_ball_units(frame: Mapping[str, Any], team_id: str) -> tuple[float, float]:
+    """``ball_x`` and ``ball_y`` in the same units as the six-feature scaffold.
+
+    Section 6 flips the acting team onto +x, then own goal line is 0 and the
+    opponent goal line is 1. ``ball_y`` is the width fraction in [0, 1].
+    """
+    multiplier = attack_multiplier(int(frame["attack_dir"]), team_id)
+    ball = frame["ball"]
+    x_attack = float(ball[0]) * multiplier
+    y_attack = float(ball[1]) * multiplier
+    ball_x_m = _clamp(x_attack + HALF_LENGTH_M, 0.0, PITCH_LENGTH_M)
+    ball_y_m = _clamp(y_attack + HALF_WIDTH_M, 0.0, PITCH_WIDTH_M)
+    return (ball_x_m / PITCH_LENGTH_M, ball_y_m / PITCH_WIDTH_M)
+
+
+def _path_has_holdout(path: Path) -> bool:
+    return any(part.lower() == "holdout" for part in Path(path).parts)
+
+
+def _optional_int(value: Any) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _clamp(value: float, lower: float, upper: float) -> float:

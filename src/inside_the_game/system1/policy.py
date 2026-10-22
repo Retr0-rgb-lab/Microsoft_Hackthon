@@ -100,6 +100,10 @@ class SoftmaxActionPolicy:
         sample pitch (centre spot, metres, ``attack_dir`` ±1) until
         ``features_from_tracking`` applies the section 6 attack flip. The
         returned distribution is still pass, shoot, dribble, and hold.
+
+        The checked-in ``weights.json`` is the six-feature softmax. This
+        method keeps using that vector. The ten-feature value_v1 fit lives
+        in a separate file and is not loaded here.
         """
         if event.get("type") != "decision_point":
             raise ValueError("predict_tracking expects a decision_point event")

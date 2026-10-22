@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "feature_names": [
+    "ball_x",
+    "ball_y",
+    "nearest_opponent_m",
+    "opponents_within_5m",
+    "best_onside_pass_success",
+    "best_onside_pass_progress_m",
+    "carry_progress_m",
+    "shot_xg",
+    "best_pass_value",
+    "carry_value"
+  ],
+  "labels": [
+    "pass",
+    "shoot",
+    "dribble",
+    "hold"
+  ],
+  "bias": {
+    "pass": 0.076122,
+    "shoot": -0.074262,
+    "dribble": 0.85036,
+    "hold": -0.852221
+  },
+  "weights": {
+    "pass": [
+      -0.843496,
+      -0.000338,
+      0.099508,
+      -0.251638,
+      0.594071,
+      1.232083,
+      -0.078342,
+      -0.168457,
+      1.765673,
+      -0.040612
+    ],
+    "shoot": [
+      0.739094,
+      -0.053306,
+      -0.060951,
+      0.302022,
+      -0.57264,
+      -0.472462,
+      -0.842824,
+      0.500696,
+      -0.411994,
+      -0.655584
+    ],
+    "dribble": [
+      0.006194,
+      -0.0107,
+      0.051811,
+      -0.237089,
+      0.283499,
+      -0.566779,
+      1.156862,
+      -0.26587,
+      -1.097361,
+      0.897195
+    ],
+    "hold": [
+      0.098208,
+      0.064344,
+      -0.090369,
+      0.186705,
+      -0.304929,
+      -0.192842,
+      -0.235696,
+      -0.066369,
+      -0.256319,
+      -0.200999
+    ]
+  },
+  "training": {
+    "steps": 500,
+    "learning_rate": 1.2,
+    "l2": 0.02,
+    "class_weighted": false,
+    "counts": {
+      "pass": 1615,
+      "shoot": 454,
+      "dribble": 1878,
+      "hold": 185
+    }
+  },
+  "fit_on": "synthdata:SYN-SINGLE-1001+SYN-SINGLE-1002+SYN-SINGLE-1003+SYN-SINGLE-1004+SYN-SINGLE-1005+SYN-SINGLE-1006+SYN-SINGLE-1007+SYN-SINGLE-1008+SYN-SINGLE-1009+SYN-SINGLE-1010+SYN-SINGLE-1011+SYN-SINGLE-1012+SYN-SINGLE-1013+SYN-SINGLE-1014+SYN-SINGLE-1015+SYN-SINGLE-1016+SYN-SINGLE-1017+SYN-SINGLE-1018+SYN-SINGLE-1019+SYN-SINGLE-1020:value_v1",
+  "sample": "touchline/scripts/synth/data/train",
+  "event_types": [
+    "decision_point"
+  ],
+  "label_rule": "value_v1 decision_point: the training label is the event label_class. A file whose policy is heuristic_v0 is refused and is not mixed into the fit.",
+  "policy": "value_v1",
+  "coordinate_system": "centre_spot metres, pitch 105x68, attack_dir ±1; FORMAT section 6 flip so the acting team attacks +x"
+}

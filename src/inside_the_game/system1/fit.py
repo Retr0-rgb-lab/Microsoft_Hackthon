@@ -27,16 +27,21 @@ DEFAULT_L2 = 0.02
 
 @dataclass(frozen=True)
 class LinearSoftmaxWeights:
-    """Bias and per-class weights in ``FEATURE_NAMES`` order."""
+    """Bias and per-class weights in ``feature_names`` order.
+
+    The default names are the six scaffold features. A value_v1 fit passes
+    its own ten names and does not reuse this default.
+    """
 
     bias: dict[str, float]
     weights: dict[str, tuple[float, ...]]
     metadata: dict[str, Any]
+    feature_names: tuple[str, ...] = FEATURE_NAMES
 
     def as_dict(self) -> dict[str, Any]:
         document = {
             "version": 1,
-            "feature_names": list(FEATURE_NAMES),
+            "feature_names": list(self.feature_names),
             "labels": list(ACTION_LABELS),
             "bias": {label: self.bias[label] for label in ACTION_LABELS},
             "weights": {label: list(self.weights[label]) for label in ACTION_LABELS},
@@ -46,8 +51,13 @@ class LinearSoftmaxWeights:
 
 
 def default_weights_path() -> Path:
-    """Checked-in weights next to the System 1 policy."""
+    """Checked-in six-feature weights next to the System 1 policy."""
     return Path(__file__).resolve().with_name("weights.json")
+
+
+def default_value_v1_weights_path() -> Path:
+    """Separate value_v1 file. This is not ``weights.json``."""
+    return Path(__file__).resolve().with_name("weights_value_v1.json")
 
 
 def fit_softmax(
@@ -57,18 +67,24 @@ def fit_softmax(
     learning_rate: float = DEFAULT_LEARNING_RATE,
     l2: float = DEFAULT_L2,
     class_weighted: bool = True,
+    feature_names: Sequence[str] | None = None,
 ) -> LinearSoftmaxWeights:
     """L2-regularized multinomial logistic regression. Full-batch gradient descent.
 
     Class weights are inverse frequency so shot and hold are not drowned by
     passes. Bias is not regularized. Initialization is zero, so the fit is
-    deterministic for a given sample order.
+    deterministic for a given sample order. The default names are the six
+    scaffold features and ``class_weighted`` stays on, which is the checked-in
+    fit. A value_v1 fit passes its ten names and ``class_weighted=False``.
     """
     if not samples:
         raise ValueError("fit_softmax needs at least one labeled sample")
     if steps < 1:
         raise ValueError("steps must be positive")
-    feature_count = len(FEATURE_NAMES)
+    names = tuple(feature_names) if feature_names is not None else FEATURE_NAMES
+    if not names:
+        raise ValueError("feature_names must not be empty")
+    feature_count = len(names)
     rows: list[tuple[tuple[float, ...], int]] = []
     labels: list[str] = []
     for values, label in samples:
@@ -133,6 +149,7 @@ def fit_softmax(
                 "counts": {label: counts[label] for label in ACTION_LABELS},
             }
         },
+        feature_names=names,
     )
 
 
