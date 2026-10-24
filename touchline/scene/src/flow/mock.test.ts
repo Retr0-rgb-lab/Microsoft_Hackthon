@@ -158,5 +158,17 @@ describe("sample decision stub", () => {
     });
     expect(zh.text).toContain("揭示前");
     expect(zh.text).not.toMatch(/%|success_prob|value_gain/);
+    const typed = mockExplanation({
+      decide: result,
+      questionId: "free_text",
+      mode: "fan",
+      language: "en",
+      userPick: null,
+      questionText: "Could he wait 40% of the time?",
+      shirts: { actor: "#10", passTarget: "#9", forward: "#9" },
+    });
+    expect(typed.text).toContain("Could he wait 40 of the time?");
+    expect(typed.text).not.toMatch(/%|success_prob|value_gain/);
+    expect(typed.question_id).toBe("free_text");
   });
 });

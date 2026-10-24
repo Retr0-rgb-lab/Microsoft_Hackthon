@@ -24,6 +24,7 @@ export type ExplainRequest = {
   mode: AudienceMode;
   language: Language;
   userPick: ActionClass | null;
+  questionText?: string | null;
   shirts: {
     actor: string;
     passTarget: string;
@@ -142,6 +143,11 @@ function enText(request: ExplainRequest): string {
         : `You asked about a pass to ${shirts.forward}. The single pass line is ${passTarget}, because that is the recorded pass. ${shirts.forward} stays on the option list without a second pass arrow.`;
   } else if (questionId === "why_forward") {
     question = `Forward shape is the pass to ${shirts.forward} when that pass is the pass line, otherwise the dribble line. Hold does not advance the ball.`;
+  } else if (questionId === "free_text") {
+    const asked = clipQuestion(request.questionText);
+    if (asked) {
+      question = `You asked “${asked}”. The reply stays on the four classes and the lines already on the pitch.`;
+    }
   }
   if (mode === "fan") {
     return `${lead}${shirts.actor} is on the ball. ${recorded} ${question}`;
@@ -164,9 +170,16 @@ function zhText(request: ExplainRequest): string {
         : `你问的是传给 ${shirts.forward}。唯一的传球线是 ${shirts.passTarget}，因为那是实际传球。${shirts.forward} 仍在选项里，但不会再画第二条传球线。`;
   } else if (questionId === "why_forward") {
     question = `向前的形状：若传球线就是传给 ${shirts.forward}，看那条线；否则看带球线。等待不会把球向前送。`;
+  } else if (questionId === "free_text") {
+    const asked = clipQuestion(request.questionText);
+    if (asked) question = `你问的是「${asked}」。回答仍只讲这四类，以及场上已经画出的线。`;
   }
   if (mode === "fan") return `${pick}${shirts.actor} 持球。${recorded}${question}`;
   return `${pick}${recorded}${paths}${question}球迷模式只讲份额。训练复盘会点名每一条线，方便你先讲自己的判断。`;
+}
+
+function clipQuestion(raw: string | null | undefined): string {
+  return (raw ?? "").replace(/%/g, "").replace(/\s+/g, " ").trim().slice(0, 120);
 }
 
 function zhAction(action: ActionClass): string {

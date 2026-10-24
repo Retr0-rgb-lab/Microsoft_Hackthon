@@ -66,7 +66,7 @@ export type AgentExplanation = {
   limitations: string[];
 };
 
-export type QuestionId = "why_actual" | "why_not_pass" | "why_forward";
+export type QuestionId = "why_actual" | "why_not_pass" | "why_forward" | "free_text";
 
 export function ranked(decide: DecideFromTracking): RankedAction[] {
   return [decide.primary, ...decide.secondaries];

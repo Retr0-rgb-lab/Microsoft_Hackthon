@@ -27,6 +27,7 @@ type Meta = {
 const client: DecisionFlowClient = createMockClient();
 let state: FlowState = initialFlowState();
 let rendering = false;
+let settingsOpen = false;
 let previewT = 0;
 let previewSeen = false;
 let decisions: DecisionPoint[] = [];
@@ -89,6 +90,7 @@ function explainBody(
     mode,
     language,
     userPick,
+    questionText: state.questionText,
     shirts: {
       actor: shirt(decide.actor_id),
       passTarget: shirt(pass?.geometry?.target_id ?? null),
@@ -165,10 +167,41 @@ async function setLanguage(language: Language): Promise<void> {
   dispatch({ type: "set_language", language, agent });
 }
 
+function syncSettings(): void {
+  const panel = document.getElementById("settings");
+  const button = document.getElementById("settings-btn");
+  if (panel) panel.hidden = !settingsOpen;
+  button?.setAttribute("aria-expanded", String(settingsOpen));
+}
+
+function ask(questionId: QuestionId, text: string | null): void {
+  if (!state.eventId) return;
+  dispatch({ type: "select_question", questionId, text });
+  void analyze();
+}
+
 function bindUi(): void {
+  must<HTMLFormElement>("ask").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = must<HTMLInputElement>("ask-input");
+    const value = input.value.trim();
+    if (!value || !state.eventId) return;
+    input.value = "";
+    ask("free_text", value);
+  });
+
   document.body.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
+    if (target.closest("#settings-btn")) {
+      settingsOpen = !settingsOpen;
+      syncSettings();
+      return;
+    }
+    if (settingsOpen && !target.closest("#settings")) {
+      settingsOpen = false;
+      syncSettings();
+    }
     if (target.closest("#start")) dispatch({ type: "start" });
     if (target.closest("#play-toggle")) {
       if (state.phase === "playing") dispatch({ type: "pause" });
@@ -197,7 +230,7 @@ function bindUi(): void {
     const chosen = decisions.find((item) => item.event_id === moment);
     if (chosen) jump(chosen);
     const question = target.closest<HTMLElement>("[data-question]")?.dataset.question;
-    if (question) dispatch({ type: "select_question", questionId: question });
+    if (question === "why_actual" || question === "why_not_pass" || question === "why_forward") ask(question, null);
     const action = target.closest<HTMLElement>("[data-action]")?.dataset.action as ActionClass | undefined;
     if (action) {
       if (state.mode === "coach" && state.decide && !state.revealed) dispatch({ type: "pick", action });
@@ -217,6 +250,10 @@ function bindUi(): void {
 
   window.addEventListener("keydown", (event) => {
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
+    if (event.key === "Escape" && settingsOpen) {
+      settingsOpen = false;
+      syncSettings();
+    }
     if (event.key === " ") {
       event.preventDefault();
       if (state.phase === "playing") dispatch({ type: "pause" });
