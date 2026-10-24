@@ -6,7 +6,7 @@ import { defineConfig, type Plugin } from "vite";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const sampleDir = path.resolve(rootDir, "../data/samples/sample_25hz_10min");
-const sampleFiles = ["metadata.json", "clip.jsonl"];
+const sampleFiles = ["metadata.json", "clip.jsonl", "events.jsonl"];
 
 function sendSample(req: IncomingMessage, res: ServerResponse, next: (err?: unknown) => void) {
   const raw = decodeURIComponent((req.url ?? "/").split("?")[0] ?? "/");
@@ -67,6 +67,14 @@ function samplePlugin(): Plugin {
 
 export default defineConfig({
   plugins: [samplePlugin()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(rootDir, "index.html"),
+        flow: path.resolve(rootDir, "flow.html"),
+      },
+    },
+  },
   server: {
     host: "127.0.0.1",
     port: 5174,

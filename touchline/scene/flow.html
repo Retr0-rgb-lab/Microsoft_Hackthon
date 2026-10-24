@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inside the Game · Decision flow</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236d28d9'/%3E%3Cpath d='M6 16h14M16 8l8 8-8 8' fill='none' stroke='white' stroke-width='2.4'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/flow/tokens.css" />
+    <link rel="stylesheet" href="/src/flow/flow.css" />
+  </head>
+  <body>
+    <div class="flow-app" id="app">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <p class="kicker" data-i18n="product">Inside the Game</p>
+          <h1 data-i18n="flow">Decision flow</h1>
+          <p data-i18n="sub">Synthetic clip · four-class decision</p>
+          <p class="fictional" data-i18n="fictional">Fictional squads only</p>
+          <a href="/" data-i18n="sampleLink">Pitch sample</a>
+        </div>
+        <div class="control">
+          <span data-i18n="language">Language</span>
+          <div class="seg" id="lang-toggle">
+            <button type="button" data-lang="en" aria-pressed="true">English</button>
+            <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+          </div>
+        </div>
+        <div class="control">
+          <span data-i18n="mode">Mode</span>
+          <div class="seg" id="mode-toggle">
+            <button type="button" id="mode-fan" data-mode="fan" aria-pressed="true" data-i18n="fan">Fan</button>
+            <button type="button" id="mode-coach" data-mode="coach" aria-pressed="false" data-i18n="coach">Coach</button>
+          </div>
+        </div>
+        <div class="control">
+          <span data-i18n="playback">Playback</span>
+          <button class="btn" id="play-toggle" type="button">Play</button>
+          <div class="seg" id="speed-toggle">
+            <button type="button" data-speed="1" aria-pressed="true">1×</button>
+            <button type="button" data-speed="4" aria-pressed="false">4×</button>
+          </div>
+          <input id="scrub" type="range" min="0" max="30000" step="40" value="0" aria-label="Timeline" />
+        </div>
+        <div class="control">
+          <span data-i18n="moments">Moments</span>
+          <div id="cases" class="chips"></div>
+        </div>
+        <p class="space-hint" data-i18n="spaceHint">Space pauses. 1 broadcast, 2 top-down.</p>
+      </aside>
+      <section class="stage" aria-label="Synthetic pitch">
+        <canvas id="view"></canvas>
+        <div class="gate" id="gate">
+          <div class="gate-card">
+            <p class="kicker" data-i18n="product">Inside the Game</p>
+            <h2 data-i18n="enterTitle">Pause before the choice</h2>
+            <p data-i18n="enterBody">A fictional match runs until the carrier is about to act. Then compare pass, shoot, dribble, and hold.</p>
+            <button class="btn btn-primary" id="start" type="button" data-i18n="enterAction">Play synthetic match</button>
+          </div>
+        </div>
+        <p class="hypo" id="hypo" hidden>Hypothetical / 假设推演</p>
+        <header class="stage-hud">
+          <div class="glass">
+            <p class="phase-pill" id="phase-pill">Ready</p>
+            <p class="clock" id="clock">00:00.0</p>
+            <p class="match" id="match-label"></p>
+          </div>
+          <div class="cam-toggle" role="group" aria-label="Camera">
+            <button id="cam-broadcast" type="button" aria-pressed="true" data-i18n="broadcast">Broadcast</button>
+            <button id="cam-top" type="button" aria-pressed="false" data-i18n="topdown">Top-down</button>
+          </div>
+        </header>
+        <footer class="stage-status">
+          <p class="glass" id="status" role="status">Loading synthetic clip…</p>
+        </footer>
+      </section>
+      <aside class="panel">
+        <p class="aid" data-i18n="aid">Decision aid. Not a grade on the player.</p>
+        <p id="hint">Pick a moment or keep playing to the next decision.</p>
+        <p id="carrier"></p>
+        <div id="banner" class="banner" hidden></div>
+        <section>
+          <h2 data-i18n="questions">Questions</h2>
+          <div id="questions" class="chips"></div>
+          <button class="btn btn-primary" id="analyze" type="button" data-i18n="analyze">Compare actions</button>
+        </section>
+        <section id="loading" hidden>
+          <p data-i18n="loading">Reading the frame…</p>
+          <div class="shimmer" aria-hidden="true"></div>
+        </section>
+        <section id="coach-prompt" hidden>
+          <p data-i18n="pickPrompt">Pick a class first. The distribution stays hidden until you reveal it.</p>
+        </section>
+        <section id="distribution" hidden>
+          <h2 data-i18n="distribution">Model distribution</h2>
+          <p class="note" id="distribution-note" data-i18n="distributionNote">Shares across pass, shoot, dribble, and hold. Not a completion percentage.</p>
+          <div class="legend-row" id="legend">
+            <span class="swatch-line solid"></span><span data-i18n="legendRecorded">Solid · what happened</span>
+            <span class="swatch-line dashed"></span><span data-i18n="legendOther">Dashed · other class</span>
+          </div>
+          <p class="note" data-i18n="diagram">Top-down paths</p>
+          <svg id="diagram" viewBox="0 0 105 68" role="img" aria-label="Top-down paths"></svg>
+          <div id="actions"></div>
+          <div class="row-actions">
+            <button class="btn" id="preview-btn" type="button" data-i18n="preview">Play hypothetical</button>
+            <button class="btn" id="reset-btn" type="button" data-i18n="reset" hidden>Reset snapshot</button>
+            <button class="btn" id="explain-btn" type="button" data-i18n="explain">Explanation</button>
+            <button class="btn btn-primary" id="reveal-btn" type="button" data-i18n="reveal" hidden>Reveal analysis</button>
+            <button class="btn" id="back-btn" type="button" data-i18n="backDist" hidden>Back to distribution</button>
+          </div>
+        </section>
+        <section id="explain-block" hidden>
+          <h2 data-i18n="explain">Explanation</h2>
+          <p id="explanation"></p>
+        </section>
+        <details id="trace-wrap" hidden>
+          <summary data-i18n="traceSummary">Agent process</summary>
+          <ol id="trace"></ol>
+        </details>
+        <section>
+          <h2 data-i18n="limitations">Limitations</h2>
+          <ul id="limitations"></ul>
+        </section>
+      </aside>
+    </div>
+    <script type="module" src="/src/flow/main.ts"></script>
+  </body>
+</html>

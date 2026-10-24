@@ -279,3 +279,5 @@ npm run dev
 ```
 
 Open http://127.0.0.1:5174 . Playback uses `clip.jsonl` (first 30 seconds). The full 10-minute `tracking.jsonl` in that folder plays at `http://127.0.0.1:5174/?clip=tracking.jsonl`. Details are in `scene/README.md`.
+
+The main decision-flow page is the same dev server at http://127.0.0.1:5174/flow.html (`scene/flow.html`). It plays that clip, pauses on `decision_point`, and shows a stub `decide_from_tracking` distribution. State phases and invalidation rules are in `scene/FLOW.md`. From this directory, `npm run flow` starts that server.
