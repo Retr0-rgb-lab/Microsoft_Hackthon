@@ -4,6 +4,8 @@ Microsoft × Premier League Developer Hackathon MVP scaffold (`inside_the_game`)
 
 This is a decision aid. For each synthetic on-ball state it shows the full probability distribution over **pass**, **shoot**, **dribble**, and **hold**, with a bar and an arrow placeholder for every action. It does not mark a single action as optimal.
 
+The browser flow lives in `touchline/scene`. From `touchline/scene`, run `npm install` and `npm run dev`, then open `http://127.0.0.1:5174/flow.html`. It plays the synthetic `sample_25hz_10min` clip, pauses on a `decision_point`, and renders a stub of `decide_from_tracking`. The phase diagram is in `touchline/scene/FLOW.md`.
+
 ## Locked architecture
 
 1. **Ingest** synthetic match events (JSON/text state).

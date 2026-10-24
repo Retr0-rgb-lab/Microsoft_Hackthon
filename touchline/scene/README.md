@@ -15,6 +15,8 @@ npm run dev
 
 Open http://127.0.0.1:5174 . The dev server is pinned to port 5174 so it does not take the Touchline dashboard port.
 
+The decision flow is [flow.html](flow.html) on the same server: http://127.0.0.1:5174/flow.html . It pauses this clip on `decision_point` events and shows a softmax HUD. The state machine is in [FLOW.md](FLOW.md).
+
 `npm test` checks the coordinate mapping and that the short clip has 22 players. `npm run build` typechecks and writes `dist/`.
 
 ## Clip
