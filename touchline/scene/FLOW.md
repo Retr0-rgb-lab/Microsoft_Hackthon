@@ -11,6 +11,8 @@ npm run dev
 
 Open http://127.0.0.1:5174/flow.html . The pitch-only sample stays at `/`.
 
+The page is two columns. The picture is the three.js pitch. The bar under the picture holds playback, the four moments, and the four-class shares. The right rail holds a settings button for language and fan or coach, the question chips, the explanation, and a text box. A typed question uses the same mock explanation. Arrow geometry still comes from `decide_from_tracking`. A small top-down inset sits on the broadcast view once the distribution is revealed. It hides during the hypothetical preview and on a narrow window.
+
 Still frames of that page are in [proof/flow](proof/flow).
 
 Deep links, still without a reload: `?at=e000005`, `?demo=deciding`, `?demo=preview`, `?demo=explain`, `?demo=trace`, `?mode=coach`, `?lang=zh`.

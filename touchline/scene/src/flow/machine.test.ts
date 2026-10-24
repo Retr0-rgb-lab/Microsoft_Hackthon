@@ -129,6 +129,19 @@ describe("decision flow state machine", () => {
     });
     expect(jumped.decide).toBeNull();
     expect(jumped.snapshotId).toBe("f2:e2");
+
+    const typed = reduce(paused(), { type: "select_question", questionId: "free_text", text: "Why hold?" });
+    expect(typed.questionText).toBe("Why hold?");
+    expect(typed.phase).toBe("selecting");
+    const cleared = reduce(typed, {
+      type: "jump",
+      tMs: 2000,
+      snapshotId: "f2:e2",
+      eventId: "e2",
+      actorId: "H08",
+    });
+    expect(cleared.questionText).toBeNull();
+    expect(cleared.questionId).toBeNull();
   });
 
   it("hides the coach distribution until a pick is revealed", () => {

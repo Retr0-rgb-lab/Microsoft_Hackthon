@@ -2,8 +2,8 @@ Still frames from `npm run dev` at http://127.0.0.1:5174/flow.html . The clip is
 
 | File | View |
 | --- | --- |
-| `desktop-deciding.png` | 1440×900. Paused on the first decision. Softmax bars, solid recorded dribble, dashed other classes, top-down diagram. |
-| `desktop-preview.png` | Top-down camera with the `Hypothetical / 假设推演` badge. |
-| `desktop-explain.png` | Fan explanation and the open agent trace. |
-| `desktop-coach-pick.png` | Coach mode before reveal. Distribution and arrows stay hidden until a class is picked. |
-| `narrow-deciding.png` | 390px wide. Same deciding moment, stacked. |
+| `desktop-deciding.png` | 1440×900. Pitch, bottom shares, right-hand question and explanation. Small top-down inset. |
+| `desktop-preview.png` | Top-down camera with the `Hypothetical / 假设推演` badge. The inset is hidden. |
+| `desktop-explain.png` | Fan explanation and the open agent trace in the right rail. |
+| `desktop-coach-pick.png` | Coach mode before reveal. Shares and arrows stay hidden until a class is picked. |
+| `narrow-deciding.png` | 390px wide. Pitch, then the match bar, then the thread. |

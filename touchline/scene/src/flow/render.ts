@@ -39,6 +39,12 @@ export function renderFlow(state: FlowState, ctx: RenderContext): void {
   const viewCamera = state.phase === "preview" ? "top" : state.camera;
   press("cam-broadcast", viewCamera === "broadcast");
   press("cam-top", viewCamera === "top");
+  must<HTMLElement>("inset").hidden = !(
+    state.decide &&
+    state.revealed &&
+    state.phase !== "preview" &&
+    viewCamera === "broadcast"
+  );
 
   const scrub = must<HTMLInputElement>("scrub");
   if (document.activeElement !== scrub) scrub.value = String(Math.round(state.tMs));
@@ -52,6 +58,14 @@ export function renderFlow(state: FlowState, ctx: RenderContext): void {
   textEl("hint").textContent = hintFor(state);
   const event = ctx.decisions.find((item) => item.event_id === state.eventId) ?? null;
   textEl("carrier").textContent = event ? `${ctx.shirt(event.player_id)} · ${event.team_id}` : "";
+  const asked = askedLabel(state, ctx, event);
+  const bubble = textEl("user-bubble");
+  bubble.hidden = asked.length === 0;
+  bubble.textContent = asked;
+  const askInput = must<HTMLInputElement>("ask-input");
+  askInput.placeholder = text(state.language, "askPlaceholder");
+  askInput.setAttribute("aria-label", text(state.language, "askPlaceholder"));
+  must<HTMLButtonElement>("ask-send").disabled = !event;
 
   fillCases(state, ctx);
   fillQuestions(state, ctx, event);
@@ -89,7 +103,8 @@ export function renderFlow(state: FlowState, ctx: RenderContext): void {
 
   const limits = must<HTMLElement>("limitations");
   limits.replaceChildren();
-  const lines = state.revealed && state.decide ? (state.agent?.limitations ?? state.decide.limitations) : state.decide?.limitations ?? [];
+  const lines = state.revealed ? (state.agent?.limitations ?? state.decide?.limitations ?? []) : [];
+  must<HTMLElement>("limits-block").hidden = lines.length === 0;
   for (const line of lines) {
     const item = document.createElement("li");
     item.textContent = line;
@@ -127,6 +142,12 @@ export function paintDiagram(state: FlowState, ctx: RenderContext): void {
         ? { action: state.previewAction, t: ctx.previewT }
         : null,
   });
+}
+
+function askedLabel(state: FlowState, ctx: RenderContext, event: DecisionPoint | null): string {
+  if (state.questionId === "free_text") return state.questionText ?? "";
+  if (!event || !state.questionId) return "";
+  return questionSet(event, ctx.shirt, state.language).find((item) => item.id === state.questionId)?.label ?? "";
 }
 
 function fillCases(state: FlowState, ctx: RenderContext): void {
@@ -229,6 +250,7 @@ function hintFor(state: FlowState): string {
   if (state.phase === "playing") return text(state.language, "playingHint");
   if (state.phase === "paused") return text(state.language, "pausedHint");
   if (state.phase === "selecting") return text(state.language, "selectingHint");
+  if (state.phase === "deciding") return text(state.language, "decidingHint");
   if (state.phase === "preview") return text(state.language, "previewHint");
   if (state.phase === "explaining") return text(state.language, "explainHint");
   if (state.phase === "enter") return text(state.language, "enterBody");

@@ -41,6 +41,7 @@ export type FlowState = {
   eventId: string | null;
   actorId: string | null;
   questionId: string | null;
+  questionText: string | null;
   requestId: number;
   decide: DecideFromTracking | null;
   agent: AgentExplanation | null;
@@ -68,7 +69,7 @@ export type FlowEvent =
     }
   | { type: "arrive"; tMs: number; snapshotId: string; eventId: string; actorId: string }
   | { type: "select_actor"; actorId: string }
-  | { type: "select_question"; questionId: string }
+  | { type: "select_question"; questionId: string; text?: string | null }
   | { type: "request" }
   | { type: "resolve"; requestId: number; decide: DecideFromTracking; agent: AgentExplanation }
   | { type: "preview"; action: ActionClass }
@@ -97,6 +98,7 @@ export function initialFlowState(): FlowState {
     eventId: null,
     actorId: null,
     questionId: null,
+    questionText: null,
     requestId: 0,
     decide: null,
     agent: null,
@@ -141,6 +143,7 @@ export function reduce(state: FlowState, event: FlowEvent): FlowState {
         eventId: null,
         actorId: null,
         questionId: null,
+        questionText: null,
       };
     case "jump":
       return {
@@ -150,6 +153,7 @@ export function reduce(state: FlowState, event: FlowEvent): FlowState {
         eventId: event.eventId,
         actorId: event.actorId,
         questionId: null,
+        questionText: null,
       };
     case "arrive":
       if (state.phase !== "playing") return state;
@@ -160,6 +164,7 @@ export function reduce(state: FlowState, event: FlowEvent): FlowState {
         eventId: event.eventId,
         actorId: event.actorId,
         questionId: null,
+        questionText: null,
       };
     case "select_actor": {
       if (!state.eventId || state.actorId !== event.actorId) {
@@ -171,7 +176,7 @@ export function reduce(state: FlowState, event: FlowEvent): FlowState {
     case "select_question": {
       const nextPhase: Phase = state.eventId ? "selecting" : state.phase;
       const base = hasAnalysis(state) ? clearAnalysis(state, nextPhase) : { ...state, phase: nextPhase };
-      return { ...base, questionId: event.questionId, hint: null };
+      return { ...base, questionId: event.questionId, questionText: event.text ?? null, hint: null };
     }
     case "request": {
       if (!state.eventId || !state.snapshotId) return state;

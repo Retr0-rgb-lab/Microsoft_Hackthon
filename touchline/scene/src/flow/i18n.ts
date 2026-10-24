@@ -55,6 +55,7 @@ const en = {
   emptyAsk: "Pick a moment or keep playing to the next decision.",
   previewHint: "Hypothetical path on the frozen snapshot. Reset returns to the same frame.",
   explainHint: "Fan and coach read the same distribution at different depth.",
+  decidingHint: "The four shares are under the pitch. Ask in the box to hear them in words.",
   passPath: "Pass",
   dribblePath: "Dribble",
   shotSeg: "Shot",
@@ -75,6 +76,9 @@ const en = {
   action_shoot: "Shoot",
   action_dribble: "Dribble",
   action_hold: "Hold",
+  settings: "Settings",
+  askPlaceholder: "Ask about this frame",
+  askSend: "Ask",
 };
 
 const zh: typeof en = {
@@ -131,6 +135,7 @@ const zh: typeof en = {
   emptyAsk: "选一个时刻，或继续播放到下一处决策。",
   previewHint: "在冻结的快照上播放假设路径。重置会回到同一帧。",
   explainHint: "球迷和训练复盘读的是同一分布，深度不同。",
+  decidingHint: "四类份额在画面下方。想听讲解，就在输入框里问。",
   passPath: "传球",
   dribblePath: "带球",
   shotSeg: "射门",
@@ -151,6 +156,9 @@ const zh: typeof en = {
   action_shoot: "射门",
   action_dribble: "带球",
   action_hold: "等待",
+  settings: "设置",
+  askPlaceholder: "问问这一帧",
+  askSend: "发送",
 };
 
 export const copy = { en, zh };
