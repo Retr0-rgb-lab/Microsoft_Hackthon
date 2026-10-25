@@ -73,7 +73,7 @@ Code: `inside_the_game.system1.completion`. The `score-completion` tool recomput
 
 ## Narration
 
-**Azure AI Foundry, deployment `gpt-4o-mini`** (the budget deployment).
+**Azure AI Foundry, deployment `gpt-4.1-mini`** (the budget deployment).
 
 The request is structured JSON only: the four probabilities, the two pass targets, and the carry path. No tracking dump, no video, no match prose. `inside_the_game.system2.foundry.foundry_narration_request` builds that body and sets `sent` to false. This package does not call Foundry.
 
@@ -86,7 +86,7 @@ The Microsoft Agent Framework run orchestrates four tools, in this order:
 | `read-frame` | Tracking frame at `available_at_ms`. No later event. |
 | `decide` | Softmax probabilities, primary and secondary passes, carry path. |
 | `score-completion` | Pitch-control × xT on those ends. No paid API. |
-| `narrate` | Foundry `gpt-4o-mini` request from the decision JSON. Not sent here. |
+| `narrate` | Foundry `gpt-4.1-mini` request from the decision JSON. Not sent here. |
 
 `inside_the_game.system1.orchestrator.run_decision_tools` is that order in-process, so the tool boundary is testable without the hosted framework.
 

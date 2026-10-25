@@ -1,71 +1,109 @@
 # Source
 
-Imported from [LiNTe912/NextPlay-AI](https://github.com/LiNTe912/NextPlay-AI) without forking that repository and without its git history.
+Two upstream repositories were imported into `touchline/`, without forking either
+one and without their git history.
 
 | Field | Value |
 | --- | --- |
-| Source repository | https://github.com/LiNTe912/NextPlay-AI |
-| Source commit | `a964c71031b0f32a8ed5226d77db5ce24f16e2b4` |
-| Source commit date | 2026-10-21 11:45:17 +0100 |
+| Data generator | https://github.com/LiNTe912/NextPlay-AI |
+| Data generator commit | `a964c71031b0f32a8ed5226d77db5ce24f16e2b4` (2026-10-21 11:45:17 +0100) |
+| Trained model layer | https://github.com/tigerguoyi/NextPlay-AI (a fork of the repository above) |
 | Import date | 2026-10-21 |
-| Original license | None. This commit has no `LICENSE` file, and the GitHub repository metadata reports `license: null`. No SPDX license was copied because none was published. |
-| Authorization | The author LiNTe912 granted permission to use this code in this hackathon project. |
+| Original license | None. The source commit has no `LICENSE` file and the GitHub metadata reports `license: null`. No SPDX license was copied because none was published. |
+| Authorization | The upstream authors granted permission to use this code in this hackathon project. |
 
-The working tree at that commit was copied into `touchline/`. Measured sizes at import:
-
-| Tree | Bytes |
-| --- | --- |
-| Clone directory, including `.git` | 395,434,459 (about 377 MiB; `du -sh` prints this as 378M) |
-| `data/` only | 335,759,796 (about 320 MiB; `du -sh` prints this as 321M) |
-| Working tree excluding `.git` | 336,099,646 |
-
-`data/` was not copied wholesale. The checked-in sample is the legacy Harbor FC vs Mountain FC match without `tracking.jsonl`, the Northwater League index for four matchweeks, and two match directories (`NW26-W01-THF-HBR` and `NW26-W03-ASH-MTN`) without full tracking. See the size note in the pull request for the trimmed total.
+`data/` was not copied wholesale. The checked-in league is the trimmed sample
+described in `README.md`; full tracking stays gitignored, and the only tracked
+`tracking.jsonl` is the SynthData 25 Hz clip.
 
 ## Name replacement
 
-Upstream code, UI copy, and `data/league/squads.json` identified 20 real 2026/27 clubs, their grounds, and 566 real players (names, shirt numbers, nationalities, dates of birth, and external player ids). That squad file was not imported. Shipped JSON, JSONL, code, and UI strings use the fictional identities below. A scan of this tree against the upstream squad file found no remaining full player names, club names, or stadium names outside this document.
+Upstream code, UI copy, and `data/league/squads.json` identified 20 real
+2026/27 clubs, their grounds, and 566 real players (names, shirt numbers,
+nationalities, dates of birth, and external player ids). That squad file was not
+imported.
 
-`generate.py` now builds 560 procedural players (28 per club). Full names are `{Given} {Family}` pairs from fixed lists in that file. Nationalities and dates of birth are procedural. There is no per-player mapping, so real player names are not repeated here.
+What ships today:
 
-Kit colours in `CLUBS` are a new palette. They are not the upstream club colour values.
+- **Club, ground and player names are fictional.** The 20 clubs are Aster FC,
+  Beacon FC, Cedar FC, Driftwood FC, Ember FC, Fairhaven FC, Glenvale FC,
+  Highridge FC, Ivory FC, Juniper FC, Kingswell FC, Larkspur FC, Meadow FC,
+  Northstar FC, Oakmere FC, Pinecrest FC, Quartz FC, Rivermist FC, Silverbrook
+  FC and Thornvale FC, each with a fictional ground. `data/league/squads.json`
+  holds the mapping; the interface only ever renders these names.
+- **Player names are procedural.** `generate.py` builds 560 players (28 per
+  club) from fixed given-name and family-name lists. Nationalities and dates of
+  birth are procedural. There is no per-player mapping from a real player.
+- **Three-letter club codes are opaque identifiers, not names.** The codes
+  (`ARS`, `TOT`, `LIV`, …) and the `PL26` match-id prefix are carried over from
+  upstream as stable keys. Nothing renders them, and they are not club names.
+  The upstream code-to-name table is deliberately not reproduced here: keeping
+  it would publish the real club names this document exists to replace.
+- **Kit colours are upstream values.** They are not a new palette. Colours are
+  not protected by the naming rule, but no club badge, crest, logo or Premier
+  League mark is reproduced anywhere in the data or the interface.
+- **Roster attributes come from a public scouting source.** Each player carries a
+  descriptive index set (attack, technique, tactical, creativity, or the
+  goalkeeper equivalents). These are descriptive, not success probabilities, and
+  `realism/player_actions.py` uses them only as a style multiplier.
+  `data/league/squads.json` is the roster of record.
 
-The numeric strength multipliers moved with the slot in the table below. They are still compressed heuristics. They are not official ratings.
+## What the interface is allowed to see
 
-| Slot | Upstream id | Upstream club | Upstream ground | Fictional id | Fictional club | Fictional ground |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | ARS | Arsenal | Emirates Stadium | HBR | Harbor FC | Harbor Park |
-| 2 | AVL | Aston Villa | Villa Park | MTN | Mountain FC | Mountain Ground |
-| 3 | BOU | AFC Bournemouth | Vitality Stadium | RVD | Riverdale Athletic | Riverdale Bowl |
-| 4 | BRE | Brentford | Gtech Community Stadium | CDR | Cedar United | Cedar Lane |
-| 5 | BHA | Brighton & Hove Albion | Amex Stadium | BRK | Bracken Town | Bracken Field |
-| 6 | CHE | Chelsea | Stamford Bridge | WLN | Welland City | Welland Gate |
-| 7 | COV | Coventry City | CBS Arena | NQY | Northquay | Northquay Park |
-| 8 | CRY | Crystal Palace | Selhurst Park | SLM | Saltmere | Saltmere Ground |
-| 9 | EVE | Everton | Hill Dickinson Stadium | OKR | Oakmere Rovers | Oakmere Park |
-| 10 | FUL | Fulham | Craven Cottage | FNB | Fenharbor | Fen Gate |
-| 11 | HUL | Hull City | MKM Stadium | KST | Kestrel Athletic | Kestrel Moor |
-| 12 | IPS | Ipswich Town | Portman Road | LNT | Lantern FC | Lantern Yard |
-| 13 | LEE | Leeds United | Elland Road | DSK | Duskford | Duskford Arena |
-| 14 | LIV | Liverpool | Anfield | PEL | Pelican Town | Pelican Wharf |
-| 15 | MCI | Manchester City | Etihad Stadium | ASH | Ashcombe | Ashcombe Park |
-| 16 | MUN | Manchester United | Old Trafford | VLM | Vellum United | Vellum Street |
-| 17 | NEW | Newcastle United | St James' Park | CRC | Coracle FC | Coracle Dock |
-| 18 | NFO | Nottingham Forest | City Ground | YRW | Yarrow Athletic | Yarrow Field |
-| 19 | SUN | Sunderland | Stadium of Light | GLN | Glenwick | Glenwick Park |
-| 20 | TOT | Tottenham Hotspur | Tottenham Hotspur Stadium | THF | Thornferry | Thornferry End |
+The committed roster records also carry, straight from the same source, the
+player's birth date, nationality code, shirt number, source identifier, a
+capture fingerprint, and the conflict records that restate them. Those fields
+identify a real person once the name alias is reversed, and they are not model
+inputs.
 
-Competition id `PL-SYN-2026` / name `Premier League (synthetic)` became `NW-SYN-2026` / `Northwater League (synthetic)`. Match ids use the prefix `NW26` instead of `PL26`.
+`decision_analysis.input_adapter.public_profile()` keeps only the football
+fields, and the server applies it on the way out:
 
-Harbor FC and Mountain FC were already the upstream legacy two-team example. They are reused as the first two fictional league clubs. The legacy single match still uses team ids `HOME` and `AWAY` and names such as `Harbor Player 01`.
+- `POST /api/decision-analysis/analyze` and `/agents` serve the trimmed profile
+  in `player_source_profile`.
+- `GET /data/league/squads.json` and `GET /data/league/matches/*/metadata.json`
+  are rewritten by `server.Handler.send_redacted()` before they reach the
+  browser.
 
-`tests/post-match-report-preview.png` was removed. It was an upstream screenshot of a report that named real clubs and players, including Manchester City, Brentford, and Erling Haaland. No test referenced the file.
+The bytes on disk still contain those fields, because `data_version()` digests
+the whole match metadata: stripping them at rest changes every snapshot digest
+in the 91,031-record decision dataset, which would require regenerating the
+dataset and its source lock. That is a team decision, not something to change
+silently the day before submission. Until it is taken, the served product is
+clean and the repository is not.
+
+
+Two tracked files still contain real club names on purpose:
+
+- `scripts/synth/forbidden_terms.txt` — the scrub blocklist the generator and
+  `scripts/synth/validate.py` use to fail the build if a real club, ground,
+  competition, brand or player name reaches generated data. Removing it would
+  remove the check.
+- The club-code prefix described above, which carries no name.
+
+`tests/post-match-report-preview.png` was removed. It was an upstream screenshot
+of a report that named real clubs and players. No test referenced the file.
 
 ## Not replaced
 
-- Optional narration still targets the OpenAI Responses API (`https://api.openai.com/v1`, mode `openai`, environment variables `OPENAI_API_KEY` and `OPENAI_MODEL`) in `model_service.py`, `server.py`, `analysis_agent.py`, and the settings form in `index.html`. Those strings name the third-party service. They are not club, player, or competition identities.
-- Fictional players are assigned real country names as nationalities (for example Norway, Portugal, Ghana). Those are countries, not copied player biographies.
+- Optional narration still targets the OpenAI Responses API
+  (`https://api.openai.com/v1`, mode `openai`) in `analysis_agent.py`, and the
+  settings form in `index.html`. `model_service.py` and `server.py` now use
+  `ITG_MODEL_BASE_URL`, `ITG_MODEL_NAME` and `ITG_MODEL_API_KEY`, defaulting to
+  an Azure AI Foundry deployment. Those strings name the service, not a club,
+  player or competition.
+- Fictional players are assigned real country names as nationalities. Those are
+  countries, not copied player biographies.
 - Kick-off times use the IANA zone `Europe/London`.
-- `analysis_agent.py` still says the demo impact score is "not an official rating." That sentence does not name a competition.
+- `analysis_agent.py` still says the demo impact score is "not an official
+  rating." That sentence does not name a competition.
+
+## Competition naming
+
+The competition is **NextPlay League**, season 2026/27, synthetic matches
+(`data/league/squads.json` records `competition: "NextPlay League"` and
+`synthetic_matches: true`). Match identifiers keep the upstream `PL26-Wnn-XXX-YYY`
+form as opaque keys. `README.md` refers to the same competition by this name.
 
 ## Regenerate
 
@@ -76,14 +114,30 @@ python3 generate.py --weeks 4 --tracking none --retain-matches 2
 python3 generate.py --mode single --output data
 ```
 
-`--retain-matches` simulates every fixture, writes the league index, and then keeps the week-1 opener and the week-3 featured match (the explorer default when no home club is selected). Omit the flag to keep all match directories. League `tracking.jsonl` files and `data/league-alt/` are gitignored. The one exception is the SynthData clip below. Details are in `README.md`.
+`--retain-matches` simulates every fixture, writes the league index, and then
+keeps the week-1 opener and the week-3 featured match (the explorer default when
+no home club is selected). Omit the flag to keep all match directories. League
+`tracking.jsonl` files and `data/league-alt/` are gitignored. The one exception
+is the SynthData clip below. Details are in `README.md`.
+
+The decision-analysis model layer is rebuilt separately. `decision_analysis/pipeline.py`
+has `audit`, `train`, `score` and `validate` subcommands; `validate` re-checks
+the committed 40-match dataset against the contract without writing to it.
 
 ## SynthData 25 Hz sample
 
-`data/samples/sample_25hz_10min/` is a separate checked-in clip from the v0.1 single-match generator in `scripts/synth/`. It is not produced by `generate.py` and it does not replace the Northwater League sample above.
+`data/samples/sample_25hz_10min/` is a separate checked-in clip from the v0.1
+single-match generator in `scripts/synth/`. It is not produced by `generate.py`
+and it does not replace the league sample above.
 
-- Frame rate 25 Hz, 10 minutes (15,001 frames). Pitch 105 × 68 m. Origin is the centre spot.
-- Fictional Harbor FC (HOME) vs Mountain FC (AWAY), played at fictional Harbor Park.
-- `data/samples/sample_25hz_10min/tracking.jsonl` is tracked on purpose. Every other `tracking.jsonl` under `data/`, other league match directories, `data/league-alt/`, and the generator default `scripts/synth/data/` stay gitignored.
+- Frame rate 25 Hz, 10 minutes (15,001 frames). Pitch 105 × 68 m. Origin is the
+  centre spot.
+- Fictional Harbor FC (HOME) vs Mountain FC (AWAY), played at fictional Harbor
+  Park.
+- `data/samples/sample_25hz_10min/tracking.jsonl` is tracked on purpose. Every
+  other `tracking.jsonl` under `data/`, other league match directories,
+  `data/league-alt/`, and the generator default `scripts/synth/data/` stay
+  gitignored.
 
-Regenerate steps and the notes for Frontend and SysModel are in `data/samples/README.md`.
+Regenerate steps and the notes for Frontend and SysModel are in
+`data/samples/README.md`.

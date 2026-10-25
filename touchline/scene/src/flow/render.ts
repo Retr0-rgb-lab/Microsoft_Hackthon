@@ -204,7 +204,7 @@ function fillActions(state: FlowState): void {
     name.textContent = `${rank}${actionName(item.action, state.language)}`;
     const meta = document.createElement("span");
     meta.className = "action-meta";
-    meta.textContent = metaFor(state, item.action, item.role, item.prob);
+    meta.textContent = metaFor(state, item.action, item.role);
     button.append(mark, name, meta);
     if (state.revealed) {
       const bar = document.createElement("span");
@@ -218,11 +218,13 @@ function fillActions(state: FlowState): void {
   });
 }
 
-function metaFor(state: FlowState, action: ActionClass, role: "primary" | "secondary", prob: number): string {
+function metaFor(state: FlowState, action: ActionClass, role: "primary" | "secondary"): string {
   if (!state.revealed) {
     return state.userPick === action ? text(state.language, "yourPick") : "";
   }
-  const bits = [prob.toFixed(2), role === "primary" ? text(state.language, "primary") : text(state.language, "secondary")];
+  // The ranking is shown as a label and as a bar width. The share itself is a
+  // model number, not a success rate, so it is not printed.
+  const bits = [role === "primary" ? text(state.language, "primary") : text(state.language, "secondary")];
   if (action === state.decide?.actual_action) bits.push(text(state.language, "recorded"));
   return bits.join(" · ");
 }

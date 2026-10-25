@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from contracts import check_exchange, data_version
-from .comparison import compare_actions, rollout_action
+from .comparison import accept_agent_response, compare_actions, rollout_action
 from .counterfactual import simulate
 from .input_adapter import NEUTRAL_PROFILE, match_actual, source_profile
 from .metrics import analysis_document
@@ -128,6 +128,75 @@ class Repository:
 def repository():return Repository()
 
 
+def run_agent_team(handler,repo,request,public,private,snapshot,metadata):
+    """The real four-role team over this comparison.
+
+    The team reads the same document the interface shows, cites the same
+    public evidence ids, and may not change the ranking. When no model is
+    configured the comparison is returned untouched, with the agent reported
+    as unavailable rather than fabricated.
+    """
+    from decision.agents import numeric_claims, run_team
+    from server import claim_model_call, read_config
+    config=read_config()
+    if not (config.get('api_key') and config.get('model')):
+        public=copy.deepcopy(public)
+        public['status']='model_unavailable'
+        public['explanation']=None
+        public['agent_trace']=[]
+        return public
+    if not claim_model_call():
+        # The cap is spent. The computed comparison still stands.
+        public=copy.deepcopy(public)
+        public['status']='model_unavailable'
+        public['explanation']=None
+        public['agent_trace']=[]
+        public['limitations']=list(public.get('limitations') or [])+[
+            'The daily model call limit is reached. The computed comparison is unaffected.']
+        return public
+    try:
+        team=run_team(repo.document(request),metadata,request['question'],request['mode'],
+                      config,language=request.get('language','en'),profile=request.get('profile'),private=private)
+    except Exception:
+        public=copy.deepcopy(public)
+        public['status']='model_unavailable'
+        public['explanation']=None
+        public['agent_trace']=[]
+        return public
+    final=team.get('final') or {}
+    public=copy.deepcopy(public)
+    # The contract has one vocabulary. The team has its own internal one.
+    public['status']={'complete':'ready','partial':'partial','failed':'error',
+                      'unavailable':'unknown','not_configured':'model_unavailable'}.get(
+                          team.get('status'),'partial')
+    text=(final.get('answer') or '').strip()
+    # Only the public evidence ids may be cited. The team also reasons over
+    # private model internals, and those must not reach the interface.
+    public_ids={e['evidence_id'] for e in (public.get('evidence') or [])}
+    cited=[i for i in (final.get('evidence_ids') or []) if i in public_ids]
+    if text:
+        public['explanation']={'mode':request['mode'],'text':text,'cited_evidence_ids':cited}
+    else:
+        # An empty explanation is not an explanation. The comparison stands and
+        # the agent is reported as unavailable rather than as a blank answer.
+        public['explanation']=None
+        public['status']='partial'
+    public['agent_trace']=[{'agent':e.get('agent'),'tool':e.get('tool') or e.get('event'),
+                            'ms':e.get('elapsed_ms') or 0,'ok':e.get('event')=='tool_completed'}
+                           for e in team.get('trace',[]) if e.get('event') in ('tool_completed','failed')]
+    claims=numeric_claims(text)
+    if claims:
+        # A rule assumption dressed as a probability is the one thing this
+        # contract exists to prevent, so the finding is named rather than
+        # quietly passed on.
+        public['status']='partial'
+        public['limitations']=list(public.get('limitations') or [])+[
+            'The answer quoted a model internal ('+', '.join(claims)+'). Those are uncalibrated '
+            'scores, not probabilities; the ranking and the wording are the supported form.']
+    accept_agent_response(request,public,snapshot,metadata,public['candidate_set_id'])
+    return public
+
+
 def handle_get(handler):
     route=urlsplit(handler.path)
     if not route.path.startswith('/api/decision-analysis/'):return False
@@ -171,7 +240,7 @@ def handle_post(handler,route,data):
                 handler.reply(200,dict(candidate_set_id=public['candidate_set_id'],routes=[dict(action_id=a['key'],start=snapshot['frame']['ball'][:2],target=a['target'])
                     for a in private.get('options',[]) if a['key'] in eligible]))
             elif route.endswith('/actual'):handler.reply(200,repo.actual(request,public))
-            else:handler.reply(200,public) # no fabricated Agent trace
+            else:handler.reply(200,run_agent_team(handler,repo,request,public,private,snapshot,metadata))
         else:handler.reply(404,{'error':'Unknown decision-analysis route'})
     except (KeyError,StopIteration,FileNotFoundError):handler.reply(404,{'error':'Unknown registered match, snapshot, model or action'})
     except (ValueError,TypeError):handler.reply(400,{'error':'Invalid or stale request; recompute comparison'})

@@ -1,8 +1,18 @@
 # Inside the Game
 
-Microsoft × Premier League Developer Hackathon MVP scaffold (`inside_the_game`).
+Microsoft × Premier League Developer Hackathon project.
 
-This is a decision aid. For each synthetic on-ball state it shows the full probability distribution over **pass**, **shoot**, **dribble**, and **hold**, with a bar and an arrow placeholder for every action. It does not mark a single action as optimal.
+Two things live here. **[`touchline/`](touchline/README.md)** is the product: a fictional
+2026/27 league, match replay, the coach page where a viewer freezes a moment and asks
+why, a four-role agent team on Azure AI Foundry, and a 3D pitch sample. `src/inside_the_game`
+is the decision kernel underneath it.
+
+The decision aid never marks one action as optimal. For a frozen on-ball state it shows
+the candidates — passes, carries, a shot when in range, and holding — each with the
+computed opportunity and risk, and the full probability distribution over **pass**,
+**shoot**, **dribble** and **hold** where the softmax applies.
+
+Start here: [touchline/README.md](touchline/README.md). This file documents the kernel.
 
 The browser flow lives in `touchline/scene`. From `touchline/scene`, run `npm install` and `npm run dev`, then open `http://127.0.0.1:5174/flow.html`. It plays the synthetic `sample_25hz_10min` clip, pauses on a `decision_point`, and renders a stub of `decide_from_tracking`. The phase diagram is in `touchline/scene/FLOW.md`.
 
@@ -10,8 +20,8 @@ The browser flow lives in `touchline/scene`. From `touchline/scene`, run `npm in
 
 1. **Ingest** synthetic match events (JSON/text state).
 2. **System 1** maps that state to `P(pass | shoot | dribble | hold)`. The default backend is a lightweight linear softmax over numeric features. It loads `src/inside_the_game/system1/weights.json` when that file is present and otherwise uses the hand-set stub. Those weights are fit on synthetic `decision_point` events only (`docs/v1-model-selection.md`). The same softmax accepts a SynthData tracking frame through `predict_tracking`. An optional [TypeSafe Jev Choice](https://docs.typesafe.ai/primitives/choice) hook accepts the same JSON/text state and is unused when `typesafe-sdk` is not installed. No images. Jev stays off on the MVP path.
-3. **Video demo** (`python -m demo.run`) runs detection, ByteTrack, pitch homography, and this same softmax, then paints options on the broadcast. The events path below does not need those dependencies. See [Video demo](#video-demo).
-4. **System 2** takes a match event plus the System 1 distribution and returns a short football rationale (`explain`). The default is an offline template: no network and no API key. An optional local model implements the same call only when the caller passes `local_llm`; `load_local_llm()` is `None`, so the hook stays off. A Foundry-shaped chat body is still built in memory and is not sent. socceraction xT / VAEP stays a stub sidecar (`TODO`) and is named in the rationale without a fitted value.
+3. **Video demo** (`python -m demo.run`) runs detection, ByteTrack, pitch homography, and this same softmax, then paints options on the broadcast. The events path below does not need those dependencies. See [Video demo](#video-demo). The synthetic tracking clip is the primary content; a real broadcast clip is an optional second content source, not the product input.
+4. **System 2** turns a decision into a short football rationale. The default is an offline template: no network and no API key. A Foundry narration request is always built, and `inside_the_game.system2.narration.responses_narrator` sends it when a narrator is injected — pointing the base URL at Azure AI Foundry is the only change needed. `touchline/` runs the live four-role team this way; see its README. socceraction xT / VAEP stays a stub sidecar (`TODO`).
 5. **Present** emits replay overlay arrows, probability bars for all four actions, and the System 2 explanation in the same overlay.
 
 MVP path in this pull request: **1 → 2 → 4 → 5**.
@@ -153,6 +163,45 @@ pytest
 ```
 
 `pytest` checks the four-way distribution with the checked-in weights and with the stub fallback, the tracking path on a synthetic `decision_point` (four-class probabilities, pass targets, carry path), the weight fit on the synthetic sample, the offline System 2 rationale on synthetic states (with the network blocked), the overlay explanation beside all four probabilities, and the synthetic generator's labels. See [DATA.md](DATA.md) and [docs/v1-model-selection.md](docs/v1-model-selection.md) for the v1 softmax, completion score, and Foundry narration.
+
+## Data sources
+
+Every match, every frame and every decision in this repository is synthetic.
+Nothing here is a recording of a real match, and no real club badge, kit badge,
+crowd image or broadcast footage is included.
+
+| Layer | Source | Licence / attribution |
+| --- | --- | --- |
+| Match, event and tracking generator | `touchline/scripts/synth/` and `touchline/generate.py`, imported from [LiNTe912/NextPlay-AI](https://github.com/LiNTe912/NextPlay-AI) | Imported with the upstream author's permission for this hackathon. The upstream commit carries no `LICENSE` file, so no SPDX identifier is claimed. See [`touchline/SOURCE.md`](touchline/SOURCE.md). |
+| Trained decision model and the 40-match decision dataset | `touchline/data/decision-analysis/`, imported from [tigerguoyi/NextPlay-AI](https://github.com/tigerguoyi/NextPlay-AI), a fork of the repository above | Same terms. The source lock is `touchline/data/decision-analysis/source-lock.json`; `decision_analysis/pipeline.py validate` re-checks it without writing. |
+| Club, player and venue names | Fully fictional. Twenty clubs (Aster FC, Beacon FC, Cedar FC, …) with fictional grounds; 560 procedurally generated players | None needed. The upstream squad list was not imported. The upstream three-letter club codes survive only as opaque keys and are never rendered. |
+| Calibration reference for spatial values | [StatsBomb Open Data](https://github.com/hudl/open-data) | Used only to calibrate the ground-pass completion and shot frequency baselines. The matches are synthetic; the reference data is not redistributed here. |
+
+## Assumptions and limitations
+
+- The spatial values behind the ranking are **decision aids, not probabilities**.
+  `value_gain`, `scenario_weight` and the sensitivity ranges are model
+  internals. The interface shows a rank and a written opportunity and risk, and
+  deliberately does not print those numbers, so no false success rate or goal
+  probability can be read off the screen.
+- The decision model's own weights are uncalibrated for shot and carry. Ground
+  passes are the only rollout the counterfactual simulates.
+- Player foot preference, body orientation and first-touch stability are
+  unknown at inference time, so the model cannot use them.
+- The synthetic league is generated, not observed. Its numbers describe the
+  generator, not football.
+- The Foundry narration and the four-role agent team are unavailable when no
+  model key is configured. In that case the computed comparison still stands and
+  the interface reports `model_unavailable` instead of inventing an answer.
+- The daily model-call cap (`ITG_DAILY_CALL_CAP`, 200 by default) bounds the
+  hosted demo. When it is spent the comparison is unaffected.
+
+## Attribution
+
+Position-value calibration and the shot/pass frequency baselines reference
+**StatsBomb Open Data** (© StatsBomb, published under its own open-data terms).
+StatsBomb is not a sponsor of this project, and none of its match data is
+redistributed in this repository. The matches analysed here are synthetic.
 
 ## Layout
 

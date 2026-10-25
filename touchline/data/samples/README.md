@@ -1,6 +1,6 @@
 # Samples
 
-Checked-in clips for Frontend and SysModel. This is the v0.1 centre-origin format from `touchline/scripts/synth/`. It is separate from the Northwater League files under `touchline/data/league/` and from the legacy single match written by `touchline/generate.py`.
+Checked-in clips for Frontend and SysModel. This is the v0.1 centre-origin format from `touchline/scripts/synth/`. It is separate from the NextPlay League files under `touchline/data/league/` and from the legacy single match written by `touchline/generate.py`.
 
 ## `sample_25hz_10min/`
 

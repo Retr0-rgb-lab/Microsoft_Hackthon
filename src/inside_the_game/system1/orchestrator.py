@@ -2,7 +2,7 @@
 
 This is the in-process shape the Microsoft Agent Framework run will call.
 The tools are ``read-frame``, ``decide``, ``score-completion``, and
-``narrate``. Narration builds a Foundry ``gpt-4o-mini`` request from the
+``narrate``. Narration builds a Foundry ``gpt-4.1-mini`` request from the
 decision JSON and does not send it.
 """
 

@@ -42,17 +42,17 @@ import {
 const CLIP_DIR = "touchline/data/samples/sample_25hz_10min";
 
 const ACTION_LABEL: Record<ActionName, string> = {
-  pass: "传球",
-  shoot: "射门",
-  dribble: "带球",
-  hold: "停球",
+  pass: "Pass",
+  shoot: "Shot",
+  dribble: "Dribble",
+  hold: "Hold",
 };
 
 const KIND_LABEL = {
-  pass: "传球",
-  carry: "带球",
-  shot: "射门",
-  hold: "停球",
+  pass: "Pass",
+  carry: "Carry",
+  shot: "Shot",
+  hold: "Hold",
 } as const;
 
 type Tool = "pass" | "carry" | "shot" | "formation";
@@ -86,7 +86,7 @@ type Hit = { kind: "player" | "ghost" | "ink"; id: string; distance: number };
 
 function required<T extends Element>(selector: string): T {
   const found = document.querySelector<T>(selector);
-  if (!found) throw new Error(`板面缺少 ${selector}`);
+  if (!found) throw new Error(`Board markup missing: ${selector}`);
   return found;
 }
 
@@ -247,11 +247,11 @@ function renderPanel(ghost: GhostView | null) {
     return;
   }
   ghostPanel.hidden = false;
-  ghostTitle.textContent = `建议 · ${ACTION_LABEL[ghost.action]}`;
+  ghostTitle.textContent = `Suggestion · ${ACTION_LABEL[ghost.action]}`;
   const modeled = ghost.probabilities !== null;
   ghostBars.hidden = !modeled;
   ghostFoot.hidden = !modeled;
-  ghostSource.textContent = modeled ? "未校准 · 检入决策" : "几何兜底";
+  ghostSource.textContent = modeled ? "Uncalibrated · checked-in decision" : "Geometric fallback";
   ghostNote.textContent = ghost.note ?? "";
   if (!ghost.probabilities) return;
   for (const action of ACTION_ORDER) {
@@ -274,7 +274,7 @@ async function main() {
   try {
     clipName = clipNameFromQuery(params.get("clip"));
   } catch (error) {
-    showError(error instanceof Error ? error.message : "片段名无效。");
+    showError(error instanceof Error ? error.message : "Invalid clip name.");
     return;
   }
 
@@ -298,23 +298,23 @@ async function main() {
       }),
     ]);
   } catch (error) {
-    showError(error instanceof Error ? error.message : "读不到样本。");
+    showError(error instanceof Error ? error.message : "The sample could not be read.");
     return;
   }
 
   const coords = meta.coordinate_system;
   if (!coords || coords.origin !== "centre_spot" || coords.pitch_length_m !== 105 || coords.pitch_width_m !== 68) {
-    showError("样本必须是中圈开球点、105×68 米。");
+    showError("The sample must start from the centre spot on a 105 × 68 m pitch.");
     return;
   }
   if (!Number.isFinite(meta.frame_hz) || meta.frame_hz < 10) {
-    showError("frame_hz 缺失。");
+    showError("frame_hz is missing.");
     return;
   }
   const first = frames[0];
   const endFrame = frames[frames.length - 1];
   if (!first || !endFrame || first.players.length !== 22 || first.ball.length !== 6) {
-    showError("片段需要 22 名球员和一个球。");
+    showError("The clip needs 22 players and one ball.");
     return;
   }
 
@@ -360,7 +360,7 @@ async function main() {
   function frameAt(t: number): TrackingFrame {
     const index = Math.max(0, Math.min(frames.length - 1, Math.round((t * hz) / 1000)));
     const frame = frames[index];
-    if (!frame) throw new Error("帧缺失。");
+    if (!frame) throw new Error("Frame missing.");
     return frame;
   }
 
@@ -368,7 +368,7 @@ async function main() {
   try {
     opened = formationFromFrame(peopleOf(first), meta.players, first.attack_dir);
   } catch (error) {
-    showError(error instanceof Error ? error.message : "阵型无法从这一帧填入。");
+    showError(error instanceof Error ? error.message : "The formation cannot be filled from this frame.");
     return;
   }
   let slots = opened.slots;
@@ -380,7 +380,7 @@ async function main() {
     clipActors = createActors(meta.players);
     formationActors = createActors(meta.players);
   } catch (error) {
-    showError(error instanceof Error ? error.message : "无法摆出 22 人。");
+    showError(error instanceof Error ? error.message : "Cannot place 22 players.");
     return;
   }
   tagActors(clipActors);
@@ -392,8 +392,8 @@ async function main() {
 
   const seconds = (span / 1000).toFixed(span >= 1000 ? 0 : 1);
   clipEl.textContent = decisionSet
-    ? `${clipName} · ${frames.length} 帧 · ${seconds} 秒 · ${decisionSet.decision_count} 条检入决策 · 未校准`
-    : `${clipName} · ${frames.length} 帧 · ${seconds} 秒 · 检入决策不可用`;
+    ? `${clipName} · ${frames.length} frames · ${seconds} s · ${decisionSet.decision_count} checked-in decisions · uncalibrated`
+    : `${clipName} · ${frames.length} frames · ${seconds} s · checked-in decisions unavailable`;
   scrub.max = String(span);
   scrub.value = String(tMs);
 
@@ -433,7 +433,7 @@ async function main() {
     broadcastBtn.setAttribute("aria-pressed", String(mode === "broadcast"));
     topBtn.setAttribute("aria-pressed", String(mode === "top"));
     document.documentElement.dataset.camera = mode;
-    playBtn.textContent = paused ? "播放" : "暂停";
+    playBtn.textContent = paused ? "Play" : "Pause";
   }
 
   function setCamera(next: CameraMode) {
@@ -469,7 +469,7 @@ async function main() {
         action: routed.action,
         route: routed.route,
         probabilities: decision.probabilities,
-        note: routed.route?.score != null ? `完成分 ${routed.route.score.toFixed(4)}` : null,
+        note: routed.route?.score != null ? `Completion score ${routed.route.score.toFixed(4)}` : null,
         markerAt: routed.action === "hold" ? [owner.x, owner.y] : null,
       };
     }
@@ -480,8 +480,8 @@ async function main() {
       probabilities: null,
       note:
         routed.action === "pass"
-          ? "这一帧没有检入决策。路线是未越位的最近队友。"
-          : "这一帧没有检入决策。沿进攻方向 6 米。",
+          ? "No checked-in decision for this frame. The route is the nearest offside-free teammate."
+          : "No checked-in decision for this frame. Six metres along the attacking direction.",
       markerAt: null,
     };
   }
@@ -832,7 +832,7 @@ async function main() {
       formationAttack = filled.attack_dir;
       placeFormation();
     } catch (error) {
-      statusEl.textContent = error instanceof Error ? error.message : "无法填入阵型。";
+      statusEl.textContent = error instanceof Error ? error.message : "The formation could not be filled.";
     }
   });
   downloadBtn.addEventListener("click", () => {

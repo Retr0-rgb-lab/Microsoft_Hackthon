@@ -74,10 +74,10 @@ and calculated evidence to your configured provider and can incur API charges.
 Provider support for function calling and strict JSON-schema output is required.
 No new model is selected automatically. Missing settings returns `not_configured`.
 
-`agents.py` implements separate coordinator, attack, defense and audit model
+`agents.py` implements separate coordinator, attack, defense and reviewer model
 contexts. The coordinator calls a `delegate` function in a bounded sequence;
 colleague outputs share a hash-identified snapshot. Attack must call
-`evaluate_options`, defense must call `simulate_pass`, and audit must call
+`compare_actions`, defense must call `simulate_action`, and reviewer must call
 `check_evidence`. Each role can decline to recommend a candidate. Runtime checks
 reject unknown evidence references, illegal candidates, missing tool use and early
 coordinator answers. These checks do NOT prove all natural-language claims true.

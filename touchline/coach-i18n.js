@@ -16,10 +16,18 @@ const pairs = [
 ['Blue: HOME · orange: AWAY · white ring: ball owner. Click a route in the table to inspect it. Dashed routes are offside.','蓝色：主队 · 橙色：客队 · 白圈：持球者。点击表格中的路线查看依据，虚线表示越位选项。'],
 ['What are the options?','当前有哪些选择？'],['Loading match previews…','正在加载比赛片段…'],['Choose a moment, then analyze.','选择比赛时刻，再点击分析。'],
 ['Ask the analysis team','向分析团队提问'],['Your question','你的问题'],['Run model agents','运行模型 Agent'],['Touchline Settings','Touchline 设置'],
-['Four model contexts: coordinator → attack → defense → reviewer. Uses the model saved in','四个独立模型上下文：协调 → 进攻 → 防守 → 证据审查。使用以下位置保存的模型：'],
-['. Running sends this synthetic snapshot, your question and computed evidence to that provider and may incur API charges. Up to 14 model requests; up to about 150 seconds. The model runs on Azure AI Foundry. The orchestration is a custom four-role workflow over the Responses tool loop, not the Microsoft Agent Framework graph.','。运行时会将合成快照、你的问题和计算证据发送至所配置的服务，可能产生 API 费用。最多 14 次模型请求，约 150 秒。模型运行在 Azure AI Foundry 上；编排是基于 Responses 工具循环的自定义四角色工作流，不是 Microsoft Agent Framework 图。'],
+['Decision-analysis contract: catalog → index → context → analyze → agents. The registered decision for this moment is analysed with the request issued by the server; only the question, the audience mode and the language change. Contract: ','决策分析契约：目录 → 索引 → 上下文 → 分析 → Agent。当前时刻对应的已登记决策使用服务端签发的请求分析，仅问题、解释模式与语言可改。契约：'],
+['decision-analysis README','决策分析说明'],
+['. The ranking is computed locally and the cited evidence is never re-written; the language agent may be unavailable, and that never changes the computed comparison.','。排名在本地计算，引用证据不会被改写；语言 Agent 可能尚未接通，而这不会改变计算结果。'],
 ['No model agents have run for this snapshot.','当前快照尚未运行模型 Agent。'],['No model agents have run for this selected route.','所选路线尚未运行模型 Agent。'],
 ['Actual handoffs, tool calls and cited evidence','实际交接、工具调用与引用证据（原始记录）'],
+['Contract status, agent trace and cited evidence','契约状态、Agent 调用记录与引用证据（原始记录）'],
+['Running the decision-analysis contract: catalog, index, context, analyze, agents. The trace appears when the bounded review finishes.','正在按决策分析契约执行：目录、索引、上下文、分析、Agent。完成受限审查后显示调用记录。'],
+['No registered decision covers this moment.','当前时刻没有已登记的决策。'],
+['This match is not covered by the decision-analysis catalog.','该比赛不在决策分析目录的覆盖范围内。'],
+['The language agent is not connected, so no explanation was produced. The computed comparison and its limitations are unchanged.','语言 Agent 尚未接通，因此没有生成解释。计算结果及其限制说明保持不变。'],
+['The agent run returned no explanation text. The computed comparison and its limitations are unchanged.','本次 Agent 运行没有返回解释文本。计算结果及其限制说明保持不变。'],
+['Decision-analysis service unavailable','决策分析服务不可用'],
 ['Pass to','接球者'],['Rule check','规则检查'],['Feasibility index','可行性指数'],['Value gain','价值增益'],['Critical defender','关键防守者'],['Eligible','符合当前规则检查'],['Offside','越位'],
 ['Model assumptions & research','模型假设与研究依据'],['un-xPass paper','un-xPass 论文'],['Pitch Control reference','空间控制模型参考'],
 ['This baseline uses probability-weighted outcome values minus current value, following the expected-usefulness formulation in un-xPass §2.1. Its feasibility and spatial-value functions are hand-defined and uncalibrated. They are not trained un-xPass, VAEP, xT, xG, or real goal probabilities. Player foot preference and body orientation are unknown. Only candidate ground passes are compared; the result does not claim passing is better than shooting or carrying.','本原型参考 un-xPass 第 2.1 节的期望效用结构，将不同结果加权后减去当前价值。可行性与空间价值函数为手工设定，尚未校准，并非训练后的 un-xPass、VAEP、xT、xG 或真实进球概率。惯用脚和身体朝向未知。目前仅比较候选地面传球，不代表传球优于射门或带球。'],
@@ -57,6 +65,9 @@ export function translate(text, language) {
     .replace(/\bintercepted\b/g,'被拦截').replace(/\bunreceived\b/g,'未接到').replace(/\breceived\b/g,'接到').replace(/\bunresolved\b/g,'尚未结束')
     .replace(/ · reaction /g,' · 反应时间 ').replace(/ · pass offset /g,' · 传球偏移 ').replace(/ by (\w+)/g,'，控球者 $1')
     .replace(/ · period /g,' · 半场 ').replace(/Status: /g,'状态：').replace(/model requests: /g,'模型请求次数：').replace(/all four agents completed: /g,'四个 Agent 均完成：')
+    .replace(/candidate_set_id: /g,'候选集 ID：').replace(/data_version: /g,'数据版本：').replace(/cited evidence: /g,'引用证据：')
+    .replace(/decision_id: /g,'决策 ID：').replace(/snapshot_id: /g,'快照 ID：')
+    .replace(/nearest registered decision, ([\d.]+) s before the previewed frame/g,'预览时刻前 $1 秒的最近已登记决策')
     .replace(/\bnot_configured\b/g,'未配置').replace(/\bcomplete\b/g,'已完成').replace(/\bpartial\b/g,'部分完成').replace(/\bfailed\b/g,'失败').replace(/\byes\b/g,'是').replace(/\bno\b/g,'否')
     .replace(/Gain /g,'增益 ').replace(/feasibility index /g,'可行性指数 ').replace(/minimum defender arrival margin /g,'最小防守到达时间差 ');
 }

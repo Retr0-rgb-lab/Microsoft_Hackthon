@@ -57,21 +57,39 @@ class ServerTests(unittest.TestCase):
         except urllib.error.HTTPError as error:
             return error.code, error.read()
 
-    def test_agent_endpoint_missing_config_and_validation(self):
-        from test_decision import sample
-        frame, metadata = sample()
-        payload = {'frame':frame,'metadata':metadata,'question':'Why pass?','mode':'fan'}
-        status, body = self.request('/api/agent-review',payload)
-        self.assertEqual(status,200)
-        self.assertEqual(json.loads(body)['status'],'not_configured')
-        self.assertFalse(json.loads(body)['is_multi_agent'])
-        self.assertEqual(self.request('/api/agent-review',{**payload,'question':''})[0],400)
-        self.assertEqual(self.request('/api/agent-review',payload,'https://evil.example')[0],403)
-        server.AGENT_SLOT.acquire()
-        try:
-            self.assertEqual(self.request('/api/agent-review',payload)[0],429)
-        finally:
-            server.AGENT_SLOT.release()
+    def test_decision_analysis_agents_endpoint(self):
+        from decision_analysis.input_adapter import NEUTRAL_PROFILE
+        from decision_analysis.service import Repository
+        repo = Repository()
+        match = 'PL26-W01-MCI-CHE'
+        record = repo.index(match)['records'][0]
+        request = dict(match_id=match, snapshot_id=record['snapshot_id'], t_ms=record['t_ms'],
+                       actor_id=record['actor_id'], question='Why not pass along this route?',
+                       mode='fan', language='en', profile=copy.deepcopy(NEUTRAL_PROFILE))
+        public, _ = repo.compare(request)
+        body = {'request': request, 'candidate_set_id': public['candidate_set_id']}
+        status, raw = self.request('/api/decision-analysis/agents', body)
+        self.assertEqual(status, 200)
+        answer = json.loads(raw)
+        # No key is configured for the test, so the computed comparison stands
+        # and the agent is reported as unavailable rather than replaced by a
+        # fabricated answer.
+        self.assertEqual(answer['status'], 'model_unavailable')
+        self.assertIsNone(answer['explanation'])
+        self.assertEqual(answer['agent_trace'], [])
+        self.assertTrue(answer['candidates'])
+        # A body that is not exactly the bound request is refused.
+        self.assertEqual(self.request('/api/decision-analysis/agents', {'request': request})[0], 400)
+        # A stale candidate set is refused rather than answered.
+        self.assertEqual(self.request('/api/decision-analysis/agents',
+                                       {**body, 'candidate_set_id': 'outcome-0.2:stale'})[0], 400)
+        # Only same-origin JSON requests are accepted.
+        self.assertEqual(self.request('/api/decision-analysis/agents', body, 'https://evil.example')[0], 403)
+        # A spent daily cap still returns the comparison.
+        with patch('server.claim_model_call', return_value=False):
+            status, raw = self.request('/api/decision-analysis/agents', body)
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(raw)['status'], 'model_unavailable')
 
     def test_decision_and_rollout_endpoints(self):
         from test_decision import sample

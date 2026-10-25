@@ -10,6 +10,29 @@ NEUTRAL_PROFILE = {'profile_version': 'sim-1', 'kind': 'simulated',
                    'preferred_foot': None, 'weak_foot': None}
 REQUEST_KEYS = {'match_id', 'snapshot_id', 't_ms', 'actor_id', 'question', 'mode', 'language', 'profile'}
 
+# A source profile identifies the person it describes. Birth date, nationality
+# code and shirt number together reverse a name alias, and the capture hash is
+# a fingerprint of the page they came from. The modelling inputs are the four
+# fields kept below; everything else stays in the local capture.
+PUBLIC_PROFILE_FIELDS = ('schema_version', 'status', 'attribute_kind', 'attributes',
+                         'height_cm', 'weight_kg', 'preferred_foot', 'source_conflicts')
+
+
+def public_profile(profile):
+    """The part of a source profile that may be persisted or served.
+
+    Only the football inputs and a position conflict survive. A birth-date or
+    shirt-number conflict restates the person's real values, so it is dropped
+    rather than reduced.
+    """
+    if not profile:
+        return None
+    kept = {k: copy.deepcopy(profile[k]) for k in PUBLIC_PROFILE_FIELDS if k in profile}
+    conflicts = kept.get('source_conflicts')
+    if conflicts:
+        kept['source_conflicts'] = {k: v for k, v in conflicts.items() if k == 'position'}
+    return kept
+
 
 def validate_request(request):
     if not isinstance(request, dict) or set(request) != REQUEST_KEYS:
@@ -40,7 +63,7 @@ def validate_request(request):
 
 def source_profile(player):
     """Keep observed indices separate, with no conversion to execution ability."""
-    observed = copy.deepcopy(player.get('sofascore'))
+    observed = public_profile(player.get('sofascore'))
     issues = []
     if not observed:
         return {'status': 'unavailable', 'observation': None, 'issues': ['No source profile'], 'used_in_probability': False}

@@ -1,6 +1,6 @@
 """Azure AI Foundry narration request. This module does not send it.
 
-v1 narration is budgeted on ``gpt-4o-mini``. The user message is the decision
+v1 narration is budgeted on ``gpt-4.1-mini``. The user message is the decision
 JSON (probabilities, pass targets, carry path, scores) and nothing else: no
 tracking dump, no video, no free-text match report.
 """
@@ -13,13 +13,13 @@ from typing import Any
 
 
 FOUNDRY_PROVIDER = "azure-ai-foundry"
-FOUNDRY_DEPLOYMENT = "gpt-4o-mini"
+FOUNDRY_DEPLOYMENT = "gpt-4.1-mini"
 
 _NARRATION_KEYS = ("probabilities", "primary_pass", "secondary_pass", "carry")
 
 
 def foundry_narration_request(decision: Mapping[str, Any]) -> dict[str, Any]:
-    """Chat body for Foundry ``gpt-4o-mini``. ``sent`` is always false here."""
+    """Chat body for Foundry ``gpt-4.1-mini``. ``sent`` is always false here."""
     payload = {key: decision.get(key) for key in _NARRATION_KEYS}
     encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True)
     # Round-trip so a caller cannot slip a non-JSON blob into the user turn.
