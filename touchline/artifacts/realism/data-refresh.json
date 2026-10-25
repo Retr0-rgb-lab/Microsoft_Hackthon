@@ -1,0 +1,53 @@
+{
+  "updated_at_utc": "2026-10-24T13:38:36.071820+00:00",
+  "generator": "generate.py v2.3.0",
+  "action_policy": "player-actions-1",
+  "matches": 40,
+  "players": 566,
+  "seed": 20261019,
+  "full_tracking_matches": 4,
+  "changed_scores": 38,
+  "decisions": 91031,
+  "action_mix": {
+    "counts": {
+      "pass": 41760,
+      "carry": 48032,
+      "shot": 970
+    },
+    "total": 90762,
+    "shares": {
+      "pass": 0.4601044489984795,
+      "carry": 0.5292082589630022,
+      "shot": 0.010687292038518323
+    }
+  },
+  "real_test_shares": {
+    "pass": 0.46077457795431975,
+    "carry": 0.5292949354518371,
+    "shot": 0.009930486593843098
+  },
+  "squads_sha256": "c39c3452ab5d391febcce16638fe798eaaed325152d43515da7269b5b78e8387",
+  "datasets": [
+    "data/league",
+    "data/league-validated",
+    "data",
+    "data/realism-sample"
+  ],
+  "integrity": "PASS",
+  "scope": "All existing local datasets refreshed; fixture identities, kickoff times, seeds and roster values retained. Attribute policy applies to league players; legacy single-match examples use neutral profiles. Forced restart carries excluded from action-mix counts. Hosted deployment is separate.",
+  "system_audit": {
+    "decisions": 91031,
+    "analyzed": 91031,
+    "analysis_errors": 0,
+    "rollout_runs": 80
+  },
+  "tests": {
+    "javascript_passed": 21,
+    "python_passed": 73,
+    "skipped": 0
+  },
+  "demo": {
+    "matches": 40,
+    "moments": 360
+  }
+}

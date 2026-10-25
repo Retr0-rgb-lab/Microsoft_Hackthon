@@ -9,18 +9,10 @@ from unittest.mock import patch
 from analysis_agent import build_report, clock, narrate, write_report
 
 ROOT = Path(__file__).resolve().parents[1]
+MATCH = ROOT / 'data/league/matches/PL26-W01-MCI-CHE'
 
 
-def sample_match():
-    """First checked-in league match. A full generate.py run has 40 directories."""
-    matches = sorted(path for path in (ROOT / 'data/league/matches').glob('*') if path.is_dir())
-    if not matches:
-        raise FileNotFoundError('no league matches under data/league/matches; run generate.py')
-    return matches[0]
-
-
-def inputs(path=None):
-    path = Path(path) if path else sample_match()
+def inputs(path=MATCH):
     return (json.loads((path / 'metadata.json').read_text()),
             json.loads((path / 'summary.json').read_text()),
             [json.loads(line) for line in (path / 'events.jsonl').read_text().splitlines()])
@@ -53,9 +45,8 @@ class AnalysisTests(unittest.TestCase):
                     build_report(m, s, e)
 
     def test_all_matches_have_valid_awards_and_full_coverage(self):
-        paths = sorted(path for path in (ROOT / 'data/league/matches').glob('*') if path.is_dir())
-        # The trimmed sample ships two matches. A full `generate.py` run restores 40.
-        self.assertGreaterEqual(len(paths), 1)
+        paths = sorted((ROOT / 'data/league/matches').glob('*'))
+        self.assertEqual(len(paths), 40)
         for path in paths:
             with self.subTest(match=path.name):
                 m, s, e = inputs(path)

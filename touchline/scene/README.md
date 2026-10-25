@@ -38,6 +38,6 @@ Other query flags:
 | `?cam=top` | Open on the top-down camera |
 | `?cam=broadcast` | Open on the broadcast camera (the default) |
 
-Buttons: **转播** (broadcast) and **俯视** (top-down). Keys: `1` / `b`, `2` / `t`. Space pauses.
+Buttons: **Broadcast** and **Top-down**. Keys: `1` / `b`, `2` / `t`. Space pauses.
 
 HOME and AWAY are flat kit colours for the sample. The page does not print club or player names from the metadata.

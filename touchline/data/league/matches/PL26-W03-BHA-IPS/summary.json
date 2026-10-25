@@ -1,0 +1,165 @@
+{
+  "match_id": "PL26-W03-BHA-IPS",
+  "seed": 20264025,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655634,
+  "state_snapshots": 6001,
+  "event_count": 3737,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 82,
+    "restart": 31,
+    "carry": 1218,
+    "pressure": 1242,
+    "pass": 1041,
+    "interception": 56,
+    "shot": 24,
+    "save": 12,
+    "stoppage": 12,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 543,
+      "completed_passes": 518,
+      "shots": 15,
+      "shots_on_target": 9,
+      "interceptions": 31,
+      "pressure_events": 610,
+      "possession_seconds": 2893.0,
+      "possession_pct": 50.44,
+      "pass_accuracy_pct": 95.4
+    },
+    "AWAY": {
+      "passes": 498,
+      "completed_passes": 467,
+      "shots": 9,
+      "shots_on_target": 6,
+      "interceptions": 25,
+      "pressure_events": 632,
+      "possession_seconds": 2842.8,
+      "possession_pct": 49.56,
+      "pass_accuracy_pct": 93.78
+    }
+  },
+  "distance_m": {
+    "H01": 3034.3,
+    "H02": 7329.8,
+    "H03": 10631.6,
+    "H04": 10780.2,
+    "H05": 9751.6,
+    "H06": 7343.3,
+    "H07": 12052.7,
+    "H08": 11250.6,
+    "H09": 11501.3,
+    "H10": 12356.9,
+    "H11": 11599.8,
+    "A01": 3141.1,
+    "A02": 9844.2,
+    "A03": 11165.6,
+    "A04": 11062.6,
+    "A05": 8266.5,
+    "A06": 9702.3,
+    "A07": 12266.9,
+    "A08": 11268.8,
+    "A09": 11342.0,
+    "A10": 12451.6,
+    "A11": 7458.4,
+    "H12": 4297.5,
+    "H13": 0.0,
+    "H14": 2421.7,
+    "A12": 2162.8,
+    "A13": 3794.2,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 669400,
+      "period": 1,
+      "period_ms": 669400,
+      "team_id": "AWAY",
+      "club_id": "IPS",
+      "club_name": "Larkspur FC",
+      "player_id": "A09",
+      "player_name": "Larkspur Player 23",
+      "shirt_number": 11,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 1714000,
+      "period": 1,
+      "period_ms": 1714000,
+      "team_id": "HOME",
+      "club_id": "BHA",
+      "club_name": "Ember FC",
+      "player_id": "H10",
+      "player_name": "Ember Player 23",
+      "shirt_number": 7,
+      "score": [
+        1,
+        1
+      ]
+    },
+    {
+      "t_ms": 4713600,
+      "period": 2,
+      "period_ms": 1713600,
+      "team_id": "HOME",
+      "club_id": "BHA",
+      "club_name": "Ember FC",
+      "player_id": "H10",
+      "player_name": "Ember Player 23",
+      "shirt_number": 7,
+      "score": [
+        2,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 3,
+    "kickoff_local": "2026-11-08T14:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Ember Park"
+  },
+  "home_club": {
+    "club_id": "BHA",
+    "name": "Ember FC",
+    "short_name": "Ember",
+    "stadium": "Ember Park",
+    "colors": {
+      "primary": "#0057B8",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "IPS",
+    "name": "Larkspur FC",
+    "short_name": "Larkspur FC",
+    "stadium": "Larkspur Park",
+    "colors": {
+      "primary": "#0044A9",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

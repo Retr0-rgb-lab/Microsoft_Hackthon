@@ -1,0 +1,2142 @@
+{
+  "revision": "player-actions-1",
+  "reference": {
+    "train": {
+      "counts": {
+        "pass": 4867,
+        "carry": 5616,
+        "shot": 106
+      },
+      "total": 10589,
+      "shares": {
+        "pass": 0.4596279157616394,
+        "carry": 0.5303616960997262,
+        "shot": 0.010010388138634432
+      }
+    },
+    "development": {
+      "counts": {
+        "pass": 2308,
+        "carry": 2692,
+        "shot": 43
+      },
+      "total": 5043,
+      "shares": {
+        "pass": 0.4576640888360103,
+        "carry": 0.5338092405314298,
+        "shot": 0.008526670632559984
+      }
+    },
+    "test": {
+      "counts": {
+        "pass": 2320,
+        "carry": 2665,
+        "shot": 50
+      },
+      "total": 5035,
+      "shares": {
+        "pass": 0.46077457795431975,
+        "carry": 0.5292949354518371,
+        "shot": 0.009930486593843098
+      }
+    }
+  },
+  "source": {
+    "commit": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+    "competition": "2022 World Cup",
+    "sources": [
+      {
+        "match_id": 3857254,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857254.json",
+        "sha256": "05b8584eea49fb178102bc067ccb5dad82c1c1988ec971a875a9229e27badb5a"
+      },
+      {
+        "match_id": 3857255,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857255.json",
+        "sha256": "dec08979312350b0c3910b5ed15c7e4f7c10f438b733be0231d47a487b74e7a0"
+      },
+      {
+        "match_id": 3857256,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857256.json",
+        "sha256": "e1c5c6d486cac99e336669951946b5d31983b28285089470943f42d16ced7337"
+      },
+      {
+        "match_id": 3857257,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857257.json",
+        "sha256": "a9cc7eef2a5f15d49f2fe5bc2b0040732862c500b1363b3c0f6694cf41498cbf"
+      },
+      {
+        "match_id": 3857258,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857258.json",
+        "sha256": "0b47aafb78f7a131cf536753291ec3be96a54509407ec7e400c143730ae4db74"
+      },
+      {
+        "match_id": 3857259,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857259.json",
+        "sha256": "54006e5292f8a12a121d39c68a796d8fbe94c0f93304558a40bb80d81972f264"
+      },
+      {
+        "match_id": 3857260,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857260.json",
+        "sha256": "7d619884b464cb63bb5ae13085cc3e6f2390cb2c6ef42107e2f85abb751579e7"
+      },
+      {
+        "match_id": 3857261,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857261.json",
+        "sha256": "ec4f9d3ebb2fe5dd32664a60fec79c4e5b4536748315f35fca050fd7f8bb23c2"
+      },
+      {
+        "match_id": 3857262,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857262.json",
+        "sha256": "f67026e3be8362a24da7df778ca96cdfc631bef071b07b4edb6cef1cb1eafacf"
+      },
+      {
+        "match_id": 3857263,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857263.json",
+        "sha256": "16617ba95154db870ba833156348acfafa037730391ec0f8fe3f2635eba135ad"
+      },
+      {
+        "match_id": 3857264,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857264.json",
+        "sha256": "b5e2357a818badd8b294b854b2b327ea7a07cdf7a627973f20a81ebf98e494ce"
+      },
+      {
+        "match_id": 3857265,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857265.json",
+        "sha256": "ed76f94790148cc865622a26fd3d29df3d5253bd04bf053c0207dc0d15e6c0a6"
+      },
+      {
+        "match_id": 3857266,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857266.json",
+        "sha256": "f375137a64c13b2c22e456fae9394bc810ca2bb98a439d94da18fea1365a98a8"
+      },
+      {
+        "match_id": 3857267,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857267.json",
+        "sha256": "7c05c6fa755649d4d882f98817944d6f90613ca424af061d0cfbc080585ac95d"
+      },
+      {
+        "match_id": 3857268,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857268.json",
+        "sha256": "1e9c9f2cf8b229388e826a32bb04224ab9aadb91e5aa4614ecf66cc07c6caa48"
+      },
+      {
+        "match_id": 3857269,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857269.json",
+        "sha256": "20c7d2dd0ca6ff6dbfb5ccebfd8dfb4483783de6afded86060aa0043943e258e"
+      },
+      {
+        "match_id": 3857270,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857270.json",
+        "sha256": "29d7a2c5f589c6fe7ffbc97ca0738d0959e900d1f0f3f488d3ff7f91f94c30fb"
+      },
+      {
+        "match_id": 3857271,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857271.json",
+        "sha256": "3195e45476b96c3257e15043ac4fe17bbb640c548a4edb74d2c3b3eb8b3519e3"
+      },
+      {
+        "match_id": 3857272,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857272.json",
+        "sha256": "9d560f65771f71885fb97643240f0c858d7ddd66410d7fbc6e2783533eb6919b"
+      },
+      {
+        "match_id": 3857273,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857273.json",
+        "sha256": "7bee8a23bbf5bf6db47d7668289e80cf8eb4f49cab46b449073f5839b15f450b"
+      },
+      {
+        "match_id": 3857274,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857274.json",
+        "sha256": "40f8b9d5fe6e8e2cb9ea823a99485d142a67eba46b228d237774a687ab3a9d66"
+      },
+      {
+        "match_id": 3857275,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857275.json",
+        "sha256": "8531cc2ce4bfab163e2660f8e5dea4f88d97794423ef3d894f789602b1fab610"
+      },
+      {
+        "match_id": 3857276,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857276.json",
+        "sha256": "8320cf567b912bac1ff9f5a49deb1263ba5aa2610cf6f3dcf6db60f065bf1e99"
+      },
+      {
+        "match_id": 3857277,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857277.json",
+        "sha256": "0bb3e4c8ad11587af05ca6734d50e6f7ea883db9ff73d79540c434bc50715a0f"
+      },
+      {
+        "match_id": 3857278,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857278.json",
+        "sha256": "63962cc1cc2b6b0c7e9e12e3e9e9ee855ce7036b8f0aa123e3bdd297a99ec095"
+      },
+      {
+        "match_id": 3857279,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857279.json",
+        "sha256": "6e35ec73c164565b99684ab534efed808f23f6cb2c75842c8f2b413501ec96fb"
+      },
+      {
+        "match_id": 3857280,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857280.json",
+        "sha256": "78ea79b4145e6d694180fe8eef748531ea96b0d75d18c1f9ccebd0228c7bf017"
+      },
+      {
+        "match_id": 3857281,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857281.json",
+        "sha256": "f99ed7e0cb4f7a9c28b05ecae768bd10812f52987060f0edb324fb77ac610375"
+      },
+      {
+        "match_id": 3857282,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857282.json",
+        "sha256": "2a6d3d04b6257bfc35a2e0c5a35f05a8997a089191ce27d0c2a5f02108f3b9db"
+      },
+      {
+        "match_id": 3857283,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857283.json",
+        "sha256": "9dd25252fdcfa200588ad3b8d66b618fa6a01633d34b0327776a006ffd6ba5a3"
+      },
+      {
+        "match_id": 3857284,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857284.json",
+        "sha256": "669bc6550cbe4dfb70305b04b2b8eacb0de676e576c69e4be209826bb425f0c6"
+      },
+      {
+        "match_id": 3857285,
+        "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3857285.json",
+        "sha256": "b97e53a23b76d1fd7b4895cf68820539e24300e7e0032e4cfe429fca7a95b0fa"
+      }
+    ],
+    "split": {
+      "train": [
+        3857254,
+        3857255,
+        3857257,
+        3857258,
+        3857260,
+        3857261,
+        3857263,
+        3857264,
+        3857266,
+        3857267,
+        3857269,
+        3857270,
+        3857272,
+        3857273,
+        3857275,
+        3857276
+      ],
+      "development": [
+        3857256,
+        3857259,
+        3857262,
+        3857265,
+        3857268,
+        3857271,
+        3857274,
+        3857277
+      ],
+      "test": [
+        3857278,
+        3857279,
+        3857280,
+        3857281,
+        3857282,
+        3857283,
+        3857284,
+        3857285
+      ]
+    }
+  },
+  "config": {
+    "revision": "player-actions-1",
+    "multipliers": {
+      "pass": 1.2676785250291727,
+      "carry": 1.4731620286964047,
+      "shot": 0.5354764191523225
+    },
+    "coefficients": {
+      "pass": {
+        "CRE": 0.35,
+        "TAC": 0.25,
+        "DEF": 0.15,
+        "TEC": 0.1,
+        "ATT": -0.15
+      },
+      "carry": {
+        "TEC": 0.45,
+        "ATT": 0.2,
+        "TAC": -0.15,
+        "DEF": -0.2
+      },
+      "shot": {
+        "ATT": 0.6,
+        "TEC": 0.2,
+        "DEF": -0.2
+      }
+    },
+    "attribute_strength": 1.0,
+    "attribute_effect": "bounded heuristic log-weight, not learned from paired player data",
+    "target": {
+      "counts": {
+        "pass": 4867,
+        "carry": 5616,
+        "shot": 106
+      },
+      "total": 10589,
+      "shares": {
+        "pass": 0.4596279157616394,
+        "carry": 0.5303616960997262,
+        "shot": 0.010010388138634432
+      }
+    },
+    "source_commit": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+    "train_match_ids": [
+      3857254,
+      3857255,
+      3857257,
+      3857258,
+      3857260,
+      3857261,
+      3857263,
+      3857264,
+      3857266,
+      3857267,
+      3857269,
+      3857270,
+      3857272,
+      3857273,
+      3857275,
+      3857276
+    ],
+    "fit_seeds": [
+      241000,
+      241001,
+      241002,
+      241003,
+      241004,
+      241005,
+      241006,
+      241007,
+      241008,
+      241009
+    ],
+    "roster_sha256": "c39c3452ab5d391febcce16638fe798eaaed325152d43515da7269b5b78e8387"
+  },
+  "fit_history": [
+    {
+      "iteration": 0,
+      "multipliers": {
+        "pass": 1.0,
+        "carry": 1.0,
+        "shot": 1.0
+      },
+      "shares": {
+        "pass": 0.4978221655154208,
+        "carry": 0.4829952923577808,
+        "shot": 0.019182542126798364
+      },
+      "signed_gaps": {
+        "pass": 0.038194249753781384,
+        "carry": -0.04736640374194534,
+        "shot": 0.009172153988163931
+      }
+    },
+    {
+      "iteration": 1,
+      "multipliers": {
+        "pass": 1.1117251243948238,
+        "carry": 1.2771299462048142,
+        "shot": 0.7043158972220337
+      },
+      "shares": {
+        "pass": 0.46506034828308024,
+        "carry": 0.5199305215338708,
+        "shot": 0.015009130183049035
+      },
+      "signed_gaps": {
+        "pass": 0.005432432521440822,
+        "carry": -0.010431174565855406,
+        "shot": 0.004998742044414603
+      }
+    },
+    {
+      "iteration": 2,
+      "multipliers": {
+        "pass": 1.2242870939318358,
+        "carry": 1.4424631967835682,
+        "shot": 0.5662549185552835
+      },
+      "shares": {
+        "pass": 0.4604398995019174,
+        "carry": 0.5275708555560453,
+        "shot": 0.01198924494203729
+      },
+      "signed_gaps": {
+        "pass": 0.0008119837402779662,
+        "carry": -0.0027908405436808392,
+        "shot": 0.0019788568034028575
+      }
+    },
+    {
+      "iteration": 3,
+      "multipliers": {
+        "pass": 1.2816053930621767,
+        "carry": 1.5185256152039588,
+        "shot": 0.5138348444244034
+      },
+      "shares": {
+        "pass": 0.45007769145394005,
+        "carry": 0.5391786903440622,
+        "shot": 0.01074361820199778
+      },
+      "signed_gaps": {
+        "pass": -0.009550224307699362,
+        "carry": 0.008816994244336018,
+        "shot": 0.0007332300633633472
+      }
+    },
+    {
+      "iteration": 4,
+      "multipliers": {
+        "pass": 1.3265200037237836,
+        "carry": 1.5253096430292885,
+        "shot": 0.4942289495071104
+      },
+      "shares": {
+        "pass": 0.46353322528363045,
+        "carry": 0.5278373997985019,
+        "shot": 0.008629374917867624
+      },
+      "signed_gaps": {
+        "pass": 0.0039053095219910294,
+        "carry": -0.0025242963012243047,
+        "shot": -0.001381013220766808
+      }
+    },
+    {
+      "iteration": 5,
+      "multipliers": {
+        "pass": 1.2676785250291727,
+        "carry": 1.4731620286964047,
+        "shot": 0.5354764191523225
+      },
+      "shares": {
+        "pass": 0.45970412894678736,
+        "carry": 0.5295208655332303,
+        "shot": 0.010775005519982336
+      },
+      "signed_gaps": {
+        "pass": 7.621318514794417e-05,
+        "carry": -0.0008408305664958649,
+        "shot": 0.0007646173813479033
+      }
+    }
+  ],
+  "validation_seeds": [
+    242000,
+    242001,
+    242002,
+    242003,
+    242004,
+    242005,
+    242006,
+    242007,
+    242008,
+    242009,
+    242010,
+    242011,
+    242012,
+    242013,
+    242014,
+    242015,
+    242016,
+    242017,
+    242018,
+    242019
+  ],
+  "baseline": {
+    "counts": {
+      "pass": 14678,
+      "carry": 25914,
+      "shot": 753
+    },
+    "total": 41345,
+    "shares": {
+      "pass": 0.3550126980287822,
+      "carry": 0.6267747006893216,
+      "shot": 0.018212601281896237
+    },
+    "matches": [
+      {
+        "seed": 242000,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 738,
+          "carry": 1298,
+          "shot": 37
+        },
+        "total": 2073,
+        "shares": {
+          "pass": 0.35600578871201155,
+          "carry": 0.6261456825856248,
+          "shot": 0.017848528702363725
+        },
+        "outcome_metrics": {
+          "actions": 2073,
+          "passes": 738,
+          "shots": 37,
+          "pass_distance_m": 21.38331562006543,
+          "pass_completion": 0.9322493224932249,
+          "backward_pass_share": 0.6653116531165312,
+          "shot_distance_m": 15.993020088554099,
+          "shot_conversion": 0.02702702702702703
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242001,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 728,
+          "carry": 1256,
+          "shot": 52
+        },
+        "total": 2036,
+        "shares": {
+          "pass": 0.3575638506876228,
+          "carry": 0.6168958742632613,
+          "shot": 0.025540275049115914
+        },
+        "outcome_metrics": {
+          "actions": 2036,
+          "passes": 728,
+          "shots": 52,
+          "pass_distance_m": 20.524036669796494,
+          "pass_completion": 0.9326923076923077,
+          "backward_pass_share": 0.657967032967033,
+          "shot_distance_m": 15.31449989161109,
+          "shot_conversion": 0.11538461538461539
+        },
+        "goals": 6
+      },
+      {
+        "seed": 242002,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 744,
+          "carry": 1295,
+          "shot": 38
+        },
+        "total": 2077,
+        "shares": {
+          "pass": 0.3582089552238806,
+          "carry": 0.6234954260953298,
+          "shot": 0.0182956186807896
+        },
+        "outcome_metrics": {
+          "actions": 2077,
+          "passes": 744,
+          "shots": 38,
+          "pass_distance_m": 20.836789380002966,
+          "pass_completion": 0.9126344086021505,
+          "backward_pass_share": 0.6760752688172043,
+          "shot_distance_m": 15.521729090008726,
+          "shot_conversion": 0.10526315789473684
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242003,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 747,
+          "carry": 1284,
+          "shot": 36
+        },
+        "total": 2067,
+        "shares": {
+          "pass": 0.3613933236574746,
+          "carry": 0.6211901306240929,
+          "shot": 0.01741654571843251
+        },
+        "outcome_metrics": {
+          "actions": 2067,
+          "passes": 747,
+          "shots": 36,
+          "pass_distance_m": 21.264289427834388,
+          "pass_completion": 0.9263721552878179,
+          "backward_pass_share": 0.6987951807228916,
+          "shot_distance_m": 14.382321325692162,
+          "shot_conversion": 0.05555555555555555
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242004,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 742,
+          "carry": 1276,
+          "shot": 43
+        },
+        "total": 2061,
+        "shares": {
+          "pass": 0.36001940805434257,
+          "carry": 0.6191169335274139,
+          "shot": 0.020863658418243572
+        },
+        "outcome_metrics": {
+          "actions": 2061,
+          "passes": 742,
+          "shots": 43,
+          "pass_distance_m": 20.87183955796042,
+          "pass_completion": 0.9164420485175202,
+          "backward_pass_share": 0.6684636118598383,
+          "shot_distance_m": 15.427330887727196,
+          "shot_conversion": 0.11627906976744186
+        },
+        "goals": 5
+      },
+      {
+        "seed": 242005,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 764,
+          "carry": 1309,
+          "shot": 30
+        },
+        "total": 2103,
+        "shares": {
+          "pass": 0.36329053732762717,
+          "carry": 0.6224441274369947,
+          "shot": 0.014265335235378032
+        },
+        "outcome_metrics": {
+          "actions": 2103,
+          "passes": 764,
+          "shots": 30,
+          "pass_distance_m": 21.194474643657333,
+          "pass_completion": 0.9267015706806283,
+          "backward_pass_share": 0.7094240837696335,
+          "shot_distance_m": 13.190791973949539,
+          "shot_conversion": 0.1
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242006,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 738,
+          "carry": 1294,
+          "shot": 39
+        },
+        "total": 2071,
+        "shares": {
+          "pass": 0.3563495895702559,
+          "carry": 0.6248189280540801,
+          "shot": 0.01883148237566393
+        },
+        "outcome_metrics": {
+          "actions": 2071,
+          "passes": 738,
+          "shots": 39,
+          "pass_distance_m": 21.172813297206474,
+          "pass_completion": 0.9363143631436315,
+          "backward_pass_share": 0.6910569105691057,
+          "shot_distance_m": 12.457541568042698,
+          "shot_conversion": 0.05128205128205128
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242007,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 728,
+          "carry": 1305,
+          "shot": 31
+        },
+        "total": 2064,
+        "shares": {
+          "pass": 0.35271317829457366,
+          "carry": 0.6322674418604651,
+          "shot": 0.015019379844961241
+        },
+        "outcome_metrics": {
+          "actions": 2064,
+          "passes": 728,
+          "shots": 31,
+          "pass_distance_m": 21.11588364513054,
+          "pass_completion": 0.9010989010989011,
+          "backward_pass_share": 0.7074175824175825,
+          "shot_distance_m": 15.783767445455487,
+          "shot_conversion": 0.06451612903225806
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242008,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 734,
+          "carry": 1294,
+          "shot": 34
+        },
+        "total": 2062,
+        "shares": {
+          "pass": 0.3559650824442289,
+          "carry": 0.6275460717749758,
+          "shot": 0.016488845780795344
+        },
+        "outcome_metrics": {
+          "actions": 2062,
+          "passes": 734,
+          "shots": 34,
+          "pass_distance_m": 21.444292476875148,
+          "pass_completion": 0.9277929155313351,
+          "backward_pass_share": 0.6825613079019074,
+          "shot_distance_m": 13.550459391131929,
+          "shot_conversion": 0.17647058823529413
+        },
+        "goals": 6
+      },
+      {
+        "seed": 242009,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 716,
+          "carry": 1304,
+          "shot": 42
+        },
+        "total": 2062,
+        "shares": {
+          "pass": 0.3472356935014549,
+          "carry": 0.6323957322987391,
+          "shot": 0.020368574199806012
+        },
+        "outcome_metrics": {
+          "actions": 2062,
+          "passes": 716,
+          "shots": 42,
+          "pass_distance_m": 20.527653209835904,
+          "pass_completion": 0.914804469273743,
+          "backward_pass_share": 0.6731843575418994,
+          "shot_distance_m": 12.765774270780707,
+          "shot_conversion": 0.07142857142857142
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242010,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 719,
+          "carry": 1321,
+          "shot": 34
+        },
+        "total": 2074,
+        "shares": {
+          "pass": 0.34667309546769526,
+          "carry": 0.636933461909354,
+          "shot": 0.01639344262295082
+        },
+        "outcome_metrics": {
+          "actions": 2074,
+          "passes": 719,
+          "shots": 34,
+          "pass_distance_m": 21.192644410516234,
+          "pass_completion": 0.9221140472878998,
+          "backward_pass_share": 0.7232267037552156,
+          "shot_distance_m": 14.49900195659517,
+          "shot_conversion": 0.11764705882352941
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242011,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 729,
+          "carry": 1311,
+          "shot": 37
+        },
+        "total": 2077,
+        "shares": {
+          "pass": 0.35098700048146364,
+          "carry": 0.6311988444872412,
+          "shot": 0.01781415503129514
+        },
+        "outcome_metrics": {
+          "actions": 2077,
+          "passes": 729,
+          "shots": 37,
+          "pass_distance_m": 21.312885515716633,
+          "pass_completion": 0.9327846364883402,
+          "backward_pass_share": 0.6886145404663924,
+          "shot_distance_m": 13.249078544193498,
+          "shot_conversion": 0.05405405405405406
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242012,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 714,
+          "carry": 1250,
+          "shot": 44
+        },
+        "total": 2008,
+        "shares": {
+          "pass": 0.3555776892430279,
+          "carry": 0.6225099601593626,
+          "shot": 0.021912350597609563
+        },
+        "outcome_metrics": {
+          "actions": 2008,
+          "passes": 714,
+          "shots": 44,
+          "pass_distance_m": 20.690813100628255,
+          "pass_completion": 0.9103641456582633,
+          "backward_pass_share": 0.6288515406162465,
+          "shot_distance_m": 14.085608540609003,
+          "shot_conversion": 0.11363636363636363
+        },
+        "goals": 5
+      },
+      {
+        "seed": 242013,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 722,
+          "carry": 1284,
+          "shot": 42
+        },
+        "total": 2048,
+        "shares": {
+          "pass": 0.3525390625,
+          "carry": 0.626953125,
+          "shot": 0.0205078125
+        },
+        "outcome_metrics": {
+          "actions": 2048,
+          "passes": 722,
+          "shots": 42,
+          "pass_distance_m": 20.913660032022428,
+          "pass_completion": 0.9279778393351801,
+          "backward_pass_share": 0.6925207756232687,
+          "shot_distance_m": 15.47479490595915,
+          "shot_conversion": 0.14285714285714285
+        },
+        "goals": 6
+      },
+      {
+        "seed": 242014,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 735,
+          "carry": 1284,
+          "shot": 39
+        },
+        "total": 2058,
+        "shares": {
+          "pass": 0.35714285714285715,
+          "carry": 0.6239067055393586,
+          "shot": 0.018950437317784258
+        },
+        "outcome_metrics": {
+          "actions": 2058,
+          "passes": 735,
+          "shots": 39,
+          "pass_distance_m": 21.173627363925892,
+          "pass_completion": 0.9142857142857143,
+          "backward_pass_share": 0.708843537414966,
+          "shot_distance_m": 12.691476557850503,
+          "shot_conversion": 0.07692307692307693
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242015,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 756,
+          "carry": 1307,
+          "shot": 39
+        },
+        "total": 2102,
+        "shares": {
+          "pass": 0.35965746907706947,
+          "carry": 0.6217887725975262,
+          "shot": 0.018553758325404377
+        },
+        "outcome_metrics": {
+          "actions": 2102,
+          "passes": 756,
+          "shots": 39,
+          "pass_distance_m": 20.87084394473823,
+          "pass_completion": 0.9166666666666666,
+          "backward_pass_share": 0.6693121693121693,
+          "shot_distance_m": 14.290109858660745,
+          "shot_conversion": 0.02564102564102564
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242016,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 714,
+          "carry": 1332,
+          "shot": 35
+        },
+        "total": 2081,
+        "shares": {
+          "pass": 0.3431042767900048,
+          "carry": 0.640076886112446,
+          "shot": 0.016818837097549257
+        },
+        "outcome_metrics": {
+          "actions": 2081,
+          "passes": 714,
+          "shots": 35,
+          "pass_distance_m": 21.496836953979162,
+          "pass_completion": 0.9257703081232493,
+          "backward_pass_share": 0.7002801120448179,
+          "shot_distance_m": 15.099034907223807,
+          "shot_conversion": 0.08571428571428572
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242017,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 754,
+          "carry": 1300,
+          "shot": 30
+        },
+        "total": 2084,
+        "shares": {
+          "pass": 0.3618042226487524,
+          "carry": 0.6238003838771593,
+          "shot": 0.014395393474088292
+        },
+        "outcome_metrics": {
+          "actions": 2084,
+          "passes": 754,
+          "shots": 30,
+          "pass_distance_m": 21.37528336298983,
+          "pass_completion": 0.9204244031830239,
+          "backward_pass_share": 0.7015915119363395,
+          "shot_distance_m": 14.397547008219332,
+          "shot_conversion": 0.1
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242018,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 744,
+          "carry": 1309,
+          "shot": 34
+        },
+        "total": 2087,
+        "shares": {
+          "pass": 0.35649257307139437,
+          "carry": 0.6272160996645904,
+          "shot": 0.01629132726401533
+        },
+        "outcome_metrics": {
+          "actions": 2087,
+          "passes": 744,
+          "shots": 34,
+          "pass_distance_m": 21.265183673126327,
+          "pass_completion": 0.9260752688172043,
+          "backward_pass_share": 0.7150537634408602,
+          "shot_distance_m": 13.586648736255865,
+          "shot_conversion": 0.058823529411764705
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242019,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 712,
+          "carry": 1301,
+          "shot": 37
+        },
+        "total": 2050,
+        "shares": {
+          "pass": 0.3473170731707317,
+          "carry": 0.6346341463414634,
+          "shot": 0.018048780487804877
+        },
+        "outcome_metrics": {
+          "actions": 2050,
+          "passes": 712,
+          "shots": 37,
+          "pass_distance_m": 21.194708891483998,
+          "pass_completion": 0.9269662921348315,
+          "backward_pass_share": 0.6910112359550562,
+          "shot_distance_m": 16.284985276280636,
+          "shot_conversion": 0.13513513513513514
+        },
+        "goals": 5
+      }
+    ]
+  },
+  "attribute_policy": {
+    "counts": {
+      "pass": 20898,
+      "carry": 24149,
+      "shot": 459
+    },
+    "total": 45506,
+    "shares": {
+      "pass": 0.4592361446842175,
+      "carry": 0.5306772733265943,
+      "shot": 0.010086581989188239
+    },
+    "matches": [
+      {
+        "seed": 242000,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 1047,
+          "carry": 1201,
+          "shot": 25
+        },
+        "total": 2273,
+        "shares": {
+          "pass": 0.46062472503299606,
+          "carry": 0.528376594808623,
+          "shot": 0.010998680158380994
+        },
+        "outcome_metrics": {
+          "actions": 2273,
+          "passes": 1047,
+          "shots": 25,
+          "pass_distance_m": 20.752245976865797,
+          "pass_completion": 0.936007640878701,
+          "backward_pass_share": 0.5940783190066857,
+          "shot_distance_m": 17.0946673169843,
+          "shot_conversion": 0.12
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242001,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 1030,
+          "carry": 1219,
+          "shot": 21
+        },
+        "total": 2270,
+        "shares": {
+          "pass": 0.45374449339207046,
+          "carry": 0.5370044052863436,
+          "shot": 0.009251101321585903
+        },
+        "outcome_metrics": {
+          "actions": 2270,
+          "passes": 1030,
+          "shots": 21,
+          "pass_distance_m": 20.7792473938389,
+          "pass_completion": 0.9446601941747573,
+          "backward_pass_share": 0.5990291262135923,
+          "shot_distance_m": 12.131598901569706,
+          "shot_conversion": 0.047619047619047616
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242002,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 1110,
+          "carry": 1200,
+          "shot": 20
+        },
+        "total": 2330,
+        "shares": {
+          "pass": 0.47639484978540775,
+          "carry": 0.5150214592274678,
+          "shot": 0.008583690987124463
+        },
+        "outcome_metrics": {
+          "actions": 2330,
+          "passes": 1110,
+          "shots": 20,
+          "pass_distance_m": 20.67699249472778,
+          "pass_completion": 0.9342342342342342,
+          "backward_pass_share": 0.5702702702702702,
+          "shot_distance_m": 16.713043264692487,
+          "shot_conversion": 0.1
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242003,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 971,
+          "carry": 1245,
+          "shot": 19
+        },
+        "total": 2235,
+        "shares": {
+          "pass": 0.4344519015659955,
+          "carry": 0.5570469798657718,
+          "shot": 0.008501118568232663
+        },
+        "outcome_metrics": {
+          "actions": 2235,
+          "passes": 971,
+          "shots": 19,
+          "pass_distance_m": 20.97640300555698,
+          "pass_completion": 0.94129763130793,
+          "backward_pass_share": 0.6251287332646756,
+          "shot_distance_m": 15.603156503304609,
+          "shot_conversion": 0.10526315789473684
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242004,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 1058,
+          "carry": 1209,
+          "shot": 23
+        },
+        "total": 2290,
+        "shares": {
+          "pass": 0.46200873362445416,
+          "carry": 0.5279475982532751,
+          "shot": 0.010043668122270743
+        },
+        "outcome_metrics": {
+          "actions": 2290,
+          "passes": 1058,
+          "shots": 23,
+          "pass_distance_m": 20.4902466089378,
+          "pass_completion": 0.9243856332703214,
+          "backward_pass_share": 0.5926275992438563,
+          "shot_distance_m": 12.583850353824579,
+          "shot_conversion": 0.17391304347826086
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242005,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 1113,
+          "carry": 1193,
+          "shot": 20
+        },
+        "total": 2326,
+        "shares": {
+          "pass": 0.47850386930352534,
+          "carry": 0.5128976784178848,
+          "shot": 0.008598452278589854
+        },
+        "outcome_metrics": {
+          "actions": 2326,
+          "passes": 1113,
+          "shots": 20,
+          "pass_distance_m": 20.747393189948824,
+          "pass_completion": 0.9155435759209344,
+          "backward_pass_share": 0.5768194070080862,
+          "shot_distance_m": 15.171688276382515,
+          "shot_conversion": 0.1
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242006,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 1025,
+          "carry": 1232,
+          "shot": 19
+        },
+        "total": 2276,
+        "shares": {
+          "pass": 0.45035149384885764,
+          "carry": 0.5413005272407733,
+          "shot": 0.008347978910369069
+        },
+        "outcome_metrics": {
+          "actions": 2276,
+          "passes": 1025,
+          "shots": 19,
+          "pass_distance_m": 21.229107113556132,
+          "pass_completion": 0.9346341463414635,
+          "backward_pass_share": 0.6185365853658537,
+          "shot_distance_m": 13.77414762798402,
+          "shot_conversion": 0.15789473684210525
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242007,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 1055,
+          "carry": 1198,
+          "shot": 26
+        },
+        "total": 2279,
+        "shares": {
+          "pass": 0.4629223343571742,
+          "carry": 0.525669153137341,
+          "shot": 0.011408512505484861
+        },
+        "outcome_metrics": {
+          "actions": 2279,
+          "passes": 1055,
+          "shots": 26,
+          "pass_distance_m": 20.62708398582228,
+          "pass_completion": 0.9298578199052133,
+          "backward_pass_share": 0.5838862559241706,
+          "shot_distance_m": 18.41580166965274,
+          "shot_conversion": 0.038461538461538464
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242008,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 1019,
+          "carry": 1201,
+          "shot": 25
+        },
+        "total": 2245,
+        "shares": {
+          "pass": 0.45389755011135857,
+          "carry": 0.5349665924276169,
+          "shot": 0.011135857461024499
+        },
+        "outcome_metrics": {
+          "actions": 2245,
+          "passes": 1019,
+          "shots": 25,
+          "pass_distance_m": 21.20520284260073,
+          "pass_completion": 0.9381746810598626,
+          "backward_pass_share": 0.6084396467124632,
+          "shot_distance_m": 15.564917014667637,
+          "shot_conversion": 0.04
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242009,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 985,
+          "carry": 1204,
+          "shot": 27
+        },
+        "total": 2216,
+        "shares": {
+          "pass": 0.4444945848375451,
+          "carry": 0.5433212996389891,
+          "shot": 0.012184115523465704
+        },
+        "outcome_metrics": {
+          "actions": 2216,
+          "passes": 985,
+          "shots": 27,
+          "pass_distance_m": 20.86922773595781,
+          "pass_completion": 0.9228426395939087,
+          "backward_pass_share": 0.5918781725888325,
+          "shot_distance_m": 17.44677279374676,
+          "shot_conversion": 0.14814814814814814
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242010,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 1075,
+          "carry": 1213,
+          "shot": 21
+        },
+        "total": 2309,
+        "shares": {
+          "pass": 0.46556951061065394,
+          "carry": 0.5253356431355565,
+          "shot": 0.009094846253789519
+        },
+        "outcome_metrics": {
+          "actions": 2309,
+          "passes": 1075,
+          "shots": 21,
+          "pass_distance_m": 20.29053858302385,
+          "pass_completion": 0.9376744186046512,
+          "backward_pass_share": 0.5776744186046512,
+          "shot_distance_m": 14.932543413891702,
+          "shot_conversion": 0.09523809523809523
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242011,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 1079,
+          "carry": 1191,
+          "shot": 25
+        },
+        "total": 2295,
+        "shares": {
+          "pass": 0.47015250544662307,
+          "carry": 0.5189542483660131,
+          "shot": 0.010893246187363835
+        },
+        "outcome_metrics": {
+          "actions": 2295,
+          "passes": 1079,
+          "shots": 25,
+          "pass_distance_m": 20.878580291038965,
+          "pass_completion": 0.9453197405004634,
+          "backward_pass_share": 0.5949953660797034,
+          "shot_distance_m": 14.593382352918242,
+          "shot_conversion": 0.12
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242012,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 1016,
+          "carry": 1219,
+          "shot": 22
+        },
+        "total": 2257,
+        "shares": {
+          "pass": 0.45015507310589276,
+          "carry": 0.540097474523704,
+          "shot": 0.00974745237040319
+        },
+        "outcome_metrics": {
+          "actions": 2257,
+          "passes": 1016,
+          "shots": 22,
+          "pass_distance_m": 20.898442472391462,
+          "pass_completion": 0.9232283464566929,
+          "backward_pass_share": 0.594488188976378,
+          "shot_distance_m": 16.690951817830747,
+          "shot_conversion": 0.09090909090909091
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242013,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 1017,
+          "carry": 1202,
+          "shot": 28
+        },
+        "total": 2247,
+        "shares": {
+          "pass": 0.45260347129506007,
+          "carry": 0.5349354695149088,
+          "shot": 0.012461059190031152
+        },
+        "outcome_metrics": {
+          "actions": 2247,
+          "passes": 1017,
+          "shots": 28,
+          "pass_distance_m": 21.11792785450997,
+          "pass_completion": 0.9469026548672567,
+          "backward_pass_share": 0.5830875122910522,
+          "shot_distance_m": 14.503983120341788,
+          "shot_conversion": 0.10714285714285714
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242014,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 1020,
+          "carry": 1212,
+          "shot": 20
+        },
+        "total": 2252,
+        "shares": {
+          "pass": 0.45293072824156305,
+          "carry": 0.5381882770870338,
+          "shot": 0.008880994671403197
+        },
+        "outcome_metrics": {
+          "actions": 2252,
+          "passes": 1020,
+          "shots": 20,
+          "pass_distance_m": 21.02323387282507,
+          "pass_completion": 0.9323529411764706,
+          "backward_pass_share": 0.5882352941176471,
+          "shot_distance_m": 14.781006850560502,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242015,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 1093,
+          "carry": 1160,
+          "shot": 34
+        },
+        "total": 2287,
+        "shares": {
+          "pass": 0.47791867074770444,
+          "carry": 0.5072146917358985,
+          "shot": 0.014866637516397026
+        },
+        "outcome_metrics": {
+          "actions": 2287,
+          "passes": 1093,
+          "shots": 34,
+          "pass_distance_m": 20.71784496494286,
+          "pass_completion": 0.9240622140896615,
+          "backward_pass_share": 0.576395242451967,
+          "shot_distance_m": 18.306309741918295,
+          "shot_conversion": 0.08823529411764706
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242016,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 1044,
+          "carry": 1184,
+          "shot": 21
+        },
+        "total": 2249,
+        "shares": {
+          "pass": 0.46420631391729655,
+          "carry": 0.5264562027567808,
+          "shot": 0.009337483325922631
+        },
+        "outcome_metrics": {
+          "actions": 2249,
+          "passes": 1044,
+          "shots": 21,
+          "pass_distance_m": 20.989560532458334,
+          "pass_completion": 0.9329501915708812,
+          "backward_pass_share": 0.6120689655172413,
+          "shot_distance_m": 18.594634532306344,
+          "shot_conversion": 0.3333333333333333
+        },
+        "goals": 7
+      },
+      {
+        "seed": 242017,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 1129,
+          "carry": 1200,
+          "shot": 17
+        },
+        "total": 2346,
+        "shares": {
+          "pass": 0.4812446717817562,
+          "carry": 0.5115089514066496,
+          "shot": 0.007246376811594203
+        },
+        "outcome_metrics": {
+          "actions": 2346,
+          "passes": 1129,
+          "shots": 17,
+          "pass_distance_m": 20.748448039318344,
+          "pass_completion": 0.9326837909654562,
+          "backward_pass_share": 0.5890168290522586,
+          "shot_distance_m": 14.862148405942229,
+          "shot_conversion": 0.11764705882352941
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242018,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 996,
+          "carry": 1223,
+          "shot": 27
+        },
+        "total": 2246,
+        "shares": {
+          "pass": 0.44345503116651824,
+          "carry": 0.5445235975066786,
+          "shot": 0.012021371326803205
+        },
+        "outcome_metrics": {
+          "actions": 2246,
+          "passes": 996,
+          "shots": 27,
+          "pass_distance_m": 20.617099206486024,
+          "pass_completion": 0.929718875502008,
+          "backward_pass_share": 0.641566265060241,
+          "shot_distance_m": 16.55414737065342,
+          "shot_conversion": 0.037037037037037035
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242019,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 1016,
+          "carry": 1243,
+          "shot": 19
+        },
+        "total": 2278,
+        "shares": {
+          "pass": 0.44600526777875327,
+          "carry": 0.5456540825285338,
+          "shot": 0.008340649692712906
+        },
+        "outcome_metrics": {
+          "actions": 2278,
+          "passes": 1016,
+          "shots": 19,
+          "pass_distance_m": 20.969085271205927,
+          "pass_completion": 0.9291338582677166,
+          "backward_pass_share": 0.6131889763779528,
+          "shot_distance_m": 15.577681029249083,
+          "shot_conversion": 0.10526315789473684
+        },
+        "goals": 2
+      }
+    ]
+  },
+  "neutral_attribute_ablation": {
+    "counts": {
+      "pass": 22645,
+      "carry": 23639,
+      "shot": 365
+    },
+    "total": 46649,
+    "shares": {
+      "pass": 0.48543377135629917,
+      "carry": 0.5067418379815216,
+      "shot": 0.007824390662179253
+    },
+    "matches": [
+      {
+        "seed": 242000,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 1123,
+          "carry": 1171,
+          "shot": 18
+        },
+        "total": 2312,
+        "shares": {
+          "pass": 0.4857266435986159,
+          "carry": 0.5064878892733564,
+          "shot": 0.007785467128027681
+        },
+        "outcome_metrics": {
+          "actions": 2312,
+          "passes": 1123,
+          "shots": 18,
+          "pass_distance_m": 21.04585496944229,
+          "pass_completion": 0.9430097951914514,
+          "backward_pass_share": 0.597506678539626,
+          "shot_distance_m": 18.290025750145404,
+          "shot_conversion": 0.16666666666666666
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242001,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 1115,
+          "carry": 1184,
+          "shot": 18
+        },
+        "total": 2317,
+        "shares": {
+          "pass": 0.4812257229175658,
+          "carry": 0.5110056107034959,
+          "shot": 0.007768666378938282
+        },
+        "outcome_metrics": {
+          "actions": 2317,
+          "passes": 1115,
+          "shots": 18,
+          "pass_distance_m": 20.87855723131618,
+          "pass_completion": 0.9183856502242153,
+          "backward_pass_share": 0.5829596412556054,
+          "shot_distance_m": 18.685362568070147,
+          "shot_conversion": 0.05555555555555555
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242002,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 1142,
+          "carry": 1197,
+          "shot": 19
+        },
+        "total": 2358,
+        "shares": {
+          "pass": 0.48430873621713316,
+          "carry": 0.5076335877862596,
+          "shot": 0.008057675996607293
+        },
+        "outcome_metrics": {
+          "actions": 2358,
+          "passes": 1142,
+          "shots": 19,
+          "pass_distance_m": 20.435100222544477,
+          "pass_completion": 0.9378283712784589,
+          "backward_pass_share": 0.5884413309982487,
+          "shot_distance_m": 17.605265303450203,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242003,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 1093,
+          "carry": 1200,
+          "shot": 16
+        },
+        "total": 2309,
+        "shares": {
+          "pass": 0.4733650931139021,
+          "carry": 0.5197055002165439,
+          "shot": 0.006929406669553919
+        },
+        "outcome_metrics": {
+          "actions": 2309,
+          "passes": 1093,
+          "shots": 16,
+          "pass_distance_m": 20.683048280567586,
+          "pass_completion": 0.9332113449222323,
+          "backward_pass_share": 0.5919487648673376,
+          "shot_distance_m": 17.50015287666805,
+          "shot_conversion": 0.25
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242004,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 1158,
+          "carry": 1153,
+          "shot": 19
+        },
+        "total": 2330,
+        "shares": {
+          "pass": 0.49699570815450644,
+          "carry": 0.49484978540772534,
+          "shot": 0.00815450643776824
+        },
+        "outcome_metrics": {
+          "actions": 2330,
+          "passes": 1158,
+          "shots": 19,
+          "pass_distance_m": 20.80490701388616,
+          "pass_completion": 0.9291882556131261,
+          "backward_pass_share": 0.5690846286701209,
+          "shot_distance_m": 17.647151937026592,
+          "shot_conversion": 0.10526315789473684
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242005,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 1160,
+          "carry": 1174,
+          "shot": 20
+        },
+        "total": 2354,
+        "shares": {
+          "pass": 0.4927782497875956,
+          "carry": 0.49872557349192864,
+          "shot": 0.008496176720475786
+        },
+        "outcome_metrics": {
+          "actions": 2354,
+          "passes": 1160,
+          "shots": 20,
+          "pass_distance_m": 20.69207532589807,
+          "pass_completion": 0.9327586206896552,
+          "backward_pass_share": 0.5853448275862069,
+          "shot_distance_m": 17.04588863949061,
+          "shot_conversion": 0.2
+        },
+        "goals": 4
+      },
+      {
+        "seed": 242006,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 1087,
+          "carry": 1170,
+          "shot": 25
+        },
+        "total": 2282,
+        "shares": {
+          "pass": 0.47633654688869415,
+          "carry": 0.5127081507449606,
+          "shot": 0.010955302366345312
+        },
+        "outcome_metrics": {
+          "actions": 2282,
+          "passes": 1087,
+          "shots": 25,
+          "pass_distance_m": 20.964446939279668,
+          "pass_completion": 0.9319227230910764,
+          "backward_pass_share": 0.5887764489420423,
+          "shot_distance_m": 16.54871877665784,
+          "shot_conversion": 0.28
+        },
+        "goals": 7
+      },
+      {
+        "seed": 242007,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 1086,
+          "carry": 1237,
+          "shot": 12
+        },
+        "total": 2335,
+        "shares": {
+          "pass": 0.4650963597430407,
+          "carry": 0.5297644539614561,
+          "shot": 0.005139186295503212
+        },
+        "outcome_metrics": {
+          "actions": 2335,
+          "passes": 1086,
+          "shots": 12,
+          "pass_distance_m": 20.95778086847579,
+          "pass_completion": 0.9429097605893186,
+          "backward_pass_share": 0.6243093922651933,
+          "shot_distance_m": 18.487640982730642,
+          "shot_conversion": 0.16666666666666666
+        },
+        "goals": 2
+      },
+      {
+        "seed": 242008,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 1175,
+          "carry": 1189,
+          "shot": 15
+        },
+        "total": 2379,
+        "shares": {
+          "pass": 0.4939050021017234,
+          "carry": 0.49978982765868013,
+          "shot": 0.006305170239596469
+        },
+        "outcome_metrics": {
+          "actions": 2379,
+          "passes": 1175,
+          "shots": 15,
+          "pass_distance_m": 20.363092840927358,
+          "pass_completion": 0.9182978723404255,
+          "backward_pass_share": 0.6,
+          "shot_distance_m": 15.146661017848901,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242009,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 1127,
+          "carry": 1158,
+          "shot": 24
+        },
+        "total": 2309,
+        "shares": {
+          "pass": 0.4880900822867042,
+          "carry": 0.5015158077089649,
+          "shot": 0.01039411000433088
+        },
+        "outcome_metrics": {
+          "actions": 2309,
+          "passes": 1127,
+          "shots": 24,
+          "pass_distance_m": 20.69585995752141,
+          "pass_completion": 0.9325643300798581,
+          "backward_pass_share": 0.5944986690328306,
+          "shot_distance_m": 14.685727422222406,
+          "shot_conversion": 0.125
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242010,
+        "home": "ARS",
+        "away": "BRE",
+        "counts": {
+          "pass": 1113,
+          "carry": 1206,
+          "shot": 14
+        },
+        "total": 2333,
+        "shares": {
+          "pass": 0.4770681525932276,
+          "carry": 0.5169309901414488,
+          "shot": 0.006000857265323617
+        },
+        "outcome_metrics": {
+          "actions": 2333,
+          "passes": 1113,
+          "shots": 14,
+          "pass_distance_m": 20.673640626868607,
+          "pass_completion": 0.9299191374663073,
+          "backward_pass_share": 0.6109613656783468,
+          "shot_distance_m": 19.620944038395347,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242011,
+        "home": "BOU",
+        "away": "CHE",
+        "counts": {
+          "pass": 1171,
+          "carry": 1154,
+          "shot": 21
+        },
+        "total": 2346,
+        "shares": {
+          "pass": 0.49914748508098894,
+          "carry": 0.4919011082693947,
+          "shot": 0.008951406649616368
+        },
+        "outcome_metrics": {
+          "actions": 2346,
+          "passes": 1171,
+          "shots": 21,
+          "pass_distance_m": 20.855248037735688,
+          "pass_completion": 0.9402220324508966,
+          "backward_pass_share": 0.5789923142613151,
+          "shot_distance_m": 13.496376508036402,
+          "shot_conversion": 0.047619047619047616
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242012,
+        "home": "BHA",
+        "away": "CRY",
+        "counts": {
+          "pass": 1091,
+          "carry": 1180,
+          "shot": 23
+        },
+        "total": 2294,
+        "shares": {
+          "pass": 0.475588491717524,
+          "carry": 0.5143853530950305,
+          "shot": 0.01002615518744551
+        },
+        "outcome_metrics": {
+          "actions": 2294,
+          "passes": 1091,
+          "shots": 23,
+          "pass_distance_m": 20.74160919312623,
+          "pass_completion": 0.9385884509624198,
+          "backward_pass_share": 0.5719523373052245,
+          "shot_distance_m": 18.893584861495793,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242013,
+        "home": "COV",
+        "away": "FUL",
+        "counts": {
+          "pass": 1103,
+          "carry": 1203,
+          "shot": 15
+        },
+        "total": 2321,
+        "shares": {
+          "pass": 0.4752261956053425,
+          "carry": 0.5183110728134425,
+          "shot": 0.006462731581214994
+        },
+        "outcome_metrics": {
+          "actions": 2321,
+          "passes": 1103,
+          "shots": 15,
+          "pass_distance_m": 20.819515386762006,
+          "pass_completion": 0.9456029011786038,
+          "backward_pass_share": 0.6056210335448776,
+          "shot_distance_m": 16.83077127411373,
+          "shot_conversion": 0.2
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242014,
+        "home": "EVE",
+        "away": "IPS",
+        "counts": {
+          "pass": 1126,
+          "carry": 1206,
+          "shot": 15
+        },
+        "total": 2347,
+        "shares": {
+          "pass": 0.4797613975287601,
+          "carry": 0.5138474648487431,
+          "shot": 0.006391137622496805
+        },
+        "outcome_metrics": {
+          "actions": 2347,
+          "passes": 1126,
+          "shots": 15,
+          "pass_distance_m": 20.692750062371527,
+          "pass_completion": 0.9342806394316163,
+          "backward_pass_share": 0.5896980461811723,
+          "shot_distance_m": 15.371938425680355,
+          "shot_conversion": 0.06666666666666667
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242015,
+        "home": "HUL",
+        "away": "LIV",
+        "counts": {
+          "pass": 1212,
+          "carry": 1148,
+          "shot": 20
+        },
+        "total": 2380,
+        "shares": {
+          "pass": 0.5092436974789916,
+          "carry": 0.4823529411764706,
+          "shot": 0.008403361344537815
+        },
+        "outcome_metrics": {
+          "actions": 2380,
+          "passes": 1212,
+          "shots": 20,
+          "pass_distance_m": 20.813642044898597,
+          "pass_completion": 0.9348184818481848,
+          "backward_pass_share": 0.5759075907590759,
+          "shot_distance_m": 20.147588156006496,
+          "shot_conversion": 0.05
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242016,
+        "home": "LEE",
+        "away": "MUN",
+        "counts": {
+          "pass": 1113,
+          "carry": 1193,
+          "shot": 16
+        },
+        "total": 2322,
+        "shares": {
+          "pass": 0.479328165374677,
+          "carry": 0.5137812230835487,
+          "shot": 0.0068906115417743325
+        },
+        "outcome_metrics": {
+          "actions": 2322,
+          "passes": 1113,
+          "shots": 16,
+          "pass_distance_m": 20.328042307359535,
+          "pass_completion": 0.9326145552560647,
+          "backward_pass_share": 0.6154537286612758,
+          "shot_distance_m": 14.703969019680383,
+          "shot_conversion": 0.0625
+        },
+        "goals": 1
+      },
+      {
+        "seed": 242017,
+        "home": "MCI",
+        "away": "NFO",
+        "counts": {
+          "pass": 1210,
+          "carry": 1141,
+          "shot": 15
+        },
+        "total": 2366,
+        "shares": {
+          "pass": 0.5114116652578191,
+          "carry": 0.4822485207100592,
+          "shot": 0.006339814032121725
+        },
+        "outcome_metrics": {
+          "actions": 2366,
+          "passes": 1210,
+          "shots": 15,
+          "pass_distance_m": 20.740696861354994,
+          "pass_completion": 0.9338842975206612,
+          "backward_pass_share": 0.5768595041322314,
+          "shot_distance_m": 19.299490041628758,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      },
+      {
+        "seed": 242018,
+        "home": "NEW",
+        "away": "TOT",
+        "counts": {
+          "pass": 1117,
+          "carry": 1189,
+          "shot": 20
+        },
+        "total": 2326,
+        "shares": {
+          "pass": 0.48022355975924336,
+          "carry": 0.5111779879621668,
+          "shot": 0.008598452278589854
+        },
+        "outcome_metrics": {
+          "actions": 2326,
+          "passes": 1117,
+          "shots": 20,
+          "pass_distance_m": 20.555061717012233,
+          "pass_completion": 0.936436884512086,
+          "backward_pass_share": 0.5819158460161146,
+          "shot_distance_m": 21.312597706444816,
+          "shot_conversion": 0.15
+        },
+        "goals": 3
+      },
+      {
+        "seed": 242019,
+        "home": "SUN",
+        "away": "AVL",
+        "counts": {
+          "pass": 1123,
+          "carry": 1186,
+          "shot": 20
+        },
+        "total": 2329,
+        "shares": {
+          "pass": 0.48218119364534134,
+          "carry": 0.5092314297981967,
+          "shot": 0.008587376556462
+        },
+        "outcome_metrics": {
+          "actions": 2329,
+          "passes": 1123,
+          "shots": 20,
+          "pass_distance_m": 20.943575493091828,
+          "pass_completion": 0.9278717720391808,
+          "backward_pass_share": 0.5779162956366874,
+          "shot_distance_m": 18.51065151874019,
+          "shot_conversion": 0.0
+        },
+        "goals": 0
+      }
+    ]
+  },
+  "signed_gaps_vs_test": {
+    "pass": -0.0015384332701022796,
+    "carry": 0.0013823378747571669,
+    "shot": 0.0001560953953451405
+  },
+  "tolerance": {
+    "pass": 0.015,
+    "carry": 0.015,
+    "shot": 0.0035
+  },
+  "passed": true,
+  "scope": "Shares among footed ground passes, carries and footed shots. Real reference: Regular Play, periods 1-2. Synthetic: resolved actions excluding mandatory restart carries. Other action types and event volume are outside this calibration.",
+  "limitations": [
+    "World Cup reference, not a Premier League benchmark.",
+    "Player radar coefficients are bounded style hypotheses; no paired player/action dataset fits their effects.",
+    "No action quotas or future-event feedback are used at runtime.",
+    "Only training real matches and fitting simulator seeds choose multipliers; development/test references never choose coefficients.",
+    "Current Sofascore profiles are synthetic style inputs, not historical World Cup features.",
+    "Matching action shares does not establish realistic movement, individual behavior or calibrated player outcomes."
+  ]
+}

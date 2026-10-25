@@ -7,6 +7,15 @@
     "flow": "npm --prefix scene run dev",
     "start": "python3 server.py",
     "test": "node --test tests/*.test.js && python3 -m unittest discover -s tests -p 'test_*.py'",
-    "analyze": "python3 analysis_agent.py"
+    "analyze": "python3 analysis_agent.py",
+    "test:contract": "python3 -m unittest discover -s tests -p test_contract.py",
+    "validate:schema": "node scripts/validate_contracts.mjs --dataset data data/league",
+    "test:decision-analysis": "python3 -m unittest discover -s tests -p 'test_decision_integration.py'",
+    "validate:decision-analysis": "node scripts/validate_decision_analysis.mjs",
+    "validate:decision-dataset": "node scripts/validate_decision_dataset.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1"
   }
 }

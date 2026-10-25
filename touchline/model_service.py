@@ -25,6 +25,20 @@ def validate_base_url(value):
     return value
 
 
+def auth_headers(api_key):
+    """Headers for a Responses API endpoint.
+
+    Azure AI Foundry authenticates with the api-key header and OpenAI with a
+    bearer token. Both are sent so one client reaches either deployment, and
+    so a deployment can be moved between them without a code change.
+    """
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["api-key"] = api_key
+        headers["Authorization"] = f"Bearer {api_key}"
+    return headers
+
+
 def narrate(report, model, api_key, base_url="https://api.openai.com/v1"):
     base_url = validate_base_url(base_url)
     """Request English prose; retain computed facts and award for auditability."""
@@ -45,7 +59,7 @@ def narrate(report, model, api_key, base_url="https://api.openai.com/v1"):
     }
     request = urllib.request.Request(base_url + '/responses',
                                      data=json.dumps(payload).encode(),
-                                     headers={'Authorization': f'Bearer {api_key}', 'Content-Type': 'application/json'})
+                                     headers=auth_headers(api_key))
     with urlopen(request, timeout=45) as response:
         result = json.load(response)
     if result.get('status') != 'completed':

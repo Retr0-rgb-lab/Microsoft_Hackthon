@@ -25,7 +25,7 @@ preview={'match_id':summary['match_id'],'start_ms':start,'end_ms':end,'tracking_
 (DATA/'preview-60s.json').write_text(json.dumps(preview,ensure_ascii=False,separators=(',',':'))+'\n')
 paths=[*sorted(DATA.glob('*.json')),*sorted(DATA.glob('*.jsonl')),
        ROOT/'README.md', ROOT/'generate.py',ROOT/'validate.py',ROOT/'validate_league.py',
-       ROOT/'package.py',ROOT/'schema.json',ROOT/'analysis_agent.py',ROOT/'model_service.py']
+       ROOT/'package.py',ROOT/'player_heatmaps.py',ROOT/'schema.json',ROOT/'analysis_agent.py',ROOT/'model_service.py']
 manifest={'match_id':summary['match_id'],'files':[]}
 for p in paths:
     content=p.read_bytes()

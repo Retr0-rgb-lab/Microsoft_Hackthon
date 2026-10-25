@@ -1,0 +1,4503 @@
+{
+  "schema_version": "2.0.0",
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "generator": "generate.py v2.3.0",
+    "seed": 20261019,
+    "weeks": 4
+  },
+  "format": {
+    "team_count": 20,
+    "matchweeks": 4,
+    "matches_per_week": 10,
+    "total_matches": 40,
+    "points": {
+      "win": 3,
+      "draw": 1,
+      "loss": 0
+    },
+    "schedule": "single round-robin rotation, first N rounds",
+    "tracking_mode": "featured",
+    "matches_with_full_tracking": 4,
+    "matches_with_preview": 40
+  },
+  "teams": [
+    {
+      "club_id": "ARS",
+      "name": "Aster FC",
+      "short_name": "Aster FC",
+      "stadium": "Aster Park",
+      "colors": {
+        "primary": "#EF0107",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.15,
+        "defense": 1.1,
+        "passing": 1.1,
+        "pressing": 1.08
+      }
+    },
+    {
+      "club_id": "AVL",
+      "name": "Beacon FC",
+      "short_name": "Beacon FC",
+      "stadium": "Beacon Park",
+      "colors": {
+        "primary": "#670E36",
+        "secondary": "#95BFE5"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.02,
+        "defense": 1.0,
+        "passing": 1.01,
+        "pressing": 1.0
+      }
+    },
+    {
+      "club_id": "BOU",
+      "name": "Cedar FC",
+      "short_name": "Cedar",
+      "stadium": "Cedar Park",
+      "colors": {
+        "primary": "#DA291C",
+        "secondary": "#000000"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.98,
+        "defense": 0.98,
+        "passing": 0.98,
+        "pressing": 1.04
+      }
+    },
+    {
+      "club_id": "BRE",
+      "name": "Driftwood FC",
+      "short_name": "Driftwood FC",
+      "stadium": "Driftwood Park",
+      "colors": {
+        "primary": "#E30613",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.97,
+        "defense": 0.99,
+        "passing": 0.96,
+        "pressing": 1.03
+      }
+    },
+    {
+      "club_id": "BHA",
+      "name": "Ember FC",
+      "short_name": "Ember",
+      "stadium": "Ember Park",
+      "colors": {
+        "primary": "#0057B8",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.0,
+        "defense": 0.99,
+        "passing": 1.03,
+        "pressing": 1.03
+      }
+    },
+    {
+      "club_id": "CHE",
+      "name": "Fairhaven FC",
+      "short_name": "Fairhaven FC",
+      "stadium": "Fairhaven Park",
+      "colors": {
+        "primary": "#034694",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.08,
+        "defense": 1.06,
+        "passing": 1.07,
+        "pressing": 1.04
+      }
+    },
+    {
+      "club_id": "COV",
+      "name": "Glenvale FC",
+      "short_name": "Glenvale",
+      "stadium": "Glenvale Park",
+      "colors": {
+        "primary": "#6CB4E4",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.9,
+        "defense": 0.92,
+        "passing": 0.91,
+        "pressing": 0.97
+      }
+    },
+    {
+      "club_id": "CRY",
+      "name": "Highridge FC",
+      "short_name": "Highridge FC",
+      "stadium": "Highridge Park",
+      "colors": {
+        "primary": "#1B458F",
+        "secondary": "#C4122E"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.98,
+        "defense": 1.02,
+        "passing": 0.97,
+        "pressing": 1.05
+      }
+    },
+    {
+      "club_id": "EVE",
+      "name": "Ivory FC",
+      "short_name": "Ivory FC",
+      "stadium": "Ivory Park",
+      "colors": {
+        "primary": "#003399",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.94,
+        "defense": 0.97,
+        "passing": 0.95,
+        "pressing": 0.98
+      }
+    },
+    {
+      "club_id": "FUL",
+      "name": "Juniper FC",
+      "short_name": "Juniper FC",
+      "stadium": "Juniper Park",
+      "colors": {
+        "primary": "#FFFFFF",
+        "secondary": "#000000"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.96,
+        "defense": 0.98,
+        "passing": 0.99,
+        "pressing": 0.98
+      }
+    },
+    {
+      "club_id": "HUL",
+      "name": "Kingswell FC",
+      "short_name": "Kingswell FC",
+      "stadium": "Kingswell Park",
+      "colors": {
+        "primary": "#F5A12D",
+        "secondary": "#000000"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.89,
+        "defense": 0.91,
+        "passing": 0.9,
+        "pressing": 0.98
+      }
+    },
+    {
+      "club_id": "IPS",
+      "name": "Larkspur FC",
+      "short_name": "Larkspur FC",
+      "stadium": "Larkspur Park",
+      "colors": {
+        "primary": "#0044A9",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.9,
+        "defense": 0.92,
+        "passing": 0.92,
+        "pressing": 0.99
+      }
+    },
+    {
+      "club_id": "LEE",
+      "name": "Meadow FC",
+      "short_name": "Meadow",
+      "stadium": "Meadow Park",
+      "colors": {
+        "primary": "#FFFFFF",
+        "secondary": "#1D428A"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.92,
+        "defense": 0.92,
+        "passing": 0.93,
+        "pressing": 1.0
+      }
+    },
+    {
+      "club_id": "LIV",
+      "name": "Northstar FC",
+      "short_name": "Northstar FC",
+      "stadium": "Northstar Park",
+      "colors": {
+        "primary": "#C8102E",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.14,
+        "defense": 1.08,
+        "passing": 1.09,
+        "pressing": 1.1
+      }
+    },
+    {
+      "club_id": "MCI",
+      "name": "Oakmere FC",
+      "short_name": "Oakmere",
+      "stadium": "Oakmere Park",
+      "colors": {
+        "primary": "#6CABDD",
+        "secondary": "#1C2C5B"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.12,
+        "defense": 1.12,
+        "passing": 1.12,
+        "pressing": 1.06
+      }
+    },
+    {
+      "club_id": "MUN",
+      "name": "Pinecrest FC",
+      "short_name": "Pinecrest",
+      "stadium": "Pinecrest Park",
+      "colors": {
+        "primary": "#DA291C",
+        "secondary": "#FBE122"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.0,
+        "defense": 1.01,
+        "passing": 1.0,
+        "pressing": 1.02
+      }
+    },
+    {
+      "club_id": "NEW",
+      "name": "Quartz FC",
+      "short_name": "Quartz",
+      "stadium": "Quartz Park",
+      "colors": {
+        "primary": "#241F20",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.04,
+        "defense": 1.07,
+        "passing": 1.02,
+        "pressing": 1.08
+      }
+    },
+    {
+      "club_id": "NFO",
+      "name": "Rivermist FC",
+      "short_name": "Rivermist",
+      "stadium": "Rivermist Park",
+      "colors": {
+        "primary": "#DD0000",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.96,
+        "defense": 1.0,
+        "passing": 0.95,
+        "pressing": 0.99
+      }
+    },
+    {
+      "club_id": "SUN",
+      "name": "Silverbrook FC",
+      "short_name": "Silverbrook FC",
+      "stadium": "Silverbrook Park",
+      "colors": {
+        "primary": "#EB172B",
+        "secondary": "#FFFFFF"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 0.91,
+        "defense": 0.93,
+        "passing": 0.92,
+        "pressing": 0.99
+      }
+    },
+    {
+      "club_id": "TOT",
+      "name": "Thornvale FC",
+      "short_name": "Thornvale",
+      "stadium": "Thornvale Park",
+      "colors": {
+        "primary": "#FFFFFF",
+        "secondary": "#132257"
+      },
+      "formation": "4-3-3",
+      "rating": {
+        "attack": 1.03,
+        "defense": 1.02,
+        "passing": 1.02,
+        "pressing": 1.01
+      }
+    }
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "label": "Matchweek 1",
+      "date": "2026-10-24",
+      "matches": [
+        {
+          "match_id": "PL26-W01-TOT-ARS",
+          "matchweek": 1,
+          "home_club_id": "TOT",
+          "away_club_id": "ARS",
+          "home_name": "Thornvale FC",
+          "away_name": "Aster FC",
+          "kickoff_local": "2026-10-24T12:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Thornvale Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 511400,
+              "period": 1,
+              "period_ms": 511400,
+              "team_id": "AWAY",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "A10",
+              "player_name": "Aster Player 21",
+              "shirt_number": 14,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 5575800,
+              "period": 2,
+              "period_ms": 2575800,
+              "team_id": "HOME",
+              "club_id": "TOT",
+              "club_name": "Thornvale FC",
+              "player_id": "H09",
+              "player_name": "Thornvale Player 25",
+              "shirt_number": 11,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 508,
+              "completed_passes": 477,
+              "shots": 11,
+              "shots_on_target": 4,
+              "interceptions": 31,
+              "pressure_events": 625,
+              "possession_seconds": 2876.6,
+              "possession_pct": 50.22,
+              "pass_accuracy_pct": 93.9
+            },
+            "AWAY": {
+              "passes": 514,
+              "completed_passes": 483,
+              "shots": 12,
+              "shots_on_target": 3,
+              "interceptions": 31,
+              "pressure_events": 650,
+              "possession_seconds": 2851.2,
+              "possession_pct": 49.78,
+              "pass_accuracy_pct": 93.97
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-TOT-ARS/",
+            "metadata": "matches/PL26-W01-TOT-ARS/metadata.json",
+            "summary": "matches/PL26-W01-TOT-ARS/summary.json",
+            "analysis": "matches/PL26-W01-TOT-ARS/analysis.json",
+            "events": "matches/PL26-W01-TOT-ARS/events.jsonl",
+            "states": "matches/PL26-W01-TOT-ARS/states.jsonl",
+            "preview": "matches/PL26-W01-TOT-ARS/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-SUN-AVL",
+          "matchweek": 1,
+          "home_club_id": "SUN",
+          "away_club_id": "AVL",
+          "home_name": "Silverbrook FC",
+          "away_name": "Beacon FC",
+          "kickoff_local": "2026-10-24T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Silverbrook Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            3,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 1225000,
+              "period": 1,
+              "period_ms": 1225000,
+              "team_id": "HOME",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "H06",
+              "player_name": "Silverbrook Player 12",
+              "shirt_number": 8,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 2117600,
+              "period": 1,
+              "period_ms": 2117600,
+              "team_id": "HOME",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "H10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            },
+            {
+              "t_ms": 2365600,
+              "period": 1,
+              "period_ms": 2365600,
+              "team_id": "HOME",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "H10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                3,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 487,
+              "completed_passes": 458,
+              "shots": 13,
+              "shots_on_target": 9,
+              "interceptions": 28,
+              "pressure_events": 631,
+              "possession_seconds": 2769.6,
+              "possession_pct": 48.49,
+              "pass_accuracy_pct": 94.05
+            },
+            "AWAY": {
+              "passes": 523,
+              "completed_passes": 495,
+              "shots": 13,
+              "shots_on_target": 4,
+              "interceptions": 29,
+              "pressure_events": 580,
+              "possession_seconds": 2942.2,
+              "possession_pct": 51.51,
+              "pass_accuracy_pct": 94.65
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-SUN-AVL/",
+            "metadata": "matches/PL26-W01-SUN-AVL/metadata.json",
+            "summary": "matches/PL26-W01-SUN-AVL/summary.json",
+            "analysis": "matches/PL26-W01-SUN-AVL/analysis.json",
+            "events": "matches/PL26-W01-SUN-AVL/events.jsonl",
+            "states": "matches/PL26-W01-SUN-AVL/states.jsonl",
+            "preview": "matches/PL26-W01-SUN-AVL/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-BOU-NFO",
+          "matchweek": 1,
+          "home_club_id": "BOU",
+          "away_club_id": "NFO",
+          "home_name": "Cedar FC",
+          "away_name": "Rivermist FC",
+          "kickoff_local": "2026-10-24T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Cedar Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2432800,
+              "period": 1,
+              "period_ms": 2432800,
+              "team_id": "HOME",
+              "club_id": "BOU",
+              "club_name": "Cedar FC",
+              "player_id": "H10",
+              "player_name": "Cedar Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 2639000,
+              "period": 1,
+              "period_ms": 2639000,
+              "team_id": "AWAY",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "A10",
+              "player_name": "Rivermist Player 23",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 539,
+              "completed_passes": 502,
+              "shots": 10,
+              "shots_on_target": 5,
+              "interceptions": 33,
+              "pressure_events": 641,
+              "possession_seconds": 2839.8,
+              "possession_pct": 49.61,
+              "pass_accuracy_pct": 93.14
+            },
+            "AWAY": {
+              "passes": 498,
+              "completed_passes": 465,
+              "shots": 14,
+              "shots_on_target": 3,
+              "interceptions": 37,
+              "pressure_events": 592,
+              "possession_seconds": 2884.0,
+              "possession_pct": 50.39,
+              "pass_accuracy_pct": 93.37
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-BOU-NFO/",
+            "metadata": "matches/PL26-W01-BOU-NFO/metadata.json",
+            "summary": "matches/PL26-W01-BOU-NFO/summary.json",
+            "analysis": "matches/PL26-W01-BOU-NFO/analysis.json",
+            "events": "matches/PL26-W01-BOU-NFO/events.jsonl",
+            "states": "matches/PL26-W01-BOU-NFO/states.jsonl",
+            "preview": "matches/PL26-W01-BOU-NFO/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-NEW-BRE",
+          "matchweek": 1,
+          "home_club_id": "NEW",
+          "away_club_id": "BRE",
+          "home_name": "Quartz FC",
+          "away_name": "Driftwood FC",
+          "kickoff_local": "2026-10-24T17:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Quartz Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 243600,
+              "period": 1,
+              "period_ms": 243600,
+              "team_id": "HOME",
+              "club_id": "NEW",
+              "club_name": "Quartz FC",
+              "player_id": "H10",
+              "player_name": "Quartz Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 534,
+              "completed_passes": 496,
+              "shots": 9,
+              "shots_on_target": 6,
+              "interceptions": 37,
+              "pressure_events": 609,
+              "possession_seconds": 2953.4,
+              "possession_pct": 51.13,
+              "pass_accuracy_pct": 92.88
+            },
+            "AWAY": {
+              "passes": 510,
+              "completed_passes": 473,
+              "shots": 11,
+              "shots_on_target": 3,
+              "interceptions": 38,
+              "pressure_events": 627,
+              "possession_seconds": 2822.4,
+              "possession_pct": 48.87,
+              "pass_accuracy_pct": 92.75
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-NEW-BRE/",
+            "metadata": "matches/PL26-W01-NEW-BRE/metadata.json",
+            "summary": "matches/PL26-W01-NEW-BRE/summary.json",
+            "analysis": "matches/PL26-W01-NEW-BRE/analysis.json",
+            "events": "matches/PL26-W01-NEW-BRE/events.jsonl",
+            "states": "matches/PL26-W01-NEW-BRE/states.jsonl",
+            "preview": "matches/PL26-W01-NEW-BRE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-BHA-MUN",
+          "matchweek": 1,
+          "home_club_id": "BHA",
+          "away_club_id": "MUN",
+          "home_name": "Ember FC",
+          "away_name": "Pinecrest FC",
+          "kickoff_local": "2026-10-24T20:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Ember Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            2
+          ],
+          "goals": [
+            {
+              "t_ms": 3330000,
+              "period": 2,
+              "period_ms": 330000,
+              "team_id": "AWAY",
+              "club_id": "MUN",
+              "club_name": "Pinecrest FC",
+              "player_id": "A10",
+              "player_name": "Pinecrest Player 25",
+              "shirt_number": 10,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 5728200,
+              "period": 2,
+              "period_ms": 2728200,
+              "team_id": "AWAY",
+              "club_id": "MUN",
+              "club_name": "Pinecrest FC",
+              "player_id": "A10",
+              "player_name": "Pinecrest Player 25",
+              "shirt_number": 10,
+              "score": [
+                0,
+                2
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 650,
+              "completed_passes": 615,
+              "shots": 14,
+              "shots_on_target": 1,
+              "interceptions": 36,
+              "pressure_events": 524,
+              "possession_seconds": 3212.6,
+              "possession_pct": 56.32,
+              "pass_accuracy_pct": 94.62
+            },
+            "AWAY": {
+              "passes": 462,
+              "completed_passes": 426,
+              "shots": 12,
+              "shots_on_target": 6,
+              "interceptions": 35,
+              "pressure_events": 650,
+              "possession_seconds": 2491.2,
+              "possession_pct": 43.68,
+              "pass_accuracy_pct": 92.21
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-BHA-MUN/",
+            "metadata": "matches/PL26-W01-BHA-MUN/metadata.json",
+            "summary": "matches/PL26-W01-BHA-MUN/summary.json",
+            "analysis": "matches/PL26-W01-BHA-MUN/analysis.json",
+            "events": "matches/PL26-W01-BHA-MUN/events.jsonl",
+            "states": "matches/PL26-W01-BHA-MUN/states.jsonl",
+            "preview": "matches/PL26-W01-BHA-MUN/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-MCI-CHE",
+          "matchweek": 1,
+          "home_club_id": "MCI",
+          "away_club_id": "CHE",
+          "home_name": "Oakmere FC",
+          "away_name": "Fairhaven FC",
+          "kickoff_local": "2026-10-25T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Oakmere Park",
+          "featured": true,
+          "status": "finished",
+          "score": [
+            2,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 1831800,
+              "period": 1,
+              "period_ms": 1831800,
+              "team_id": "HOME",
+              "club_id": "MCI",
+              "club_name": "Oakmere FC",
+              "player_id": "H10",
+              "player_name": "Oakmere Player 23",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 4835800,
+              "period": 2,
+              "period_ms": 1835800,
+              "team_id": "HOME",
+              "club_id": "MCI",
+              "club_name": "Oakmere FC",
+              "player_id": "H10",
+              "player_name": "Oakmere Player 23",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 497,
+              "completed_passes": 461,
+              "shots": 9,
+              "shots_on_target": 5,
+              "interceptions": 34,
+              "pressure_events": 625,
+              "possession_seconds": 2863.4,
+              "possession_pct": 49.71,
+              "pass_accuracy_pct": 92.76
+            },
+            "AWAY": {
+              "passes": 519,
+              "completed_passes": 485,
+              "shots": 11,
+              "shots_on_target": 4,
+              "interceptions": 36,
+              "pressure_events": 615,
+              "possession_seconds": 2896.4,
+              "possession_pct": 50.29,
+              "pass_accuracy_pct": 93.45
+            }
+          },
+          "tracking": "full",
+          "paths": {
+            "match": "matches/PL26-W01-MCI-CHE/",
+            "metadata": "matches/PL26-W01-MCI-CHE/metadata.json",
+            "summary": "matches/PL26-W01-MCI-CHE/summary.json",
+            "analysis": "matches/PL26-W01-MCI-CHE/analysis.json",
+            "events": "matches/PL26-W01-MCI-CHE/events.jsonl",
+            "states": "matches/PL26-W01-MCI-CHE/states.jsonl",
+            "preview": "matches/PL26-W01-MCI-CHE/preview-60s.json",
+            "tracking": "matches/PL26-W01-MCI-CHE/tracking.jsonl"
+          }
+        },
+        {
+          "match_id": "PL26-W01-COV-LIV",
+          "matchweek": 1,
+          "home_club_id": "COV",
+          "away_club_id": "LIV",
+          "home_name": "Glenvale FC",
+          "away_name": "Northstar FC",
+          "kickoff_local": "2026-10-25T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Glenvale Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 1135600,
+              "period": 1,
+              "period_ms": 1135600,
+              "team_id": "HOME",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "H10",
+              "player_name": "Glenvale Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 4216800,
+              "period": 2,
+              "period_ms": 1216800,
+              "team_id": "HOME",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "H11",
+              "player_name": "Glenvale Player 26",
+              "shirt_number": 18,
+              "score": [
+                2,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 545,
+              "completed_passes": 514,
+              "shots": 12,
+              "shots_on_target": 6,
+              "interceptions": 30,
+              "pressure_events": 529,
+              "possession_seconds": 3192.4,
+              "possession_pct": 55.66,
+              "pass_accuracy_pct": 94.31
+            },
+            "AWAY": {
+              "passes": 484,
+              "completed_passes": 454,
+              "shots": 12,
+              "shots_on_target": 5,
+              "interceptions": 31,
+              "pressure_events": 705,
+              "possession_seconds": 2543.4,
+              "possession_pct": 44.34,
+              "pass_accuracy_pct": 93.8
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-COV-LIV/",
+            "metadata": "matches/PL26-W01-COV-LIV/metadata.json",
+            "summary": "matches/PL26-W01-COV-LIV/summary.json",
+            "analysis": "matches/PL26-W01-COV-LIV/analysis.json",
+            "events": "matches/PL26-W01-COV-LIV/events.jsonl",
+            "states": "matches/PL26-W01-COV-LIV/states.jsonl",
+            "preview": "matches/PL26-W01-COV-LIV/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-LEE-CRY",
+          "matchweek": 1,
+          "home_club_id": "LEE",
+          "away_club_id": "CRY",
+          "home_name": "Meadow FC",
+          "away_name": "Highridge FC",
+          "kickoff_local": "2026-10-25T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Meadow Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 530000,
+              "period": 1,
+              "period_ms": 530000,
+              "team_id": "AWAY",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "A10",
+              "player_name": "Highridge Player 23",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 521,
+              "completed_passes": 485,
+              "shots": 10,
+              "shots_on_target": 6,
+              "interceptions": 35,
+              "pressure_events": 647,
+              "possession_seconds": 2763.6,
+              "possession_pct": 48.01,
+              "pass_accuracy_pct": 93.09
+            },
+            "AWAY": {
+              "passes": 542,
+              "completed_passes": 507,
+              "shots": 12,
+              "shots_on_target": 2,
+              "interceptions": 36,
+              "pressure_events": 589,
+              "possession_seconds": 2992.2,
+              "possession_pct": 51.99,
+              "pass_accuracy_pct": 93.54
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-LEE-CRY/",
+            "metadata": "matches/PL26-W01-LEE-CRY/metadata.json",
+            "summary": "matches/PL26-W01-LEE-CRY/summary.json",
+            "analysis": "matches/PL26-W01-LEE-CRY/analysis.json",
+            "events": "matches/PL26-W01-LEE-CRY/events.jsonl",
+            "states": "matches/PL26-W01-LEE-CRY/states.jsonl",
+            "preview": "matches/PL26-W01-LEE-CRY/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-EVE-IPS",
+          "matchweek": 1,
+          "home_club_id": "EVE",
+          "away_club_id": "IPS",
+          "home_name": "Ivory FC",
+          "away_name": "Larkspur FC",
+          "kickoff_local": "2026-10-25T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Ivory Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2960400,
+              "period": 1,
+              "period_ms": 2960400,
+              "team_id": "AWAY",
+              "club_id": "IPS",
+              "club_name": "Larkspur FC",
+              "player_id": "A10",
+              "player_name": "Larkspur Player 22",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 5620400,
+              "period": 2,
+              "period_ms": 2620400,
+              "team_id": "HOME",
+              "club_id": "EVE",
+              "club_name": "Ivory FC",
+              "player_id": "H10",
+              "player_name": "Ivory Player 19",
+              "shirt_number": 11,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 518,
+              "completed_passes": 490,
+              "shots": 12,
+              "shots_on_target": 3,
+              "interceptions": 33,
+              "pressure_events": 615,
+              "possession_seconds": 2929.2,
+              "possession_pct": 50.86,
+              "pass_accuracy_pct": 94.59
+            },
+            "AWAY": {
+              "passes": 487,
+              "completed_passes": 454,
+              "shots": 6,
+              "shots_on_target": 2,
+              "interceptions": 28,
+              "pressure_events": 647,
+              "possession_seconds": 2830.6,
+              "possession_pct": 49.14,
+              "pass_accuracy_pct": 93.22
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-EVE-IPS/",
+            "metadata": "matches/PL26-W01-EVE-IPS/metadata.json",
+            "summary": "matches/PL26-W01-EVE-IPS/summary.json",
+            "analysis": "matches/PL26-W01-EVE-IPS/analysis.json",
+            "events": "matches/PL26-W01-EVE-IPS/events.jsonl",
+            "states": "matches/PL26-W01-EVE-IPS/states.jsonl",
+            "preview": "matches/PL26-W01-EVE-IPS/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W01-HUL-FUL",
+          "matchweek": 1,
+          "home_club_id": "HUL",
+          "away_club_id": "FUL",
+          "home_name": "Kingswell FC",
+          "away_name": "Juniper FC",
+          "kickoff_local": "2026-10-25T19:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Kingswell Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2406400,
+              "period": 1,
+              "period_ms": 2406400,
+              "team_id": "AWAY",
+              "club_id": "FUL",
+              "club_name": "Juniper FC",
+              "player_id": "A10",
+              "player_name": "Juniper Player 24",
+              "shirt_number": 7,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 4517200,
+              "period": 2,
+              "period_ms": 1517200,
+              "team_id": "HOME",
+              "club_id": "HUL",
+              "club_name": "Kingswell FC",
+              "player_id": "H12",
+              "player_name": "Kingswell Player 16",
+              "shirt_number": 14,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 559,
+              "completed_passes": 525,
+              "shots": 13,
+              "shots_on_target": 7,
+              "interceptions": 30,
+              "pressure_events": 549,
+              "possession_seconds": 3037.6,
+              "possession_pct": 53.22,
+              "pass_accuracy_pct": 93.92
+            },
+            "AWAY": {
+              "passes": 518,
+              "completed_passes": 488,
+              "shots": 15,
+              "shots_on_target": 5,
+              "interceptions": 34,
+              "pressure_events": 644,
+              "possession_seconds": 2670.2,
+              "possession_pct": 46.78,
+              "pass_accuracy_pct": 94.21
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W01-HUL-FUL/",
+            "metadata": "matches/PL26-W01-HUL-FUL/metadata.json",
+            "summary": "matches/PL26-W01-HUL-FUL/summary.json",
+            "analysis": "matches/PL26-W01-HUL-FUL/analysis.json",
+            "events": "matches/PL26-W01-HUL-FUL/events.jsonl",
+            "states": "matches/PL26-W01-HUL-FUL/states.jsonl",
+            "preview": "matches/PL26-W01-HUL-FUL/preview-60s.json",
+            "tracking": null
+          }
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "label": "Matchweek 2",
+      "date": "2026-10-31",
+      "matches": [
+        {
+          "match_id": "PL26-W02-ARS-SUN",
+          "matchweek": 2,
+          "home_club_id": "ARS",
+          "away_club_id": "SUN",
+          "home_name": "Aster FC",
+          "away_name": "Silverbrook FC",
+          "kickoff_local": "2026-10-31T12:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Aster Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            2
+          ],
+          "goals": [
+            {
+              "t_ms": 636400,
+              "period": 1,
+              "period_ms": 636400,
+              "team_id": "AWAY",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "A10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1140600,
+              "period": 1,
+              "period_ms": 1140600,
+              "team_id": "HOME",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "H10",
+              "player_name": "Aster Player 21",
+              "shirt_number": 14,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 1797400,
+              "period": 1,
+              "period_ms": 1797400,
+              "team_id": "HOME",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "H10",
+              "player_name": "Aster Player 21",
+              "shirt_number": 14,
+              "score": [
+                2,
+                1
+              ]
+            },
+            {
+              "t_ms": 2275200,
+              "period": 1,
+              "period_ms": 2275200,
+              "team_id": "AWAY",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "A10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                2,
+                2
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 439,
+              "completed_passes": 410,
+              "shots": 18,
+              "shots_on_target": 9,
+              "interceptions": 33,
+              "pressure_events": 704,
+              "possession_seconds": 2363.0,
+              "possession_pct": 41.66,
+              "pass_accuracy_pct": 93.39
+            },
+            "AWAY": {
+              "passes": 574,
+              "completed_passes": 541,
+              "shots": 13,
+              "shots_on_target": 8,
+              "interceptions": 29,
+              "pressure_events": 511,
+              "possession_seconds": 3308.8,
+              "possession_pct": 58.34,
+              "pass_accuracy_pct": 94.25
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-ARS-SUN/",
+            "metadata": "matches/PL26-W02-ARS-SUN/metadata.json",
+            "summary": "matches/PL26-W02-ARS-SUN/summary.json",
+            "analysis": "matches/PL26-W02-ARS-SUN/analysis.json",
+            "events": "matches/PL26-W02-ARS-SUN/events.jsonl",
+            "states": "matches/PL26-W02-ARS-SUN/states.jsonl",
+            "preview": "matches/PL26-W02-ARS-SUN/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-NFO-TOT",
+          "matchweek": 2,
+          "home_club_id": "NFO",
+          "away_club_id": "TOT",
+          "home_name": "Rivermist FC",
+          "away_name": "Thornvale FC",
+          "kickoff_local": "2026-10-31T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Rivermist Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            3,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2200800,
+              "period": 1,
+              "period_ms": 2200800,
+              "team_id": "AWAY",
+              "club_id": "TOT",
+              "club_name": "Thornvale FC",
+              "player_id": "A08",
+              "player_name": "Thornvale Player 14",
+              "shirt_number": 8,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 3179600,
+              "period": 2,
+              "period_ms": 179600,
+              "team_id": "HOME",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "H10",
+              "player_name": "Rivermist Player 23",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 3674400,
+              "period": 2,
+              "period_ms": 674400,
+              "team_id": "HOME",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "H09",
+              "player_name": "Rivermist Player 22",
+              "shirt_number": 7,
+              "score": [
+                2,
+                1
+              ]
+            },
+            {
+              "t_ms": 5970200,
+              "period": 2,
+              "period_ms": 2970200,
+              "team_id": "HOME",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "H10",
+              "player_name": "Rivermist Player 23",
+              "shirt_number": 9,
+              "score": [
+                3,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 533,
+              "completed_passes": 499,
+              "shots": 13,
+              "shots_on_target": 9,
+              "interceptions": 37,
+              "pressure_events": 576,
+              "possession_seconds": 2883.0,
+              "possession_pct": 50.33,
+              "pass_accuracy_pct": 93.62
+            },
+            "AWAY": {
+              "passes": 577,
+              "completed_passes": 540,
+              "shots": 10,
+              "shots_on_target": 6,
+              "interceptions": 34,
+              "pressure_events": 591,
+              "possession_seconds": 2844.8,
+              "possession_pct": 49.67,
+              "pass_accuracy_pct": 93.59
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-NFO-TOT/",
+            "metadata": "matches/PL26-W02-NFO-TOT/metadata.json",
+            "summary": "matches/PL26-W02-NFO-TOT/summary.json",
+            "analysis": "matches/PL26-W02-NFO-TOT/analysis.json",
+            "events": "matches/PL26-W02-NFO-TOT/events.jsonl",
+            "states": "matches/PL26-W02-NFO-TOT/states.jsonl",
+            "preview": "matches/PL26-W02-NFO-TOT/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-AVL-NEW",
+          "matchweek": 2,
+          "home_club_id": "AVL",
+          "away_club_id": "NEW",
+          "home_name": "Beacon FC",
+          "away_name": "Quartz FC",
+          "kickoff_local": "2026-10-31T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Beacon Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 2363800,
+              "period": 1,
+              "period_ms": 2363800,
+              "team_id": "HOME",
+              "club_id": "AVL",
+              "club_name": "Beacon FC",
+              "player_id": "H09",
+              "player_name": "Beacon Player 27",
+              "shirt_number": 19,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 536,
+              "completed_passes": 505,
+              "shots": 10,
+              "shots_on_target": 4,
+              "interceptions": 32,
+              "pressure_events": 593,
+              "possession_seconds": 3006.2,
+              "possession_pct": 51.98,
+              "pass_accuracy_pct": 94.22
+            },
+            "AWAY": {
+              "passes": 508,
+              "completed_passes": 476,
+              "shots": 8,
+              "shots_on_target": 3,
+              "interceptions": 31,
+              "pressure_events": 622,
+              "possession_seconds": 2777.6,
+              "possession_pct": 48.02,
+              "pass_accuracy_pct": 93.7
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-AVL-NEW/",
+            "metadata": "matches/PL26-W02-AVL-NEW/metadata.json",
+            "summary": "matches/PL26-W02-AVL-NEW/summary.json",
+            "analysis": "matches/PL26-W02-AVL-NEW/analysis.json",
+            "events": "matches/PL26-W02-AVL-NEW/events.jsonl",
+            "states": "matches/PL26-W02-AVL-NEW/states.jsonl",
+            "preview": "matches/PL26-W02-AVL-NEW/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-MUN-BOU",
+          "matchweek": 2,
+          "home_club_id": "MUN",
+          "away_club_id": "BOU",
+          "home_name": "Pinecrest FC",
+          "away_name": "Cedar FC",
+          "kickoff_local": "2026-10-31T17:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Pinecrest Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2388600,
+              "period": 1,
+              "period_ms": 2388600,
+              "team_id": "AWAY",
+              "club_id": "BOU",
+              "club_name": "Cedar FC",
+              "player_id": "A10",
+              "player_name": "Cedar Player 22",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 3921800,
+              "period": 2,
+              "period_ms": 921800,
+              "team_id": "HOME",
+              "club_id": "MUN",
+              "club_name": "Pinecrest FC",
+              "player_id": "H10",
+              "player_name": "Pinecrest Player 25",
+              "shirt_number": 10,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 523,
+              "completed_passes": 488,
+              "shots": 17,
+              "shots_on_target": 11,
+              "interceptions": 37,
+              "pressure_events": 603,
+              "possession_seconds": 2782.2,
+              "possession_pct": 48.85,
+              "pass_accuracy_pct": 93.31
+            },
+            "AWAY": {
+              "passes": 541,
+              "completed_passes": 504,
+              "shots": 14,
+              "shots_on_target": 4,
+              "interceptions": 35,
+              "pressure_events": 583,
+              "possession_seconds": 2913.6,
+              "possession_pct": 51.15,
+              "pass_accuracy_pct": 93.16
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-MUN-BOU/",
+            "metadata": "matches/PL26-W02-MUN-BOU/metadata.json",
+            "summary": "matches/PL26-W02-MUN-BOU/summary.json",
+            "analysis": "matches/PL26-W02-MUN-BOU/analysis.json",
+            "events": "matches/PL26-W02-MUN-BOU/events.jsonl",
+            "states": "matches/PL26-W02-MUN-BOU/states.jsonl",
+            "preview": "matches/PL26-W02-MUN-BOU/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-BRE-MCI",
+          "matchweek": 2,
+          "home_club_id": "BRE",
+          "away_club_id": "MCI",
+          "home_name": "Driftwood FC",
+          "away_name": "Oakmere FC",
+          "kickoff_local": "2026-10-31T20:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Driftwood Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 102200,
+              "period": 1,
+              "period_ms": 102200,
+              "team_id": "AWAY",
+              "club_id": "MCI",
+              "club_name": "Oakmere FC",
+              "player_id": "A10",
+              "player_name": "Oakmere Player 23",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1838800,
+              "period": 1,
+              "period_ms": 1838800,
+              "team_id": "HOME",
+              "club_id": "BRE",
+              "club_name": "Driftwood FC",
+              "player_id": "H09",
+              "player_name": "Driftwood Player 25",
+              "shirt_number": 11,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 476,
+              "completed_passes": 445,
+              "shots": 12,
+              "shots_on_target": 7,
+              "interceptions": 27,
+              "pressure_events": 708,
+              "possession_seconds": 2406.6,
+              "possession_pct": 42.05,
+              "pass_accuracy_pct": 93.49
+            },
+            "AWAY": {
+              "passes": 570,
+              "completed_passes": 543,
+              "shots": 15,
+              "shots_on_target": 7,
+              "interceptions": 31,
+              "pressure_events": 491,
+              "possession_seconds": 3317.2,
+              "possession_pct": 57.95,
+              "pass_accuracy_pct": 95.26
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-BRE-MCI/",
+            "metadata": "matches/PL26-W02-BRE-MCI/metadata.json",
+            "summary": "matches/PL26-W02-BRE-MCI/summary.json",
+            "analysis": "matches/PL26-W02-BRE-MCI/analysis.json",
+            "events": "matches/PL26-W02-BRE-MCI/events.jsonl",
+            "states": "matches/PL26-W02-BRE-MCI/states.jsonl",
+            "preview": "matches/PL26-W02-BRE-MCI/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-LIV-BHA",
+          "matchweek": 2,
+          "home_club_id": "LIV",
+          "away_club_id": "BHA",
+          "home_name": "Northstar FC",
+          "away_name": "Ember FC",
+          "kickoff_local": "2026-11-01T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Northstar Park",
+          "featured": true,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2594400,
+              "period": 1,
+              "period_ms": 2594400,
+              "team_id": "AWAY",
+              "club_id": "BHA",
+              "club_name": "Ember FC",
+              "player_id": "A10",
+              "player_name": "Ember Player 23",
+              "shirt_number": 7,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 585,
+              "completed_passes": 554,
+              "shots": 12,
+              "shots_on_target": 5,
+              "interceptions": 32,
+              "pressure_events": 534,
+              "possession_seconds": 3114.8,
+              "possession_pct": 54.04,
+              "pass_accuracy_pct": 94.7
+            },
+            "AWAY": {
+              "passes": 552,
+              "completed_passes": 520,
+              "shots": 10,
+              "shots_on_target": 4,
+              "interceptions": 31,
+              "pressure_events": 664,
+              "possession_seconds": 2648.6,
+              "possession_pct": 45.96,
+              "pass_accuracy_pct": 94.2
+            }
+          },
+          "tracking": "full",
+          "paths": {
+            "match": "matches/PL26-W02-LIV-BHA/",
+            "metadata": "matches/PL26-W02-LIV-BHA/metadata.json",
+            "summary": "matches/PL26-W02-LIV-BHA/summary.json",
+            "analysis": "matches/PL26-W02-LIV-BHA/analysis.json",
+            "events": "matches/PL26-W02-LIV-BHA/events.jsonl",
+            "states": "matches/PL26-W02-LIV-BHA/states.jsonl",
+            "preview": "matches/PL26-W02-LIV-BHA/preview-60s.json",
+            "tracking": "matches/PL26-W02-LIV-BHA/tracking.jsonl"
+          }
+        },
+        {
+          "match_id": "PL26-W02-CHE-LEE",
+          "matchweek": 2,
+          "home_club_id": "CHE",
+          "away_club_id": "LEE",
+          "home_name": "Fairhaven FC",
+          "away_name": "Meadow FC",
+          "kickoff_local": "2026-11-01T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Fairhaven Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 2965400,
+              "period": 1,
+              "period_ms": 2965400,
+              "team_id": "HOME",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "H10",
+              "player_name": "Fairhaven Player 25",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 409,
+              "completed_passes": 372,
+              "shots": 9,
+              "shots_on_target": 2,
+              "interceptions": 27,
+              "pressure_events": 723,
+              "possession_seconds": 2445.0,
+              "possession_pct": 42.69,
+              "pass_accuracy_pct": 90.95
+            },
+            "AWAY": {
+              "passes": 563,
+              "completed_passes": 536,
+              "shots": 18,
+              "shots_on_target": 9,
+              "interceptions": 37,
+              "pressure_events": 537,
+              "possession_seconds": 3282.8,
+              "possession_pct": 57.31,
+              "pass_accuracy_pct": 95.2
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-CHE-LEE/",
+            "metadata": "matches/PL26-W02-CHE-LEE/metadata.json",
+            "summary": "matches/PL26-W02-CHE-LEE/summary.json",
+            "analysis": "matches/PL26-W02-CHE-LEE/analysis.json",
+            "events": "matches/PL26-W02-CHE-LEE/events.jsonl",
+            "states": "matches/PL26-W02-CHE-LEE/states.jsonl",
+            "preview": "matches/PL26-W02-CHE-LEE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-IPS-COV",
+          "matchweek": 2,
+          "home_club_id": "IPS",
+          "away_club_id": "COV",
+          "home_name": "Larkspur FC",
+          "away_name": "Glenvale FC",
+          "kickoff_local": "2026-11-01T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Larkspur Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 2709600,
+              "period": 1,
+              "period_ms": 2709600,
+              "team_id": "HOME",
+              "club_id": "IPS",
+              "club_name": "Larkspur FC",
+              "player_id": "H11",
+              "player_name": "Larkspur Player 20",
+              "shirt_number": 7,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 495,
+              "completed_passes": 460,
+              "shots": 13,
+              "shots_on_target": 2,
+              "interceptions": 35,
+              "pressure_events": 642,
+              "possession_seconds": 2702.2,
+              "possession_pct": 47.28,
+              "pass_accuracy_pct": 92.93
+            },
+            "AWAY": {
+              "passes": 548,
+              "completed_passes": 513,
+              "shots": 12,
+              "shots_on_target": 2,
+              "interceptions": 35,
+              "pressure_events": 583,
+              "possession_seconds": 3013.6,
+              "possession_pct": 52.72,
+              "pass_accuracy_pct": 93.61
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-IPS-COV/",
+            "metadata": "matches/PL26-W02-IPS-COV/metadata.json",
+            "summary": "matches/PL26-W02-IPS-COV/summary.json",
+            "analysis": "matches/PL26-W02-IPS-COV/analysis.json",
+            "events": "matches/PL26-W02-IPS-COV/events.jsonl",
+            "states": "matches/PL26-W02-IPS-COV/states.jsonl",
+            "preview": "matches/PL26-W02-IPS-COV/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-CRY-HUL",
+          "matchweek": 2,
+          "home_club_id": "CRY",
+          "away_club_id": "HUL",
+          "home_name": "Highridge FC",
+          "away_name": "Kingswell FC",
+          "kickoff_local": "2026-11-01T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Highridge Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            3,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 3642800,
+              "period": 2,
+              "period_ms": 642800,
+              "team_id": "HOME",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "H09",
+              "player_name": "Highridge Player 24",
+              "shirt_number": 11,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 4295000,
+              "period": 2,
+              "period_ms": 1295000,
+              "team_id": "HOME",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "H10",
+              "player_name": "Highridge Player 23",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            },
+            {
+              "t_ms": 5504000,
+              "period": 2,
+              "period_ms": 2504000,
+              "team_id": "HOME",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "H11",
+              "player_name": "Highridge Player 22",
+              "shirt_number": 7,
+              "score": [
+                3,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 516,
+              "completed_passes": 489,
+              "shots": 13,
+              "shots_on_target": 5,
+              "interceptions": 26,
+              "pressure_events": 605,
+              "possession_seconds": 2821.8,
+              "possession_pct": 49.61,
+              "pass_accuracy_pct": 94.77
+            },
+            "AWAY": {
+              "passes": 521,
+              "completed_passes": 495,
+              "shots": 14,
+              "shots_on_target": 4,
+              "interceptions": 27,
+              "pressure_events": 607,
+              "possession_seconds": 2866.0,
+              "possession_pct": 50.39,
+              "pass_accuracy_pct": 95.01
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-CRY-HUL/",
+            "metadata": "matches/PL26-W02-CRY-HUL/metadata.json",
+            "summary": "matches/PL26-W02-CRY-HUL/summary.json",
+            "analysis": "matches/PL26-W02-CRY-HUL/analysis.json",
+            "events": "matches/PL26-W02-CRY-HUL/events.jsonl",
+            "states": "matches/PL26-W02-CRY-HUL/states.jsonl",
+            "preview": "matches/PL26-W02-CRY-HUL/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W02-FUL-EVE",
+          "matchweek": 2,
+          "home_club_id": "FUL",
+          "away_club_id": "EVE",
+          "home_name": "Juniper FC",
+          "away_name": "Ivory FC",
+          "kickoff_local": "2026-11-01T19:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Juniper Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 4544200,
+              "period": 2,
+              "period_ms": 1544200,
+              "team_id": "AWAY",
+              "club_id": "EVE",
+              "club_name": "Ivory FC",
+              "player_id": "A13",
+              "player_name": "Ivory Player 22",
+              "shirt_number": 22,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 595,
+              "completed_passes": 559,
+              "shots": 14,
+              "shots_on_target": 6,
+              "interceptions": 40,
+              "pressure_events": 449,
+              "possession_seconds": 3538.6,
+              "possession_pct": 61.52,
+              "pass_accuracy_pct": 93.95
+            },
+            "AWAY": {
+              "passes": 449,
+              "completed_passes": 409,
+              "shots": 9,
+              "shots_on_target": 3,
+              "interceptions": 36,
+              "pressure_events": 809,
+              "possession_seconds": 2213.2,
+              "possession_pct": 38.48,
+              "pass_accuracy_pct": 91.09
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W02-FUL-EVE/",
+            "metadata": "matches/PL26-W02-FUL-EVE/metadata.json",
+            "summary": "matches/PL26-W02-FUL-EVE/summary.json",
+            "analysis": "matches/PL26-W02-FUL-EVE/analysis.json",
+            "events": "matches/PL26-W02-FUL-EVE/events.jsonl",
+            "states": "matches/PL26-W02-FUL-EVE/states.jsonl",
+            "preview": "matches/PL26-W02-FUL-EVE/preview-60s.json",
+            "tracking": null
+          }
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "label": "Matchweek 3",
+      "date": "2026-11-07",
+      "matches": [
+        {
+          "match_id": "PL26-W03-NFO-ARS",
+          "matchweek": 3,
+          "home_club_id": "NFO",
+          "away_club_id": "ARS",
+          "home_name": "Rivermist FC",
+          "away_name": "Aster FC",
+          "kickoff_local": "2026-11-07T12:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Rivermist Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            3
+          ],
+          "goals": [
+            {
+              "t_ms": 1533600,
+              "period": 1,
+              "period_ms": 1533600,
+              "team_id": "AWAY",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "A10",
+              "player_name": "Aster Player 21",
+              "shirt_number": 14,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1788800,
+              "period": 1,
+              "period_ms": 1788800,
+              "team_id": "AWAY",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "A09",
+              "player_name": "Aster Player 20",
+              "shirt_number": 7,
+              "score": [
+                0,
+                2
+              ]
+            },
+            {
+              "t_ms": 2786800,
+              "period": 1,
+              "period_ms": 2786800,
+              "team_id": "HOME",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "H10",
+              "player_name": "Rivermist Player 23",
+              "shirt_number": 9,
+              "score": [
+                1,
+                2
+              ]
+            },
+            {
+              "t_ms": 3043400,
+              "period": 2,
+              "period_ms": 43400,
+              "team_id": "AWAY",
+              "club_id": "ARS",
+              "club_name": "Aster FC",
+              "player_id": "A10",
+              "player_name": "Aster Player 21",
+              "shirt_number": 14,
+              "score": [
+                1,
+                3
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 566,
+              "completed_passes": 525,
+              "shots": 8,
+              "shots_on_target": 2,
+              "interceptions": 28,
+              "pressure_events": 592,
+              "possession_seconds": 2937.8,
+              "possession_pct": 51.76,
+              "pass_accuracy_pct": 92.76
+            },
+            "AWAY": {
+              "passes": 471,
+              "completed_passes": 443,
+              "shots": 20,
+              "shots_on_target": 10,
+              "interceptions": 41,
+              "pressure_events": 615,
+              "possession_seconds": 2738.0,
+              "possession_pct": 48.24,
+              "pass_accuracy_pct": 94.06
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-NFO-ARS/",
+            "metadata": "matches/PL26-W03-NFO-ARS/metadata.json",
+            "summary": "matches/PL26-W03-NFO-ARS/summary.json",
+            "analysis": "matches/PL26-W03-NFO-ARS/analysis.json",
+            "events": "matches/PL26-W03-NFO-ARS/events.jsonl",
+            "states": "matches/PL26-W03-NFO-ARS/states.jsonl",
+            "preview": "matches/PL26-W03-NFO-ARS/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-NEW-SUN",
+          "matchweek": 3,
+          "home_club_id": "NEW",
+          "away_club_id": "SUN",
+          "home_name": "Quartz FC",
+          "away_name": "Silverbrook FC",
+          "kickoff_local": "2026-11-07T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Quartz Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 3104600,
+              "period": 2,
+              "period_ms": 104600,
+              "team_id": "HOME",
+              "club_id": "NEW",
+              "club_name": "Quartz FC",
+              "player_id": "H10",
+              "player_name": "Quartz Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 4141800,
+              "period": 2,
+              "period_ms": 1141800,
+              "team_id": "HOME",
+              "club_id": "NEW",
+              "club_name": "Quartz FC",
+              "player_id": "H10",
+              "player_name": "Quartz Player 22",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 538,
+              "completed_passes": 511,
+              "shots": 23,
+              "shots_on_target": 12,
+              "interceptions": 40,
+              "pressure_events": 605,
+              "possession_seconds": 2847.2,
+              "possession_pct": 50.02,
+              "pass_accuracy_pct": 94.98
+            },
+            "AWAY": {
+              "passes": 520,
+              "completed_passes": 480,
+              "shots": 10,
+              "shots_on_target": 6,
+              "interceptions": 27,
+              "pressure_events": 607,
+              "possession_seconds": 2844.6,
+              "possession_pct": 49.98,
+              "pass_accuracy_pct": 92.31
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-NEW-SUN/",
+            "metadata": "matches/PL26-W03-NEW-SUN/metadata.json",
+            "summary": "matches/PL26-W03-NEW-SUN/summary.json",
+            "analysis": "matches/PL26-W03-NEW-SUN/analysis.json",
+            "events": "matches/PL26-W03-NEW-SUN/events.jsonl",
+            "states": "matches/PL26-W03-NEW-SUN/states.jsonl",
+            "preview": "matches/PL26-W03-NEW-SUN/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-TOT-MUN",
+          "matchweek": 3,
+          "home_club_id": "TOT",
+          "away_club_id": "MUN",
+          "home_name": "Thornvale FC",
+          "away_name": "Pinecrest FC",
+          "kickoff_local": "2026-11-07T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Thornvale Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            0
+          ],
+          "goals": [],
+          "stats": {
+            "HOME": {
+              "passes": 546,
+              "completed_passes": 503,
+              "shots": 9,
+              "shots_on_target": 3,
+              "interceptions": 44,
+              "pressure_events": 601,
+              "possession_seconds": 2943.6,
+              "possession_pct": 50.65,
+              "pass_accuracy_pct": 92.12
+            },
+            "AWAY": {
+              "passes": 531,
+              "completed_passes": 487,
+              "shots": 7,
+              "shots_on_target": 3,
+              "interceptions": 43,
+              "pressure_events": 621,
+              "possession_seconds": 2868.2,
+              "possession_pct": 49.35,
+              "pass_accuracy_pct": 91.71
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-TOT-MUN/",
+            "metadata": "matches/PL26-W03-TOT-MUN/metadata.json",
+            "summary": "matches/PL26-W03-TOT-MUN/summary.json",
+            "analysis": "matches/PL26-W03-TOT-MUN/analysis.json",
+            "events": "matches/PL26-W03-TOT-MUN/events.jsonl",
+            "states": "matches/PL26-W03-TOT-MUN/states.jsonl",
+            "preview": "matches/PL26-W03-TOT-MUN/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-MCI-AVL",
+          "matchweek": 3,
+          "home_club_id": "MCI",
+          "away_club_id": "AVL",
+          "home_name": "Oakmere FC",
+          "away_name": "Beacon FC",
+          "kickoff_local": "2026-11-07T17:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Oakmere Park",
+          "featured": true,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 1356600,
+              "period": 1,
+              "period_ms": 1356600,
+              "team_id": "AWAY",
+              "club_id": "AVL",
+              "club_name": "Beacon FC",
+              "player_id": "A10",
+              "player_name": "Beacon Player 24",
+              "shirt_number": 11,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 474,
+              "completed_passes": 436,
+              "shots": 9,
+              "shots_on_target": 6,
+              "interceptions": 35,
+              "pressure_events": 625,
+              "possession_seconds": 2774.6,
+              "possession_pct": 48.07,
+              "pass_accuracy_pct": 91.98
+            },
+            "AWAY": {
+              "passes": 551,
+              "completed_passes": 516,
+              "shots": 12,
+              "shots_on_target": 4,
+              "interceptions": 38,
+              "pressure_events": 619,
+              "possession_seconds": 2997.2,
+              "possession_pct": 51.93,
+              "pass_accuracy_pct": 93.65
+            }
+          },
+          "tracking": "full",
+          "paths": {
+            "match": "matches/PL26-W03-MCI-AVL/",
+            "metadata": "matches/PL26-W03-MCI-AVL/metadata.json",
+            "summary": "matches/PL26-W03-MCI-AVL/summary.json",
+            "analysis": "matches/PL26-W03-MCI-AVL/analysis.json",
+            "events": "matches/PL26-W03-MCI-AVL/events.jsonl",
+            "states": "matches/PL26-W03-MCI-AVL/states.jsonl",
+            "preview": "matches/PL26-W03-MCI-AVL/preview-60s.json",
+            "tracking": "matches/PL26-W03-MCI-AVL/tracking.jsonl"
+          }
+        },
+        {
+          "match_id": "PL26-W03-BOU-LIV",
+          "matchweek": 3,
+          "home_club_id": "BOU",
+          "away_club_id": "LIV",
+          "home_name": "Cedar FC",
+          "away_name": "Northstar FC",
+          "kickoff_local": "2026-11-07T20:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Cedar Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 791200,
+              "period": 1,
+              "period_ms": 791200,
+              "team_id": "HOME",
+              "club_id": "BOU",
+              "club_name": "Cedar FC",
+              "player_id": "H10",
+              "player_name": "Cedar Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 553,
+              "completed_passes": 518,
+              "shots": 9,
+              "shots_on_target": 5,
+              "interceptions": 30,
+              "pressure_events": 564,
+              "possession_seconds": 3110.2,
+              "possession_pct": 53.96,
+              "pass_accuracy_pct": 93.67
+            },
+            "AWAY": {
+              "passes": 477,
+              "completed_passes": 447,
+              "shots": 13,
+              "shots_on_target": 5,
+              "interceptions": 35,
+              "pressure_events": 681,
+              "possession_seconds": 2653.6,
+              "possession_pct": 46.04,
+              "pass_accuracy_pct": 93.71
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-BOU-LIV/",
+            "metadata": "matches/PL26-W03-BOU-LIV/metadata.json",
+            "summary": "matches/PL26-W03-BOU-LIV/summary.json",
+            "analysis": "matches/PL26-W03-BOU-LIV/analysis.json",
+            "events": "matches/PL26-W03-BOU-LIV/events.jsonl",
+            "states": "matches/PL26-W03-BOU-LIV/states.jsonl",
+            "preview": "matches/PL26-W03-BOU-LIV/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-LEE-BRE",
+          "matchweek": 3,
+          "home_club_id": "LEE",
+          "away_club_id": "BRE",
+          "home_name": "Meadow FC",
+          "away_name": "Driftwood FC",
+          "kickoff_local": "2026-11-08T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Meadow Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 1366800,
+              "period": 1,
+              "period_ms": 1366800,
+              "team_id": "HOME",
+              "club_id": "LEE",
+              "club_name": "Meadow FC",
+              "player_id": "H10",
+              "player_name": "Meadow Player 25",
+              "shirt_number": 14,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 1690200,
+              "period": 1,
+              "period_ms": 1690200,
+              "team_id": "AWAY",
+              "club_id": "BRE",
+              "club_name": "Driftwood FC",
+              "player_id": "A10",
+              "player_name": "Driftwood Player 26",
+              "shirt_number": 13,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 1776000,
+              "period": 1,
+              "period_ms": 1776000,
+              "team_id": "HOME",
+              "club_id": "LEE",
+              "club_name": "Meadow FC",
+              "player_id": "H10",
+              "player_name": "Meadow Player 25",
+              "shirt_number": 14,
+              "score": [
+                2,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 605,
+              "completed_passes": 575,
+              "shots": 11,
+              "shots_on_target": 4,
+              "interceptions": 25,
+              "pressure_events": 522,
+              "possession_seconds": 3322.0,
+              "possession_pct": 58.28,
+              "pass_accuracy_pct": 95.04
+            },
+            "AWAY": {
+              "passes": 444,
+              "completed_passes": 419,
+              "shots": 15,
+              "shots_on_target": 6,
+              "interceptions": 30,
+              "pressure_events": 723,
+              "possession_seconds": 2377.8,
+              "possession_pct": 41.72,
+              "pass_accuracy_pct": 94.37
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-LEE-BRE/",
+            "metadata": "matches/PL26-W03-LEE-BRE/metadata.json",
+            "summary": "matches/PL26-W03-LEE-BRE/summary.json",
+            "analysis": "matches/PL26-W03-LEE-BRE/analysis.json",
+            "events": "matches/PL26-W03-LEE-BRE/events.jsonl",
+            "states": "matches/PL26-W03-LEE-BRE/states.jsonl",
+            "preview": "matches/PL26-W03-LEE-BRE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-BHA-IPS",
+          "matchweek": 3,
+          "home_club_id": "BHA",
+          "away_club_id": "IPS",
+          "home_name": "Ember FC",
+          "away_name": "Larkspur FC",
+          "kickoff_local": "2026-11-08T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Ember Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 669400,
+              "period": 1,
+              "period_ms": 669400,
+              "team_id": "AWAY",
+              "club_id": "IPS",
+              "club_name": "Larkspur FC",
+              "player_id": "A09",
+              "player_name": "Larkspur Player 23",
+              "shirt_number": 11,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1714000,
+              "period": 1,
+              "period_ms": 1714000,
+              "team_id": "HOME",
+              "club_id": "BHA",
+              "club_name": "Ember FC",
+              "player_id": "H10",
+              "player_name": "Ember Player 23",
+              "shirt_number": 7,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 4713600,
+              "period": 2,
+              "period_ms": 1713600,
+              "team_id": "HOME",
+              "club_id": "BHA",
+              "club_name": "Ember FC",
+              "player_id": "H10",
+              "player_name": "Ember Player 23",
+              "shirt_number": 7,
+              "score": [
+                2,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 543,
+              "completed_passes": 518,
+              "shots": 15,
+              "shots_on_target": 9,
+              "interceptions": 31,
+              "pressure_events": 610,
+              "possession_seconds": 2893.0,
+              "possession_pct": 50.44,
+              "pass_accuracy_pct": 95.4
+            },
+            "AWAY": {
+              "passes": 498,
+              "completed_passes": 467,
+              "shots": 9,
+              "shots_on_target": 6,
+              "interceptions": 25,
+              "pressure_events": 632,
+              "possession_seconds": 2842.8,
+              "possession_pct": 49.56,
+              "pass_accuracy_pct": 93.78
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-BHA-IPS/",
+            "metadata": "matches/PL26-W03-BHA-IPS/metadata.json",
+            "summary": "matches/PL26-W03-BHA-IPS/summary.json",
+            "analysis": "matches/PL26-W03-BHA-IPS/analysis.json",
+            "events": "matches/PL26-W03-BHA-IPS/events.jsonl",
+            "states": "matches/PL26-W03-BHA-IPS/states.jsonl",
+            "preview": "matches/PL26-W03-BHA-IPS/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-HUL-CHE",
+          "matchweek": 3,
+          "home_club_id": "HUL",
+          "away_club_id": "CHE",
+          "home_name": "Kingswell FC",
+          "away_name": "Fairhaven FC",
+          "kickoff_local": "2026-11-08T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Kingswell Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            3
+          ],
+          "goals": [
+            {
+              "t_ms": 4572600,
+              "period": 2,
+              "period_ms": 1572600,
+              "team_id": "AWAY",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "A10",
+              "player_name": "Fairhaven Player 25",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 5290400,
+              "period": 2,
+              "period_ms": 2290400,
+              "team_id": "AWAY",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "A10",
+              "player_name": "Fairhaven Player 25",
+              "shirt_number": 9,
+              "score": [
+                0,
+                2
+              ]
+            },
+            {
+              "t_ms": 5932000,
+              "period": 2,
+              "period_ms": 2932000,
+              "team_id": "AWAY",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "A07",
+              "player_name": "Fairhaven Player 21",
+              "shirt_number": 25,
+              "score": [
+                0,
+                3
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 567,
+              "completed_passes": 532,
+              "shots": 12,
+              "shots_on_target": 1,
+              "interceptions": 28,
+              "pressure_events": 536,
+              "possession_seconds": 3060.6,
+              "possession_pct": 53.97,
+              "pass_accuracy_pct": 93.83
+            },
+            "AWAY": {
+              "passes": 488,
+              "completed_passes": 460,
+              "shots": 17,
+              "shots_on_target": 8,
+              "interceptions": 35,
+              "pressure_events": 660,
+              "possession_seconds": 2610.0,
+              "possession_pct": 46.03,
+              "pass_accuracy_pct": 94.26
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-HUL-CHE/",
+            "metadata": "matches/PL26-W03-HUL-CHE/metadata.json",
+            "summary": "matches/PL26-W03-HUL-CHE/summary.json",
+            "analysis": "matches/PL26-W03-HUL-CHE/analysis.json",
+            "events": "matches/PL26-W03-HUL-CHE/events.jsonl",
+            "states": "matches/PL26-W03-HUL-CHE/states.jsonl",
+            "preview": "matches/PL26-W03-HUL-CHE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-COV-FUL",
+          "matchweek": 3,
+          "home_club_id": "COV",
+          "away_club_id": "FUL",
+          "home_name": "Glenvale FC",
+          "away_name": "Juniper FC",
+          "kickoff_local": "2026-11-08T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Glenvale Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 1459600,
+              "period": 1,
+              "period_ms": 1459600,
+              "team_id": "AWAY",
+              "club_id": "FUL",
+              "club_name": "Juniper FC",
+              "player_id": "A10",
+              "player_name": "Juniper Player 24",
+              "shirt_number": 7,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1930200,
+              "period": 1,
+              "period_ms": 1930200,
+              "team_id": "HOME",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "H10",
+              "player_name": "Glenvale Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 540,
+              "completed_passes": 506,
+              "shots": 8,
+              "shots_on_target": 6,
+              "interceptions": 24,
+              "pressure_events": 598,
+              "possession_seconds": 3017.0,
+              "possession_pct": 52.67,
+              "pass_accuracy_pct": 93.7
+            },
+            "AWAY": {
+              "passes": 462,
+              "completed_passes": 438,
+              "shots": 18,
+              "shots_on_target": 7,
+              "interceptions": 34,
+              "pressure_events": 661,
+              "possession_seconds": 2710.8,
+              "possession_pct": 47.33,
+              "pass_accuracy_pct": 94.81
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-COV-FUL/",
+            "metadata": "matches/PL26-W03-COV-FUL/metadata.json",
+            "summary": "matches/PL26-W03-COV-FUL/summary.json",
+            "analysis": "matches/PL26-W03-COV-FUL/analysis.json",
+            "events": "matches/PL26-W03-COV-FUL/events.jsonl",
+            "states": "matches/PL26-W03-COV-FUL/states.jsonl",
+            "preview": "matches/PL26-W03-COV-FUL/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W03-EVE-CRY",
+          "matchweek": 3,
+          "home_club_id": "EVE",
+          "away_club_id": "CRY",
+          "home_name": "Ivory FC",
+          "away_name": "Highridge FC",
+          "kickoff_local": "2026-11-08T19:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Ivory Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 3341800,
+              "period": 2,
+              "period_ms": 341800,
+              "team_id": "AWAY",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "A11",
+              "player_name": "Highridge Player 22",
+              "shirt_number": 7,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 4515000,
+              "period": 2,
+              "period_ms": 1515000,
+              "team_id": "HOME",
+              "club_id": "EVE",
+              "club_name": "Ivory FC",
+              "player_id": "H10",
+              "player_name": "Ivory Player 19",
+              "shirt_number": 11,
+              "score": [
+                1,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 595,
+              "completed_passes": 551,
+              "shots": 11,
+              "shots_on_target": 3,
+              "interceptions": 43,
+              "pressure_events": 504,
+              "possession_seconds": 3320.0,
+              "possession_pct": 58.0,
+              "pass_accuracy_pct": 92.61
+            },
+            "AWAY": {
+              "passes": 455,
+              "completed_passes": 412,
+              "shots": 12,
+              "shots_on_target": 3,
+              "interceptions": 44,
+              "pressure_events": 695,
+              "possession_seconds": 2403.8,
+              "possession_pct": 42.0,
+              "pass_accuracy_pct": 90.55
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W03-EVE-CRY/",
+            "metadata": "matches/PL26-W03-EVE-CRY/metadata.json",
+            "summary": "matches/PL26-W03-EVE-CRY/summary.json",
+            "analysis": "matches/PL26-W03-EVE-CRY/analysis.json",
+            "events": "matches/PL26-W03-EVE-CRY/events.jsonl",
+            "states": "matches/PL26-W03-EVE-CRY/states.jsonl",
+            "preview": "matches/PL26-W03-EVE-CRY/preview-60s.json",
+            "tracking": null
+          }
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "label": "Matchweek 4",
+      "date": "2026-11-14",
+      "matches": [
+        {
+          "match_id": "PL26-W04-ARS-NEW",
+          "matchweek": 4,
+          "home_club_id": "ARS",
+          "away_club_id": "NEW",
+          "home_name": "Aster FC",
+          "away_name": "Quartz FC",
+          "kickoff_local": "2026-11-14T12:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Aster Park",
+          "featured": true,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 3934800,
+              "period": 2,
+              "period_ms": 934800,
+              "team_id": "AWAY",
+              "club_id": "NEW",
+              "club_name": "Quartz FC",
+              "player_id": "A10",
+              "player_name": "Quartz Player 22",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 573,
+              "completed_passes": 538,
+              "shots": 10,
+              "shots_on_target": 6,
+              "interceptions": 33,
+              "pressure_events": 577,
+              "possession_seconds": 3031.8,
+              "possession_pct": 52.53,
+              "pass_accuracy_pct": 93.89
+            },
+            "AWAY": {
+              "passes": 481,
+              "completed_passes": 448,
+              "shots": 12,
+              "shots_on_target": 6,
+              "interceptions": 35,
+              "pressure_events": 644,
+              "possession_seconds": 2740.0,
+              "possession_pct": 47.47,
+              "pass_accuracy_pct": 93.14
+            }
+          },
+          "tracking": "full",
+          "paths": {
+            "match": "matches/PL26-W04-ARS-NEW/",
+            "metadata": "matches/PL26-W04-ARS-NEW/metadata.json",
+            "summary": "matches/PL26-W04-ARS-NEW/summary.json",
+            "analysis": "matches/PL26-W04-ARS-NEW/analysis.json",
+            "events": "matches/PL26-W04-ARS-NEW/events.jsonl",
+            "states": "matches/PL26-W04-ARS-NEW/states.jsonl",
+            "preview": "matches/PL26-W04-ARS-NEW/preview-60s.json",
+            "tracking": "matches/PL26-W04-ARS-NEW/tracking.jsonl"
+          }
+        },
+        {
+          "match_id": "PL26-W04-MUN-NFO",
+          "matchweek": 4,
+          "home_club_id": "MUN",
+          "away_club_id": "NFO",
+          "home_name": "Pinecrest FC",
+          "away_name": "Rivermist FC",
+          "kickoff_local": "2026-11-14T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Pinecrest Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 2112400,
+              "period": 1,
+              "period_ms": 2112400,
+              "team_id": "AWAY",
+              "club_id": "NFO",
+              "club_name": "Rivermist FC",
+              "player_id": "A10",
+              "player_name": "Rivermist Player 23",
+              "shirt_number": 9,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 522,
+              "completed_passes": 490,
+              "shots": 14,
+              "shots_on_target": 3,
+              "interceptions": 33,
+              "pressure_events": 622,
+              "possession_seconds": 2872.2,
+              "possession_pct": 50.14,
+              "pass_accuracy_pct": 93.87
+            },
+            "AWAY": {
+              "passes": 520,
+              "completed_passes": 487,
+              "shots": 12,
+              "shots_on_target": 6,
+              "interceptions": 32,
+              "pressure_events": 613,
+              "possession_seconds": 2855.6,
+              "possession_pct": 49.86,
+              "pass_accuracy_pct": 93.65
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-MUN-NFO/",
+            "metadata": "matches/PL26-W04-MUN-NFO/metadata.json",
+            "summary": "matches/PL26-W04-MUN-NFO/summary.json",
+            "analysis": "matches/PL26-W04-MUN-NFO/analysis.json",
+            "events": "matches/PL26-W04-MUN-NFO/events.jsonl",
+            "states": "matches/PL26-W04-MUN-NFO/states.jsonl",
+            "preview": "matches/PL26-W04-MUN-NFO/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-SUN-MCI",
+          "matchweek": 4,
+          "home_club_id": "SUN",
+          "away_club_id": "MCI",
+          "home_name": "Silverbrook FC",
+          "away_name": "Oakmere FC",
+          "kickoff_local": "2026-11-14T15:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Silverbrook Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 515000,
+              "period": 1,
+              "period_ms": 515000,
+              "team_id": "HOME",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "H10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 5528800,
+              "period": 2,
+              "period_ms": 2528800,
+              "team_id": "HOME",
+              "club_id": "SUN",
+              "club_name": "Silverbrook FC",
+              "player_id": "H10",
+              "player_name": "Silverbrook Player 21",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 497,
+              "completed_passes": 461,
+              "shots": 7,
+              "shots_on_target": 3,
+              "interceptions": 36,
+              "pressure_events": 665,
+              "possession_seconds": 2693.8,
+              "possession_pct": 46.54,
+              "pass_accuracy_pct": 92.76
+            },
+            "AWAY": {
+              "passes": 549,
+              "completed_passes": 513,
+              "shots": 7,
+              "shots_on_target": 1,
+              "interceptions": 36,
+              "pressure_events": 563,
+              "possession_seconds": 3094.0,
+              "possession_pct": 53.46,
+              "pass_accuracy_pct": 93.44
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-SUN-MCI/",
+            "metadata": "matches/PL26-W04-SUN-MCI/metadata.json",
+            "summary": "matches/PL26-W04-SUN-MCI/summary.json",
+            "analysis": "matches/PL26-W04-SUN-MCI/analysis.json",
+            "events": "matches/PL26-W04-SUN-MCI/events.jsonl",
+            "states": "matches/PL26-W04-SUN-MCI/states.jsonl",
+            "preview": "matches/PL26-W04-SUN-MCI/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-LIV-TOT",
+          "matchweek": 4,
+          "home_club_id": "LIV",
+          "away_club_id": "TOT",
+          "home_name": "Northstar FC",
+          "away_name": "Thornvale FC",
+          "kickoff_local": "2026-11-14T17:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Northstar Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            2
+          ],
+          "goals": [
+            {
+              "t_ms": 591200,
+              "period": 1,
+              "period_ms": 591200,
+              "team_id": "AWAY",
+              "club_id": "TOT",
+              "club_name": "Thornvale FC",
+              "player_id": "A10",
+              "player_name": "Thornvale Player 27",
+              "shirt_number": 19,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 3251800,
+              "period": 2,
+              "period_ms": 251800,
+              "team_id": "HOME",
+              "club_id": "LIV",
+              "club_name": "Northstar FC",
+              "player_id": "H10",
+              "player_name": "Northstar Player 25",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 4281600,
+              "period": 2,
+              "period_ms": 1281600,
+              "team_id": "AWAY",
+              "club_id": "TOT",
+              "club_name": "Thornvale FC",
+              "player_id": "A08",
+              "player_name": "Thornvale Player 14",
+              "shirt_number": 8,
+              "score": [
+                1,
+                2
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 540,
+              "completed_passes": 501,
+              "shots": 9,
+              "shots_on_target": 6,
+              "interceptions": 36,
+              "pressure_events": 621,
+              "possession_seconds": 2927.8,
+              "possession_pct": 50.83,
+              "pass_accuracy_pct": 92.78
+            },
+            "AWAY": {
+              "passes": 492,
+              "completed_passes": 456,
+              "shots": 10,
+              "shots_on_target": 5,
+              "interceptions": 39,
+              "pressure_events": 626,
+              "possession_seconds": 2832.0,
+              "possession_pct": 49.17,
+              "pass_accuracy_pct": 92.68
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-LIV-TOT/",
+            "metadata": "matches/PL26-W04-LIV-TOT/metadata.json",
+            "summary": "matches/PL26-W04-LIV-TOT/summary.json",
+            "analysis": "matches/PL26-W04-LIV-TOT/analysis.json",
+            "events": "matches/PL26-W04-LIV-TOT/events.jsonl",
+            "states": "matches/PL26-W04-LIV-TOT/states.jsonl",
+            "preview": "matches/PL26-W04-LIV-TOT/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-AVL-LEE",
+          "matchweek": 4,
+          "home_club_id": "AVL",
+          "away_club_id": "LEE",
+          "home_name": "Beacon FC",
+          "away_name": "Meadow FC",
+          "kickoff_local": "2026-11-14T20:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Beacon Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            2
+          ],
+          "goals": [
+            {
+              "t_ms": 1124200,
+              "period": 1,
+              "period_ms": 1124200,
+              "team_id": "AWAY",
+              "club_id": "LEE",
+              "club_name": "Meadow FC",
+              "player_id": "A08",
+              "player_name": "Meadow Player 16",
+              "shirt_number": 10,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 1668000,
+              "period": 1,
+              "period_ms": 1668000,
+              "team_id": "AWAY",
+              "club_id": "LEE",
+              "club_name": "Meadow FC",
+              "player_id": "A10",
+              "player_name": "Meadow Player 25",
+              "shirt_number": 14,
+              "score": [
+                0,
+                2
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 483,
+              "completed_passes": 450,
+              "shots": 13,
+              "shots_on_target": 3,
+              "interceptions": 34,
+              "pressure_events": 653,
+              "possession_seconds": 2799.4,
+              "possession_pct": 48.98,
+              "pass_accuracy_pct": 93.17
+            },
+            "AWAY": {
+              "passes": 507,
+              "completed_passes": 473,
+              "shots": 11,
+              "shots_on_target": 3,
+              "interceptions": 33,
+              "pressure_events": 601,
+              "possession_seconds": 2916.4,
+              "possession_pct": 51.02,
+              "pass_accuracy_pct": 93.29
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-AVL-LEE/",
+            "metadata": "matches/PL26-W04-AVL-LEE/metadata.json",
+            "summary": "matches/PL26-W04-AVL-LEE/summary.json",
+            "analysis": "matches/PL26-W04-AVL-LEE/analysis.json",
+            "events": "matches/PL26-W04-AVL-LEE/events.jsonl",
+            "states": "matches/PL26-W04-AVL-LEE/states.jsonl",
+            "preview": "matches/PL26-W04-AVL-LEE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-IPS-BOU",
+          "matchweek": 4,
+          "home_club_id": "IPS",
+          "away_club_id": "BOU",
+          "home_name": "Larkspur FC",
+          "away_name": "Cedar FC",
+          "kickoff_local": "2026-11-15T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Larkspur Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            1,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 3857600,
+              "period": 2,
+              "period_ms": 857600,
+              "team_id": "HOME",
+              "club_id": "IPS",
+              "club_name": "Larkspur FC",
+              "player_id": "H10",
+              "player_name": "Larkspur Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 541,
+              "completed_passes": 507,
+              "shots": 7,
+              "shots_on_target": 3,
+              "interceptions": 25,
+              "pressure_events": 616,
+              "possession_seconds": 3040.0,
+              "possession_pct": 52.67,
+              "pass_accuracy_pct": 93.72
+            },
+            "AWAY": {
+              "passes": 478,
+              "completed_passes": 453,
+              "shots": 14,
+              "shots_on_target": 7,
+              "interceptions": 34,
+              "pressure_events": 645,
+              "possession_seconds": 2731.8,
+              "possession_pct": 47.33,
+              "pass_accuracy_pct": 94.77
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-IPS-BOU/",
+            "metadata": "matches/PL26-W04-IPS-BOU/metadata.json",
+            "summary": "matches/PL26-W04-IPS-BOU/summary.json",
+            "analysis": "matches/PL26-W04-IPS-BOU/analysis.json",
+            "events": "matches/PL26-W04-IPS-BOU/events.jsonl",
+            "states": "matches/PL26-W04-IPS-BOU/states.jsonl",
+            "preview": "matches/PL26-W04-IPS-BOU/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-BRE-HUL",
+          "matchweek": 4,
+          "home_club_id": "BRE",
+          "away_club_id": "HUL",
+          "home_name": "Driftwood FC",
+          "away_name": "Kingswell FC",
+          "kickoff_local": "2026-11-15T14:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Driftwood Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            0
+          ],
+          "goals": [
+            {
+              "t_ms": 788800,
+              "period": 1,
+              "period_ms": 788800,
+              "team_id": "HOME",
+              "club_id": "BRE",
+              "club_name": "Driftwood FC",
+              "player_id": "H10",
+              "player_name": "Driftwood Player 26",
+              "shirt_number": 13,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 5928800,
+              "period": 2,
+              "period_ms": 2928800,
+              "team_id": "HOME",
+              "club_id": "BRE",
+              "club_name": "Driftwood FC",
+              "player_id": "H11",
+              "player_name": "Driftwood Player 24",
+              "shirt_number": 9,
+              "score": [
+                2,
+                0
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 509,
+              "completed_passes": 466,
+              "shots": 16,
+              "shots_on_target": 7,
+              "interceptions": 45,
+              "pressure_events": 619,
+              "possession_seconds": 2812.8,
+              "possession_pct": 49.31,
+              "pass_accuracy_pct": 91.55
+            },
+            "AWAY": {
+              "passes": 555,
+              "completed_passes": 510,
+              "shots": 14,
+              "shots_on_target": 8,
+              "interceptions": 43,
+              "pressure_events": 602,
+              "possession_seconds": 2891.0,
+              "possession_pct": 50.69,
+              "pass_accuracy_pct": 91.89
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-BRE-HUL/",
+            "metadata": "matches/PL26-W04-BRE-HUL/metadata.json",
+            "summary": "matches/PL26-W04-BRE-HUL/summary.json",
+            "analysis": "matches/PL26-W04-BRE-HUL/analysis.json",
+            "events": "matches/PL26-W04-BRE-HUL/events.jsonl",
+            "states": "matches/PL26-W04-BRE-HUL/states.jsonl",
+            "preview": "matches/PL26-W04-BRE-HUL/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-FUL-BHA",
+          "matchweek": 4,
+          "home_club_id": "FUL",
+          "away_club_id": "BHA",
+          "home_name": "Juniper FC",
+          "away_name": "Ember FC",
+          "kickoff_local": "2026-11-15T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Juniper Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            0,
+            1
+          ],
+          "goals": [
+            {
+              "t_ms": 837400,
+              "period": 1,
+              "period_ms": 837400,
+              "team_id": "AWAY",
+              "club_id": "BHA",
+              "club_name": "Ember FC",
+              "player_id": "A10",
+              "player_name": "Ember Player 23",
+              "shirt_number": 7,
+              "score": [
+                0,
+                1
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 489,
+              "completed_passes": 455,
+              "shots": 15,
+              "shots_on_target": 8,
+              "interceptions": 39,
+              "pressure_events": 635,
+              "possession_seconds": 2691.8,
+              "possession_pct": 46.86,
+              "pass_accuracy_pct": 93.05
+            },
+            "AWAY": {
+              "passes": 586,
+              "completed_passes": 547,
+              "shots": 10,
+              "shots_on_target": 3,
+              "interceptions": 34,
+              "pressure_events": 591,
+              "possession_seconds": 3052.0,
+              "possession_pct": 53.14,
+              "pass_accuracy_pct": 93.34
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-FUL-BHA/",
+            "metadata": "matches/PL26-W04-FUL-BHA/metadata.json",
+            "summary": "matches/PL26-W04-FUL-BHA/summary.json",
+            "analysis": "matches/PL26-W04-FUL-BHA/analysis.json",
+            "events": "matches/PL26-W04-FUL-BHA/events.jsonl",
+            "states": "matches/PL26-W04-FUL-BHA/states.jsonl",
+            "preview": "matches/PL26-W04-FUL-BHA/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-CHE-EVE",
+          "matchweek": 4,
+          "home_club_id": "CHE",
+          "away_club_id": "EVE",
+          "home_name": "Fairhaven FC",
+          "away_name": "Ivory FC",
+          "kickoff_local": "2026-11-15T16:30:00",
+          "time_zone": "Europe/London",
+          "venue": "Fairhaven Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            2
+          ],
+          "goals": [
+            {
+              "t_ms": 276000,
+              "period": 1,
+              "period_ms": 276000,
+              "team_id": "AWAY",
+              "club_id": "EVE",
+              "club_name": "Ivory FC",
+              "player_id": "A07",
+              "player_name": "Ivory Player 13",
+              "shirt_number": 23,
+              "score": [
+                0,
+                1
+              ]
+            },
+            {
+              "t_ms": 468200,
+              "period": 1,
+              "period_ms": 468200,
+              "team_id": "HOME",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "H10",
+              "player_name": "Fairhaven Player 25",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 939600,
+              "period": 1,
+              "period_ms": 939600,
+              "team_id": "AWAY",
+              "club_id": "EVE",
+              "club_name": "Ivory FC",
+              "player_id": "A10",
+              "player_name": "Ivory Player 19",
+              "shirt_number": 11,
+              "score": [
+                1,
+                2
+              ]
+            },
+            {
+              "t_ms": 5316800,
+              "period": 2,
+              "period_ms": 2316800,
+              "team_id": "HOME",
+              "club_id": "CHE",
+              "club_name": "Fairhaven FC",
+              "player_id": "H11",
+              "player_name": "Fairhaven Player 29",
+              "shirt_number": 41,
+              "score": [
+                2,
+                2
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 490,
+              "completed_passes": 452,
+              "shots": 12,
+              "shots_on_target": 6,
+              "interceptions": 35,
+              "pressure_events": 614,
+              "possession_seconds": 2796.2,
+              "possession_pct": 49.13,
+              "pass_accuracy_pct": 92.24
+            },
+            "AWAY": {
+              "passes": 582,
+              "completed_passes": 547,
+              "shots": 14,
+              "shots_on_target": 6,
+              "interceptions": 38,
+              "pressure_events": 602,
+              "possession_seconds": 2895.6,
+              "possession_pct": 50.87,
+              "pass_accuracy_pct": 93.99
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-CHE-EVE/",
+            "metadata": "matches/PL26-W04-CHE-EVE/metadata.json",
+            "summary": "matches/PL26-W04-CHE-EVE/summary.json",
+            "analysis": "matches/PL26-W04-CHE-EVE/analysis.json",
+            "events": "matches/PL26-W04-CHE-EVE/events.jsonl",
+            "states": "matches/PL26-W04-CHE-EVE/states.jsonl",
+            "preview": "matches/PL26-W04-CHE-EVE/preview-60s.json",
+            "tracking": null
+          }
+        },
+        {
+          "match_id": "PL26-W04-CRY-COV",
+          "matchweek": 4,
+          "home_club_id": "CRY",
+          "away_club_id": "COV",
+          "home_name": "Highridge FC",
+          "away_name": "Glenvale FC",
+          "kickoff_local": "2026-11-15T19:00:00",
+          "time_zone": "Europe/London",
+          "venue": "Highridge Park",
+          "featured": false,
+          "status": "finished",
+          "score": [
+            2,
+            3
+          ],
+          "goals": [
+            {
+              "t_ms": 927600,
+              "period": 1,
+              "period_ms": 927600,
+              "team_id": "HOME",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "H10",
+              "player_name": "Highridge Player 23",
+              "shirt_number": 9,
+              "score": [
+                1,
+                0
+              ]
+            },
+            {
+              "t_ms": 1753000,
+              "period": 1,
+              "period_ms": 1753000,
+              "team_id": "AWAY",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "A10",
+              "player_name": "Glenvale Player 22",
+              "shirt_number": 9,
+              "score": [
+                1,
+                1
+              ]
+            },
+            {
+              "t_ms": 2107600,
+              "period": 1,
+              "period_ms": 2107600,
+              "team_id": "HOME",
+              "club_id": "CRY",
+              "club_name": "Highridge FC",
+              "player_id": "H10",
+              "player_name": "Highridge Player 23",
+              "shirt_number": 9,
+              "score": [
+                2,
+                1
+              ]
+            },
+            {
+              "t_ms": 2695000,
+              "period": 1,
+              "period_ms": 2695000,
+              "team_id": "AWAY",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "A10",
+              "player_name": "Glenvale Player 22",
+              "shirt_number": 9,
+              "score": [
+                2,
+                2
+              ]
+            },
+            {
+              "t_ms": 4372400,
+              "period": 2,
+              "period_ms": 1372400,
+              "team_id": "AWAY",
+              "club_id": "COV",
+              "club_name": "Glenvale FC",
+              "player_id": "A10",
+              "player_name": "Glenvale Player 22",
+              "shirt_number": 9,
+              "score": [
+                2,
+                3
+              ]
+            }
+          ],
+          "stats": {
+            "HOME": {
+              "passes": 506,
+              "completed_passes": 473,
+              "shots": 17,
+              "shots_on_target": 7,
+              "interceptions": 36,
+              "pressure_events": 591,
+              "possession_seconds": 2887.0,
+              "possession_pct": 51.04,
+              "pass_accuracy_pct": 93.48
+            },
+            "AWAY": {
+              "passes": 511,
+              "completed_passes": 475,
+              "shots": 13,
+              "shots_on_target": 8,
+              "interceptions": 33,
+              "pressure_events": 613,
+              "possession_seconds": 2768.8,
+              "possession_pct": 48.96,
+              "pass_accuracy_pct": 92.95
+            }
+          },
+          "tracking": "preview",
+          "paths": {
+            "match": "matches/PL26-W04-CRY-COV/",
+            "metadata": "matches/PL26-W04-CRY-COV/metadata.json",
+            "summary": "matches/PL26-W04-CRY-COV/summary.json",
+            "analysis": "matches/PL26-W04-CRY-COV/analysis.json",
+            "events": "matches/PL26-W04-CRY-COV/events.jsonl",
+            "states": "matches/PL26-W04-CRY-COV/states.jsonl",
+            "preview": "matches/PL26-W04-CRY-COV/preview-60s.json",
+            "tracking": null
+          }
+        }
+      ]
+    }
+  ],
+  "standings": [
+    {
+      "club_id": "NEW",
+      "name": "Quartz FC",
+      "short_name": "Quartz",
+      "played": 4,
+      "won": 3,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 1,
+      "goal_difference": 3,
+      "points": 9,
+      "form": "WLWW",
+      "position": 1
+    },
+    {
+      "club_id": "BHA",
+      "name": "Ember FC",
+      "short_name": "Ember",
+      "played": 4,
+      "won": 3,
+      "drawn": 0,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 3,
+      "goal_difference": 1,
+      "points": 9,
+      "form": "LWWW",
+      "position": 2
+    },
+    {
+      "club_id": "CRY",
+      "name": "Highridge FC",
+      "short_name": "Highridge FC",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 7,
+      "goals_against": 4,
+      "goal_difference": 3,
+      "points": 7,
+      "form": "WWDL",
+      "position": 3
+    },
+    {
+      "club_id": "SUN",
+      "name": "Silverbrook FC",
+      "short_name": "Silverbrook FC",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 7,
+      "goals_against": 4,
+      "goal_difference": 3,
+      "points": 7,
+      "form": "WDLW",
+      "position": 4
+    },
+    {
+      "club_id": "CHE",
+      "name": "Fairhaven FC",
+      "short_name": "Fairhaven FC",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 6,
+      "goals_against": 4,
+      "goal_difference": 2,
+      "points": 7,
+      "form": "LWWD",
+      "position": 5
+    },
+    {
+      "club_id": "COV",
+      "name": "Glenvale FC",
+      "short_name": "Glenvale",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 6,
+      "goals_against": 4,
+      "goal_difference": 2,
+      "points": 7,
+      "form": "WLDW",
+      "position": 6
+    },
+    {
+      "club_id": "NFO",
+      "name": "Rivermist FC",
+      "short_name": "Rivermist",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 6,
+      "goals_against": 5,
+      "goal_difference": 1,
+      "points": 7,
+      "form": "DWLW",
+      "position": 7
+    },
+    {
+      "club_id": "IPS",
+      "name": "Larkspur FC",
+      "short_name": "Larkspur FC",
+      "played": 4,
+      "won": 2,
+      "drawn": 1,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 3,
+      "goal_difference": 1,
+      "points": 7,
+      "form": "DWLW",
+      "position": 8
+    },
+    {
+      "club_id": "EVE",
+      "name": "Ivory FC",
+      "short_name": "Ivory FC",
+      "played": 4,
+      "won": 1,
+      "drawn": 3,
+      "lost": 0,
+      "goals_for": 5,
+      "goals_against": 4,
+      "goal_difference": 1,
+      "points": 6,
+      "form": "DWDD",
+      "position": 9
+    },
+    {
+      "club_id": "LEE",
+      "name": "Meadow FC",
+      "short_name": "Meadow",
+      "played": 4,
+      "won": 2,
+      "drawn": 0,
+      "lost": 2,
+      "goals_for": 4,
+      "goals_against": 3,
+      "goal_difference": 1,
+      "points": 6,
+      "form": "LLWW",
+      "position": 10
+    },
+    {
+      "club_id": "AVL",
+      "name": "Beacon FC",
+      "short_name": "Beacon FC",
+      "played": 4,
+      "won": 2,
+      "drawn": 0,
+      "lost": 2,
+      "goals_for": 2,
+      "goals_against": 5,
+      "goal_difference": -3,
+      "points": 6,
+      "form": "LWWL",
+      "position": 11
+    },
+    {
+      "club_id": "ARS",
+      "name": "Aster FC",
+      "short_name": "Aster FC",
+      "played": 4,
+      "won": 1,
+      "drawn": 2,
+      "lost": 1,
+      "goals_for": 6,
+      "goals_against": 5,
+      "goal_difference": 1,
+      "points": 5,
+      "form": "DDWL",
+      "position": 12
+    },
+    {
+      "club_id": "MUN",
+      "name": "Pinecrest FC",
+      "short_name": "Pinecrest",
+      "played": 4,
+      "won": 1,
+      "drawn": 2,
+      "lost": 1,
+      "goals_for": 3,
+      "goals_against": 2,
+      "goal_difference": 1,
+      "points": 5,
+      "form": "WDDL",
+      "position": 13
+    },
+    {
+      "club_id": "BOU",
+      "name": "Cedar FC",
+      "short_name": "Cedar",
+      "played": 4,
+      "won": 1,
+      "drawn": 2,
+      "lost": 1,
+      "goals_for": 3,
+      "goals_against": 3,
+      "goal_difference": 0,
+      "points": 5,
+      "form": "DDWL",
+      "position": 14
+    },
+    {
+      "club_id": "TOT",
+      "name": "Thornvale FC",
+      "short_name": "Thornvale",
+      "played": 4,
+      "won": 1,
+      "drawn": 2,
+      "lost": 1,
+      "goals_for": 4,
+      "goals_against": 5,
+      "goal_difference": -1,
+      "points": 5,
+      "form": "DLDW",
+      "position": 15
+    },
+    {
+      "club_id": "BRE",
+      "name": "Driftwood FC",
+      "short_name": "Driftwood FC",
+      "played": 4,
+      "won": 1,
+      "drawn": 1,
+      "lost": 2,
+      "goals_for": 4,
+      "goals_against": 4,
+      "goal_difference": 0,
+      "points": 4,
+      "form": "LDLW",
+      "position": 16
+    },
+    {
+      "club_id": "MCI",
+      "name": "Oakmere FC",
+      "short_name": "Oakmere",
+      "played": 4,
+      "won": 1,
+      "drawn": 1,
+      "lost": 2,
+      "goals_for": 3,
+      "goals_against": 4,
+      "goal_difference": -1,
+      "points": 4,
+      "form": "WDLL",
+      "position": 17
+    },
+    {
+      "club_id": "FUL",
+      "name": "Juniper FC",
+      "short_name": "Juniper FC",
+      "played": 4,
+      "won": 0,
+      "drawn": 2,
+      "lost": 2,
+      "goals_for": 2,
+      "goals_against": 4,
+      "goal_difference": -2,
+      "points": 2,
+      "form": "DLDL",
+      "position": 18
+    },
+    {
+      "club_id": "HUL",
+      "name": "Kingswell FC",
+      "short_name": "Kingswell FC",
+      "played": 4,
+      "won": 0,
+      "drawn": 1,
+      "lost": 3,
+      "goals_for": 1,
+      "goals_against": 9,
+      "goal_difference": -8,
+      "points": 1,
+      "form": "DLLL",
+      "position": 19
+    },
+    {
+      "club_id": "LIV",
+      "name": "Northstar FC",
+      "short_name": "Northstar FC",
+      "played": 4,
+      "won": 0,
+      "drawn": 0,
+      "lost": 4,
+      "goals_for": 1,
+      "goals_against": 6,
+      "goal_difference": -5,
+      "points": 0,
+      "form": "LLLL",
+      "position": 20
+    }
+  ],
+  "top_scorers": [
+    {
+      "club_id": "SUN",
+      "club_name": "Silverbrook FC",
+      "player_id": "H10",
+      "player_name": "Silverbrook Player 21",
+      "shirt_number": 9,
+      "goals": 6,
+      "matches": 3,
+      "rank": 1
+    },
+    {
+      "club_id": "ARS",
+      "club_name": "Aster FC",
+      "player_id": "A10",
+      "player_name": "Aster Player 21",
+      "shirt_number": 14,
+      "goals": 5,
+      "matches": 3,
+      "rank": 2
+    },
+    {
+      "club_id": "COV",
+      "club_name": "Glenvale FC",
+      "player_id": "H10",
+      "player_name": "Glenvale Player 22",
+      "shirt_number": 9,
+      "goals": 5,
+      "matches": 3,
+      "rank": 3
+    },
+    {
+      "club_id": "NFO",
+      "club_name": "Rivermist FC",
+      "player_id": "A10",
+      "player_name": "Rivermist Player 23",
+      "shirt_number": 9,
+      "goals": 5,
+      "matches": 4,
+      "rank": 4
+    },
+    {
+      "club_id": "BHA",
+      "club_name": "Ember FC",
+      "player_id": "A10",
+      "player_name": "Ember Player 23",
+      "shirt_number": 7,
+      "goals": 4,
+      "matches": 3,
+      "rank": 5
+    },
+    {
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "H10",
+      "player_name": "Fairhaven Player 25",
+      "shirt_number": 9,
+      "goals": 4,
+      "matches": 3,
+      "rank": 6
+    },
+    {
+      "club_id": "CRY",
+      "club_name": "Highridge FC",
+      "player_id": "A10",
+      "player_name": "Highridge Player 23",
+      "shirt_number": 9,
+      "goals": 4,
+      "matches": 3,
+      "rank": 7
+    },
+    {
+      "club_id": "NEW",
+      "club_name": "Quartz FC",
+      "player_id": "H10",
+      "player_name": "Quartz Player 22",
+      "shirt_number": 9,
+      "goals": 4,
+      "matches": 3,
+      "rank": 8
+    },
+    {
+      "club_id": "BOU",
+      "club_name": "Cedar FC",
+      "player_id": "H10",
+      "player_name": "Cedar Player 22",
+      "shirt_number": 9,
+      "goals": 3,
+      "matches": 3,
+      "rank": 9
+    },
+    {
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "H10",
+      "player_name": "Ivory Player 19",
+      "shirt_number": 11,
+      "goals": 3,
+      "matches": 3,
+      "rank": 10
+    },
+    {
+      "club_id": "LEE",
+      "club_name": "Meadow FC",
+      "player_id": "H10",
+      "player_name": "Meadow Player 25",
+      "shirt_number": 14,
+      "goals": 3,
+      "matches": 2,
+      "rank": 11
+    },
+    {
+      "club_id": "MCI",
+      "club_name": "Oakmere FC",
+      "player_id": "H10",
+      "player_name": "Oakmere Player 23",
+      "shirt_number": 9,
+      "goals": 3,
+      "matches": 2,
+      "rank": 12
+    },
+    {
+      "club_id": "MUN",
+      "club_name": "Pinecrest FC",
+      "player_id": "A10",
+      "player_name": "Pinecrest Player 25",
+      "shirt_number": 10,
+      "goals": 3,
+      "matches": 2,
+      "rank": 13
+    },
+    {
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "A10",
+      "player_name": "Driftwood Player 26",
+      "shirt_number": 13,
+      "goals": 2,
+      "matches": 2,
+      "rank": 14
+    },
+    {
+      "club_id": "CRY",
+      "club_name": "Highridge FC",
+      "player_id": "H11",
+      "player_name": "Highridge Player 22",
+      "shirt_number": 7,
+      "goals": 2,
+      "matches": 2,
+      "rank": 15
+    },
+    {
+      "club_id": "FUL",
+      "club_name": "Juniper FC",
+      "player_id": "A10",
+      "player_name": "Juniper Player 24",
+      "shirt_number": 7,
+      "goals": 2,
+      "matches": 2,
+      "rank": 16
+    },
+    {
+      "club_id": "IPS",
+      "club_name": "Larkspur FC",
+      "player_id": "A10",
+      "player_name": "Larkspur Player 22",
+      "shirt_number": 9,
+      "goals": 2,
+      "matches": 2,
+      "rank": 17
+    },
+    {
+      "club_id": "TOT",
+      "club_name": "Thornvale FC",
+      "player_id": "A08",
+      "player_name": "Thornvale Player 14",
+      "shirt_number": 8,
+      "goals": 2,
+      "matches": 2,
+      "rank": 18
+    },
+    {
+      "club_id": "ARS",
+      "club_name": "Aster FC",
+      "player_id": "A09",
+      "player_name": "Aster Player 20",
+      "shirt_number": 7,
+      "goals": 1,
+      "matches": 1,
+      "rank": 19
+    },
+    {
+      "club_id": "AVL",
+      "club_name": "Beacon FC",
+      "player_id": "A10",
+      "player_name": "Beacon Player 24",
+      "shirt_number": 11,
+      "goals": 1,
+      "matches": 1,
+      "rank": 20
+    },
+    {
+      "club_id": "AVL",
+      "club_name": "Beacon FC",
+      "player_id": "H09",
+      "player_name": "Beacon Player 27",
+      "shirt_number": 19,
+      "goals": 1,
+      "matches": 1,
+      "rank": 21
+    },
+    {
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "H11",
+      "player_name": "Driftwood Player 24",
+      "shirt_number": 9,
+      "goals": 1,
+      "matches": 1,
+      "rank": 22
+    },
+    {
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "H09",
+      "player_name": "Driftwood Player 25",
+      "shirt_number": 11,
+      "goals": 1,
+      "matches": 1,
+      "rank": 23
+    },
+    {
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "A07",
+      "player_name": "Fairhaven Player 21",
+      "shirt_number": 25,
+      "goals": 1,
+      "matches": 1,
+      "rank": 24
+    },
+    {
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "H11",
+      "player_name": "Fairhaven Player 29",
+      "shirt_number": 41,
+      "goals": 1,
+      "matches": 1,
+      "rank": 25
+    },
+    {
+      "club_id": "COV",
+      "club_name": "Glenvale FC",
+      "player_id": "H11",
+      "player_name": "Glenvale Player 26",
+      "shirt_number": 18,
+      "goals": 1,
+      "matches": 1,
+      "rank": 26
+    },
+    {
+      "club_id": "CRY",
+      "club_name": "Highridge FC",
+      "player_id": "H09",
+      "player_name": "Highridge Player 24",
+      "shirt_number": 11,
+      "goals": 1,
+      "matches": 1,
+      "rank": 27
+    },
+    {
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "A07",
+      "player_name": "Ivory Player 13",
+      "shirt_number": 23,
+      "goals": 1,
+      "matches": 1,
+      "rank": 28
+    },
+    {
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "A13",
+      "player_name": "Ivory Player 22",
+      "shirt_number": 22,
+      "goals": 1,
+      "matches": 1,
+      "rank": 29
+    },
+    {
+      "club_id": "HUL",
+      "club_name": "Kingswell FC",
+      "player_id": "H12",
+      "player_name": "Kingswell Player 16",
+      "shirt_number": 14,
+      "goals": 1,
+      "matches": 1,
+      "rank": 30
+    },
+    {
+      "club_id": "IPS",
+      "club_name": "Larkspur FC",
+      "player_id": "H11",
+      "player_name": "Larkspur Player 20",
+      "shirt_number": 7,
+      "goals": 1,
+      "matches": 1,
+      "rank": 31
+    },
+    {
+      "club_id": "IPS",
+      "club_name": "Larkspur FC",
+      "player_id": "A09",
+      "player_name": "Larkspur Player 23",
+      "shirt_number": 11,
+      "goals": 1,
+      "matches": 1,
+      "rank": 32
+    },
+    {
+      "club_id": "LEE",
+      "club_name": "Meadow FC",
+      "player_id": "A08",
+      "player_name": "Meadow Player 16",
+      "shirt_number": 10,
+      "goals": 1,
+      "matches": 1,
+      "rank": 33
+    },
+    {
+      "club_id": "LIV",
+      "club_name": "Northstar FC",
+      "player_id": "H10",
+      "player_name": "Northstar Player 25",
+      "shirt_number": 9,
+      "goals": 1,
+      "matches": 1,
+      "rank": 34
+    },
+    {
+      "club_id": "NFO",
+      "club_name": "Rivermist FC",
+      "player_id": "H09",
+      "player_name": "Rivermist Player 22",
+      "shirt_number": 7,
+      "goals": 1,
+      "matches": 1,
+      "rank": 35
+    },
+    {
+      "club_id": "SUN",
+      "club_name": "Silverbrook FC",
+      "player_id": "H06",
+      "player_name": "Silverbrook Player 12",
+      "shirt_number": 8,
+      "goals": 1,
+      "matches": 1,
+      "rank": 36
+    },
+    {
+      "club_id": "TOT",
+      "club_name": "Thornvale FC",
+      "player_id": "H09",
+      "player_name": "Thornvale Player 25",
+      "shirt_number": 11,
+      "goals": 1,
+      "matches": 1,
+      "rank": 37
+    },
+    {
+      "club_id": "TOT",
+      "club_name": "Thornvale FC",
+      "player_id": "A10",
+      "player_name": "Thornvale Player 27",
+      "shirt_number": 19,
+      "goals": 1,
+      "matches": 1,
+      "rank": 38
+    }
+  ],
+  "featured_matches": [
+    "PL26-W01-MCI-CHE",
+    "PL26-W02-LIV-BHA",
+    "PL26-W03-MCI-AVL",
+    "PL26-W04-ARS-NEW"
+  ],
+  "totals": {
+    "matches": 40,
+    "goals": 82,
+    "average_goals_per_match": 2.05,
+    "home_wins": 16,
+    "draws": 11,
+    "away_wins": 13,
+    "clean_sheets": 24,
+    "biggest_win": {
+      "match_id": "PL26-W01-SUN-AVL",
+      "score": [
+        3,
+        0
+      ],
+      "home_name": "Silverbrook FC",
+      "away_name": "Beacon FC",
+      "margin": 3
+    }
+  },
+  "paths": {
+    "matches": "matches/",
+    "fixtures": "fixtures.jsonl",
+    "standings": "standings.json",
+    "squads": "squads.json"
+  }
+}

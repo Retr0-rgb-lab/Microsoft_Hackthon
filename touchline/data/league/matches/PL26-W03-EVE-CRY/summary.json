@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W03-EVE-CRY",
+  "seed": 20264028,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656404,
+  "state_snapshots": 6001,
+  "event_count": 3777,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 112,
+    "restart": 30,
+    "pressure": 1199,
+    "carry": 1234,
+    "pass": 1050,
+    "shot": 23,
+    "stoppage": 19,
+    "interception": 87,
+    "save": 4,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 595,
+      "completed_passes": 551,
+      "shots": 11,
+      "shots_on_target": 3,
+      "interceptions": 43,
+      "pressure_events": 504,
+      "possession_seconds": 3320.0,
+      "possession_pct": 58.0,
+      "pass_accuracy_pct": 92.61
+    },
+    "AWAY": {
+      "passes": 455,
+      "completed_passes": 412,
+      "shots": 12,
+      "shots_on_target": 3,
+      "interceptions": 44,
+      "pressure_events": 695,
+      "possession_seconds": 2403.8,
+      "possession_pct": 42.0,
+      "pass_accuracy_pct": 90.55
+    }
+  },
+  "distance_m": {
+    "H01": 3105.9,
+    "H02": 7732.3,
+    "H03": 10879.4,
+    "H04": 10335.6,
+    "H05": 9504.4,
+    "H06": 7839.9,
+    "H07": 11337.5,
+    "H08": 11010.8,
+    "H09": 11986.7,
+    "H10": 12980.9,
+    "H11": 11149.8,
+    "A01": 3120.7,
+    "A02": 10268.1,
+    "A03": 11761.9,
+    "A04": 10953.9,
+    "A05": 8715.8,
+    "A06": 9662.2,
+    "A07": 12951.7,
+    "A08": 11513.6,
+    "A09": 11759.2,
+    "A10": 11897.4,
+    "A11": 7628.1,
+    "H12": 4057.0,
+    "H13": 0.0,
+    "H14": 2372.8,
+    "A12": 2526.7,
+    "A13": 3489.2,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 3341800,
+      "period": 2,
+      "period_ms": 341800,
+      "team_id": "AWAY",
+      "club_id": "CRY",
+      "club_name": "Highridge FC",
+      "player_id": "A11",
+      "player_name": "Highridge Player 22",
+      "shirt_number": 7,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 4515000,
+      "period": 2,
+      "period_ms": 1515000,
+      "team_id": "HOME",
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "H10",
+      "player_name": "Ivory Player 19",
+      "shirt_number": 11,
+      "score": [
+        1,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 3,
+    "kickoff_local": "2026-11-08T19:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Ivory Park"
+  },
+  "home_club": {
+    "club_id": "EVE",
+    "name": "Ivory FC",
+    "short_name": "Ivory FC",
+    "stadium": "Ivory Park",
+    "colors": {
+      "primary": "#003399",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "CRY",
+    "name": "Highridge FC",
+    "short_name": "Highridge FC",
+    "stadium": "Highridge Park",
+    "colors": {
+      "primary": "#1B458F",
+      "secondary": "#C4122E"
+    },
+    "formation": "4-3-3"
+  }
+}

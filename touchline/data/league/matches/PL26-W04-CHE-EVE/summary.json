@@ -1,0 +1,180 @@
+{
+  "match_id": "PL26-W04-CHE-EVE",
+  "seed": 20265027,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655957,
+  "state_snapshots": 6001,
+  "event_count": 3768,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 101,
+    "restart": 33,
+    "carry": 1202,
+    "pressure": 1216,
+    "pass": 1072,
+    "interception": 73,
+    "shot": 26,
+    "stoppage": 18,
+    "save": 8,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    2
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 490,
+      "completed_passes": 452,
+      "shots": 12,
+      "shots_on_target": 6,
+      "interceptions": 35,
+      "pressure_events": 614,
+      "possession_seconds": 2796.2,
+      "possession_pct": 49.13,
+      "pass_accuracy_pct": 92.24
+    },
+    "AWAY": {
+      "passes": 582,
+      "completed_passes": 547,
+      "shots": 14,
+      "shots_on_target": 6,
+      "interceptions": 38,
+      "pressure_events": 602,
+      "possession_seconds": 2895.6,
+      "possession_pct": 50.87,
+      "pass_accuracy_pct": 93.99
+    }
+  },
+  "distance_m": {
+    "H01": 3199.9,
+    "H02": 7565.7,
+    "H03": 11037.2,
+    "H04": 10894.8,
+    "H05": 10121.7,
+    "H06": 7790.3,
+    "H07": 12286.0,
+    "H08": 11589.4,
+    "H09": 11869.9,
+    "H10": 12637.5,
+    "H11": 11069.2,
+    "A01": 3174.6,
+    "A02": 10202.7,
+    "A03": 11146.2,
+    "A04": 10622.6,
+    "A05": 8655.0,
+    "A06": 9322.9,
+    "A07": 12174.6,
+    "A08": 11238.9,
+    "A09": 11652.7,
+    "A10": 12569.4,
+    "A11": 7734.9,
+    "H12": 4053.8,
+    "H13": 0.0,
+    "H14": 2426.7,
+    "A12": 2536.8,
+    "A13": 3730.0,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 276000,
+      "period": 1,
+      "period_ms": 276000,
+      "team_id": "AWAY",
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "A07",
+      "player_name": "Ivory Player 13",
+      "shirt_number": 23,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 468200,
+      "period": 1,
+      "period_ms": 468200,
+      "team_id": "HOME",
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "H10",
+      "player_name": "Fairhaven Player 25",
+      "shirt_number": 9,
+      "score": [
+        1,
+        1
+      ]
+    },
+    {
+      "t_ms": 939600,
+      "period": 1,
+      "period_ms": 939600,
+      "team_id": "AWAY",
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "A10",
+      "player_name": "Ivory Player 19",
+      "shirt_number": 11,
+      "score": [
+        1,
+        2
+      ]
+    },
+    {
+      "t_ms": 5316800,
+      "period": 2,
+      "period_ms": 2316800,
+      "team_id": "HOME",
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "H11",
+      "player_name": "Fairhaven Player 29",
+      "shirt_number": 41,
+      "score": [
+        2,
+        2
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 4,
+    "kickoff_local": "2026-11-15T16:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Fairhaven Park"
+  },
+  "home_club": {
+    "club_id": "CHE",
+    "name": "Fairhaven FC",
+    "short_name": "Fairhaven FC",
+    "stadium": "Fairhaven Park",
+    "colors": {
+      "primary": "#034694",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "EVE",
+    "name": "Ivory FC",
+    "short_name": "Ivory FC",
+    "stadium": "Ivory Park",
+    "colors": {
+      "primary": "#003399",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

@@ -1,0 +1,2354 @@
+{
+  "schema_version": "1",
+  "players": 566,
+  "coverage": {
+    "complete": 471,
+    "partial": 95
+  },
+  "field_coverage": {
+    "height_cm": 561,
+    "weight_kg": 0,
+    "preferred_foot": 563
+  },
+  "complete_radars": {
+    "goalkeeper": 37,
+    "outfield": 435
+  },
+  "missing_fields": {
+    "ARS-01": [
+      "weight_kg"
+    ],
+    "ARS-13": [
+      "weight_kg"
+    ],
+    "ARS-30": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "ARS-02": [
+      "weight_kg"
+    ],
+    "ARS-03": [
+      "weight_kg"
+    ],
+    "ARS-04": [
+      "weight_kg"
+    ],
+    "ARS-05": [
+      "weight_kg"
+    ],
+    "ARS-06": [
+      "weight_kg"
+    ],
+    "ARS-12": [
+      "weight_kg"
+    ],
+    "ARS-15": [
+      "weight_kg"
+    ],
+    "ARS-33": [
+      "weight_kg"
+    ],
+    "ARS-08": [
+      "weight_kg"
+    ],
+    "ARS-10": [
+      "weight_kg"
+    ],
+    "ARS-22": [
+      "weight_kg"
+    ],
+    "ARS-23": [
+      "weight_kg"
+    ],
+    "ARS-36": [
+      "weight_kg"
+    ],
+    "ARS-39": [
+      "weight_kg"
+    ],
+    "ARS-41": [
+      "weight_kg"
+    ],
+    "ARS-49": [
+      "weight_kg"
+    ],
+    "ARS-07": [
+      "weight_kg"
+    ],
+    "ARS-14": [
+      "weight_kg"
+    ],
+    "ARS-17": [
+      "weight_kg"
+    ],
+    "ARS-20": [
+      "weight_kg"
+    ],
+    "ARS-29": [
+      "weight_kg"
+    ],
+    "ARS-56": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "AVL-01": [
+      "weight_kg"
+    ],
+    "AVL-40": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "AVL-42": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "AVL-02": [
+      "weight_kg"
+    ],
+    "AVL-03": [
+      "weight_kg"
+    ],
+    "AVL-04": [
+      "weight_kg"
+    ],
+    "AVL-05": [
+      "weight_kg"
+    ],
+    "AVL-13": [
+      "weight_kg"
+    ],
+    "AVL-14": [
+      "weight_kg"
+    ],
+    "AVL-22": [
+      "weight_kg"
+    ],
+    "AVL-29": [
+      "weight_kg"
+    ],
+    "AVL-45": [
+      "weight_kg"
+    ],
+    "AVL-48": [
+      "weight_kg"
+    ],
+    "AVL-06": [
+      "weight_kg"
+    ],
+    "AVL-07": [
+      "weight_kg"
+    ],
+    "AVL-08": [
+      "weight_kg"
+    ],
+    "AVL-10": [
+      "weight_kg"
+    ],
+    "AVL-24": [
+      "weight_kg"
+    ],
+    "AVL-26": [
+      "weight_kg"
+    ],
+    "AVL-27": [
+      "weight_kg"
+    ],
+    "AVL-35": [
+      "weight_kg"
+    ],
+    "AVL-44": [
+      "weight_kg"
+    ],
+    "AVL-53": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "AVL-11": [
+      "weight_kg"
+    ],
+    "AVL-17": [
+      "weight_kg"
+    ],
+    "AVL-18": [
+      "weight_kg"
+    ],
+    "AVL-19": [
+      "weight_kg"
+    ],
+    "AVL-39": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "AVL-47": [
+      "weight_kg"
+    ],
+    "AVL-49": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "AVL-74": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BOU-01": [
+      "weight_kg"
+    ],
+    "BOU-17": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "BOU-20": [
+      "weight_kg"
+    ],
+    "BOU-02": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BOU-03": [
+      "weight_kg"
+    ],
+    "BOU-05": [
+      "weight_kg"
+    ],
+    "BOU-06": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BOU-14": [
+      "weight_kg"
+    ],
+    "BOU-15": [
+      "weight_kg"
+    ],
+    "BOU-18": [
+      "weight_kg"
+    ],
+    "BOU-28": [
+      "weight_kg"
+    ],
+    "BOU-44": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BOU-04": [
+      "weight_kg"
+    ],
+    "BOU-07": [
+      "weight_kg"
+    ],
+    "BOU-08": [
+      "weight_kg"
+    ],
+    "BOU-10": [
+      "weight_kg"
+    ],
+    "BOU-12": [
+      "weight_kg"
+    ],
+    "BOU-16": [
+      "weight_kg"
+    ],
+    "BOU-24": [
+      "weight_kg"
+    ],
+    "BOU-27": [
+      "weight_kg"
+    ],
+    "BOU-47": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BOU-09": [
+      "weight_kg"
+    ],
+    "BOU-11": [
+      "weight_kg"
+    ],
+    "BOU-19": [
+      "weight_kg"
+    ],
+    "BOU-21": [
+      "weight_kg"
+    ],
+    "BOU-22": [
+      "weight_kg"
+    ],
+    "BOU-29": [
+      "weight_kg"
+    ],
+    "BOU-30": [
+      "weight_kg"
+    ],
+    "BOU-37": [
+      "weight_kg"
+    ],
+    "BRE-01": [
+      "weight_kg"
+    ],
+    "BRE-12": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "BRE-31": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "BRE-02": [
+      "weight_kg"
+    ],
+    "BRE-03": [
+      "weight_kg"
+    ],
+    "BRE-04": [
+      "weight_kg"
+    ],
+    "BRE-20": [
+      "weight_kg"
+    ],
+    "BRE-22": [
+      "weight_kg"
+    ],
+    "BRE-25": [
+      "weight_kg"
+    ],
+    "BRE-33": [
+      "weight_kg"
+    ],
+    "BRE-36": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BRE-44": [
+      "weight_kg"
+    ],
+    "BRE-48": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BRE-59": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "height_cm",
+      "weight_kg"
+    ],
+    "BRE-06": [
+      "weight_kg"
+    ],
+    "BRE-07": [
+      "weight_kg"
+    ],
+    "BRE-08": [
+      "weight_kg"
+    ],
+    "BRE-10": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BRE-14": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BRE-17": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BRE-18": [
+      "weight_kg"
+    ],
+    "BRE-24": [
+      "weight_kg"
+    ],
+    "BRE-27": [
+      "weight_kg"
+    ],
+    "BRE-09": [
+      "weight_kg"
+    ],
+    "BRE-11": [
+      "weight_kg"
+    ],
+    "BRE-13": [
+      "weight_kg"
+    ],
+    "BRE-19": [
+      "weight_kg"
+    ],
+    "BRE-23": [
+      "weight_kg"
+    ],
+    "BRE-39": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BHA-01": [
+      "weight_kg"
+    ],
+    "BHA-23": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "BHA-38": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "BHA-03": [
+      "weight_kg"
+    ],
+    "BHA-04": [
+      "weight_kg"
+    ],
+    "BHA-05": [
+      "weight_kg"
+    ],
+    "BHA-20": [
+      "weight_kg"
+    ],
+    "BHA-21": [
+      "weight_kg"
+    ],
+    "BHA-24": [
+      "weight_kg"
+    ],
+    "BHA-29": [
+      "weight_kg"
+    ],
+    "BHA-30": [
+      "weight_kg"
+    ],
+    "BHA-44": [
+      "weight_kg"
+    ],
+    "BHA-08": [
+      "weight_kg"
+    ],
+    "BHA-13": [
+      "weight_kg"
+    ],
+    "BHA-14": [
+      "weight_kg"
+    ],
+    "BHA-22": [
+      "weight_kg"
+    ],
+    "BHA-25": [
+      "weight_kg"
+    ],
+    "BHA-26": [
+      "weight_kg"
+    ],
+    "BHA-27": [
+      "weight_kg"
+    ],
+    "BHA-33": [
+      "weight_kg"
+    ],
+    "BHA-35": [
+      "weight_kg"
+    ],
+    "BHA-49": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BHA-07": [
+      "weight_kg"
+    ],
+    "BHA-09": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BHA-10": [
+      "weight_kg"
+    ],
+    "BHA-11": [
+      "weight_kg"
+    ],
+    "BHA-12": [
+      "weight_kg"
+    ],
+    "BHA-15": [
+      "weight_kg"
+    ],
+    "BHA-19": [
+      "weight_kg"
+    ],
+    "BHA-28": [
+      "weight_kg"
+    ],
+    "BHA-36": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "BHA-39": [
+      "weight_kg"
+    ],
+    "CHE-01": [
+      "weight_kg"
+    ],
+    "CHE-28": [
+      "weight_kg"
+    ],
+    "CHE-39": [
+      "weight_kg"
+    ],
+    "CHE-44": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "CHE-02": [
+      "weight_kg"
+    ],
+    "CHE-03": [
+      "weight_kg"
+    ],
+    "CHE-05": [
+      "weight_kg"
+    ],
+    "CHE-06": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CHE-21": [
+      "weight_kg"
+    ],
+    "CHE-24": [
+      "weight_kg"
+    ],
+    "CHE-27": [
+      "weight_kg"
+    ],
+    "CHE-29": [
+      "weight_kg"
+    ],
+    "CHE-30": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CHE-34": [
+      "weight_kg"
+    ],
+    "CHE-37": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CHE-04": [
+      "weight_kg"
+    ],
+    "CHE-10": [
+      "weight_kg"
+    ],
+    "CHE-14": [
+      "weight_kg"
+    ],
+    "CHE-17": [
+      "weight_kg"
+    ],
+    "CHE-23": [
+      "weight_kg"
+    ],
+    "CHE-25": [
+      "weight_kg"
+    ],
+    "CHE-32": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CHE-45": [
+      "weight_kg"
+    ],
+    "CHE-07": [
+      "weight_kg"
+    ],
+    "CHE-09": [
+      "weight_kg"
+    ],
+    "CHE-11": [
+      "weight_kg"
+    ],
+    "CHE-18": [
+      "weight_kg"
+    ],
+    "CHE-22": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CHE-41": [
+      "weight_kg"
+    ],
+    "COV-13": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "COV-19": [
+      "weight_kg"
+    ],
+    "COV-25": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "COV-02": [
+      "weight_kg"
+    ],
+    "COV-04": [
+      "weight_kg"
+    ],
+    "COV-12": [
+      "weight_kg"
+    ],
+    "COV-20": [
+      "weight_kg"
+    ],
+    "COV-21": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "COV-22": [
+      "weight_kg"
+    ],
+    "COV-24": [
+      "weight_kg"
+    ],
+    "COV-26": [
+      "weight_kg"
+    ],
+    "COV-27": [
+      "weight_kg"
+    ],
+    "COV-03": [
+      "weight_kg"
+    ],
+    "COV-05": [
+      "weight_kg"
+    ],
+    "COV-06": [
+      "weight_kg"
+    ],
+    "COV-07": [
+      "weight_kg"
+    ],
+    "COV-08": [
+      "weight_kg"
+    ],
+    "COV-16": [
+      "weight_kg"
+    ],
+    "COV-28": [
+      "weight_kg"
+    ],
+    "COV-29": [
+      "weight_kg"
+    ],
+    "COV-38": [
+      "weight_kg"
+    ],
+    "COV-09": [
+      "weight_kg"
+    ],
+    "COV-10": [
+      "weight_kg"
+    ],
+    "COV-11": [
+      "weight_kg"
+    ],
+    "COV-14": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "COV-18": [
+      "weight_kg"
+    ],
+    "COV-23": [
+      "weight_kg"
+    ],
+    "COV-34": [
+      "weight_kg"
+    ],
+    "COV-49": [
+      "weight_kg"
+    ],
+    "CRY-01": [
+      "weight_kg"
+    ],
+    "CRY-31": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "CRY-44": [
+      "weight_kg"
+    ],
+    "CRY-03": [
+      "weight_kg"
+    ],
+    "CRY-04": [
+      "weight_kg"
+    ],
+    "CRY-05": [
+      "weight_kg"
+    ],
+    "CRY-06": [
+      "weight_kg"
+    ],
+    "CRY-17": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CRY-21": [
+      "weight_kg"
+    ],
+    "CRY-25": [
+      "weight_kg"
+    ],
+    "CRY-26": [
+      "weight_kg"
+    ],
+    "CRY-30": [
+      "weight_kg"
+    ],
+    "CRY-33": [
+      "weight_kg"
+    ],
+    "CRY-08": [
+      "weight_kg"
+    ],
+    "CRY-10": [
+      "weight_kg"
+    ],
+    "CRY-18": [
+      "weight_kg"
+    ],
+    "CRY-19": [
+      "weight_kg"
+    ],
+    "CRY-20": [
+      "weight_kg"
+    ],
+    "CRY-23": [
+      "weight_kg"
+    ],
+    "CRY-24": [
+      "weight_kg"
+    ],
+    "CRY-28": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CRY-07": [
+      "weight_kg"
+    ],
+    "CRY-09": [
+      "weight_kg"
+    ],
+    "CRY-11": [
+      "weight_kg"
+    ],
+    "CRY-12": [
+      "weight_kg"
+    ],
+    "CRY-14": [
+      "weight_kg"
+    ],
+    "CRY-22": [
+      "weight_kg"
+    ],
+    "CRY-27": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "CRY-29": [
+      "weight_kg"
+    ],
+    "EVE-01": [
+      "weight_kg"
+    ],
+    "EVE-12": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "EVE-31": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "EVE-47": [
+      "height_cm",
+      "preferred_foot",
+      "weight_kg"
+    ],
+    "EVE-04": [
+      "weight_kg"
+    ],
+    "EVE-05": [
+      "weight_kg"
+    ],
+    "EVE-06": [
+      "weight_kg"
+    ],
+    "EVE-15": [
+      "weight_kg"
+    ],
+    "EVE-16": [
+      "weight_kg"
+    ],
+    "EVE-02": [
+      "weight_kg"
+    ],
+    "EVE-08": [
+      "weight_kg"
+    ],
+    "EVE-10": [
+      "weight_kg"
+    ],
+    "EVE-23": [
+      "weight_kg"
+    ],
+    "EVE-24": [
+      "weight_kg"
+    ],
+    "EVE-30": [
+      "weight_kg"
+    ],
+    "EVE-34": [
+      "weight_kg"
+    ],
+    "EVE-37": [
+      "weight_kg"
+    ],
+    "EVE-45": [
+      "weight_kg"
+    ],
+    "EVE-11": [
+      "weight_kg"
+    ],
+    "EVE-19": [
+      "weight_kg"
+    ],
+    "EVE-20": [
+      "weight_kg"
+    ],
+    "EVE-22": [
+      "weight_kg"
+    ],
+    "FUL-01": [
+      "weight_kg"
+    ],
+    "FUL-23": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "FUL-36": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "FUL-02": [
+      "weight_kg"
+    ],
+    "FUL-03": [
+      "weight_kg"
+    ],
+    "FUL-04": [
+      "weight_kg"
+    ],
+    "FUL-05": [
+      "weight_kg"
+    ],
+    "FUL-21": [
+      "weight_kg"
+    ],
+    "FUL-22": [
+      "weight_kg"
+    ],
+    "FUL-33": [
+      "weight_kg"
+    ],
+    "FUL-39": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "preferred_foot",
+      "weight_kg"
+    ],
+    "FUL-44": [
+      "weight_kg"
+    ],
+    "FUL-06": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "FUL-08": [
+      "weight_kg"
+    ],
+    "FUL-10": [
+      "weight_kg"
+    ],
+    "FUL-14": [
+      "weight_kg"
+    ],
+    "FUL-15": [
+      "weight_kg"
+    ],
+    "FUL-16": [
+      "weight_kg"
+    ],
+    "FUL-19": [
+      "weight_kg"
+    ],
+    "FUL-20": [
+      "weight_kg"
+    ],
+    "FUL-24": [
+      "weight_kg"
+    ],
+    "FUL-30": [
+      "weight_kg"
+    ],
+    "FUL-32": [
+      "weight_kg"
+    ],
+    "FUL-07": [
+      "weight_kg"
+    ],
+    "FUL-09": [
+      "weight_kg"
+    ],
+    "FUL-11": [
+      "weight_kg"
+    ],
+    "FUL-17": [
+      "weight_kg"
+    ],
+    "FUL-18": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "FUL-35": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "height_cm",
+      "weight_kg"
+    ],
+    "HUL-01": [
+      "weight_kg"
+    ],
+    "HUL-12": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "HUL-19": [
+      "weight_kg"
+    ],
+    "HUL-02": [
+      "weight_kg"
+    ],
+    "HUL-03": [
+      "weight_kg"
+    ],
+    "HUL-04": [
+      "weight_kg"
+    ],
+    "HUL-06": [
+      "weight_kg"
+    ],
+    "HUL-15": [
+      "weight_kg"
+    ],
+    "HUL-17": [
+      "weight_kg"
+    ],
+    "HUL-18": [
+      "weight_kg"
+    ],
+    "HUL-22": [
+      "weight_kg"
+    ],
+    "HUL-23": [
+      "weight_kg"
+    ],
+    "HUL-32": [
+      "weight_kg"
+    ],
+    "HUL-05": [
+      "weight_kg"
+    ],
+    "HUL-08": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "HUL-14": [
+      "weight_kg"
+    ],
+    "HUL-21": [
+      "weight_kg"
+    ],
+    "HUL-25": [
+      "weight_kg"
+    ],
+    "HUL-27": [
+      "weight_kg"
+    ],
+    "HUL-29": [
+      "weight_kg"
+    ],
+    "HUL-33": [
+      "weight_kg"
+    ],
+    "HUL-42": [
+      "weight_kg"
+    ],
+    "HUL-07": [
+      "weight_kg"
+    ],
+    "HUL-09": [
+      "weight_kg"
+    ],
+    "HUL-10": [
+      "weight_kg"
+    ],
+    "HUL-11": [
+      "weight_kg"
+    ],
+    "HUL-28": [
+      "weight_kg"
+    ],
+    "HUL-50": [
+      "weight_kg"
+    ],
+    "IPS-01": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "IPS-27": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "IPS-28": [
+      "weight_kg"
+    ],
+    "IPS-37": [
+      "weight_kg"
+    ],
+    "IPS-02": [
+      "weight_kg"
+    ],
+    "IPS-03": [
+      "weight_kg"
+    ],
+    "IPS-04": [
+      "weight_kg"
+    ],
+    "IPS-06": [
+      "weight_kg"
+    ],
+    "IPS-24": [
+      "weight_kg"
+    ],
+    "IPS-26": [
+      "weight_kg"
+    ],
+    "IPS-05": [
+      "weight_kg"
+    ],
+    "IPS-10": [
+      "weight_kg"
+    ],
+    "IPS-12": [
+      "weight_kg"
+    ],
+    "IPS-14": [
+      "weight_kg"
+    ],
+    "IPS-20": [
+      "weight_kg"
+    ],
+    "IPS-23": [
+      "weight_kg"
+    ],
+    "IPS-25": [
+      "weight_kg"
+    ],
+    "IPS-32": [
+      "weight_kg"
+    ],
+    "IPS-33": [
+      "weight_kg"
+    ],
+    "IPS-07": [
+      "weight_kg"
+    ],
+    "IPS-08": [
+      "weight_kg"
+    ],
+    "IPS-09": [
+      "weight_kg"
+    ],
+    "IPS-11": [
+      "weight_kg"
+    ],
+    "IPS-19": [
+      "weight_kg"
+    ],
+    "IPS-29": [
+      "weight_kg"
+    ],
+    "IPS-38": [
+      "weight_kg"
+    ],
+    "IPS-42": [
+      "weight_kg"
+    ],
+    "IPS-47": [
+      "weight_kg"
+    ],
+    "LEE-01": [
+      "weight_kg"
+    ],
+    "LEE-16": [
+      "weight_kg"
+    ],
+    "LEE-21": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "LEE-48": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "height_cm",
+      "preferred_foot",
+      "weight_kg"
+    ],
+    "LEE-02": [
+      "weight_kg"
+    ],
+    "LEE-03": [
+      "weight_kg"
+    ],
+    "LEE-05": [
+      "weight_kg"
+    ],
+    "LEE-06": [
+      "weight_kg"
+    ],
+    "LEE-15": [
+      "weight_kg"
+    ],
+    "LEE-24": [
+      "weight_kg"
+    ],
+    "LEE-26": [
+      "weight_kg"
+    ],
+    "LEE-30": [
+      "weight_kg"
+    ],
+    "LEE-65": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LEE-04": [
+      "weight_kg"
+    ],
+    "LEE-08": [
+      "weight_kg"
+    ],
+    "LEE-10": [
+      "weight_kg"
+    ],
+    "LEE-11": [
+      "weight_kg"
+    ],
+    "LEE-18": [
+      "weight_kg"
+    ],
+    "LEE-22": [
+      "weight_kg"
+    ],
+    "LEE-44": [
+      "weight_kg"
+    ],
+    "LEE-50": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "height_cm",
+      "weight_kg"
+    ],
+    "LEE-72": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LEE-07": [
+      "weight_kg"
+    ],
+    "LEE-09": [
+      "weight_kg"
+    ],
+    "LEE-14": [
+      "weight_kg"
+    ],
+    "LEE-19": [
+      "weight_kg"
+    ],
+    "LEE-23": [
+      "weight_kg"
+    ],
+    "LIV-01": [
+      "weight_kg"
+    ],
+    "LIV-25": [
+      "weight_kg"
+    ],
+    "LIV-28": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "LIV-56": [
+      "weight_kg"
+    ],
+    "LIV-95": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "LIV-02": [
+      "weight_kg"
+    ],
+    "LIV-04": [
+      "weight_kg"
+    ],
+    "LIV-05": [
+      "weight_kg"
+    ],
+    "LIV-06": [
+      "weight_kg"
+    ],
+    "LIV-12": [
+      "weight_kg"
+    ],
+    "LIV-15": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-21": [
+      "weight_kg"
+    ],
+    "LIV-30": [
+      "weight_kg"
+    ],
+    "LIV-33": [
+      "weight_kg"
+    ],
+    "LIV-44": [
+      "weight_kg"
+    ],
+    "LIV-52": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-03": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-07": [
+      "weight_kg"
+    ],
+    "LIV-08": [
+      "weight_kg"
+    ],
+    "LIV-10": [
+      "weight_kg"
+    ],
+    "LIV-23": [
+      "weight_kg"
+    ],
+    "LIV-38": [
+      "weight_kg"
+    ],
+    "LIV-42": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-53": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-09": [
+      "weight_kg"
+    ],
+    "LIV-14": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "LIV-18": [
+      "weight_kg"
+    ],
+    "LIV-22": [
+      "weight_kg"
+    ],
+    "LIV-29": [
+      "weight_kg"
+    ],
+    "LIV-67": [
+      "weight_kg"
+    ],
+    "LIV-73": [
+      "weight_kg"
+    ],
+    "LIV-76": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MCI-01": [
+      "weight_kg"
+    ],
+    "MCI-13": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "MCI-28": [
+      "weight_kg"
+    ],
+    "MCI-03": [
+      "weight_kg"
+    ],
+    "MCI-06": [
+      "weight_kg"
+    ],
+    "MCI-21": [
+      "weight_kg"
+    ],
+    "MCI-22": [
+      "weight_kg"
+    ],
+    "MCI-24": [
+      "weight_kg"
+    ],
+    "MCI-45": [
+      "weight_kg"
+    ],
+    "MCI-61": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MCI-82": [
+      "weight_kg"
+    ],
+    "MCI-05": [
+      "weight_kg"
+    ],
+    "MCI-08": [
+      "weight_kg"
+    ],
+    "MCI-10": [
+      "weight_kg"
+    ],
+    "MCI-17": [
+      "weight_kg"
+    ],
+    "MCI-27": [
+      "weight_kg"
+    ],
+    "MCI-30": [
+      "weight_kg"
+    ],
+    "MCI-32": [
+      "weight_kg"
+    ],
+    "MCI-33": [
+      "weight_kg"
+    ],
+    "MCI-37": [
+      "weight_kg"
+    ],
+    "MCI-47": [
+      "weight_kg"
+    ],
+    "MCI-07": [
+      "weight_kg"
+    ],
+    "MCI-09": [
+      "weight_kg"
+    ],
+    "MCI-11": [
+      "weight_kg"
+    ],
+    "MCI-42": [
+      "weight_kg"
+    ],
+    "MCI-56": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MUN-01": [
+      "weight_kg"
+    ],
+    "MUN-12": [
+      "weight_kg"
+    ],
+    "MUN-22": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "MUN-45": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "MUN-02": [
+      "weight_kg"
+    ],
+    "MUN-03": [
+      "weight_kg"
+    ],
+    "MUN-04": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MUN-05": [
+      "weight_kg"
+    ],
+    "MUN-06": [
+      "weight_kg"
+    ],
+    "MUN-13": [
+      "weight_kg"
+    ],
+    "MUN-15": [
+      "weight_kg"
+    ],
+    "MUN-23": [
+      "weight_kg"
+    ],
+    "MUN-26": [
+      "weight_kg"
+    ],
+    "MUN-41": [
+      "weight_kg"
+    ],
+    "MUN-07": [
+      "weight_kg"
+    ],
+    "MUN-08": [
+      "weight_kg"
+    ],
+    "MUN-17": [
+      "weight_kg"
+    ],
+    "MUN-18": [
+      "weight_kg"
+    ],
+    "MUN-20": [
+      "weight_kg"
+    ],
+    "MUN-25": [
+      "weight_kg"
+    ],
+    "MUN-37": [
+      "weight_kg"
+    ],
+    "MUN-38": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MUN-39": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "MUN-09": [
+      "weight_kg"
+    ],
+    "MUN-10": [
+      "weight_kg"
+    ],
+    "MUN-11": [
+      "weight_kg"
+    ],
+    "MUN-16": [
+      "weight_kg"
+    ],
+    "MUN-19": [
+      "weight_kg"
+    ],
+    "MUN-30": [
+      "weight_kg"
+    ],
+    "MUN-31": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "NEW-01": [
+      "weight_kg"
+    ],
+    "NEW-21": [
+      "weight_kg"
+    ],
+    "NEW-24": [
+      "weight_kg"
+    ],
+    "NEW-29": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "NEW-31": [
+      "weight_kg"
+    ],
+    "NEW-02": [
+      "weight_kg"
+    ],
+    "NEW-03": [
+      "weight_kg"
+    ],
+    "NEW-04": [
+      "weight_kg"
+    ],
+    "NEW-05": [
+      "weight_kg"
+    ],
+    "NEW-12": [
+      "weight_kg"
+    ],
+    "NEW-33": [
+      "weight_kg"
+    ],
+    "NEW-37": [
+      "weight_kg"
+    ],
+    "NEW-51": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "NEW-06": [
+      "weight_kg"
+    ],
+    "NEW-07": [
+      "weight_kg"
+    ],
+    "NEW-08": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "NEW-11": [
+      "weight_kg"
+    ],
+    "NEW-14": [
+      "weight_kg"
+    ],
+    "NEW-28": [
+      "weight_kg"
+    ],
+    "NEW-41": [
+      "weight_kg"
+    ],
+    "NEW-67": [
+      "weight_kg"
+    ],
+    "NEW-09": [
+      "weight_kg"
+    ],
+    "NEW-10": [
+      "weight_kg"
+    ],
+    "NEW-17": [
+      "weight_kg"
+    ],
+    "NEW-19": [
+      "weight_kg"
+    ],
+    "NEW-20": [
+      "weight_kg"
+    ],
+    "NEW-23": [
+      "weight_kg"
+    ],
+    "NFO-12": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "NFO-26": [
+      "weight_kg"
+    ],
+    "NFO-33": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "NFO-63": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "NFO-02": [
+      "weight_kg"
+    ],
+    "NFO-03": [
+      "weight_kg"
+    ],
+    "NFO-04": [
+      "weight_kg"
+    ],
+    "NFO-05": [
+      "weight_kg"
+    ],
+    "NFO-23": [
+      "weight_kg"
+    ],
+    "NFO-25": [
+      "weight_kg"
+    ],
+    "NFO-27": [
+      "weight_kg"
+    ],
+    "NFO-31": [
+      "weight_kg"
+    ],
+    "NFO-34": [
+      "weight_kg"
+    ],
+    "NFO-37": [
+      "weight_kg"
+    ],
+    "NFO-44": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "NFO-06": [
+      "weight_kg"
+    ],
+    "NFO-08": [
+      "weight_kg"
+    ],
+    "NFO-10": [
+      "weight_kg"
+    ],
+    "NFO-21": [
+      "weight_kg"
+    ],
+    "NFO-22": [
+      "weight_kg"
+    ],
+    "NFO-24": [
+      "weight_kg"
+    ],
+    "NFO-07": [
+      "weight_kg"
+    ],
+    "NFO-09": [
+      "weight_kg"
+    ],
+    "NFO-11": [
+      "weight_kg"
+    ],
+    "NFO-14": [
+      "weight_kg"
+    ],
+    "NFO-15": [
+      "weight_kg"
+    ],
+    "NFO-19": [
+      "weight_kg"
+    ],
+    "SUN-21": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "SUN-22": [
+      "weight_kg"
+    ],
+    "SUN-31": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "SUN-04": [
+      "weight_kg"
+    ],
+    "SUN-05": [
+      "weight_kg"
+    ],
+    "SUN-06": [
+      "weight_kg"
+    ],
+    "SUN-12": [
+      "weight_kg"
+    ],
+    "SUN-15": [
+      "weight_kg"
+    ],
+    "SUN-17": [
+      "weight_kg"
+    ],
+    "SUN-20": [
+      "weight_kg"
+    ],
+    "SUN-32": [
+      "weight_kg"
+    ],
+    "SUN-08": [
+      "weight_kg"
+    ],
+    "SUN-11": [
+      "weight_kg"
+    ],
+    "SUN-13": [
+      "weight_kg"
+    ],
+    "SUN-19": [
+      "weight_kg"
+    ],
+    "SUN-27": [
+      "weight_kg"
+    ],
+    "SUN-28": [
+      "weight_kg"
+    ],
+    "SUN-29": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "SUN-34": [
+      "weight_kg"
+    ],
+    "SUN-07": [
+      "weight_kg"
+    ],
+    "SUN-09": [
+      "weight_kg"
+    ],
+    "SUN-10": [
+      "weight_kg"
+    ],
+    "SUN-14": [
+      "weight_kg"
+    ],
+    "SUN-18": [
+      "weight_kg"
+    ],
+    "SUN-37": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "SUN-39": [
+      "weight_kg"
+    ],
+    "SUN-57": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "TOT-31": [
+      "weight_kg"
+    ],
+    "TOT-39": [
+      "weight_kg"
+    ],
+    "TOT-40": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "TOT-51": [
+      "SAV",
+      "ANT",
+      "TAC",
+      "BAL",
+      "AER",
+      "weight_kg"
+    ],
+    "TOT-03": [
+      "weight_kg"
+    ],
+    "TOT-04": [
+      "weight_kg"
+    ],
+    "TOT-05": [
+      "weight_kg"
+    ],
+    "TOT-06": [
+      "weight_kg"
+    ],
+    "TOT-13": [
+      "weight_kg"
+    ],
+    "TOT-23": [
+      "weight_kg"
+    ],
+    "TOT-33": [
+      "weight_kg"
+    ],
+    "TOT-37": [
+      "weight_kg"
+    ],
+    "TOT-07": [
+      "weight_kg"
+    ],
+    "TOT-08": [
+      "weight_kg"
+    ],
+    "TOT-10": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "TOT-14": [
+      "weight_kg"
+    ],
+    "TOT-15": [
+      "weight_kg"
+    ],
+    "TOT-16": [
+      "weight_kg"
+    ],
+    "TOT-18": [
+      "weight_kg"
+    ],
+    "TOT-20": [
+      "weight_kg"
+    ],
+    "TOT-21": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "TOT-27": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "TOT-30": [
+      "weight_kg"
+    ],
+    "TOT-68": [
+      "ATT",
+      "DEF",
+      "CRE",
+      "TEC",
+      "TAC",
+      "weight_kg"
+    ],
+    "TOT-11": [
+      "weight_kg"
+    ],
+    "TOT-17": [
+      "weight_kg"
+    ],
+    "TOT-19": [
+      "weight_kg"
+    ],
+    "TOT-22": [
+      "weight_kg"
+    ],
+    "TOT-28": [
+      "weight_kg"
+    ],
+    "TOT-47": [
+      "weight_kg"
+    ]
+  },
+  "source_conflicts": {
+    "ARS-22": {
+      "shirt_number": {
+        "roster": 22,
+        "source": 18
+      }
+    },
+    "AVL-04": {
+      "date_of_birth": {
+        "roster": "2002-01-30",
+        "source": "2002-01-29"
+      }
+    },
+    "AVL-45": {
+      "shirt_number": {
+        "roster": 45,
+        "source": 2
+      }
+    },
+    "AVL-49": {
+      "shirt_number": {
+        "roster": 49,
+        "source": 27
+      }
+    },
+    "AVL-74": {
+      "shirt_number": {
+        "roster": 74,
+        "source": 20
+      }
+    },
+    "BOU-29": {
+      "date_of_birth": {
+        "roster": "2003-08-13",
+        "source": "2003-07-11"
+      }
+    },
+    "BRE-25": {
+      "date_of_birth": {
+        "roster": "2004-12-29",
+        "source": "2004-12-28"
+      }
+    },
+    "BHA-22": {
+      "shirt_number": {
+        "roster": 22,
+        "source": 11
+      }
+    },
+    "BHA-07": {
+      "shirt_number": {
+        "roster": 7,
+        "source": 22
+      }
+    },
+    "BHA-39": {
+      "shirt_number": {
+        "roster": 39,
+        "source": 11
+      }
+    },
+    "CHE-28": {
+      "shirt_number": {
+        "roster": 28,
+        "source": 1
+      }
+    },
+    "COV-21": {
+      "shirt_number": {
+        "roster": 21,
+        "source": 40
+      }
+    },
+    "COV-03": {
+      "date_of_birth": {
+        "roster": "1998-10-23",
+        "source": "1998-04-22"
+      }
+    },
+    "CRY-04": {
+      "date_of_birth": {
+        "roster": "2003-06-17",
+        "source": "2003-03-17"
+      },
+      "shirt_number": {
+        "roster": 4,
+        "source": 34
+      }
+    },
+    "CRY-27": {
+      "shirt_number": {
+        "roster": 27,
+        "source": 26
+      }
+    },
+    "EVE-47": {
+      "shirt_number": {
+        "roster": 47,
+        "source": 12
+      }
+    },
+    "FUL-39": {
+      "position": {
+        "roster": "DEF",
+        "source": "G"
+      }
+    },
+    "HUL-32": {
+      "date_of_birth": {
+        "roster": "2004-09-03",
+        "source": "2004-08-16"
+      }
+    },
+    "HUL-33": {
+      "shirt_number": {
+        "roster": 33,
+        "source": 10
+      }
+    },
+    "HUL-28": {
+      "shirt_number": {
+        "roster": 28,
+        "source": 10
+      }
+    },
+    "NEW-51": {
+      "shirt_number": {
+        "roster": 51,
+        "source": 2
+      }
+    },
+    "NFO-04": {
+      "shirt_number": {
+        "roster": 4,
+        "source": 5
+      }
+    },
+    "NFO-44": {
+      "shirt_number": {
+        "roster": 44,
+        "source": 6
+      }
+    },
+    "NFO-11": {
+      "shirt_number": {
+        "roster": 11,
+        "source": 19
+      }
+    }
+  },
+  "failures": {},
+  "notes": [
+    "Only observed official page values are imported; missing values are never imputed.",
+    "Goalkeeper and outfield radars have different meanings and are not interchangeable.",
+    "Complete means all five applicable radar scores, height and preferred foot are present; weight is optional.",
+    "Sofascore scores are descriptive indices, not calibrated action-success probabilities.",
+    "Existing names, IDs and roster attributes are preserved. Source names, URLs and IDs stay in ignored .local captures.",
+    "Profiles are a collection-time snapshot, not historical pre-match features; do not use them in historical evaluation without an as-of cutoff."
+  ]
+}

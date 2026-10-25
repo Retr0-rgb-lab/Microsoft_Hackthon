@@ -198,3 +198,26 @@ body.is-loading .match-picker-controls{pointer-events:none}
 @media(max-width:600px) { .home-calendar { padding: 16px; }.calendar-heading { align-items: flex-start; flex-direction: column; }.calendar-heading h2 { font-size: 19px; } }
 
 .home-hero + .home-calendar, .home-empty + .home-calendar { margin-top: 22px; }
+
+/* Full-time player reports */
+.player-analysis-card { padding: 26px; margin-bottom: 24px; }
+.player-analysis-card > p, .player-report-heading p, .heatmap-note { color: #77808e; font-size: 12px; line-height: 1.7; }
+#analysis-players { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+#analysis-players h3 { font-size: 14px; }
+.analysis-player-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.analysis-player-buttons .button { font-size: 11px; padding: 9px 12px; }
+#player-dialog { width: min(850px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); overflow-y: auto; border: 1px solid #e2e6eb; border-radius: 18px; padding: 28px; color: #303947; background: #fff; }
+#player-dialog::backdrop { background: #15252bcc; }
+.player-report-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.player-report-heading h2 { margin: 10px 0; font-size: 24px; }
+#report-player-select { display: block; width: 100%; padding: 10px; margin: 8px 0 20px; border: 1px solid #dce0e6; border-radius: 8px; font: inherit; background: white; }
+.player-summary-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 22px; }
+.player-summary-stats > div { padding: 14px; border-radius: 8px; background: #f6f7f9; }
+.player-summary-stats span { display: block; color: #77808e; font-size: 11px; margin-bottom: 9px; }
+.player-summary-stats strong { font-size: 22px; }
+#player-heatmap svg { width: 100%; display: block; }
+#heatmap-legend { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin: 12px 0; font-size: 11px; color: #77808e; }
+#heatmap-legend[hidden] { display: none; }
+#heatmap-legend i { width: 120px; height: 8px; border-radius: 8px; background: linear-gradient(90deg, #766d36, #efad36, #f04422); }
+@media(max-width:600px) { #analysis-players { grid-template-columns: 1fr; } #player-dialog { padding: 18px; } .player-report-heading h2 { font-size: 19px; } .player-summary-stats > div { padding: 9px; } .player-summary-stats strong { font-size: 18px; } }
+#player-heatmap svg { height: auto; max-height: 280px; stroke: none; }

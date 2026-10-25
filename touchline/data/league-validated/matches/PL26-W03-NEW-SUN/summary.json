@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W03-NEW-SUN",
+  "seed": 20264020,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655638,
+  "state_snapshots": 6001,
+  "event_count": 3764,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 102,
+    "restart": 40,
+    "carry": 1200,
+    "pass": 1058,
+    "pressure": 1212,
+    "interception": 67,
+    "shot": 33,
+    "stoppage": 17,
+    "save": 16,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 538,
+      "completed_passes": 511,
+      "shots": 23,
+      "shots_on_target": 12,
+      "interceptions": 40,
+      "pressure_events": 605,
+      "possession_seconds": 2847.2,
+      "possession_pct": 50.02,
+      "pass_accuracy_pct": 94.98
+    },
+    "AWAY": {
+      "passes": 520,
+      "completed_passes": 480,
+      "shots": 10,
+      "shots_on_target": 6,
+      "interceptions": 27,
+      "pressure_events": 607,
+      "possession_seconds": 2844.6,
+      "possession_pct": 49.98,
+      "pass_accuracy_pct": 92.31
+    }
+  },
+  "distance_m": {
+    "H01": 3127.5,
+    "H02": 7193.0,
+    "H03": 10576.4,
+    "H04": 10901.1,
+    "H05": 9967.5,
+    "H06": 7202.8,
+    "H07": 12126.3,
+    "H08": 11942.2,
+    "H09": 11840.4,
+    "H10": 12371.6,
+    "H11": 11699.6,
+    "A01": 3302.1,
+    "A02": 10066.3,
+    "A03": 11086.7,
+    "A04": 10881.7,
+    "A05": 8331.0,
+    "A06": 9125.3,
+    "A07": 12024.9,
+    "A08": 11870.6,
+    "A09": 11175.0,
+    "A10": 12253.3,
+    "A11": 7812.7,
+    "H12": 4121.1,
+    "H13": 0.0,
+    "H14": 2625.9,
+    "A12": 2520.5,
+    "A13": 3825.1,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 3104600,
+      "period": 2,
+      "period_ms": 104600,
+      "team_id": "HOME",
+      "club_id": "NEW",
+      "club_name": "Quartz FC",
+      "player_id": "H10",
+      "player_name": "Quartz Player 22",
+      "shirt_number": 9,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 4141800,
+      "period": 2,
+      "period_ms": 1141800,
+      "team_id": "HOME",
+      "club_id": "NEW",
+      "club_name": "Quartz FC",
+      "player_id": "H10",
+      "player_name": "Quartz Player 22",
+      "shirt_number": 9,
+      "score": [
+        2,
+        0
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 3,
+    "kickoff_local": "2026-11-07T15:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Quartz Park"
+  },
+  "home_club": {
+    "club_id": "NEW",
+    "name": "Quartz FC",
+    "short_name": "Quartz",
+    "stadium": "Quartz Park",
+    "colors": {
+      "primary": "#241F20",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "SUN",
+    "name": "Silverbrook FC",
+    "short_name": "Silverbrook FC",
+    "stadium": "Silverbrook Park",
+    "colors": {
+      "primary": "#EB172B",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

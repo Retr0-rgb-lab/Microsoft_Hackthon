@@ -1,0 +1,9 @@
+{
+  "test_actions": 5035,
+  "positive_goal_windows": 29,
+  "observed_rate": 0.005759682224428997,
+  "mean_prediction": 0.006467651043623015,
+  "brier": 0.005493047690973452,
+  "constant_train_baseline_brier": 0.005727228960081457,
+  "warning": "Existing held-out matches have been inspected before; reproducibility audit, not a new blind test. Sparse goal labels; not validation of counterfactual actions."
+}

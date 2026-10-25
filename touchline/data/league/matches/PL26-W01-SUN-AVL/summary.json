@@ -1,0 +1,165 @@
+{
+  "match_id": "PL26-W01-SUN-AVL",
+  "seed": 20262020,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655804,
+  "state_snapshots": 6001,
+  "event_count": 3709,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 85,
+    "restart": 33,
+    "pressure": 1211,
+    "carry": 1242,
+    "pass": 1010,
+    "interception": 57,
+    "shot": 26,
+    "stoppage": 16,
+    "save": 10,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    3,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 487,
+      "completed_passes": 458,
+      "shots": 13,
+      "shots_on_target": 9,
+      "interceptions": 28,
+      "pressure_events": 631,
+      "possession_seconds": 2769.6,
+      "possession_pct": 48.49,
+      "pass_accuracy_pct": 94.05
+    },
+    "AWAY": {
+      "passes": 523,
+      "completed_passes": 495,
+      "shots": 13,
+      "shots_on_target": 4,
+      "interceptions": 29,
+      "pressure_events": 580,
+      "possession_seconds": 2942.2,
+      "possession_pct": 51.51,
+      "pass_accuracy_pct": 94.65
+    }
+  },
+  "distance_m": {
+    "H01": 3132.2,
+    "H02": 7355.1,
+    "H03": 10856.4,
+    "H04": 10771.3,
+    "H05": 9763.3,
+    "H06": 7432.7,
+    "H07": 12370.6,
+    "H08": 11543.3,
+    "H09": 11075.8,
+    "H10": 11850.4,
+    "H11": 11146.9,
+    "A01": 3059.3,
+    "A02": 9765.7,
+    "A03": 10601.3,
+    "A04": 10555.1,
+    "A05": 7995.8,
+    "A06": 9193.4,
+    "A07": 11930.3,
+    "A08": 11188.0,
+    "A09": 11850.2,
+    "A10": 12954.8,
+    "A11": 7442.5,
+    "H12": 4635.7,
+    "H13": 0.0,
+    "H14": 2580.4,
+    "A12": 2228.2,
+    "A13": 3773.7,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 1225000,
+      "period": 1,
+      "period_ms": 1225000,
+      "team_id": "HOME",
+      "club_id": "SUN",
+      "club_name": "Silverbrook FC",
+      "player_id": "H06",
+      "player_name": "Silverbrook Player 12",
+      "shirt_number": 8,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 2117600,
+      "period": 1,
+      "period_ms": 2117600,
+      "team_id": "HOME",
+      "club_id": "SUN",
+      "club_name": "Silverbrook FC",
+      "player_id": "H10",
+      "player_name": "Silverbrook Player 21",
+      "shirt_number": 9,
+      "score": [
+        2,
+        0
+      ]
+    },
+    {
+      "t_ms": 2365600,
+      "period": 1,
+      "period_ms": 2365600,
+      "team_id": "HOME",
+      "club_id": "SUN",
+      "club_name": "Silverbrook FC",
+      "player_id": "H10",
+      "player_name": "Silverbrook Player 21",
+      "shirt_number": 9,
+      "score": [
+        3,
+        0
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-24T15:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Silverbrook Park"
+  },
+  "home_club": {
+    "club_id": "SUN",
+    "name": "Silverbrook FC",
+    "short_name": "Silverbrook FC",
+    "stadium": "Silverbrook Park",
+    "colors": {
+      "primary": "#EB172B",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "AVL",
+    "name": "Beacon FC",
+    "short_name": "Beacon FC",
+    "stadium": "Beacon Park",
+    "colors": {
+      "primary": "#670E36",
+      "secondary": "#95BFE5"
+    },
+    "formation": "4-3-3"
+  }
+}

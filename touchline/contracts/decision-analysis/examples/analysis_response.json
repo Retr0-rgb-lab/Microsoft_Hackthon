@@ -1,0 +1,1728 @@
+{
+  "schema_version": "decision-analysis-1",
+  "match_id": "PL26-W01-MCI-CHE",
+  "decision_id": "d000001",
+  "snapshot_id": "67554a61efcbaa4f",
+  "candidate_set_id": "outcome-3.0:84e46dbe2ed0f54a",
+  "data_version": "gen-19c6f7e3d03d3651",
+  "source": {
+    "dataset": "league",
+    "root": "data/league",
+    "source_commit": "96d13a377e98602c9998e3ebb82186843762febf",
+    "dataset_version": "gen-6dd4c2c35772c4c2",
+    "model_id": "B-Q2-6539c9563b7ef879",
+    "snapshot_source": "generator_decisions",
+    "match_excluded_from_fitting": true
+  },
+  "request": {
+    "match_id": "PL26-W01-MCI-CHE",
+    "snapshot_id": "67554a61efcbaa4f",
+    "t_ms": 16200,
+    "actor_id": "H10",
+    "question": "Compare current choices",
+    "mode": "analyst",
+    "language": "en",
+    "profile": {
+      "profile_version": "sim-1",
+      "kind": "simulated",
+      "preferred_foot": null,
+      "weak_foot": null
+    }
+  },
+  "snapshot": {
+    "snapshot_id": "67554a61efcbaa4f",
+    "schema_version": "contract-1",
+    "match_id": "PL26-W01-MCI-CHE",
+    "data_version": "gen-19c6f7e3d03d3651",
+    "seed": 20262024,
+    "t_ms": 16200,
+    "period": 1,
+    "attacking_direction": {
+      "HOME": "positive_x",
+      "AWAY": "negative_x"
+    },
+    "frame": {
+      "frame_id": 81,
+      "t_ms": 16200,
+      "period": 1,
+      "period_ms": 16200,
+      "in_play": true,
+      "phase": "carry",
+      "action_id": "a000002",
+      "possession_team_id": "HOME",
+      "ball_owner_id": "H10",
+      "score": [
+        0,
+        0
+      ],
+      "players": [
+        [
+          "H01",
+          5.57,
+          33.134,
+          0.006,
+          -0.027
+        ],
+        [
+          "H02",
+          34.193,
+          6.364,
+          -1.289,
+          -0.011
+        ],
+        [
+          "H03",
+          36.012,
+          22.797,
+          -1.275,
+          0.312
+        ],
+        [
+          "H04",
+          35.541,
+          42.757,
+          -1.133,
+          0.297
+        ],
+        [
+          "H05",
+          33.14,
+          58.988,
+          -0.959,
+          -0.034
+        ],
+        [
+          "H06",
+          53.339,
+          16.103,
+          -0.898,
+          -0.138
+        ],
+        [
+          "H07",
+          51.201,
+          31.238,
+          -1.024,
+          0.161
+        ],
+        [
+          "H08",
+          54.102,
+          48.83,
+          -1.226,
+          0.368
+        ],
+        [
+          "H09",
+          72.138,
+          10.239,
+          -1.328,
+          0.144
+        ],
+        [
+          "H10",
+          56.104,
+          28.13,
+          0.002,
+          -0.004
+        ],
+        [
+          "H11",
+          70.584,
+          55.33,
+          -1.086,
+          -0.012
+        ],
+        [
+          "A01",
+          99.82,
+          33.134,
+          0.006,
+          -0.027
+        ],
+        [
+          "A02",
+          84.987,
+          9.003,
+          -0.136,
+          0.162
+        ],
+        [
+          "A03",
+          81.077,
+          25.188,
+          -0.033,
+          -0.181
+        ],
+        [
+          "A04",
+          81.14,
+          41.335,
+          0.125,
+          -0.279
+        ],
+        [
+          "A05",
+          85.129,
+          56.52,
+          0.218,
+          0.032
+        ],
+        [
+          "A06",
+          67.296,
+          17.096,
+          0.176,
+          0.235
+        ],
+        [
+          "A07",
+          52.031,
+          28.252,
+          -1.918,
+          -1.269
+        ],
+        [
+          "A08",
+          67.163,
+          49.33,
+          -0.108,
+          -0.292
+        ],
+        [
+          "A09",
+          46.965,
+          7.6,
+          -0.135,
+          -0.147
+        ],
+        [
+          "A10",
+          56.664,
+          25.714,
+          0.582,
+          -0.616
+        ],
+        [
+          "A11",
+          46.152,
+          58.038,
+          0.127,
+          0.156
+        ]
+      ],
+      "ball": [
+        56.454,
+        28.13,
+        0.0,
+        0.002,
+        -0.004,
+        0.0
+      ]
+    }
+  },
+  "public": {
+    "status": "model_unavailable",
+    "snapshot_id": "67554a61efcbaa4f",
+    "candidate_set_id": "outcome-3.0:84e46dbe2ed0f54a",
+    "data_version": "gen-19c6f7e3d03d3651",
+    "profile_version": "sim-1",
+    "candidates": [
+      {
+        "action_id": "pass:H06",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 10.2 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.09; lane arrival margin 0.35 s.",
+        "rank": 1,
+        "evidence_ids": [
+          "route-1",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "pass:H08",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 12.2 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.03; lane arrival margin 1.09 s.",
+        "rank": 2,
+        "evidence_ids": [
+          "route-2",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "pass:H07",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 3.1 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.41; lane arrival margin 0.46 s.",
+        "rank": 3,
+        "evidence_ids": [
+          "route-3",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "carry:right",
+        "type": "carry",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "main_risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.10.",
+        "rank": 4,
+        "evidence_ids": [
+          "route-4",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "carry:forward",
+        "type": "carry",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "main_risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.19.",
+        "rank": 5,
+        "evidence_ids": [
+          "route-5",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "pass:H04",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 18.6 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.00; lane arrival margin 0.55 s.",
+        "rank": 6,
+        "evidence_ids": [
+          "route-6",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "carry:left",
+        "type": "carry",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "main_risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.23.",
+        "rank": 7,
+        "evidence_ids": [
+          "route-7",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "pass:H03",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 16.9 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.01; lane arrival margin 0.25 s.",
+        "rank": 8,
+        "evidence_ids": [
+          "route-8",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "pass:H09",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Advance possession to an active teammate and assess their next option. Receiver space: 8.4 m to nearest outfield opponent.",
+        "main_risk": "A defender may reach the lane before the ball under the geometric rule. Target pressure index 0.08; lane arrival margin -0.53 s.",
+        "rank": 9,
+        "evidence_ids": [
+          "route-9",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "pass:H02",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Recycle possession to an active teammate and assess their next option. Receiver space: 12.8 m to nearest outfield opponent.",
+        "main_risk": "Receiver control and defender response remain uncertain. Target pressure index 0.01; lane arrival margin 0.66 s.",
+        "rank": 10,
+        "evidence_ids": [
+          "route-10",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "pass:H11",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Advance possession to an active teammate and assess their next option. Receiver space: 6.9 m to nearest outfield opponent.",
+        "main_risk": "A defender may reach the lane before the ball under the geometric rule. Target pressure index 0.11; lane arrival margin -1.37 s.",
+        "rank": 11,
+        "evidence_ids": [
+          "route-11",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "rollout_supported": true
+      },
+      {
+        "action_id": "shot:goal",
+        "type": "shot",
+        "is_actual": false,
+        "eligible": true,
+        "opportunity": "Use the current shooting window rather than defer to the next choice. Goal distance 48.9 m; opening 0.15 rad.",
+        "main_risk": "A failed shot gives the opponent a modelled restart or controlled possession.",
+        "rank": 12,
+        "evidence_ids": [
+          "route-12",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "pass:H01",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": false,
+        "opportunity": "Excluded from this comparison.",
+        "main_risk": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only",
+        "rank": null,
+        "evidence_ids": [
+          "route-13",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "pass:H05",
+        "type": "pass",
+        "is_actual": false,
+        "eligible": false,
+        "opportunity": "Excluded from this comparison.",
+        "main_risk": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only",
+        "rank": null,
+        "evidence_ids": [
+          "route-14",
+          "model-context"
+        ],
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "rollout_supported": false
+      },
+      {
+        "action_id": "hold:1s",
+        "type": "hold",
+        "is_actual": false,
+        "eligible": false,
+        "opportunity": "Holding is outside this first contract adapter.",
+        "main_risk": "No supported hold continuation model.",
+        "rank": null,
+        "evidence_ids": [
+          "hold-support"
+        ],
+        "assumptions": [
+          "hold_not_implemented",
+          "preferred_foot_not_considered"
+        ],
+        "rollout_supported": false
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "model-context",
+        "kind": "assumed",
+        "source": "decision_analysis/q2.py + fitted source model",
+        "value": "B two-step comparison; source 96d13a377e98602c9998e3ebb82186843762febf; model B-Q2-6539c9563b7ef879; calculator c838798ccc3a6d0a; team-parameter binding aa0cfd1e976fce6d; textual thresholds are versioned hypotheses; neutral player-profile effects."
+      },
+      {
+        "evidence_id": "route-1",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 12.52 m; forward displacement -3.34 m; receiver nearest defender 10.17 m; estimated critical arrival margin 0.348 s."
+      },
+      {
+        "evidence_id": "route-2",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 20.96 m; forward displacement -2.66 m; receiver nearest defender 12.17 m; estimated critical arrival margin 1.088 s."
+      },
+      {
+        "evidence_id": "route-3",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 6.35 m; forward displacement -5.51 m; receiver nearest defender 3.10 m; estimated critical arrival margin 0.461 s."
+      },
+      {
+        "evidence_id": "route-4",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 6.92 m; forward displacement 5.65 m; receiver nearest defender 2.48 m; estimated critical arrival margin 0.850 s."
+      },
+      {
+        "evidence_id": "route-5",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 5.65 m; forward displacement 5.65 m; receiver nearest defender 2.48 m; estimated critical arrival margin 0.801 s."
+      },
+      {
+        "evidence_id": "route-6",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 25.80 m; forward displacement -21.20 m; receiver nearest defender 18.60 m; estimated critical arrival margin 0.545 s."
+      },
+      {
+        "evidence_id": "route-7",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 6.92 m; forward displacement 5.65 m; receiver nearest defender 2.48 m; estimated critical arrival margin 0.307 s."
+      },
+      {
+        "evidence_id": "route-8",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 21.42 m; forward displacement -20.76 m; receiver nearest defender 16.92 m; estimated critical arrival margin 0.249 s."
+      },
+      {
+        "evidence_id": "route-9",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 23.55 m; forward displacement 15.35 m; receiver nearest defender 8.39 m; estimated critical arrival margin -0.528 s."
+      },
+      {
+        "evidence_id": "route-10",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 31.37 m; forward displacement -22.58 m; receiver nearest defender 12.83 m; estimated critical arrival margin 0.657 s."
+      },
+      {
+        "evidence_id": "route-11",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 30.52 m; forward displacement 13.86 m; receiver nearest defender 6.91 m; estimated critical arrival margin -1.374 s."
+      },
+      {
+        "evidence_id": "route-12",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "Route length 48.90 m; forward displacement 48.55 m; receiver nearest defender 2.48 m; estimated critical arrival margin 1.068 s."
+      },
+      {
+        "evidence_id": "route-13",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only"
+      },
+      {
+        "evidence_id": "route-14",
+        "kind": "computed",
+        "source": "decision_analysis.tactical_rules.geometry via decision_analysis/q2.py",
+        "value": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only"
+      },
+      {
+        "evidence_id": "hold-support",
+        "kind": "assumed",
+        "source": "decision_analysis/comparison.py",
+        "value": "B has no validated hold transition; hold is not assigned a value or rank."
+      }
+    ],
+    "explanation": null,
+    "agent_trace": [],
+    "limitations": [
+      "B two-step Q2 is the sole ranking engine; no language model or agent team was called.",
+      "Tactical execution probabilities and short geometric successors are unvalidated assumptions, not individual skill models.",
+      "The next decision uses a maximum and can overestimate achievable continuation; xT retains source-policy bias.",
+      "Source radar indices and generator choice probabilities do not modify action success or Q2.",
+      "Source observations and simulated profile are separate. Foot effects remain neutral; body orientation is unknown.",
+      "High balls and hold are unsupported in the public contract; legacy research analysis remains available separately.",
+      "One standardised route per receiver; historical carry direction is unknown unless explicitly recorded before execution."
+    ]
+  },
+  "action_conditions": {
+    "player_id": "H10",
+    "team_id": "HOME",
+    "speed_mps": 0.00447213595499958,
+    "speed_kmh": 0.01609968943799849,
+    "movement_heading_deg": null,
+    "movement_label": "Stationary / slow",
+    "nearest_opponent": {
+      "player_id": "A10",
+      "distance_m": 2.4800516123661627
+    },
+    "under_pressure_3m": true,
+    "opponents_within_5m": 2,
+    "ball_distance_m": 0.3500000000000014,
+    "attacking_direction": "positive_x",
+    "body_orientation": null,
+    "provenance": "observed_generator_snapshot; proximity includes opposing goalkeeper"
+  },
+  "player_source_profile": {
+    "status": "complete",
+    "observation": {
+      "schema_version": "sofascore-profile-1",
+      "status": "complete",
+      "collected_at_utc": "2026-10-23T14:43:43.335Z",
+      "source_date_of_birth": "2000-07-21",
+      "source_position": "F",
+      "source_nationality": "NOR",
+      "source_shirt_number": 9,
+      "height_cm": 195,
+      "weight_kg": null,
+      "preferred_foot": "left",
+      "attribute_kind": "outfield",
+      "attributes": {
+        "ATT": 87,
+        "DEF": 36,
+        "CRE": 53,
+        "TEC": 66,
+        "TAC": 77
+      },
+      "attribute_period": "latest_visible_on_source_page",
+      "missing_fields": [
+        "weight_kg"
+      ],
+      "evidence_sha256": "a1bcf3b90f6bcaf81af7b6a748cb6eb26a7b1845bf328b555e6064139ed8127f",
+      "identity_match": "name_and_birth_date",
+      "source": "Sofascore",
+      "source_conflicts": {}
+    },
+    "issues": [],
+    "used_in_probability": false,
+    "time_note": "Collection time is not historical pre-match evidence; indices are descriptive, not probabilities."
+  },
+  "model": {
+    "model_id": "B-Q2-6539c9563b7ef879",
+    "evaluation_mode": "two_step_Q2",
+    "temperature": 0.04175513040902647,
+    "feature_units": {
+      "progress": "m",
+      "y": "m",
+      "vx": "m/s",
+      "vy": "m/s",
+      "ball_speed": "m/s",
+      "distance": "m",
+      "advance": "m",
+      "lateral": "m",
+      "duration": "s",
+      "source_pressure": "index",
+      "receiver_pressure": "index",
+      "nearest_defender": "m",
+      "closing_speed": "m/s",
+      "lane_pressure": "index",
+      "intercept_margin": "s",
+      "goal_distance": "m",
+      "goal_angle": "rad",
+      "blockers": "index",
+      "keeper_offset": "m",
+      "target_speed": "m/s",
+      "attack_ratio": "ratio",
+      "passing_ratio": "ratio",
+      "time_fraction": "ratio",
+      "score_difference": "goals",
+      "player_difference": "players",
+      "receiver_nearest_defender": "m",
+      "receiver_reachable": "boolean_as_0_or_1",
+      "keeper_depth": "m",
+      "keeper_cover": "index",
+      "state_quality": "exact_snapshot_indicator"
+    },
+    "probability_basis": "unvalidated_tactical_assumption",
+    "relative_score_meaning": "softmax preference share within supported candidates, sum 100; not success or ability"
+  },
+  "candidates": [
+    {
+      "action_id": "pass:H06",
+      "type": "pass",
+      "eligible": true,
+      "rank": 1,
+      "recipient_id": "H06",
+      "target": [
+        53.1145,
+        16.0685
+      ],
+      "planned_duration_s": 0.8939480264420252,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 12.515272370188352,
+        "advance": -3.339500000000001,
+        "lateral": -12.061499999999999,
+        "duration": 0.8939480264420252,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.08884390352614464,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.4246709904364873,
+        "intercept_margin": 0.3482035451072054,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.7193544791120539,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 0.9085416886417486,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 10.169903932682942,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8961923768844725,
+        "loss": 0.10380762311552749
+      },
+      "q2": 0.019362395369032653,
+      "q1": 0.020936484778547416,
+      "softmax_weight": 0.09534084358362246,
+      "relative_score": 9.534084358362247,
+      "value_gap": 0.0,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.02157922193225914,
+        "risk": 0.0022168265632264883
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 10.2 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.09; lane arrival margin 0.35 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-1",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H08",
+      "type": "pass",
+      "eligible": true,
+      "rank": 2,
+      "recipient_id": "H08",
+      "target": [
+        53.7955,
+        48.922
+      ],
+      "planned_duration_s": 1.4972336502083856,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 20.961271102917397,
+        "advance": -2.6585000000000036,
+        "lateral": 20.791999999999998,
+        "duration": 1.4972336502083856,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.03206637424037633,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.19280932908435658,
+        "intercept_margin": 1.088162419223782,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.23421473168711923,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.2800390619039717,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 12.16510435631359,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8947874343316349,
+        "loss": 0.10521256566836512
+      },
+      "q2": 0.018759609834096865,
+      "q1": 0.02057023040797171,
+      "softmax_weight": 0.09397437089043086,
+      "relative_score": 9.397437089043086,
+      "value_gap": 0.0006027855349357882,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.02089429950895389,
+        "risk": 0.0021346896748570265
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 12.2 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.03; lane arrival margin 1.09 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-2",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H07",
+      "type": "pass",
+      "eligible": true,
+      "rank": 3,
+      "recipient_id": "H07",
+      "target": [
+        50.945,
+        31.27825
+      ],
+      "planned_duration_s": 0.4532229204541624,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 6.3451208863582735,
+        "advance": -5.509,
+        "lateral": 3.148250000000001,
+        "duration": 0.4532229204541624,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.41393465688331843,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.3768475345002968,
+        "intercept_margin": 0.4610996412023979,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.5469656346707581,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.0365794711453629,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 3.09920893132425,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.90702892795878,
+        "loss": 0.09297107204122002
+      },
+      "q2": 0.017792950406705088,
+      "q1": 0.01941330854463732,
+      "softmax_weight": 0.09182379057320449,
+      "relative_score": 9.182379057320448,
+      "value_gap": 0.0015694449623275646,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.019544284300878616,
+        "risk": 0.0017513338941735292
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 3.1 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.41; lane arrival margin 0.46 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-3",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "carry:right",
+      "type": "carry",
+      "eligible": true,
+      "rank": 4,
+      "recipient_id": "H10",
+      "target": [
+        62.104,
+        32.129999999999995
+      ],
+      "planned_duration_s": 2.0,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 6.922607890094596,
+        "advance": 5.649999999999999,
+        "lateral": 3.9999999999999964,
+        "duration": 2.0,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.09767161206303936,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.228637144361582,
+        "intercept_margin": 0.8503930590969148,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.3071307305153365,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 0.00447213595499958,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 2.4800516123661627,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8600599137399769,
+        "loss": 0.13994008626002308
+      },
+      "q2": 0.016381415567739952,
+      "q1": 0.01952724660947244,
+      "softmax_weight": 0.08877156253842017,
+      "relative_score": 8.877156253842017,
+      "value_gap": 0.0029809798012927005,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.019104751731439662,
+        "risk": 0.0027233361636997103
+      },
+      "judgment": {
+        "reason": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.10.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-4",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "carry:forward",
+      "type": "carry",
+      "eligible": true,
+      "rank": 5,
+      "recipient_id": "H10",
+      "target": [
+        62.104,
+        28.13
+      ],
+      "planned_duration_s": 2.0,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 5.649999999999999,
+        "advance": 5.649999999999999,
+        "lateral": 0.0,
+        "duration": 2.0,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.1925474584131597,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.24865519023810848,
+        "intercept_margin": 0.8007085597201798,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.33536886715400166,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 0.00447213595499958,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 2.4800516123661627,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8554296156998313,
+        "loss": 0.14457038430016866
+      },
+      "q2": 0.015470902010339068,
+      "q1": 0.019295374169908217,
+      "softmax_weight": 0.0868567603187899,
+      "relative_score": 8.68567603187899,
+      "value_gap": 0.0038914933586935846,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.018310559954413802,
+        "risk": 0.002839657944074734
+      },
+      "judgment": {
+        "reason": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.19.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-5",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H04",
+      "type": "pass",
+      "eligible": true,
+      "rank": 6,
+      "recipient_id": "H04",
+      "target": [
+        35.257749999999994,
+        42.83125
+      ],
+      "planned_duration_s": 1.8425356386565197,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 25.795498941191276,
+        "advance": -21.196250000000006,
+        "lateral": 14.701249999999998,
+        "duration": 1.8425356386565197,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.002697853334271398,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.31148391649220203,
+        "intercept_margin": 0.5450210185061843,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.4122086035563685,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.1712804958676637,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 18.603824391774936,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8646053440126721,
+        "loss": 0.13539465598732792
+      },
+      "q2": 0.015444524882153041,
+      "q1": 0.016725794518372177,
+      "softmax_weight": 0.08680190937240484,
+      "relative_score": 8.680190937240484,
+      "value_gap": 0.003917870486879612,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.01802425331708188,
+        "risk": 0.002579728434928837
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 18.6 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.00; lane arrival margin 0.55 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-6",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "carry:left",
+      "type": "carry",
+      "eligible": true,
+      "rank": 7,
+      "recipient_id": "H10",
+      "target": [
+        62.104,
+        24.13
+      ],
+      "planned_duration_s": 2.0,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 6.922607890094597,
+        "advance": 5.649999999999999,
+        "lateral": -4.0,
+        "duration": 2.0,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.2349343803376956,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.37030306372123406,
+        "intercept_margin": 0.30706573724233316,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.4369841191433904,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 0.00447213595499958,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 2.4800516123661627,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8533201615185081,
+        "loss": 0.1466798384814919
+      },
+      "q2": 0.015262443154759059,
+      "q1": 0.019046254374116375,
+      "softmax_weight": 0.08642421611808572,
+      "relative_score": 8.642421611808572,
+      "value_gap": 0.004099952214273594,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.0182631643228295,
+        "risk": 0.0030007211680704426
+      },
+      "judgment": {
+        "reason": "Carry toward the standardised target and compare the next available choice. Standard advance 5.6 m.",
+        "risk": "Retention and the opponent response are tactical assumptions; intended historical direction is not reconstructed. Source/target pressure 0.68/0.23.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-7",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H03",
+      "type": "pass",
+      "eligible": true,
+      "rank": 8,
+      "recipient_id": "H03",
+      "target": [
+        35.69325,
+        22.875
+      ],
+      "planned_duration_s": 1.5296787804102028,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 21.41550292574284,
+        "advance": -20.76075,
+        "lateral": -5.254999999999999,
+        "duration": 1.5296787804102028,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.005914946759114106,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.4862298871344959,
+        "intercept_margin": 0.24926345258123217,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.763496044944161,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.3126191374500067,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 16.92233394068324,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8598097677647493,
+        "loss": 0.14019023223525073
+      },
+      "q2": 0.014708096749643428,
+      "q1": 0.015987605189116905,
+      "softmax_weight": 0.08528442004765416,
+      "relative_score": 8.528442004765415,
+      "value_gap": 0.004654298619389225,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.01753505726164451,
+        "risk": 0.002826960512001084
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 16.9 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.01; lane arrival margin 0.25 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-8",
+          "model-context"
+        ],
+        "similar_to_best": true,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H09",
+      "type": "pass",
+      "eligible": true,
+      "rank": 9,
+      "recipient_id": "H09",
+      "target": [
+        71.80600000000001,
+        10.275
+      ],
+      "planned_duration_s": 1.6819645477226681,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 23.547503668117354,
+        "advance": 15.352000000000011,
+        "lateral": -17.854999999999997,
+        "duration": 1.6819645477226681,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.08161448967589799,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.8081957772331633,
+        "intercept_margin": -0.5283322945621824,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 1.0739625591074513,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.3357844137434751,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 8.39424880498547,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.7942707743453744,
+        "loss": 0.2057292256546256
+      },
+      "q2": 0.013916573584388447,
+      "q1": 0.017748973666838565,
+      "softmax_weight": 0.0836829689625152,
+      "relative_score": 8.36829689625152,
+      "value_gap": 0.0054458217846442055,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.01815700831299293,
+        "risk": 0.004240434728604482
+      },
+      "judgment": {
+        "reason": "Advance possession to an active teammate and assess their next option. Receiver space: 8.4 m to nearest outfield opponent.",
+        "risk": "A defender may reach the lane before the ball under the geometric rule. Target pressure index 0.08; lane arrival margin -0.53 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-9",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H02",
+      "type": "pass",
+      "eligible": true,
+      "rank": 10,
+      "recipient_id": "H02",
+      "target": [
+        33.87075,
+        6.36125
+      ],
+      "planned_duration_s": 2.2404919935332805,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 31.36688790946593,
+        "advance": -22.58325,
+        "lateral": -21.768749999999997,
+        "duration": 2.2404919935332805,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.012603998874203576,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.3941814484642793,
+        "intercept_margin": 0.6566147820192574,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.5345501952087787,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.2890469347545108,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 12.831667077975494,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.8268772817394926,
+        "loss": 0.1731227182605074
+      },
+      "q2": 0.012684259285206185,
+      "q1": 0.014096112791368878,
+      "softmax_weight": 0.08124933171609496,
+      "relative_score": 8.124933171609495,
+      "value_gap": 0.006678136083826468,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.016314457407198158,
+        "risk": 0.003630198121991974
+      },
+      "judgment": {
+        "reason": "Recycle possession to an active teammate and assess their next option. Receiver space: 12.8 m to nearest outfield opponent.",
+        "risk": "Receiver control and defender response remain uncertain. Target pressure index 0.01; lane arrival margin 0.66 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-10",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H11",
+      "type": "pass",
+      "eligible": true,
+      "rank": 11,
+      "recipient_id": "H11",
+      "target": [
+        70.3125,
+        55.327
+      ],
+      "planned_duration_s": 2.180309413599504,
+      "mode": "ground",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 30.524331790393052,
+        "advance": 13.8585,
+        "lateral": 27.197,
+        "duration": 2.180309413599504,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.11473118819842956,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.9355682906483459,
+        "intercept_margin": -1.3742864656905844,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 1.129502799078123,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 1.086066296318968,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 6.906753289353837,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "success": 0.7214493570282338,
+        "loss": 0.27855064297176624
+      },
+      "q2": 0.011163412370939672,
+      "q1": 0.014347652631934738,
+      "softmax_weight": 0.0783432333708551,
+      "relative_score": 7.83432333708551,
+      "value_gap": 0.00819898299809298,
+      "decomposition": {
+        "immediate": 0.0,
+        "continuation": 0.017007258822279967,
+        "risk": 0.005843846451340296
+      },
+      "judgment": {
+        "reason": "Advance possession to an active teammate and assess their next option. Receiver space: 6.9 m to nearest outfield opponent.",
+        "risk": "A defender may reach the lane before the ball under the geometric rule. Target pressure index 0.11; lane arrival margin -1.37 s.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated",
+          "ground_pass_template_14_mps_ball_origin_and_quarter_second_receiver_lead"
+        ],
+        "evidence_ids": [
+          "route-11",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "shot:goal",
+      "type": "shot",
+      "eligible": true,
+      "rank": 12,
+      "recipient_id": null,
+      "target": [
+        105.0,
+        34.0
+      ],
+      "planned_duration_s": 2.0374833912070165,
+      "mode": "ordinary",
+      "features": {
+        "progress": 56.104,
+        "y": 28.13,
+        "vx": 0.002,
+        "vy": -0.004,
+        "ball_speed": 0.004472135954999579,
+        "distance": 48.89960138896839,
+        "advance": 48.546,
+        "lateral": 5.870000000000001,
+        "duration": 2.0374833912070165,
+        "source_pressure": 0.6814295961739033,
+        "receiver_pressure": 0.0005176994358942233,
+        "nearest_defender": 2.425109482064676,
+        "closing_speed": -0.6599256700928273,
+        "lane_pressure": 0.21504099991405012,
+        "intercept_margin": 1.0682432687901564,
+        "goal_distance": 48.89960138896839,
+        "goal_angle": 0.1480560480968725,
+        "blockers": 0.20809406143393797,
+        "keeper_offset": 0.8659999999999997,
+        "target_speed": 0.00447213595499958,
+        "attack_ratio": 1.0566037735849056,
+        "passing_ratio": 1.076923076923077,
+        "time_fraction": 0.0027,
+        "score_difference": 0,
+        "player_difference": 0,
+        "receiver_nearest_defender": 2.4800516123661627,
+        "receiver_reachable": 1.0,
+        "keeper_depth": 5.180000000000007,
+        "keeper_cover": 0.022450856894194814,
+        "state_quality": 1.0
+      },
+      "outcome_probabilities": {
+        "goal": 0.0023245445812045407,
+        "blocked": 0.1173763942946181,
+        "saved": 0.3392512641293349,
+        "off_target": 0.5410477969948424
+      },
+      "q2": -0.01542182570825406,
+      "q1": -0.018358607483842923,
+      "softmax_weight": 0.041446592507922084,
+      "relative_score": 4.144659250792208,
+      "value_gap": 0.03478422107728671,
+      "decomposition": {
+        "immediate": 0.0023245445812045407,
+        "continuation": 0.0,
+        "risk": 0.0177463702894586
+      },
+      "judgment": {
+        "reason": "Use the current shooting window rather than defer to the next choice. Goal distance 48.9 m; opening 0.15 rad.",
+        "risk": "A failed shot gives the opponent a modelled restart or controlled possession.",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-12",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": true
+      }
+    },
+    {
+      "action_id": "pass:H01",
+      "type": "pass",
+      "eligible": false,
+      "rank": null,
+      "recipient_id": "H01",
+      "target": [
+        5.5715,
+        33.127250000000004
+      ],
+      "planned_duration_s": 3.651950355221515,
+      "mode": "high",
+      "features": null,
+      "outcome_probabilities": null,
+      "q2": null,
+      "q1": null,
+      "softmax_weight": null,
+      "relative_score": null,
+      "value_gap": null,
+      "decomposition": null,
+      "judgment": {
+        "reason": "Excluded from this comparison.",
+        "risk": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-13",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": false
+      }
+    },
+    {
+      "action_id": "pass:H05",
+      "type": "pass",
+      "eligible": false,
+      "rank": null,
+      "recipient_id": "H05",
+      "target": [
+        32.90025,
+        58.9795
+      ],
+      "planned_duration_s": 2.772377221028196,
+      "mode": "high",
+      "features": null,
+      "outcome_probabilities": null,
+      "q2": null,
+      "q1": null,
+      "softmax_weight": null,
+      "relative_score": null,
+      "value_gap": null,
+      "decomposition": null,
+      "judgment": {
+        "reason": "Excluded from this comparison.",
+        "risk": "High-ball Q2 exists in legacy research mode; ground-pass contract rollout only",
+        "assumptions": [
+          "preferred_foot_not_considered",
+          "radar_and_choice_style_not_execution_probability",
+          "two_step_geometric_successor_unvalidated"
+        ],
+        "evidence_ids": [
+          "route-14",
+          "model-context"
+        ],
+        "similar_to_best": false,
+        "comparison_tolerance": 0.005,
+        "counterfactual_available": false
+      }
+    }
+  ],
+  "assessment": {
+    "recommended_action_id": "pass:H06",
+    "candidate_count": 12,
+    "actual_action_included": false,
+    "similar_value_tolerance": 0.005,
+    "agent_available": false
+  },
+  "limitations": [
+    "B two-step Q2 is the sole ranking engine; no language model or agent team was called.",
+    "Tactical execution probabilities and short geometric successors are unvalidated assumptions, not individual skill models.",
+    "The next decision uses a maximum and can overestimate achievable continuation; xT retains source-policy bias.",
+    "Source radar indices and generator choice probabilities do not modify action success or Q2.",
+    "Source observations and simulated profile are separate. Foot effects remain neutral; body orientation is unknown.",
+    "High balls and hold are unsupported in the public contract; legacy research analysis remains available separately.",
+    "One standardised route per receiver; historical carry direction is unknown unless explicitly recorded before execution.",
+    "Numerical metrics are research diagnostics, not validated real-football probabilities.",
+    "The 0.005 similar-value tolerance is a versioned display assumption, not a calibrated error bound."
+  ]
+}

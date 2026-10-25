@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "contract_version": "contract-1",
+  "schema_draft": "2020-12",
+  "command": "node scripts/validate_contracts.mjs --dataset data data/league data/league-validated data/realism-sample",
+  "datasets": [
+    {
+      "dataset": "data",
+      "counts": {
+        "data.match": 1,
+        "data.preview": 1,
+        "data.event": 3807,
+        "data.state": 6001,
+        "data.tracking": 32408,
+        "decision_snapshots": 2407
+      }
+    },
+    {
+      "dataset": "data/league",
+      "counts": {
+        "data.squads": 1,
+        "data.match": 40,
+        "data.preview": 40,
+        "data.event": 150466,
+        "data.state": 240040,
+        "data.tracking": 211035,
+        "decision_snapshots": 91031
+      }
+    },
+    {
+      "dataset": "data/league-validated",
+      "counts": {
+        "data.squads": 1,
+        "data.match": 40,
+        "data.preview": 40,
+        "data.event": 150466,
+        "data.state": 240040,
+        "data.tracking": 211035,
+        "decision_snapshots": 91031
+      }
+    },
+    {
+      "dataset": "data/realism-sample",
+      "counts": {
+        "data.match": 1,
+        "data.preview": 1,
+        "data.event": 3807,
+        "data.state": 6001,
+        "data.tracking": 32408,
+        "decision_snapshots": 2407
+      }
+    }
+  ],
+  "scope": [
+    "metadata, events, states, existing tracking, decision snapshots, previews and squads",
+    "decision_snapshots is a subset of data.tracking; preview counts are whole preview objects",
+    "league-validated and realism-sample are local mirrors, not additional unique matches"
+  ],
+  "consistency_checks": {
+    "single_match": {
+      "status": "PASS",
+      "tracking_frames": 30001,
+      "events": 3807,
+      "state_snapshots": 6001,
+      "final_score": [
+        0,
+        1
+      ],
+      "max_player_speed_mps": 7.201,
+      "max_player_acceleration_mps2": 3.507,
+      "max_ball_speed_mps": 25.15,
+      "checks": [
+        "unique identities and event IDs",
+        "5 Hz frame continuity",
+        "pitch bounds and finite coordinates",
+        "player speed and acceleration limits",
+        "velocity/coordinate agreement",
+        "ball speed and attachment",
+        "event availability and causal references",
+        "goals and scoreboard agreement",
+        "event counts and final statistics",
+        "period clocks and state snapshots"
+      ],
+      "scope": "Internal consistency only; not validation against real football distributions."
+    },
+    "league": {
+      "status": "PASS",
+      "competition": "NextPlay League (synthetic)",
+      "teams": 20,
+      "matchweeks": 4,
+      "matches": 40,
+      "goals": 82,
+      "matches_with_full_tracking": 4,
+      "checks": [
+        "20 unique clubs and 10 fixtures per matchweek",
+        "every club plays exactly once per matchweek",
+        "no repeated pairing in the selected rounds",
+        "per-match metadata, summary, events, states and preview exist",
+        "all 20 clubs have a fictional 2026/27 squad and match lineups use squad players",
+        "event order, match_end and event/score consistency",
+        "substitute identity, team membership and no events from departed players",
+        "state snapshots and final statistics consistency",
+        "fixture scores, standings, totals and scorer totals agree",
+        "featured matches contain exactly 30,001 tracking frames"
+      ],
+      "scope": "Structural and internal consistency; not validation against real football data."
+    }
+  },
+  "limitations": [
+    "JSON Schema and internal consistency checks do not establish realistic football outcomes.",
+    "Legacy HTTP/model/browser interfaces are not yet wired to the new contract."
+  ],
+  "tests": {
+    "command": "npm test",
+    "status": "passed",
+    "javascript": 21,
+    "python": 85,
+    "contract_tests_in_python": 12,
+    "total": 106
+  }
+}

@@ -12,7 +12,7 @@ export function statusLine(input: {
   const mm = Math.floor(sec / 60);
   const ss = sec - mm * 60;
   const clock = `${String(mm).padStart(2, "0")}:${ss.toFixed(1).padStart(4, "0")}`;
-  const cam = input.camera === "broadcast" ? "转播" : "俯视";
+  const cam = input.camera === "broadcast" ? "Broadcast" : "Top-down";
   return `${cam} · ${clock} · frame ${input.frameId} · ball z ${input.ballZ.toFixed(2)} m · ${input.players} players · ${input.hz} Hz`;
 }
 

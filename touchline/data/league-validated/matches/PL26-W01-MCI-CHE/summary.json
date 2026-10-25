@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-MCI-CHE",
+  "seed": 20262024,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656024,
+  "state_snapshots": 6001,
+  "event_count": 3738,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 92,
+    "restart": 27,
+    "pressure": 1240,
+    "carry": 1234,
+    "pass": 1016,
+    "interception": 70,
+    "shot": 20,
+    "save": 7,
+    "stoppage": 13,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 497,
+      "completed_passes": 461,
+      "shots": 9,
+      "shots_on_target": 5,
+      "interceptions": 34,
+      "pressure_events": 625,
+      "possession_seconds": 2863.4,
+      "possession_pct": 49.71,
+      "pass_accuracy_pct": 92.76
+    },
+    "AWAY": {
+      "passes": 519,
+      "completed_passes": 485,
+      "shots": 11,
+      "shots_on_target": 4,
+      "interceptions": 36,
+      "pressure_events": 615,
+      "possession_seconds": 2896.4,
+      "possession_pct": 50.29,
+      "pass_accuracy_pct": 93.45
+    }
+  },
+  "distance_m": {
+    "H01": 3135.5,
+    "H02": 7129.3,
+    "H03": 10593.7,
+    "H04": 10879.0,
+    "H05": 9963.9,
+    "H06": 7013.3,
+    "H07": 11850.8,
+    "H08": 12025.4,
+    "H09": 11299.7,
+    "H10": 12957.1,
+    "H11": 11835.8,
+    "A01": 3028.0,
+    "A02": 9628.5,
+    "A03": 10680.4,
+    "A04": 11341.0,
+    "A05": 8840.2,
+    "A06": 8857.6,
+    "A07": 12106.6,
+    "A08": 12279.4,
+    "A09": 10976.2,
+    "A10": 12274.5,
+    "A11": 7835.8,
+    "H12": 3786.1,
+    "H13": 0.0,
+    "H14": 2586.1,
+    "A12": 2123.5,
+    "A13": 3921.4,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 1831800,
+      "period": 1,
+      "period_ms": 1831800,
+      "team_id": "HOME",
+      "club_id": "MCI",
+      "club_name": "Oakmere FC",
+      "player_id": "H10",
+      "player_name": "Oakmere Player 23",
+      "shirt_number": 9,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 4835800,
+      "period": 2,
+      "period_ms": 1835800,
+      "team_id": "HOME",
+      "club_id": "MCI",
+      "club_name": "Oakmere FC",
+      "player_id": "H10",
+      "player_name": "Oakmere Player 23",
+      "shirt_number": 9,
+      "score": [
+        2,
+        0
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-25T14:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Oakmere Park"
+  },
+  "home_club": {
+    "club_id": "MCI",
+    "name": "Oakmere FC",
+    "short_name": "Oakmere",
+    "stadium": "Oakmere Park",
+    "colors": {
+      "primary": "#6CABDD",
+      "secondary": "#1C2C5B"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "CHE",
+    "name": "Fairhaven FC",
+    "short_name": "Fairhaven FC",
+    "stadium": "Fairhaven Park",
+    "colors": {
+      "primary": "#034694",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

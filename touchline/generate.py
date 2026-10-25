@@ -3,8 +3,8 @@
 
 Two modes are available:
 
-* ``league`` (default): simulate a mini Northwater League season.  Twenty
-  fictional clubs play four matchweeks; every matchweek pairs all twenty
+* ``league`` (default): simulate a fictional league season.  Twenty fictional
+  clubs play four matchweeks; every matchweek pairs all twenty
   clubs into ten matches, so every club plays exactly once per week (40 matches
   in total).  Each match is a complete 100-minute 5 Hz replay.
 * ``single``: regenerate the original two-team ``HOME / AWAY`` match used by the
@@ -17,15 +17,14 @@ Examples
     python3 generate.py
     python3 generate.py --weeks 4 --tracking featured
     python3 generate.py --tracking all
-    python3 generate.py --weeks 4 --tracking none --retain-matches 2
     python3 generate.py --mode single --output data
 """
 import argparse
+import copy
 import datetime as dt
 import json
 import math
 import random
-import shutil
 from collections import Counter, defaultdict
 from pathlib import Path
 from analysis_agent import write_report
@@ -35,88 +34,86 @@ HZ = 5
 DURATION = 6000
 HALF = 3000
 DEFAULT_MATCH = 'SYN-20261019-001'
-VERSION = '2.1.0'
+VERSION = '2.3.0'
 ROOT = Path(__file__).resolve().parent
 BASE = [(6, 34), (24, 9), (27, 25), (27, 43), (24, 59),
         (43, 18), (40, 34), (43, 50), (62, 10), (65, 34), (62, 58)]
 POSITIONS = ['GK', 'LB', 'LCB', 'RCB', 'RB', 'LCM', 'DM', 'RCM', 'LW', 'ST', 'RW']
 NEUTRAL = {'attack': 1.0, 'defense': 1.0, 'passing': 1.0, 'pressing': 1.0}
 
-# Twenty fictional clubs.  Names, grounds and kit colours are invented.
-# Strength multipliers stay compressed so any club can win.  See SOURCE.md
-# for how this roster replaced the upstream club list.
+# Twenty fictional clubs. Stable technical IDs, roster attributes and colours
+# are retained for compatibility; names and venues are fictional aliases.
 CLUBS = [
-    {'club_id': 'HBR', 'name': 'Harbor FC', 'short_name': 'Harbor',
-     'stadium': 'Harbor Park', 'colors': {'primary': '#1F6F5B', 'secondary': '#F4EDE4'}, 'formation': '4-3-3'},
-    {'club_id': 'MTN', 'name': 'Mountain FC', 'short_name': 'Mountain',
-     'stadium': 'Mountain Ground', 'colors': {'primary': '#5C4A86', 'secondary': '#E7E2F2'}, 'formation': '4-3-3'},
-    {'club_id': 'RVD', 'name': 'Riverdale Athletic', 'short_name': 'Riverdale',
-     'stadium': 'Riverdale Bowl', 'colors': {'primary': '#C46B2F', 'secondary': '#1E2A24'}, 'formation': '4-3-3'},
-    {'club_id': 'CDR', 'name': 'Cedar United', 'short_name': 'Cedar',
-     'stadium': 'Cedar Lane', 'colors': {'primary': '#2F6B3A', 'secondary': '#F2F6EF'}, 'formation': '4-3-3'},
-    {'club_id': 'BRK', 'name': 'Bracken Town', 'short_name': 'Bracken',
-     'stadium': 'Bracken Field', 'colors': {'primary': '#8C3D55', 'secondary': '#F7F1E8'}, 'formation': '4-3-3'},
-    {'club_id': 'WLN', 'name': 'Welland City', 'short_name': 'Welland',
-     'stadium': 'Welland Gate', 'colors': {'primary': '#245E78', 'secondary': '#F3F7F8'}, 'formation': '4-3-3'},
-    {'club_id': 'NQY', 'name': 'Northquay', 'short_name': 'Northquay',
-     'stadium': 'Northquay Park', 'colors': {'primary': '#3E6E8C', 'secondary': '#F4F1EA'}, 'formation': '4-3-3'},
-    {'club_id': 'SLM', 'name': 'Saltmere', 'short_name': 'Saltmere',
-     'stadium': 'Saltmere Ground', 'colors': {'primary': '#1E4C6B', 'secondary': '#D7A15E'}, 'formation': '4-3-3'},
-    {'club_id': 'OKR', 'name': 'Oakmere Rovers', 'short_name': 'Oakmere',
-     'stadium': 'Oakmere Park', 'colors': {'primary': '#1D4E89', 'secondary': '#E8EEF5'}, 'formation': '4-3-3'},
-    {'club_id': 'FNB', 'name': 'Fenharbor', 'short_name': 'Fenharbor',
-     'stadium': 'Fen Gate', 'colors': {'primary': '#F7F4EE', 'secondary': '#243028'}, 'formation': '4-3-3'},
-    {'club_id': 'KST', 'name': 'Kestrel Athletic', 'short_name': 'Kestrel',
-     'stadium': 'Kestrel Moor', 'colors': {'primary': '#E0A23A', 'secondary': '#2A241C'}, 'formation': '4-3-3'},
-    {'club_id': 'LNT', 'name': 'Lantern FC', 'short_name': 'Lantern',
-     'stadium': 'Lantern Yard', 'colors': {'primary': '#3558A8', 'secondary': '#F6F3EA'}, 'formation': '4-3-3'},
-    {'club_id': 'DSK', 'name': 'Duskford', 'short_name': 'Duskford',
-     'stadium': 'Duskford Arena', 'colors': {'primary': '#F4F1EA', 'secondary': '#31406A'}, 'formation': '4-3-3'},
-    {'club_id': 'PEL', 'name': 'Pelican Town', 'short_name': 'Pelican',
-     'stadium': 'Pelican Wharf', 'colors': {'primary': '#B23A48', 'secondary': '#F6F1E7'}, 'formation': '4-3-3'},
-    {'club_id': 'ASH', 'name': 'Ashcombe', 'short_name': 'Ashcombe',
-     'stadium': 'Ashcombe Park', 'colors': {'primary': '#7BA3C9', 'secondary': '#243044'}, 'formation': '4-3-3'},
-    {'club_id': 'VLM', 'name': 'Vellum United', 'short_name': 'Vellum',
-     'stadium': 'Vellum Street', 'colors': {'primary': '#C45C4A', 'secondary': '#F6E7A8'}, 'formation': '4-3-3'},
-    {'club_id': 'CRC', 'name': 'Coracle FC', 'short_name': 'Coracle',
-     'stadium': 'Coracle Dock', 'colors': {'primary': '#2C3038', 'secondary': '#E6E2DA'}, 'formation': '4-3-3'},
-    {'club_id': 'YRW', 'name': 'Yarrow Athletic', 'short_name': 'Yarrow',
-     'stadium': 'Yarrow Field', 'colors': {'primary': '#C4483C', 'secondary': '#F7F4EF'}, 'formation': '4-3-3'},
-    {'club_id': 'GLN', 'name': 'Glenwick', 'short_name': 'Glenwick',
-     'stadium': 'Glenwick Park', 'colors': {'primary': '#D24B5A', 'secondary': '#F8F4EE'}, 'formation': '4-3-3'},
-    {'club_id': 'THF', 'name': 'Thornferry', 'short_name': 'Thornferry',
-     'stadium': 'Thornferry End', 'colors': {'primary': '#F7F5F0', 'secondary': '#24315C'}, 'formation': '4-3-3'},
+    {'club_id': 'ARS', 'name': 'Aster FC', 'short_name': 'Aster FC',
+     'stadium': 'Aster Park', 'colors': {'primary': '#EF0107', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'AVL', 'name': 'Beacon FC', 'short_name': 'Beacon FC',
+     'stadium': 'Beacon Park', 'colors': {'primary': '#670E36', 'secondary': '#95BFE5'}, 'formation': '4-3-3'},
+    {'club_id': 'BOU', 'name': 'Cedar FC', 'short_name': 'Cedar',
+     'stadium': 'Cedar Park', 'colors': {'primary': '#DA291C', 'secondary': '#000000'}, 'formation': '4-3-3'},
+    {'club_id': 'BRE', 'name': 'Driftwood FC', 'short_name': 'Driftwood FC',
+     'stadium': 'Driftwood Park', 'colors': {'primary': '#E30613', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'BHA', 'name': 'Ember FC', 'short_name': 'Ember',
+     'stadium': 'Ember Park', 'colors': {'primary': '#0057B8', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'CHE', 'name': 'Fairhaven FC', 'short_name': 'Fairhaven FC',
+     'stadium': 'Fairhaven Park', 'colors': {'primary': '#034694', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'COV', 'name': 'Glenvale FC', 'short_name': 'Glenvale',
+     'stadium': 'Glenvale Park', 'colors': {'primary': '#6CB4E4', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'CRY', 'name': 'Highridge FC', 'short_name': 'Highridge FC',
+     'stadium': 'Highridge Park', 'colors': {'primary': '#1B458F', 'secondary': '#C4122E'}, 'formation': '4-3-3'},
+    {'club_id': 'EVE', 'name': 'Ivory FC', 'short_name': 'Ivory FC',
+     'stadium': 'Ivory Park', 'colors': {'primary': '#003399', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'FUL', 'name': 'Juniper FC', 'short_name': 'Juniper FC',
+     'stadium': 'Juniper Park', 'colors': {'primary': '#FFFFFF', 'secondary': '#000000'}, 'formation': '4-3-3'},
+    {'club_id': 'HUL', 'name': 'Kingswell FC', 'short_name': 'Kingswell FC',
+     'stadium': 'Kingswell Park', 'colors': {'primary': '#F5A12D', 'secondary': '#000000'}, 'formation': '4-3-3'},
+    {'club_id': 'IPS', 'name': 'Larkspur FC', 'short_name': 'Larkspur FC',
+     'stadium': 'Larkspur Park', 'colors': {'primary': '#0044A9', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'LEE', 'name': 'Meadow FC', 'short_name': 'Meadow',
+     'stadium': 'Meadow Park', 'colors': {'primary': '#FFFFFF', 'secondary': '#1D428A'}, 'formation': '4-3-3'},
+    {'club_id': 'LIV', 'name': 'Northstar FC', 'short_name': 'Northstar FC',
+     'stadium': 'Northstar Park', 'colors': {'primary': '#C8102E', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'MCI', 'name': 'Oakmere FC', 'short_name': 'Oakmere',
+     'stadium': 'Oakmere Park', 'colors': {'primary': '#6CABDD', 'secondary': '#1C2C5B'}, 'formation': '4-3-3'},
+    {'club_id': 'MUN', 'name': 'Pinecrest FC', 'short_name': 'Pinecrest',
+     'stadium': 'Pinecrest Park', 'colors': {'primary': '#DA291C', 'secondary': '#FBE122'}, 'formation': '4-3-3'},
+    {'club_id': 'NEW', 'name': 'Quartz FC', 'short_name': 'Quartz',
+     'stadium': "Quartz Park", 'colors': {'primary': '#241F20', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'NFO', 'name': 'Rivermist FC', 'short_name': 'Rivermist',
+     'stadium': 'Rivermist Park', 'colors': {'primary': '#DD0000', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'SUN', 'name': 'Silverbrook FC', 'short_name': 'Silverbrook FC',
+     'stadium': 'Silverbrook Park', 'colors': {'primary': '#EB172B', 'secondary': '#FFFFFF'}, 'formation': '4-3-3'},
+    {'club_id': 'TOT', 'name': 'Thornvale FC', 'short_name': 'Thornvale',
+     'stadium': 'Thornvale Park', 'colors': {'primary': '#FFFFFF', 'secondary': '#132257'}, 'formation': '4-3-3'},
 ]
 CLUB_BY_ID = {club['club_id']: club for club in CLUBS}
-MATCH_PREFIX = 'NW26'
 
 # Mild strength multipliers used only by league mode.  1.00 is neutral; the
 # values are heuristic and deliberately compressed so that any club can win.
 RATINGS = {
-    'HBR': {'attack': 1.15, 'defense': 1.10, 'passing': 1.10, 'pressing': 1.08},
-    'PEL': {'attack': 1.14, 'defense': 1.08, 'passing': 1.09, 'pressing': 1.10},
-    'ASH': {'attack': 1.12, 'defense': 1.12, 'passing': 1.12, 'pressing': 1.06},
-    'WLN': {'attack': 1.08, 'defense': 1.06, 'passing': 1.07, 'pressing': 1.04},
-    'CRC': {'attack': 1.04, 'defense': 1.07, 'passing': 1.02, 'pressing': 1.08},
-    'THF': {'attack': 1.03, 'defense': 1.02, 'passing': 1.02, 'pressing': 1.01},
-    'MTN': {'attack': 1.02, 'defense': 1.00, 'passing': 1.01, 'pressing': 1.00},
-    'VLM': {'attack': 1.00, 'defense': 1.01, 'passing': 1.00, 'pressing': 1.02},
-    'BRK': {'attack': 1.00, 'defense': 0.99, 'passing': 1.03, 'pressing': 1.03},
-    'SLM': {'attack': 0.98, 'defense': 1.02, 'passing': 0.97, 'pressing': 1.05},
-    'RVD': {'attack': 0.98, 'defense': 0.98, 'passing': 0.98, 'pressing': 1.04},
-    'CDR': {'attack': 0.97, 'defense': 0.99, 'passing': 0.96, 'pressing': 1.03},
-    'FNB': {'attack': 0.96, 'defense': 0.98, 'passing': 0.99, 'pressing': 0.98},
-    'YRW': {'attack': 0.96, 'defense': 1.00, 'passing': 0.95, 'pressing': 0.99},
-    'OKR': {'attack': 0.94, 'defense': 0.97, 'passing': 0.95, 'pressing': 0.98},
-    'DSK': {'attack': 0.92, 'defense': 0.92, 'passing': 0.93, 'pressing': 1.00},
-    'GLN': {'attack': 0.91, 'defense': 0.93, 'passing': 0.92, 'pressing': 0.99},
-    'NQY': {'attack': 0.90, 'defense': 0.92, 'passing': 0.91, 'pressing': 0.97},
-    'LNT': {'attack': 0.90, 'defense': 0.92, 'passing': 0.92, 'pressing': 0.99},
-    'KST': {'attack': 0.89, 'defense': 0.91, 'passing': 0.90, 'pressing': 0.98},
+    'ARS': {'attack': 1.15, 'defense': 1.10, 'passing': 1.10, 'pressing': 1.08},
+    'LIV': {'attack': 1.14, 'defense': 1.08, 'passing': 1.09, 'pressing': 1.10},
+    'MCI': {'attack': 1.12, 'defense': 1.12, 'passing': 1.12, 'pressing': 1.06},
+    'CHE': {'attack': 1.08, 'defense': 1.06, 'passing': 1.07, 'pressing': 1.04},
+    'NEW': {'attack': 1.04, 'defense': 1.07, 'passing': 1.02, 'pressing': 1.08},
+    'TOT': {'attack': 1.03, 'defense': 1.02, 'passing': 1.02, 'pressing': 1.01},
+    'AVL': {'attack': 1.02, 'defense': 1.00, 'passing': 1.01, 'pressing': 1.00},
+    'MUN': {'attack': 1.00, 'defense': 1.01, 'passing': 1.00, 'pressing': 1.02},
+    'BHA': {'attack': 1.00, 'defense': 0.99, 'passing': 1.03, 'pressing': 1.03},
+    'CRY': {'attack': 0.98, 'defense': 1.02, 'passing': 0.97, 'pressing': 1.05},
+    'BOU': {'attack': 0.98, 'defense': 0.98, 'passing': 0.98, 'pressing': 1.04},
+    'BRE': {'attack': 0.97, 'defense': 0.99, 'passing': 0.96, 'pressing': 1.03},
+    'FUL': {'attack': 0.96, 'defense': 0.98, 'passing': 0.99, 'pressing': 0.98},
+    'NFO': {'attack': 0.96, 'defense': 1.00, 'passing': 0.95, 'pressing': 0.99},
+    'EVE': {'attack': 0.94, 'defense': 0.97, 'passing': 0.95, 'pressing': 0.98},
+    'LEE': {'attack': 0.92, 'defense': 0.92, 'passing': 0.93, 'pressing': 1.00},
+    'SUN': {'attack': 0.91, 'defense': 0.93, 'passing': 0.92, 'pressing': 0.99},
+    'COV': {'attack': 0.90, 'defense': 0.92, 'passing': 0.91, 'pressing': 0.97},
+    'IPS': {'attack': 0.90, 'defense': 0.92, 'passing': 0.92, 'pressing': 0.99},
+    'HUL': {'attack': 0.89, 'defense': 0.91, 'passing': 0.90, 'pressing': 0.98},
 }
 COMPETITION = {
-    'id': 'NW-SYN-2026',
-    'name': 'Northwater League (synthetic)',
+    'id': 'PL-SYN-2026',
+    'name': 'NextPlay League (synthetic)',
     'season': '2026/27',
     'synthetic': True,
 }
@@ -151,83 +148,13 @@ def public_club(club):
     return {key: club[key] for key in keys}
 
 
-GIVEN_NAMES = [
-    'Aldric', 'Bram', 'Cedric', 'Doran', 'Elric', 'Fenn', 'Galen', 'Hart', 'Ivo', 'Joss',
-    'Kael', 'Leif', 'Merrick', 'Nils', 'Orin', 'Perrin', 'Quill', 'Rowan', 'Soren', 'Tarin',
-    'Ulric', 'Vesper', 'Wystan', 'Yorick', 'Zane', 'Ansel', 'Bramwell', 'Corin', 'Darrow', 'Eamon',
-    'Fletcher', 'Garrick', 'Hollis', 'Ingram', 'Jory', 'Keelan', 'Larkin', 'Malin', 'Nevin', 'Osric',
-]
-FAMILY_NAMES = [
-    'Aldwyn', 'Bexley', 'Cairn', 'Dovetail', 'Elmwick', 'Farrow', 'Goss', 'Heddle', 'Inkwell', 'Jarrow',
-    'Keene', 'Loxley', 'Marlow', 'Netherby', 'Oxley', 'Penrose', 'Quarry', 'Redfern', 'Sable', 'Tindall',
-    'Underhill', 'Voss', 'Whitlow', 'Yates', 'Zeller', 'Ambrose', 'Brindle', 'Cotter', 'Drayton', 'Elms',
-    'Fennick', 'Gull', 'Hartley', 'Ives', 'Jenk', 'Kemble', 'Lumen', 'Marrow', 'Ness', 'Oakley',
-]
-NATIONALITIES = [
-    'Norway', 'Portugal', 'Ghana', 'Japan', 'Canada', 'Morocco', 'Croatia', 'Senegal', 'Sweden', 'Chile',
-    'Austria', 'Nigeria', 'Denmark', 'Uruguay', 'Switzerland', 'Mali', 'Poland', 'South Korea', 'Scotland', 'Ivory Coast',
-]
-ROSTER_SHAPE = (
-    [('GK', 'Goalkeeper')] * 3
-    + [('DEF', 'Left Back')] * 2
-    + [('DEF', 'Central Defender')] * 4
-    + [('DEF', 'Right Back')] * 2
-    + [('MID', 'Defensive Midfielder')] * 2
-    + [('MID', 'Central Midfielder')] * 6
-    + [('FWD', 'Left Winger')] * 2
-    + [('FWD', 'Right Winger')] * 2
-    + [('FWD', 'Striker'), ('FWD', 'Centre Forward'), ('FWD', 'Striker'), ('FWD', 'Forward'), ('FWD', 'Forward')]
-)
-SQUAD_AS_OF = dt.date(2026, 10, 19)
-
-
-def fictional_player_name(index):
-    """Stable invented full name. Combinations do not come from a real squad list."""
-    given = GIVEN_NAMES[index % len(GIVEN_NAMES)]
-    family = FAMILY_NAMES[(index // len(GIVEN_NAMES)) % len(FAMILY_NAMES)]
-    return f'{given} {family}'
-
-
-def build_synthetic_squads():
-    """Build a procedural roster for every fictional club.
-
-    Shirt numbers, nationalities and dates of birth are invented. Nothing is
-    copied from a published squad list.
-    """
-    teams = []
-    by_id = {}
-    cursor = 0
-    for club in CLUBS:
-        players = []
-        for shirt, (position, detail) in enumerate(ROSTER_SHAPE, 1):
-            dob = dt.date(1993, 3, 1) + dt.timedelta(days=(cursor * 47) % 4800)
-            age = SQUAD_AS_OF.year - dob.year - ((SQUAD_AS_OF.month, SQUAD_AS_OF.day) < (dob.month, dob.day))
-            players.append({
-                'player_id': f'{club["club_id"]}-{shirt:02d}',
-                'name': fictional_player_name(cursor),
-                'shirt_number': shirt,
-                'position': position,
-                'position_detail': detail,
-                'nationality': NATIONALITIES[cursor % len(NATIONALITIES)],
-                'date_of_birth': dob.isoformat(),
-                'age': age,
-            })
-            cursor += 1
-        team = {**public_club(club), 'rating': RATINGS[club['club_id']], 'players': players}
-        teams.append(team)
-        by_id[club['club_id']] = team
-    document = {
-        'schema_version': '1.0.0',
-        'season': COMPETITION['season'],
-        'competition': COMPETITION['name'],
-        'synthetic_matches': True,
-        'synthetic_squads': True,
-        'source': {
-            'note': 'Fictional rosters produced by generate.py. Names, shirts, nationalities and dates of birth are procedural and are not taken from any real competition squad list.',
-        },
-        'teams': teams,
-    }
-    return document, by_id
+def load_squads(path=None):
+    """Load the checked-in 2026/27 squad file, if present."""
+    path = Path(path or ROOT/'data'/'league'/'squads.json')
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text())
+    return {team['club_id']: team for team in data.get('teams', [])}
 
 
 def select_lineup(club_id, squads):
@@ -296,7 +223,18 @@ class Match:
     """One complete 100-minute match between a HOME and an AWAY side."""
 
     def __init__(self, seed, match_id=DEFAULT_MATCH, home=None, away=None,
-                 ratings=None, competition=None, lineups=None):
+                 ratings=None, competition=None, lineups=None, attribute_actions=True,
+                 action_multipliers=None, attribute_strength=1.0):
+        from realism.player_actions import CALIBRATION, REVISION, KINDS
+        self.attribute_actions = attribute_actions
+        self.attribute_strength = attribute_strength
+        self.action_multipliers = dict(action_multipliers if action_multipliers is not None else
+                                       CALIBRATION.get('multipliers', {k: 1.0 for k in KINDS}))
+        if (set(self.action_multipliers) != set(KINDS) or
+                any(not math.isfinite(v) or v <= 0 for v in self.action_multipliers.values()) or
+                not math.isfinite(attribute_strength) or not 0 <= attribute_strength <= 1):
+            raise ValueError('Invalid action calibration or attribute strength')
+        self.action_policy_revision = REVISION if attribute_actions else 'legacy-forced-carry'
         self.rng = random.Random(seed)
         self.seed = seed
         self.match_id = match_id
@@ -324,6 +262,7 @@ class Match:
                     'shirt_number': real.get('shirt_number') if real else number,
                     'nationality': real.get('nationality') if real else None,
                     'real_player_id': real.get('player_id') if real else None,
+                    'sofascore': copy.deepcopy(real.get('sofascore')) if real else None,
                 })
         self.player_by_id = {p['id']: p.copy() for p in self.players}
         if not self.legacy:
@@ -340,6 +279,7 @@ class Match:
                         'shirt_number': real.get('shirt_number') if real else number,
                         'nationality': real.get('nationality') if real else None,
                         'real_player_id': real.get('player_id') if real else None,
+                        'sofascore': copy.deepcopy(real.get('sofascore')) if real else None,
                     }
         self.distances = {pid: 0. for pid in self.player_by_id}
         # A separate RNG leaves the football decisions independent of scheduling.
@@ -365,6 +305,7 @@ class Match:
                        'shots_on_target': 0, 'interceptions': 0,
                        'pressure_events': 0, 'possession_seconds': 0.} for _ in range(2)]
         self.events = []
+        self.decisions = []
         self.event_seq = 0
         self.action_seq = 0
         self.pressure_last = {}
@@ -523,46 +464,42 @@ class Match:
         p = self.players[owner]
         return [p['x']+.35*self.direction(p['team']), p['y'], 0.]
 
-    def start_carry(self):
+    def start_carry(self, origin='policy'):
         p = self.players[self.owner]
         d = self.direction(p['team'])
         duration = self.rng.uniform(1.6, 4.8)
         advance = self.rng.uniform(3, 12)
-        self.new_action('carry', duration, actor=self.owner, team=p['team'],
+        self.new_action('carry', duration, actor=self.owner, team=p['team'], origin=origin,
                         target=[clamp(p['x']+d*advance, 3, 102),
                                 clamp(p['y']+self.rng.uniform(-7, 7), 3, 65)])
 
     def choose_action(self):
+        from realism.policy import candidates, MODEL
+        options = candidates(self)
+        chosen = self.rng.choices(options, [o['weight'] for o in options])[0]
         p = self.players[self.owner]
         team = p['team']
-        progress = self.progress(p['x'], team)
-        shot_chance = .06
-        if self.ratings:
-            shot_chance = clamp(.06*self.rating(team, 'attack') /
-                                self.rating(1-team, 'defense'), .02, .14)
-        if p['number'] != 1 and progress > 78 and abs(p['y']-34) < 24 and self.rng.random() < shot_chance:
+        self.decisions.append({'decision_id': f'd{len(self.decisions)+1:06}',
+                              'match_id': self.match_id, 't_ms': round(self.t*1000),
+                              'player_id': p['id'], 'period': self.period,
+                              'calibration_revision': MODEL.profile.get('provenance', {}).get('commit'),
+                              'action_policy_revision': self.action_policy_revision,
+                              'score': self.score[:], 'snapshot': self.tracking(round(self.t*HZ)),
+                              'candidates': [{**o, 'recipient_id': self.players[o['recipient']]['id']}
+                                             if 'recipient' in o else o.copy() for o in options],
+                              'selected': chosen.copy(), 'action_id': f'a{self.action_seq+1:06}',
+                              'score_kind': ('empirical outcome rates; train-fitted action mix with bounded player-style hypotheses; not optimal-action labels'
+                                             if self.attribute_actions else 'empirical outcome rates plus heuristic selection weights; not optimal-action labels')})
+        if chosen['kind'] == 'shot':
             self.start_shot()
             return
-        if p['number'] != 1 and self.rng.random() < .36:
+        if chosen['kind'] == 'carry':
             self.start_carry()
             return
-        candidates = [i for i in range(team*11+1, team*11+11) if i != self.owner and self.players[i]['active']]
-        weights = []
-        for i in candidates:
-            q = self.players[i]
-            distance = norm(q['x']-p['x'], q['y']-p['y'])
-            advance = self.progress(q['x'], team)-progress
-            weights.append(math.exp(-abs(distance-17)/18+clamp(advance/23, -1, 1.3)))
-        intended = self.rng.choices(candidates, weights)[0]
+        intended = chosen['recipient']
         q = self.players[intended]
-        defender = min((i for i in range((1-team)*11+1, (1-team)*11+11) if self.players[i]['active']),
-                       key=lambda i: norm(self.players[i]['x']-q['x'], self.players[i]['y']-q['y']))
-        near = norm(self.players[defender]['x']-q['x'], self.players[defender]['y']-q['y'])
-        pressure_threshold = .32
-        if self.ratings:
-            pressure_threshold = clamp(.32*self.rating(1-team, 'pressing') /
-                                       self.rating(team, 'passing'), .16, .50)
-        success = not (near < 8 and self.rng.random() < pressure_threshold)
+        defender = chosen['defender']
+        success = self.rng.random() < chosen['success']
         receiver = intended if success else defender
         r = self.players[receiver]
         target = [clamp(r['x']+r['vx']*.25, 1, 104), clamp(r['y']+r['vy']*.25, 1, 67)]
@@ -573,19 +510,18 @@ class Match:
         self.new_action('pass', duration, actor=self.owner, team=team,
                         intended=intended, receiver=receiver, target=target,
                         success=success, under_pressure=under_pressure,
-                        height=1.8 if distance > 25 and self.rng.random() < .3 else 0.)
+                        height=0.)  # This calibrated policy supports ground passes only.
         self.owner = None
 
     def start_shot(self):
         p = self.players[self.owner]
         team = p['team']
         goal_x = 105. if self.direction(team) == 1 else 0.
-        if self.ratings:
-            goal_p = clamp(.12*self.rating(team, 'attack') /
-                           self.rating(1-team, 'defense'), .05, .22)
-            probabilities = [goal_p, .43, 1-goal_p-.43]
-        else:
-            probabilities = [.12, .43, .45]
+        from realism.policy import MODEL
+        goal_p = MODEL.shot_goal(self.progress(p['x'], team), p['y'])
+        # Calibrated foot-shot frequency by distance; no individual skill claim.
+        goal_p = clamp(goal_p, .005, .65)
+        probabilities = [goal_p, (1-goal_p)*.38, (1-goal_p)*.62]
         outcome = self.rng.choices(['goal', 'saved', 'off_target'], probabilities)[0]
         y = 34+self.rng.uniform(-2.8, 2.8) if outcome != 'off_target' else 34+self.rng.choice([-1, 1])*self.rng.uniform(4.2, 8)
         # Saved shots terminate at the keeper's current location (in front of goal).
@@ -632,9 +568,10 @@ class Match:
             self.set_possession(a['team'], a['reason'])
             self.emit('restart', start=a['start'], player_id=self.players[self.owner]['id'],
                       restart_type=a['reason'], **common)
-            self.start_carry()
+            self.start_carry(origin='restart')
         elif a['kind'] == 'carry':
-            self.emit('carry', start=a['start'], player_id=self.players[a['actor']]['id'], **common)
+            self.emit('carry', start=a['start'], player_id=self.players[a['actor']]['id'],
+                      selection_origin=a.get('origin', 'policy'), **common)
             self.choose_action()
         elif a['kind'] == 'pass':
             self.stats[a['team']]['passes'] += 1
@@ -652,7 +589,10 @@ class Match:
                           player_id=self.players[self.owner]['id'],
                           location=[round(v, 3) for v in self.ball[:2]], related_event_ids=[eid])
                 self.set_possession(other, 'interception', eid)
-            self.start_carry()
+            if self.attribute_actions:
+                self.choose_action()
+            else:
+                self.start_carry(origin='after_pass')
         elif a['kind'] == 'shot':
             team = a['team']
             self.stats[team]['shots'] += 1
@@ -700,6 +640,7 @@ class Match:
                               position=incoming_player.get('position', player['position']),
                               position_detail=incoming_player.get('position_detail'),
                               nationality=incoming_player.get('nationality'),
+                              sofascore=copy.deepcopy(incoming_player.get('sofascore')),
                               real_player_id=incoming_player.get('real_player_id'))
             else:
                 self.emit(kind, reason='serious_foul_play', dismissal='straight_red', **common)
@@ -783,7 +724,8 @@ def build_metadata(sim):
                 'position': p['position'],
                 'position_detail': p.get('position_detail', p['position']),
                 'nationality': p.get('nationality'),
-                'starter': p['starter']}
+                'starter': p['starter'],
+                **({'sofascore': copy.deepcopy(p['sofascore'])} if p.get('sofascore') else {})}
                for p in sim.player_by_id.values()]
     metadata = {
         'schema_version': '1.0.0',
@@ -791,6 +733,10 @@ def build_metadata(sim):
         'synthetic': True,
         'seed': sim.seed,
         'generator': f'generate.py v{VERSION}',
+        'action_policy': {'revision': sim.action_policy_revision,
+                          'multipliers': sim.action_multipliers,
+                          'attribute_strength': sim.attribute_strength,
+                          'scope': 'pass/carry/foot-shot selection; radar effects are bounded hypotheses, not fitted player outcomes'},
         'duration_ms': DURATION*1000,
         'tracking_hz': HZ,
         'pitch': {'length_m': 105, 'width_m': 68, 'origin': 'top_left',
@@ -805,7 +751,7 @@ def build_metadata(sim):
         'columns': {'tracking.players': ['player_id', 'x_m', 'y_m', 'vx_mps', 'vy_mps'],
                     'tracking.ball': ['x_m', 'y_m', 'z_m', 'vx_mps', 'vy_mps', 'vz_mps']},
         'limitations': ['Simplified procedural motion, not a professional football or physics simulator.',
-                        'Club names, squad numbers and player names are fictional. Match events and tracking are synthetic.',
+                        'Club, player and venue names are fictional aliases; roster attributes are preserved from the source dataset. Match events and tracking are synthetic.',
                         'No offsides, physical collisions or realistic fatigue. Cards and tactical substitutions follow a synthetic schedule.',
                         'Incoming substitutes inherit the outgoing formation slot and position; no touchline entrance animation is modeled.',
                         'Pressure is a proximity heuristic; ball transport during restart_setup is non-playing animation.',
@@ -874,11 +820,14 @@ def write_match(sim, out, metadata, tracking=False, preview=True):
     if not tracking and (out/'tracking.jsonl').exists():
         (out/'tracking.jsonl').unlink()
     (out/'metadata.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n')
+    from player_heatmaps import Heatmaps
+    heatmaps = Heatmaps(metadata)
     frames = [] if preview else None
     tracking_handle = (out/'tracking.jsonl').open('w') if tracking else None
     try:
         with (out/'states.jsonl').open('w') as states:
             first = sim.tracking(0)
+            heatmaps.add(first)
             sim.position_records += len(first['players'])
             if tracking_handle:
                 tracking_handle.write(encode(first)+'\n')
@@ -888,6 +837,7 @@ def write_match(sim, out, metadata, tracking=False, preview=True):
             for frame in range(1, DURATION*HZ+1):
                 sim.step(frame)
                 data = sim.tracking(frame)
+                heatmaps.add(data)
                 sim.position_records += len(data['players'])
                 if tracking_handle:
                     tracking_handle.write(encode(data)+'\n')
@@ -901,6 +851,10 @@ def write_match(sim, out, metadata, tracking=False, preview=True):
     with (out/'events.jsonl').open('w') as stream:
         for event in sim.events:
             stream.write(encode(event)+'\n')
+    with (out/'decisions.jsonl').open('w') as stream:
+        for decision in sim.decisions:
+            stream.write(encode(decision)+'\n')
+    heatmaps.write(out)
     summary = build_summary(sim)
     (out/'summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2)+'\n')
     if preview:
@@ -981,7 +935,7 @@ def build_week_plans(weeks):
             day_offset, kickoff = SLOTS[match_index]
             match_date = BASE_DATE + dt.timedelta(weeks=week_index-1, days=day_offset)
             matches.append({
-                'match_id': f'{MATCH_PREFIX}-W{week_index:02d}-{home_id}-{away_id}',
+                'match_id': f'PL26-W{week_index:02d}-{home_id}-{away_id}',
                 'matchweek': week_index,
                 'home_club_id': home_id,
                 'away_club_id': away_id,
@@ -1099,44 +1053,17 @@ def build_totals(fixtures):
             'clean_sheets': clean_sheets, 'biggest_win': biggest_win}
 
 
-def retained_match_ids(fixtures, limit):
-    """Choose which match directories to keep for a small checked-in sample.
-
-    The home page links completed results, and the explorer opens matchweek 3
-    when no club is selected (``CURRENT_MATCHWEEK`` in ``club-home.js``). Keep
-    the first week-1 fixture and the week-3 featured fixture, then fill from
-    generation order.
-    """
-    if limit < 1:
-        raise ValueError('retain_matches must be at least 1')
-    priority = []
-    week1 = [fixture for fixture in fixtures if fixture['matchweek'] == 1]
-    if week1:
-        priority.append(week1[0]['match_id'])
-    featured = [fixture for fixture in fixtures if fixture['matchweek'] == 3 and fixture.get('featured')]
-    if featured:
-        priority.append(featured[0]['match_id'])
-    chosen = []
-    seen = set()
-    for match_id in priority + [fixture['match_id'] for fixture in fixtures]:
-        if match_id in seen:
-            continue
-        seen.add(match_id)
-        chosen.append(match_id)
-        if len(chosen) == limit:
-            break
-    return set(chosen)
-
-
-def generate_league(out, seed, weeks=4, tracking_mode='featured', full_matches=(), retain_matches=None):
+def generate_league(out, seed, weeks=4, tracking_mode='featured', full_matches=()):
     if not 1 <= weeks <= len(CLUBS)-1:
         raise ValueError(f'weeks must be between 1 and {len(CLUBS)-1}')
     if tracking_mode not in ('featured', 'all', 'none'):
         raise ValueError("tracking_mode must be 'featured', 'all' or 'none'")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
-    squads_document, squads = build_synthetic_squads()
-    (out/'squads.json').write_text(json.dumps(squads_document, ensure_ascii=False, indent=2)+'\n')
+    squads = load_squads()
+    squads_source = ROOT/'data'/'league'/'squads.json'
+    if squads and squads_source.exists():
+        (out/'squads.json').write_text(squads_source.read_text())
     plans = build_week_plans(weeks)
     fixtures = []
     for plan in plans:
@@ -1214,21 +1141,6 @@ def generate_league(out, seed, weeks=4, tracking_mode='featured', full_matches=(
         'standings_leader': standings[0]['name'] if standings else None,
         'top_scorer': scorers[0] if scorers else None,
     }, ensure_ascii=False, indent=2))
-    if retain_matches is not None:
-        keep = retained_match_ids(fixtures, retain_matches)
-        removed = []
-        for fixture in fixtures:
-            if fixture['match_id'] in keep:
-                continue
-            path = out/'matches'/fixture['match_id']
-            if path.exists():
-                shutil.rmtree(path)
-                removed.append(fixture['match_id'])
-        print(json.dumps({
-            'retained_matches': sorted(keep),
-            'removed_match_directories': len(removed),
-            'note': 'league.json still lists every fixture; only retained match directories remain on disk',
-        }, ensure_ascii=False, indent=2))
     return league
 
 
@@ -1245,9 +1157,6 @@ def main():
                         help='full tracking: featured marquee matches, all matches, or none')
     parser.add_argument('--full-match', action='append', default=[],
                         help='add full tracking for a specific match ID (repeatable)')
-    parser.add_argument('--retain-matches', type=int, default=None,
-                        help='after the league index is written, keep only N match directories '
-                             '(week-1 opener and week-3 featured first) and delete the rest')
     args = parser.parse_args()
     if args.mode == 'single':
         output = args.output or ROOT/'data'
@@ -1255,10 +1164,8 @@ def main():
     else:
         if not 1 <= args.weeks <= len(CLUBS)-1:
             parser.error(f'--weeks must be between 1 and {len(CLUBS)-1}')
-        if args.retain_matches is not None and args.retain_matches < 1:
-            parser.error('--retain-matches must be at least 1')
         output = args.output or ROOT/'data'/'league'
-        generate_league(output, args.seed, args.weeks, args.tracking, args.full_match, args.retain_matches)
+        generate_league(output, args.seed, args.weeks, args.tracking, args.full_match)
 
 
 if __name__ == '__main__':

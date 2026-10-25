@@ -40,8 +40,8 @@
   "decision_option_offside_crosschecks": 1117,
   "ball_out_crosschecks": 5,
   "forbidden_scan": {
-    "terms": 650,
-    "files": 6,
+    "terms": 648,
+    "files": 7,
     "hits": 0
   },
   "scope": "Internal consistency + rule cross-checks; not validation against real football distributions."

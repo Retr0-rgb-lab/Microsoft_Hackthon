@@ -9,12 +9,18 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from decision_analysis.service import handle_get as decision_get, handle_post as decision_post
+from decision.outcome import review_record
+from decision.agents import run_team
+from decision.rollout import simulate
+from decision.engine import analyze as analyze_decision, review as review_decision
 from analysis_agent import build_report
 from model_service import narrate, validate_base_url
 
 ROOT = Path(__file__).resolve().parent
 CONFIG = ROOT / '.local' / 'model-service.json'
 LOCK = threading.Lock()
+AGENT_SLOT = threading.BoundedSemaphore(1)
 DEFAULTS = {'base_url': 'https://api.openai.com/v1', 'model': '', 'api_key': ''}
 
 
@@ -83,6 +89,7 @@ class Handler(SimpleHTTPRequestHandler):
         return super().send_head()
 
     def do_GET(self):
+        if decision_get(self):return
         if urlsplit(self.path).path == '/api/model-settings':
             if not self.trusted():
                 self.reply(403, {'error': 'Only same-origin local requests are accepted.'})
@@ -103,6 +110,33 @@ class Handler(SimpleHTTPRequestHandler):
             if not isinstance(data, dict):
                 raise ValueError('Expected a JSON object.')
             route = urlsplit(self.path).path
+            if decision_post(self, route, data):return
+            if route == '/api/agent-review':
+                if not AGENT_SLOT.acquire(blocking=False):
+                    self.reply(429, {'error': 'An agent review is already running. Try again when it finishes.'})
+                    return
+                try:
+                    with LOCK:
+                        config = read_config()
+                    result = run_team(data['frame'], data['metadata'], data.get('question', ''),
+                                      data.get('mode', 'fan'), config, language=data.get('language', 'en'))
+                    self.reply(200, result)
+                finally:
+                    AGENT_SLOT.release()
+                return
+            if route == '/api/rollout':
+                self.reply(200, simulate(data['frame'], data['metadata'], data['action_id']))
+                return
+            if route == '/api/action-review':
+                result = review_record(ROOT, data.get('dataset','league-validated'), data.get('match_id',''), data.get('decision_id',''), data.get('replay_at_ms'))
+                self.reply(200,result)
+                return
+            if route == '/api/decision':
+                if data.get('mode', 'fan') not in ('fan', 'analyst'):
+                    raise ValueError('Invalid audience mode.')
+                report = analyze_decision(data['frame'], data['metadata'])
+                self.reply(200, {**report, 'review': review_decision(report, data.get('mode', 'fan'))})
+                return
             if route == '/api/model-settings':
                 self.reply(200, save_config(data))
                 return
@@ -134,12 +168,13 @@ class Handler(SimpleHTTPRequestHandler):
                 json.dump(report, f, ensure_ascii=False, indent=2)
             os.replace(f.name, folder / 'analysis.json')
             self.reply(200, report)
-        except (ValueError, TypeError):
-            self.reply(400, {'error': 'Invalid settings or match request. Check the model, HTTPS URL and API key; enter the key again when changing providers.'})
+        except (ValueError, TypeError, KeyError, IndexError):
+            self.reply(400, {'error': 'Invalid request. Check the snapshot, model settings or match ID.'})
         except Exception:
             self.reply(500, {'error': 'Unable to process the request.'})
 
 
 if __name__ == '__main__':
-    print('Touchline: http://127.0.0.1:5173', flush=True)
-    ThreadingHTTPServer(('127.0.0.1', 5173), Handler).serve_forever()
+    port=int(os.environ.get('TOUCHLINE_PORT','5173'))
+    print(f'Touchline: http://127.0.0.1:{port}', flush=True)
+    ThreadingHTTPServer(('127.0.0.1', port), Handler).serve_forever()

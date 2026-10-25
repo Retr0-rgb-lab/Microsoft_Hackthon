@@ -6,6 +6,7 @@ import { formatClock, sampleFrames, samplePacked, releasedEvents, lastAtOrBefore
 const metadata = JSON.parse(readFileSync(new URL('../data/metadata.json', import.meta.url)));
 const events = readFileSync(new URL('../data/events.jsonl', import.meta.url), 'utf8').trim().split('\n').map(JSON.parse);
 const preview = JSON.parse(readFileSync(new URL('../data/preview-60s.json', import.meta.url)));
+const summary = JSON.parse(readFileSync(new URL('../data/summary.json', import.meta.url)));
 
 test('Match clock handles stoppage time, half-time and event period', () => {
   for (const [time, value] of [[0, '00:00'], [2700000, '45:00'], [2761000, '45+1:01'], [2999000, '45+4:59'], [3000000, '45:00'], [5700000, '90:00'], [5932000, '90+3:52'], [6000000, '90+5:00']]) assert.equal(formatClock(time, metadata), value);
@@ -18,7 +19,7 @@ test('Goals are hidden before availability and future events disappear when rewi
     assert.ok(!releasedEvents(events, goal.available_at_ms - 1, 'goal').includes(goal));
     assert.ok(releasedEvents(events, goal.available_at_ms, 'goal').includes(goal));
   }
-  assert.equal(releasedEvents(events, 6000000, 'goal').length, 4);
+  assert.equal(releasedEvents(events, 6000000, 'goal').length, summary.final_score.reduce((a, b) => a + b, 0));
   assert.equal(releasedEvents(events, 0, 'goal').length, 0);
 });
 
@@ -64,8 +65,8 @@ test('Players interpolate by stable ID while score and ball owner stay on the pr
 });
 
 test('Packed tracking keeps discrete scores around goals and stays finite at the end', () => {
-  const a = preview.frames.findIndex(f => f.score[0] === 2);
-  const frames = preview.frames.slice(a - 1, a + 1);
+  // A fixed score transition tests interpolation independently of regenerated results.
+  const frames = preview.frames.slice(0, 2).map((frame, i) => ({...frame, score: i ? [2, 2] : [1, 2]}));
   const data = { count: 2, step: 200, positions: new Float32Array(2 * STRIDE), scores: new Uint16Array(4), phases: new Uint8Array(2), owners: new Int8Array(2).fill(-1), possession: new Uint8Array(2), periods: new Uint8Array([2, 2]), inPlay: new Uint8Array(2) };
   frames.forEach((f, i) => {
     f.players.forEach((p, j) => data.positions.set(p.slice(1), i * STRIDE + j * 4));

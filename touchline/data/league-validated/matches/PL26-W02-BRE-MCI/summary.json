@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W02-BRE-MCI",
+  "seed": 20263023,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656281,
+  "state_snapshots": 6001,
+  "event_count": 3735,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 88,
+    "restart": 34,
+    "pressure": 1199,
+    "carry": 1237,
+    "pass": 1046,
+    "interception": 58,
+    "shot": 27,
+    "stoppage": 15,
+    "save": 12,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 476,
+      "completed_passes": 445,
+      "shots": 12,
+      "shots_on_target": 7,
+      "interceptions": 27,
+      "pressure_events": 708,
+      "possession_seconds": 2406.6,
+      "possession_pct": 42.05,
+      "pass_accuracy_pct": 93.49
+    },
+    "AWAY": {
+      "passes": 570,
+      "completed_passes": 543,
+      "shots": 15,
+      "shots_on_target": 7,
+      "interceptions": 31,
+      "pressure_events": 491,
+      "possession_seconds": 3317.2,
+      "possession_pct": 57.95,
+      "pass_accuracy_pct": 95.26
+    }
+  },
+  "distance_m": {
+    "H01": 3207.9,
+    "H02": 7483.5,
+    "H03": 11117.0,
+    "H04": 11005.0,
+    "H05": 10291.3,
+    "H06": 7312.7,
+    "H07": 12972.3,
+    "H08": 12275.9,
+    "H09": 10993.9,
+    "H10": 12901.1,
+    "H11": 11460.5,
+    "A01": 3118.9,
+    "A02": 9757.6,
+    "A03": 10524.0,
+    "A04": 10873.5,
+    "A05": 8877.2,
+    "A06": 8899.3,
+    "A07": 12469.5,
+    "A08": 11641.0,
+    "A09": 11590.1,
+    "A10": 12418.3,
+    "A11": 8337.2,
+    "H12": 4600.7,
+    "H13": 0.0,
+    "H14": 2309.2,
+    "A12": 2458.7,
+    "A13": 3593.1,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 102200,
+      "period": 1,
+      "period_ms": 102200,
+      "team_id": "AWAY",
+      "club_id": "MCI",
+      "club_name": "Oakmere FC",
+      "player_id": "A10",
+      "player_name": "Oakmere Player 23",
+      "shirt_number": 9,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 1838800,
+      "period": 1,
+      "period_ms": 1838800,
+      "team_id": "HOME",
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "H09",
+      "player_name": "Driftwood Player 25",
+      "shirt_number": 11,
+      "score": [
+        1,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 2,
+    "kickoff_local": "2026-10-31T20:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Driftwood Park"
+  },
+  "home_club": {
+    "club_id": "BRE",
+    "name": "Driftwood FC",
+    "short_name": "Driftwood FC",
+    "stadium": "Driftwood Park",
+    "colors": {
+      "primary": "#E30613",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "MCI",
+    "name": "Oakmere FC",
+    "short_name": "Oakmere",
+    "stadium": "Oakmere Park",
+    "colors": {
+      "primary": "#6CABDD",
+      "secondary": "#1C2C5B"
+    },
+    "formation": "4-3-3"
+  }
+}

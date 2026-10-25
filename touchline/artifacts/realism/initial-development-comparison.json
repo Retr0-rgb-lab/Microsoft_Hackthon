@@ -1,0 +1,149 @@
+{
+  "seeds": [
+    20261019,
+    12345,
+    712
+  ],
+  "baseline_commit": "dd7860d5ca29e78377afd87a256767f23dd4034c",
+  "real_held_out": {
+    "actions": 5043,
+    "passes": 2308,
+    "shots": 43,
+    "pass_distance_m": 14.87135519766754,
+    "pass_completion": 0.9194107452339688,
+    "backward_pass_share": 0.389948006932409,
+    "shot_distance_m": 17.09107497713081,
+    "shot_conversion": 0.11627906976744186
+  },
+  "baseline": {
+    "actions": 5862,
+    "passes": 2002,
+    "shots": 78,
+    "pass_distance_m": 25.057034394209765,
+    "pass_completion": 0.8821178821178821,
+    "backward_pass_share": 0.5384615384615384,
+    "shot_distance_m": 21.54983316734837,
+    "shot_conversion": 0.15384615384615385
+  },
+  "modified": {
+    "actions": 6068,
+    "passes": 1965,
+    "shots": 107,
+    "pass_distance_m": 21.8062201476144,
+    "pass_completion": 0.8452926208651399,
+    "backward_pass_share": 0.6005089058524173,
+    "shot_distance_m": 15.95820702009021,
+    "shot_conversion": 0.07476635514018691
+  },
+  "absolute_gaps": {
+    "pass_distance_m": {
+      "before": 10.185679196542225,
+      "after": 6.93486494994686
+    },
+    "pass_completion": {
+      "before": 0.037292863116086705,
+      "after": 0.07411812436882892
+    },
+    "backward_pass_share": {
+      "before": 0.14851353152912944,
+      "after": 0.21056089892000834
+    },
+    "shot_distance_m": {
+      "before": 4.458758190217562,
+      "after": 1.1328679570405988
+    },
+    "shot_conversion": {
+      "before": 0.037567084078711996,
+      "after": 0.04151271462725495
+    }
+  },
+  "baseline_matches": [
+    {
+      "actions": 1947,
+      "passes": 664,
+      "shots": 25,
+      "pass_distance_m": 25.15314922636999,
+      "pass_completion": 0.8945783132530121,
+      "backward_pass_share": 0.5316265060240963,
+      "shot_distance_m": 20.1043927696789,
+      "shot_conversion": 0.16,
+      "seed": 20261019,
+      "goals": 4,
+      "decisions": 0,
+      "unpressured_large_backpasses_near_goal": 12
+    },
+    {
+      "actions": 1952,
+      "passes": 666,
+      "shots": 29,
+      "pass_distance_m": 25.308243672083286,
+      "pass_completion": 0.8903903903903904,
+      "backward_pass_share": 0.5435435435435435,
+      "shot_distance_m": 22.052774755263222,
+      "shot_conversion": 0.1724137931034483,
+      "seed": 12345,
+      "goals": 5,
+      "decisions": 0,
+      "unpressured_large_backpasses_near_goal": 21
+    },
+    {
+      "actions": 1963,
+      "passes": 672,
+      "shots": 24,
+      "pass_distance_m": 24.713097448349533,
+      "pass_completion": 0.8616071428571429,
+      "backward_pass_share": 0.5401785714285714,
+      "shot_distance_m": 22.44777916285698,
+      "shot_conversion": 0.125,
+      "seed": 712,
+      "goals": 3,
+      "decisions": 0,
+      "unpressured_large_backpasses_near_goal": 14
+    }
+  ],
+  "modified_matches": [
+    {
+      "actions": 2043,
+      "passes": 659,
+      "shots": 32,
+      "pass_distance_m": 21.324430893764728,
+      "pass_completion": 0.842185128983308,
+      "backward_pass_share": 0.6115326251896813,
+      "shot_distance_m": 15.680743728551203,
+      "shot_conversion": 0.03125,
+      "seed": 20261019,
+      "goals": 1,
+      "decisions": 1352,
+      "unpressured_large_backpasses_near_goal": 4
+    },
+    {
+      "actions": 2010,
+      "passes": 661,
+      "shots": 41,
+      "pass_distance_m": 22.269455554463278,
+      "pass_completion": 0.8789712556732224,
+      "backward_pass_share": 0.6006051437216339,
+      "shot_distance_m": 15.831879901653481,
+      "shot_conversion": 0.0975609756097561,
+      "seed": 12345,
+      "goals": 4,
+      "decisions": 1308,
+      "unpressured_large_backpasses_near_goal": 3
+    },
+    {
+      "actions": 2015,
+      "passes": 645,
+      "shots": 34,
+      "pass_distance_m": 21.823740324916518,
+      "pass_completion": 0.813953488372093,
+      "backward_pass_share": 0.5891472868217055,
+      "shot_distance_m": 16.37168458435945,
+      "shot_conversion": 0.08823529411764706,
+      "seed": 712,
+      "goals": 3,
+      "decisions": 1336,
+      "unpressured_large_backpasses_near_goal": 1
+    }
+  ],
+  "scope": "Synthetic regular-play actions vs real Regular Play events; synthetic restarts include a forced carry. Ground passes only. Rates do not establish tactical correctness. Test set used for reporting only, not tuning."
+}

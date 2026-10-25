@@ -1,0 +1,135 @@
+{
+  "match_id": "PL26-W04-ARS-NEW",
+  "seed": 20265019,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655682,
+  "state_snapshots": 6001,
+  "event_count": 3760,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 93,
+    "restart": 29,
+    "pressure": 1221,
+    "carry": 1232,
+    "pass": 1054,
+    "interception": 68,
+    "shot": 22,
+    "stoppage": 11,
+    "save": 11,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    0,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 573,
+      "completed_passes": 538,
+      "shots": 10,
+      "shots_on_target": 6,
+      "interceptions": 33,
+      "pressure_events": 577,
+      "possession_seconds": 3031.8,
+      "possession_pct": 52.53,
+      "pass_accuracy_pct": 93.89
+    },
+    "AWAY": {
+      "passes": 481,
+      "completed_passes": 448,
+      "shots": 12,
+      "shots_on_target": 6,
+      "interceptions": 35,
+      "pressure_events": 644,
+      "possession_seconds": 2740.0,
+      "possession_pct": 47.47,
+      "pass_accuracy_pct": 93.14
+    }
+  },
+  "distance_m": {
+    "H01": 3207.6,
+    "H02": 7388.4,
+    "H03": 10605.2,
+    "H04": 10962.9,
+    "H05": 9926.8,
+    "H06": 7595.1,
+    "H07": 12316.7,
+    "H08": 11793.7,
+    "H09": 11493.8,
+    "H10": 11906.5,
+    "H11": 11322.1,
+    "A01": 3179.8,
+    "A02": 10026.9,
+    "A03": 11018.4,
+    "A04": 10754.1,
+    "A05": 8401.9,
+    "A06": 9614.7,
+    "A07": 12390.9,
+    "A08": 11403.2,
+    "A09": 11907.3,
+    "A10": 12705.1,
+    "A11": 7857.6,
+    "H12": 4652.8,
+    "H13": 0.0,
+    "H14": 2388.8,
+    "A12": 2517.5,
+    "A13": 3581.1,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 3934800,
+      "period": 2,
+      "period_ms": 934800,
+      "team_id": "AWAY",
+      "club_id": "NEW",
+      "club_name": "Quartz FC",
+      "player_id": "A10",
+      "player_name": "Quartz Player 22",
+      "shirt_number": 9,
+      "score": [
+        0,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 4,
+    "kickoff_local": "2026-11-14T12:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Aster Park"
+  },
+  "home_club": {
+    "club_id": "ARS",
+    "name": "Aster FC",
+    "short_name": "Aster FC",
+    "stadium": "Aster Park",
+    "colors": {
+      "primary": "#EF0107",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "NEW",
+    "name": "Quartz FC",
+    "short_name": "Quartz",
+    "stadium": "Quartz Park",
+    "colors": {
+      "primary": "#241F20",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

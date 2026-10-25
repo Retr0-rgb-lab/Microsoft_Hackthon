@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "tracking_frames": 30001,
+  "events": 3781,
+  "state_snapshots": 6001,
+  "final_score": [
+    1,
+    0
+  ],
+  "max_player_speed_mps": 7.201,
+  "max_player_acceleration_mps2": 3.507,
+  "max_ball_speed_mps": 28.542,
+  "checks": [
+    "unique identities and event IDs",
+    "5 Hz frame continuity",
+    "pitch bounds and finite coordinates",
+    "player speed and acceleration limits",
+    "velocity/coordinate agreement",
+    "ball speed and attachment",
+    "event availability and causal references",
+    "goals and scoreboard agreement",
+    "event counts and final statistics",
+    "period clocks and state snapshots"
+  ],
+  "scope": "Internal consistency only; not validation against real football distributions.",
+  "sample": {
+    "path": ".local/player-action-sample",
+    "seed": 243000,
+    "generator": "generate.py v2.3.0",
+    "sha256": {
+      "metadata.json": "e924ee1d2cbe43664686f60acf8c439ee661b09a7774c6bb898655f4d46c126a",
+      "events.jsonl": "0a0af619803d0ffd39b76bfa4e190eb205428a189304c52d74ad91b036d483cc",
+      "tracking.jsonl": "5e50ba56f74157808a2f56377f25f7feaffca77c16c4032eed11356793df3c49"
+    }
+  }
+}

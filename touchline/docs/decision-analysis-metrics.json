@@ -1,0 +1,20 @@
+{
+  "fresh_cached_parity": 80,
+  "statuses": {
+    "model_unavailable": 91029,
+    "unknown": 2
+  },
+  "best_actions": {
+    "pass": 62004,
+    "carry": 24512,
+    "shot": 4513
+  },
+  "representative_best_actions": {
+    "pass": 652,
+    "carry": 76,
+    "shot": 72
+  },
+  "representative_players_min": 19,
+  "representative_players_max": 20,
+  "published_bytes": 97293829
+}

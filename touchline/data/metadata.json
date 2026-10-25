@@ -3,7 +3,17 @@
   "match_id": "SYN-20261019-001",
   "synthetic": true,
   "seed": 20261019,
-  "generator": "generate.py v2.1.0",
+  "generator": "generate.py v2.3.0",
+  "action_policy": {
+    "revision": "player-actions-1",
+    "multipliers": {
+      "pass": 1.2676785250291727,
+      "carry": 1.4731620286964047,
+      "shot": 0.5354764191523225
+    },
+    "attribute_strength": 1.0,
+    "scope": "pass/carry/foot-shot selection; radar effects are bounded hypotheses, not fitted player outcomes"
+  },
   "duration_ms": 6000000,
   "tracking_hz": 5,
   "pitch": {
@@ -284,7 +294,7 @@
   },
   "limitations": [
     "Simplified procedural motion, not a professional football or physics simulator.",
-    "Club names, squad numbers and player names are fictional. Match events and tracking are synthetic.",
+    "Club, player and venue names are fictional aliases; roster attributes are preserved from the source dataset. Match events and tracking are synthetic.",
     "No offsides, physical collisions or realistic fatigue. Cards and tactical substitutions follow a synthetic schedule.",
     "Incoming substitutes inherit the outgoing formation slot and position; no touchline entrance animation is modeled.",
     "Pressure is a proximity heuristic; ball transport during restart_setup is non-playing animation.",

@@ -40,13 +40,11 @@ test('Future scores cannot influence the current standings', () => {
   for (const week of altered.weeks.filter(week => week.week >= 3)) {
     week.matches.forEach(match => { match.score = [99, 0]; });
   }
-  const clubId = league.teams[0].club_id;
-  assert.deepEqual(clubDashboard(altered, clubId), clubDashboard(league, clubId));
+  assert.deepEqual(clubDashboard(altered, 'ARS'), clubDashboard(league, 'ARS'));
 });
 
 test('Unknown clubs, season start and end have defined empty states', () => {
-  const clubId = league.teams[0].club_id;
   assert.equal(clubDashboard(league, 'unknown'), null);
-  assert.equal(clubDashboard(league, clubId, 1).history.length, 0);
-  assert.equal(clubDashboard(league, clubId, 5).upcoming.length, 0);
+  assert.equal(clubDashboard(league, 'ARS', 1).history.length, 0);
+  assert.equal(clubDashboard(league, 'ARS', 5).upcoming.length, 0);
 });

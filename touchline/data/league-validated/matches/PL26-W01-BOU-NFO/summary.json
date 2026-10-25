@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-BOU-NFO",
+  "seed": 20262021,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655961,
+  "state_snapshots": 6001,
+  "event_count": 3768,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 96,
+    "restart": 31,
+    "carry": 1234,
+    "pressure": 1233,
+    "pass": 1037,
+    "interception": 70,
+    "shot": 24,
+    "save": 6,
+    "stoppage": 18,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 539,
+      "completed_passes": 502,
+      "shots": 10,
+      "shots_on_target": 5,
+      "interceptions": 33,
+      "pressure_events": 641,
+      "possession_seconds": 2839.8,
+      "possession_pct": 49.61,
+      "pass_accuracy_pct": 93.14
+    },
+    "AWAY": {
+      "passes": 498,
+      "completed_passes": 465,
+      "shots": 14,
+      "shots_on_target": 3,
+      "interceptions": 37,
+      "pressure_events": 592,
+      "possession_seconds": 2884.0,
+      "possession_pct": 50.39,
+      "pass_accuracy_pct": 93.37
+    }
+  },
+  "distance_m": {
+    "H01": 3212.6,
+    "H02": 7397.1,
+    "H03": 10836.0,
+    "H04": 10919.1,
+    "H05": 9844.3,
+    "H06": 7489.8,
+    "H07": 11786.2,
+    "H08": 11986.0,
+    "H09": 11171.3,
+    "H10": 12140.5,
+    "H11": 11487.3,
+    "A01": 3167.9,
+    "A02": 9729.0,
+    "A03": 10908.3,
+    "A04": 10804.6,
+    "A05": 8463.4,
+    "A06": 9205.2,
+    "A07": 11775.0,
+    "A08": 11559.7,
+    "A09": 11810.2,
+    "A10": 12583.6,
+    "A11": 7534.4,
+    "H12": 4037.6,
+    "H13": 0.0,
+    "H14": 2518.0,
+    "A12": 2302.1,
+    "A13": 3826.5,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 2432800,
+      "period": 1,
+      "period_ms": 2432800,
+      "team_id": "HOME",
+      "club_id": "BOU",
+      "club_name": "Cedar FC",
+      "player_id": "H10",
+      "player_name": "Cedar Player 22",
+      "shirt_number": 9,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 2639000,
+      "period": 1,
+      "period_ms": 2639000,
+      "team_id": "AWAY",
+      "club_id": "NFO",
+      "club_name": "Rivermist FC",
+      "player_id": "A10",
+      "player_name": "Rivermist Player 23",
+      "shirt_number": 9,
+      "score": [
+        1,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-24T15:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Cedar Park"
+  },
+  "home_club": {
+    "club_id": "BOU",
+    "name": "Cedar FC",
+    "short_name": "Cedar",
+    "stadium": "Cedar Park",
+    "colors": {
+      "primary": "#DA291C",
+      "secondary": "#000000"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "NFO",
+    "name": "Rivermist FC",
+    "short_name": "Rivermist",
+    "stadium": "Rivermist Park",
+    "colors": {
+      "primary": "#DD0000",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "request": {
+    "match_id": "PL26-W01-MCI-CHE",
+    "snapshot_id": "67554a61efcbaa4f",
+    "t_ms": 16200,
+    "actor_id": "H10",
+    "question": "Compare current choices",
+    "mode": "analyst",
+    "language": "en",
+    "profile": {
+      "profile_version": "sim-1",
+      "kind": "simulated",
+      "preferred_foot": null,
+      "weak_foot": null
+    }
+  },
+  "candidate_set_id": "outcome-3.0:84e46dbe2ed0f54a",
+  "action_id": "shot:goal"
+}

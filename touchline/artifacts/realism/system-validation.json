@@ -1,0 +1,1867 @@
+{
+  "exposure_minutes": {
+    "real": 826.1012666666668,
+    "synthetic": 4000.0
+  },
+  "per90_selected_events": {
+    "passes": {
+      "real": 252.75351633645553,
+      "synthetic": 939.6
+    },
+    "shots": {
+      "real": 5.447274058975335,
+      "synthetic": 21.825
+    }
+  },
+  "zone_fit": [
+    {
+      "zone": 0,
+      "real": {
+        "actions": 848,
+        "passes": 364,
+        "shots": 0,
+        "pass_distance_m": 15.786877679540469,
+        "pass_completion": 0.9423076923076923,
+        "backward_pass_share": 0.27197802197802196,
+        "shot_distance_m": 0.0,
+        "shot_conversion": 0.0
+      },
+      "synthetic": {
+        "actions": 6007,
+        "passes": 3254,
+        "shots": 0,
+        "pass_distance_m": 19.287509087023814,
+        "pass_completion": 0.9434542102028273,
+        "backward_pass_share": 0.17977873386601106,
+        "shot_distance_m": 0.0,
+        "shot_conversion": 0.0
+      }
+    },
+    {
+      "zone": 1,
+      "real": {
+        "actions": 1996,
+        "passes": 942,
+        "shots": 0,
+        "pass_distance_m": 16.185693068281864,
+        "pass_completion": 0.9617834394904459,
+        "backward_pass_share": 0.39596602972399153,
+        "shot_distance_m": 0.0,
+        "shot_conversion": 0.0
+      },
+      "synthetic": {
+        "actions": 18859,
+        "passes": 9497,
+        "shots": 0,
+        "pass_distance_m": 18.749805219007605,
+        "pass_completion": 0.9357691902706118,
+        "backward_pass_share": 0.4144466673686427,
+        "shot_distance_m": 0.0,
+        "shot_conversion": 0.0
+      }
+    },
+    {
+      "zone": 2,
+      "real": {
+        "actions": 1578,
+        "passes": 760,
+        "shots": 1,
+        "pass_distance_m": 14.36897658829103,
+        "pass_completion": 0.9276315789473685,
+        "backward_pass_share": 0.3907894736842105,
+        "shot_distance_m": 28.8033965011073,
+        "shot_conversion": 0.0
+      },
+      "synthetic": {
+        "actions": 28125,
+        "passes": 12881,
+        "shots": 4,
+        "pass_distance_m": 19.907036720786856,
+        "pass_completion": 0.9357192764536915,
+        "backward_pass_share": 0.4633180653675957,
+        "shot_distance_m": 28.767573075978785,
+        "shot_conversion": 0.0
+      }
+    },
+    {
+      "zone": 3,
+      "real": {
+        "actions": 613,
+        "passes": 254,
+        "shots": 49,
+        "pass_distance_m": 11.458650425951289,
+        "pass_completion": 0.7913385826771654,
+        "backward_pass_share": 0.5,
+        "shot_distance_m": 15.443510652738226,
+        "shot_conversion": 0.10204081632653061
+      },
+      "synthetic": {
+        "actions": 39010,
+        "passes": 16128,
+        "shots": 966,
+        "pass_distance_m": 23.1298233835315,
+        "pass_completion": 0.9329737103174603,
+        "backward_pass_share": 0.8852926587301587,
+        "shot_distance_m": 16.240022190268373,
+        "shot_conversion": 0.08488612836438923
+      }
+    }
+  ],
+  "generated_at_utc": "2026-10-24T13:41:48.858858+00:00",
+  "league_root": "/Users/mac/Desktop/NextPlay-AI/data/league-validated",
+  "generator_version": "generate.py v2.3.0",
+  "profile_sha256": "8c29ae9f187c3da3bc89977a007a460ee9c1d0b6e71e0dc5acb69a4320df7dda",
+  "source_revision": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+  "source_match_audit": [
+    {
+      "match_id": 3857254,
+      "events": 3680,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857255,
+      "events": 4450,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857256,
+      "events": 3210,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857257,
+      "events": 3594,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857258,
+      "events": 3656,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857259,
+      "events": 3270,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857260,
+      "events": 2912,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857261,
+      "events": 3315,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857262,
+      "events": 3378,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857263,
+      "events": 3603,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857264,
+      "events": 4052,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857265,
+      "events": 3184,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857266,
+      "events": 3853,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857267,
+      "events": 2827,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857268,
+      "events": 3499,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857269,
+      "events": 3786,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857270,
+      "events": 3441,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857271,
+      "events": 3649,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857272,
+      "events": 3519,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857273,
+      "events": 3133,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857274,
+      "events": 3563,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857275,
+      "events": 3564,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857276,
+      "events": 3388,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857277,
+      "events": 3719,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857278,
+      "events": 3596,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857279,
+      "events": 3963,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857280,
+      "events": 3299,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857281,
+      "events": 3724,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857282,
+      "events": 3687,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857283,
+      "events": 3620,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857284,
+      "events": 3717,
+      "unique_ids": true,
+      "checksum": "verified"
+    },
+    {
+      "match_id": 3857285,
+      "events": 3133,
+      "unique_ids": true,
+      "checksum": "verified"
+    }
+  ],
+  "splits": {
+    "train": [
+      3857254,
+      3857255,
+      3857257,
+      3857258,
+      3857260,
+      3857261,
+      3857263,
+      3857264,
+      3857266,
+      3857267,
+      3857269,
+      3857270,
+      3857272,
+      3857273,
+      3857275,
+      3857276
+    ],
+    "development": [
+      3857256,
+      3857259,
+      3857262,
+      3857265,
+      3857268,
+      3857271,
+      3857274,
+      3857277
+    ],
+    "test": [
+      3857278,
+      3857279,
+      3857280,
+      3857281,
+      3857282,
+      3857283,
+      3857284,
+      3857285
+    ]
+  },
+  "real_held_out": {
+    "actions": 5035,
+    "passes": 2320,
+    "shots": 50,
+    "pass_distance_m": 15.01045937972718,
+    "pass_completion": 0.9288793103448276,
+    "backward_pass_share": 0.38620689655172413,
+    "shot_distance_m": 15.710708369705607,
+    "shot_conversion": 0.1
+  },
+  "synthetic": {
+    "actions": 92001,
+    "passes": 41760,
+    "shots": 970,
+    "pass_distance_m": 20.840248713221726,
+    "pass_completion": 0.9352729885057471,
+    "backward_pass_share": 0.5930795019157088,
+    "shot_distance_m": 16.291682193920792,
+    "shot_conversion": 0.08453608247422681
+  },
+  "fit_absolute_gaps": {
+    "pass_distance_m": 5.829789333494546,
+    "pass_completion": 0.006393678160919514,
+    "backward_pass_share": 0.20687260536398466,
+    "shot_distance_m": 0.5809738242151852,
+    "shot_conversion": 0.015463917525773196
+  },
+  "distance_distribution_js_distance": {
+    "pass": 0.3258823969151593,
+    "shot": 0.1912013508987475
+  },
+  "real_outcome_model_metrics": {
+    "pass": {
+      "n": 2320,
+      "brier": 0.06435834538251464,
+      "constant_train_prior_brier": 0.06606983103812808,
+      "observed": 0.9288793103448276,
+      "predicted_mean": 0.9334717202546662,
+      "paired_match_bootstrap": {
+        "metric": "constant Brier minus fitted Brier; positive favors fitted",
+        "resampling_unit": "match",
+        "bootstrap_replicates": 2000,
+        "ci95": [
+          0.0007427520720728359,
+          0.002470152595936926
+        ],
+        "per_match": [
+          {
+            "brier_improvement_sum": 0.770663358208884,
+            "n": 349
+          },
+          {
+            "brier_improvement_sum": 0.4840404773637277,
+            "n": 406
+          },
+          {
+            "brier_improvement_sum": 0.4369775848426241,
+            "n": 257
+          },
+          {
+            "brier_improvement_sum": 0.1334877198118797,
+            "n": 254
+          },
+          {
+            "brier_improvement_sum": 0.9476234562796317,
+            "n": 314
+          },
+          {
+            "brier_improvement_sum": 1.039583551455659,
+            "n": 333
+          },
+          {
+            "brier_improvement_sum": 0.5016604232539119,
+            "n": 234
+          },
+          {
+            "brier_improvement_sum": -0.34338985018642304,
+            "n": 173
+          }
+        ]
+      }
+    },
+    "shot": {
+      "n": 50,
+      "brier": 0.08521552368831405,
+      "constant_train_prior_brier": 0.09060163759344952,
+      "observed": 0.1,
+      "predicted_mean": 0.07895134451328052,
+      "paired_match_bootstrap": {
+        "metric": "constant Brier minus fitted Brier; positive favors fitted",
+        "resampling_unit": "match",
+        "bootstrap_replicates": 2000,
+        "ci95": [
+          0.001103997453249577,
+          0.01235668092534422
+        ],
+        "per_match": [
+          {
+            "brier_improvement_sum": 0.13630397316864917,
+            "n": 5
+          },
+          {
+            "brier_improvement_sum": 0.025929468571292455,
+            "n": 5
+          },
+          {
+            "brier_improvement_sum": -0.008667179055316113,
+            "n": 5
+          },
+          {
+            "brier_improvement_sum": 0.06944486301816306,
+            "n": 9
+          },
+          {
+            "brier_improvement_sum": 0.0,
+            "n": 0
+          },
+          {
+            "brier_improvement_sum": 0.00867050104844163,
+            "n": 7
+          },
+          {
+            "brier_improvement_sum": -0.005469820991093255,
+            "n": 10
+          },
+          {
+            "brier_improvement_sum": 0.04309388949664522,
+            "n": 9
+          }
+        ]
+      }
+    }
+  },
+  "synthetic_selected_pass_brier": 0.059721206704168465,
+  "synthetic_selected_pass_n": 41760,
+  "cancelled_decision_audit": {
+    "half_time": 40,
+    "substitution": 152,
+    "red_card": 40,
+    "full_time": 37
+  },
+  "unavailable_snapshot_audit": [
+    [
+      "PL26-W03-MCI-AVL",
+      6000000
+    ],
+    [
+      "PL26-W04-IPS-BOU",
+      6000000
+    ]
+  ],
+  "pipeline_counts": {
+    "decisions": 91031,
+    "analyzed": 91031,
+    "candidates": 904995,
+    "legal_candidates": 904084,
+    "no_legal_pass": 0,
+    "all_passes_negative": 87554,
+    "rollout_runs": 80,
+    "cancelled_or_unresolved_actions": 269,
+    "unavailable": 2
+  },
+  "analysis_errors": [],
+  "matches": [
+    {
+      "match_id": "PL26-W01-TOT-ARS",
+      "stats": {
+        "actions": 2297,
+        "passes": 1022,
+        "shots": 23,
+        "pass_distance_m": 20.80052114747057,
+        "pass_completion": 0.9393346379647749,
+        "backward_pass_share": 0.598825831702544,
+        "shot_distance_m": 18.381853396573216,
+        "shot_conversion": 0.08695652173913043
+      },
+      "analysis": {
+        "decisions": 2274,
+        "analyzed": 2274,
+        "candidates": 22641,
+        "legal_candidates": 22612,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2180,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 867,
+        "selected_backpass": 594,
+        "backpass_with_no_forward_target": 342
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-SUN-AVL",
+      "stats": {
+        "actions": 2278,
+        "passes": 1010,
+        "shots": 26,
+        "pass_distance_m": 21.069374977425422,
+        "pass_completion": 0.9435643564356435,
+        "backward_pass_share": 0.596039603960396,
+        "shot_distance_m": 15.900331705278695,
+        "shot_conversion": 0.11538461538461539
+      },
+      "analysis": {
+        "decisions": 2252,
+        "analyzed": 2252,
+        "candidates": 22339,
+        "legal_candidates": 22316,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2164,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 822,
+        "selected_backpass": 585,
+        "backpass_with_no_forward_target": 318
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-BOU-NFO",
+      "stats": {
+        "actions": 2295,
+        "passes": 1037,
+        "shots": 24,
+        "pass_distance_m": 20.912085003926595,
+        "pass_completion": 0.9324975891996142,
+        "backward_pass_share": 0.6027000964320154,
+        "shot_distance_m": 12.958161021770605,
+        "shot_conversion": 0.08333333333333333
+      },
+      "analysis": {
+        "decisions": 2271,
+        "analyzed": 2271,
+        "candidates": 22545,
+        "legal_candidates": 22519,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2205,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 888,
+        "selected_backpass": 608,
+        "backpass_with_no_forward_target": 353
+      },
+      "rollout_outcomes": {
+        "unreceived": 3,
+        "received": 5
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-NEW-BRE",
+      "stats": {
+        "actions": 2315,
+        "passes": 1044,
+        "shots": 20,
+        "pass_distance_m": 20.957328255790333,
+        "pass_completion": 0.9281609195402298,
+        "backward_pass_share": 0.6044061302681992,
+        "shot_distance_m": 17.59348535279171,
+        "shot_conversion": 0.05
+      },
+      "analysis": {
+        "decisions": 2295,
+        "analyzed": 2295,
+        "candidates": 22778,
+        "legal_candidates": 22736,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2184,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 857,
+        "selected_backpass": 608,
+        "backpass_with_no_forward_target": 328
+      },
+      "rollout_outcomes": {
+        "intercepted": 3,
+        "received": 5
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-BHA-MUN",
+      "stats": {
+        "actions": 2346,
+        "passes": 1112,
+        "shots": 26,
+        "pass_distance_m": 20.7818313038425,
+        "pass_completion": 0.9361510791366906,
+        "backward_pass_share": 0.572841726618705,
+        "shot_distance_m": 15.672282305828046,
+        "shot_conversion": 0.07692307692307693
+      },
+      "analysis": {
+        "decisions": 2320,
+        "analyzed": 2320,
+        "candidates": 23080,
+        "legal_candidates": 23053,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2218,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 721,
+        "selected_backpass": 630,
+        "backpass_with_no_forward_target": 295
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-MCI-CHE",
+      "stats": {
+        "actions": 2270,
+        "passes": 1016,
+        "shots": 20,
+        "pass_distance_m": 21.309792583382333,
+        "pass_completion": 0.9311023622047244,
+        "backward_pass_share": 0.5895669291338582,
+        "shot_distance_m": 18.357667308786045,
+        "shot_conversion": 0.1
+      },
+      "analysis": {
+        "decisions": 2250,
+        "analyzed": 2250,
+        "candidates": 22399,
+        "legal_candidates": 22377,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2168,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 5
+      },
+      "contexts": {
+        "no_forward_legal_target": 802,
+        "selected_backpass": 586,
+        "backpass_with_no_forward_target": 324
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "full"
+    },
+    {
+      "match_id": "PL26-W01-COV-LIV",
+      "stats": {
+        "actions": 2294,
+        "passes": 1029,
+        "shots": 24,
+        "pass_distance_m": 21.00511390868787,
+        "pass_completion": 0.9407191448007775,
+        "backward_pass_share": 0.6044703595724004,
+        "shot_distance_m": 18.092912532087244,
+        "shot_conversion": 0.08333333333333333
+      },
+      "analysis": {
+        "decisions": 2270,
+        "analyzed": 2270,
+        "candidates": 22504,
+        "legal_candidates": 22477,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2186,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 869,
+        "selected_backpass": 606,
+        "backpass_with_no_forward_target": 339
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-LEE-CRY",
+      "stats": {
+        "actions": 2290,
+        "passes": 1063,
+        "shots": 22,
+        "pass_distance_m": 21.057067516712397,
+        "pass_completion": 0.9332079021636877,
+        "backward_pass_share": 0.5860771401693321,
+        "shot_distance_m": 18.250038387084345,
+        "shot_conversion": 0.045454545454545456
+      },
+      "analysis": {
+        "decisions": 2268,
+        "analyzed": 2268,
+        "candidates": 22506,
+        "legal_candidates": 22478,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2180,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 860,
+        "selected_backpass": 607,
+        "backpass_with_no_forward_target": 345
+      },
+      "rollout_outcomes": {
+        "intercepted": 5,
+        "unreceived": 3
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-EVE-IPS",
+      "stats": {
+        "actions": 2289,
+        "passes": 1005,
+        "shots": 18,
+        "pass_distance_m": 20.966872207719746,
+        "pass_completion": 0.9393034825870646,
+        "backward_pass_share": 0.6368159203980099,
+        "shot_distance_m": 16.91296451398671,
+        "shot_conversion": 0.1111111111111111
+      },
+      "analysis": {
+        "decisions": 2271,
+        "analyzed": 2271,
+        "candidates": 22597,
+        "legal_candidates": 22579,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2176,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 843,
+        "selected_backpass": 632,
+        "backpass_with_no_forward_target": 361
+      },
+      "rollout_outcomes": {
+        "intercepted": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W01-HUL-FUL",
+      "stats": {
+        "actions": 2297,
+        "passes": 1077,
+        "shots": 28,
+        "pass_distance_m": 20.877326291861106,
+        "pass_completion": 0.9405756731662024,
+        "backward_pass_share": 0.5784586815227484,
+        "shot_distance_m": 15.246700684991678,
+        "shot_conversion": 0.07142857142857142
+      },
+      "analysis": {
+        "decisions": 2269,
+        "analyzed": 2269,
+        "candidates": 22584,
+        "legal_candidates": 22572,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2188,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 766,
+        "selected_backpass": 613,
+        "backpass_with_no_forward_target": 317
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-ARS-SUN",
+      "stats": {
+        "actions": 2273,
+        "passes": 1013,
+        "shots": 31,
+        "pass_distance_m": 20.656697662200187,
+        "pass_completion": 0.9387956564659428,
+        "backward_pass_share": 0.5873642645607108,
+        "shot_distance_m": 16.271893809173395,
+        "shot_conversion": 0.12903225806451613
+      },
+      "analysis": {
+        "decisions": 2242,
+        "analyzed": 2242,
+        "candidates": 22234,
+        "legal_candidates": 22208,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2169,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 870,
+        "selected_backpass": 600,
+        "backpass_with_no_forward_target": 352
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-NFO-TOT",
+      "stats": {
+        "actions": 2343,
+        "passes": 1110,
+        "shots": 23,
+        "pass_distance_m": 21.009595230208223,
+        "pass_completion": 0.936036036036036,
+        "backward_pass_share": 0.5864864864864865,
+        "shot_distance_m": 16.739940731266532,
+        "shot_conversion": 0.17391304347826086
+      },
+      "analysis": {
+        "decisions": 2320,
+        "analyzed": 2320,
+        "candidates": 23042,
+        "legal_candidates": 23024,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2225,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 777,
+        "selected_backpass": 631,
+        "backpass_with_no_forward_target": 342
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-AVL-NEW",
+      "stats": {
+        "actions": 2314,
+        "passes": 1044,
+        "shots": 18,
+        "pass_distance_m": 21.059183044238637,
+        "pass_completion": 0.9396551724137931,
+        "backward_pass_share": 0.5986590038314177,
+        "shot_distance_m": 19.12924088398039,
+        "shot_conversion": 0.05555555555555555
+      },
+      "analysis": {
+        "decisions": 2296,
+        "analyzed": 2296,
+        "candidates": 22871,
+        "legal_candidates": 22845,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2205,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 823,
+        "selected_backpass": 607,
+        "backpass_with_no_forward_target": 336
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-MUN-BOU",
+      "stats": {
+        "actions": 2312,
+        "passes": 1064,
+        "shots": 31,
+        "pass_distance_m": 20.609340451535903,
+        "pass_completion": 0.9323308270676691,
+        "backward_pass_share": 0.5516917293233082,
+        "shot_distance_m": 12.993746746095962,
+        "shot_conversion": 0.06451612903225806
+      },
+      "analysis": {
+        "decisions": 2281,
+        "analyzed": 2281,
+        "candidates": 22647,
+        "legal_candidates": 22631,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2202,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 790,
+        "selected_backpass": 575,
+        "backpass_with_no_forward_target": 307
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-BRE-MCI",
+      "stats": {
+        "actions": 2310,
+        "passes": 1046,
+        "shots": 27,
+        "pass_distance_m": 21.071245775033056,
+        "pass_completion": 0.9445506692160612,
+        "backward_pass_share": 0.607074569789675,
+        "shot_distance_m": 18.2518567243451,
+        "shot_conversion": 0.07407407407407407
+      },
+      "analysis": {
+        "decisions": 2283,
+        "analyzed": 2283,
+        "candidates": 22702,
+        "legal_candidates": 22678,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2184,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 798,
+        "selected_backpass": 620,
+        "backpass_with_no_forward_target": 320
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-LIV-BHA",
+      "stats": {
+        "actions": 2356,
+        "passes": 1137,
+        "shots": 22,
+        "pass_distance_m": 20.777190859275553,
+        "pass_completion": 0.9445910290237467,
+        "backward_pass_share": 0.5954265611257695,
+        "shot_distance_m": 16.425854782061386,
+        "shot_conversion": 0.045454545454545456
+      },
+      "analysis": {
+        "decisions": 2334,
+        "analyzed": 2334,
+        "candidates": 23178,
+        "legal_candidates": 23163,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2248,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 783,
+        "selected_backpass": 655,
+        "backpass_with_no_forward_target": 334
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "full"
+    },
+    {
+      "match_id": "PL26-W02-CHE-LEE",
+      "stats": {
+        "actions": 2283,
+        "passes": 972,
+        "shots": 27,
+        "pass_distance_m": 21.174678792685363,
+        "pass_completion": 0.934156378600823,
+        "backward_pass_share": 0.6018518518518519,
+        "shot_distance_m": 16.589558491557845,
+        "shot_conversion": 0.037037037037037035
+      },
+      "analysis": {
+        "decisions": 2256,
+        "analyzed": 2256,
+        "candidates": 22426,
+        "legal_candidates": 22410,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2178,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 868,
+        "selected_backpass": 575,
+        "backpass_with_no_forward_target": 322
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-IPS-COV",
+      "stats": {
+        "actions": 2304,
+        "passes": 1043,
+        "shots": 25,
+        "pass_distance_m": 20.80621398129304,
+        "pass_completion": 0.9328859060402684,
+        "backward_pass_share": 0.585810162991371,
+        "shot_distance_m": 14.641784135418098,
+        "shot_conversion": 0.04
+      },
+      "analysis": {
+        "decisions": 2279,
+        "analyzed": 2279,
+        "candidates": 22600,
+        "legal_candidates": 22581,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2208,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 846,
+        "selected_backpass": 593,
+        "backpass_with_no_forward_target": 335
+      },
+      "rollout_outcomes": {
+        "intercepted": 4,
+        "received": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-CRY-HUL",
+      "stats": {
+        "actions": 2309,
+        "passes": 1037,
+        "shots": 27,
+        "pass_distance_m": 20.539382380920063,
+        "pass_completion": 0.9488910318225651,
+        "backward_pass_share": 0.5949855351976856,
+        "shot_distance_m": 17.151125539741603,
+        "shot_conversion": 0.1111111111111111
+      },
+      "analysis": {
+        "decisions": 2282,
+        "analyzed": 2282,
+        "candidates": 22691,
+        "legal_candidates": 22657,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2199,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 846,
+        "selected_backpass": 603,
+        "backpass_with_no_forward_target": 334
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W02-FUL-EVE",
+      "stats": {
+        "actions": 2309,
+        "passes": 1044,
+        "shots": 23,
+        "pass_distance_m": 20.454699291600217,
+        "pass_completion": 0.9272030651340997,
+        "backward_pass_share": 0.6005747126436781,
+        "shot_distance_m": 17.40364726697438,
+        "shot_conversion": 0.043478260869565216
+      },
+      "analysis": {
+        "decisions": 2286,
+        "analyzed": 2286,
+        "candidates": 22694,
+        "legal_candidates": 22667,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2204,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 810,
+        "selected_backpass": 614,
+        "backpass_with_no_forward_target": 321
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-NFO-ARS",
+      "stats": {
+        "actions": 2309,
+        "passes": 1037,
+        "shots": 28,
+        "pass_distance_m": 20.522540988735923,
+        "pass_completion": 0.9334619093539055,
+        "backward_pass_share": 0.5911282545805208,
+        "shot_distance_m": 17.156192125223548,
+        "shot_conversion": 0.14285714285714285
+      },
+      "analysis": {
+        "decisions": 2281,
+        "analyzed": 2281,
+        "candidates": 22687,
+        "legal_candidates": 22670,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2209,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 819,
+        "selected_backpass": 610,
+        "backpass_with_no_forward_target": 328
+      },
+      "rollout_outcomes": {
+        "intercepted": 7,
+        "received": 1
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-NEW-SUN",
+      "stats": {
+        "actions": 2291,
+        "passes": 1058,
+        "shots": 33,
+        "pass_distance_m": 20.60786956939387,
+        "pass_completion": 0.9366729678638941,
+        "backward_pass_share": 0.5812854442344045,
+        "shot_distance_m": 16.850275848781255,
+        "shot_conversion": 0.06060606060606061
+      },
+      "analysis": {
+        "decisions": 2258,
+        "analyzed": 2258,
+        "candidates": 22476,
+        "legal_candidates": 22454,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2147,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 808,
+        "selected_backpass": 605,
+        "backpass_with_no_forward_target": 319
+      },
+      "rollout_outcomes": {
+        "unreceived": 7,
+        "received": 1
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-TOT-MUN",
+      "stats": {
+        "actions": 2347,
+        "passes": 1077,
+        "shots": 16,
+        "pass_distance_m": 20.97573045394464,
+        "pass_completion": 0.9192200557103064,
+        "backward_pass_share": 0.5868152274837511,
+        "shot_distance_m": 14.988127762260737,
+        "shot_conversion": 0.0
+      },
+      "analysis": {
+        "decisions": 2331,
+        "analyzed": 2331,
+        "candidates": 23181,
+        "legal_candidates": 23158,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2229,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 800,
+        "selected_backpass": 629,
+        "backpass_with_no_forward_target": 332
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-MCI-AVL",
+      "stats": {
+        "actions": 2291,
+        "passes": 1025,
+        "shots": 21,
+        "pass_distance_m": 21.011745141549433,
+        "pass_completion": 0.9287804878048781,
+        "backward_pass_share": 0.577560975609756,
+        "shot_distance_m": 15.272542700779567,
+        "shot_conversion": 0.047619047619047616
+      },
+      "analysis": {
+        "decisions": 2270,
+        "analyzed": 2270,
+        "candidates": 22576,
+        "legal_candidates": 22553,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2182,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7,
+        "unavailable": 1
+      },
+      "contexts": {
+        "no_forward_legal_target": 791,
+        "selected_backpass": 585,
+        "backpass_with_no_forward_target": 325
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "unreceived": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "full"
+    },
+    {
+      "match_id": "PL26-W03-BOU-LIV",
+      "stats": {
+        "actions": 2298,
+        "passes": 1030,
+        "shots": 22,
+        "pass_distance_m": 20.71143130301545,
+        "pass_completion": 0.9368932038834952,
+        "backward_pass_share": 0.5912621359223301,
+        "shot_distance_m": 12.74786291789356,
+        "shot_conversion": 0.045454545454545456
+      },
+      "analysis": {
+        "decisions": 2276,
+        "analyzed": 2276,
+        "candidates": 22561,
+        "legal_candidates": 22540,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2168,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 821,
+        "selected_backpass": 601,
+        "backpass_with_no_forward_target": 320
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 3,
+        "unreceived": 1
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-LEE-BRE",
+      "stats": {
+        "actions": 2289,
+        "passes": 1049,
+        "shots": 26,
+        "pass_distance_m": 20.647046869437414,
+        "pass_completion": 0.9475691134413727,
+        "backward_pass_share": 0.5776930409914204,
+        "shot_distance_m": 15.21901850141938,
+        "shot_conversion": 0.11538461538461539
+      },
+      "analysis": {
+        "decisions": 2263,
+        "analyzed": 2263,
+        "candidates": 22562,
+        "legal_candidates": 22545,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2169,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 821,
+        "selected_backpass": 591,
+        "backpass_with_no_forward_target": 332
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-BHA-IPS",
+      "stats": {
+        "actions": 2283,
+        "passes": 1041,
+        "shots": 24,
+        "pass_distance_m": 20.61424385334537,
+        "pass_completion": 0.9462055715658021,
+        "backward_pass_share": 0.6099903938520653,
+        "shot_distance_m": 17.918087210843783,
+        "shot_conversion": 0.125
+      },
+      "analysis": {
+        "decisions": 2259,
+        "analyzed": 2259,
+        "candidates": 22444,
+        "legal_candidates": 22425,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2172,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 863,
+        "selected_backpass": 626,
+        "backpass_with_no_forward_target": 354
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-HUL-CHE",
+      "stats": {
+        "actions": 2286,
+        "passes": 1055,
+        "shots": 29,
+        "pass_distance_m": 20.857462340809594,
+        "pass_completion": 0.9402843601895735,
+        "backward_pass_share": 0.5791469194312796,
+        "shot_distance_m": 13.896428897299874,
+        "shot_conversion": 0.10344827586206896
+      },
+      "analysis": {
+        "decisions": 2257,
+        "analyzed": 2257,
+        "candidates": 22458,
+        "legal_candidates": 22441,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2178,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 771,
+        "selected_backpass": 603,
+        "backpass_with_no_forward_target": 302
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-COV-FUL",
+      "stats": {
+        "actions": 2266,
+        "passes": 1002,
+        "shots": 26,
+        "pass_distance_m": 21.089143089737984,
+        "pass_completion": 0.9421157684630739,
+        "backward_pass_share": 0.5858283433133733,
+        "shot_distance_m": 16.410651156375145,
+        "shot_conversion": 0.07692307692307693
+      },
+      "analysis": {
+        "decisions": 2240,
+        "analyzed": 2240,
+        "candidates": 22299,
+        "legal_candidates": 22279,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2155,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6
+      },
+      "contexts": {
+        "no_forward_legal_target": 826,
+        "selected_backpass": 572,
+        "backpass_with_no_forward_target": 313
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "intercepted": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W03-EVE-CRY",
+      "stats": {
+        "actions": 2307,
+        "passes": 1050,
+        "shots": 23,
+        "pass_distance_m": 20.586855530207092,
+        "pass_completion": 0.9171428571428571,
+        "backward_pass_share": 0.5971428571428572,
+        "shot_distance_m": 16.562494928161378,
+        "shot_conversion": 0.08695652173913043
+      },
+      "analysis": {
+        "decisions": 2284,
+        "analyzed": 2284,
+        "candidates": 22793,
+        "legal_candidates": 22771,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2209,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 848,
+        "selected_backpass": 616,
+        "backpass_with_no_forward_target": 319
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-ARS-NEW",
+      "stats": {
+        "actions": 2308,
+        "passes": 1054,
+        "shots": 22,
+        "pass_distance_m": 20.74306449400162,
+        "pass_completion": 0.9354838709677419,
+        "backward_pass_share": 0.594876660341556,
+        "shot_distance_m": 16.974439933596383,
+        "shot_conversion": 0.045454545454545456
+      },
+      "analysis": {
+        "decisions": 2286,
+        "analyzed": 2286,
+        "candidates": 22741,
+        "legal_candidates": 22720,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2199,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 842,
+        "selected_backpass": 612,
+        "backpass_with_no_forward_target": 351
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "full"
+    },
+    {
+      "match_id": "PL26-W04-MUN-NFO",
+      "stats": {
+        "actions": 2289,
+        "passes": 1042,
+        "shots": 26,
+        "pass_distance_m": 20.56808654526635,
+        "pass_completion": 0.9376199616122841,
+        "backward_pass_share": 0.6103646833013435,
+        "shot_distance_m": 15.167719760216354,
+        "shot_conversion": 0.038461538461538464
+      },
+      "analysis": {
+        "decisions": 2263,
+        "analyzed": 2263,
+        "candidates": 22580,
+        "legal_candidates": 22546,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2168,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 863,
+        "selected_backpass": 607,
+        "backpass_with_no_forward_target": 349
+      },
+      "rollout_outcomes": {
+        "intercepted": 4,
+        "received": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-SUN-MCI",
+      "stats": {
+        "actions": 2308,
+        "passes": 1046,
+        "shots": 14,
+        "pass_distance_m": 20.75404726468297,
+        "pass_completion": 0.9311663479923518,
+        "backward_pass_share": 0.6061185468451242,
+        "shot_distance_m": 16.624878282058322,
+        "shot_conversion": 0.14285714285714285
+      },
+      "analysis": {
+        "decisions": 2294,
+        "analyzed": 2294,
+        "candidates": 22823,
+        "legal_candidates": 22798,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2215,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 879,
+        "selected_backpass": 616,
+        "backpass_with_no_forward_target": 349
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-LIV-TOT",
+      "stats": {
+        "actions": 2289,
+        "passes": 1032,
+        "shots": 19,
+        "pass_distance_m": 20.47679456883723,
+        "pass_completion": 0.9273255813953488,
+        "backward_pass_share": 0.6007751937984496,
+        "shot_distance_m": 17.20154926354989,
+        "shot_conversion": 0.15789473684210525
+      },
+      "analysis": {
+        "decisions": 2270,
+        "analyzed": 2270,
+        "candidates": 22544,
+        "legal_candidates": 22520,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2195,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 784,
+        "selected_backpass": 606,
+        "backpass_with_no_forward_target": 326
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "unreceived": 1,
+        "intercepted": 3
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-AVL-LEE",
+      "stats": {
+        "actions": 2289,
+        "passes": 990,
+        "shots": 24,
+        "pass_distance_m": 20.65009068789902,
+        "pass_completion": 0.9323232323232323,
+        "backward_pass_share": 0.602020202020202,
+        "shot_distance_m": 15.192087936866827,
+        "shot_conversion": 0.08333333333333333
+      },
+      "analysis": {
+        "decisions": 2265,
+        "analyzed": 2265,
+        "candidates": 22558,
+        "legal_candidates": 22539,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2172,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 834,
+        "selected_backpass": 586,
+        "backpass_with_no_forward_target": 325
+      },
+      "rollout_outcomes": {
+        "received": 4,
+        "unreceived": 4
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-IPS-BOU",
+      "stats": {
+        "actions": 2284,
+        "passes": 1019,
+        "shots": 21,
+        "pass_distance_m": 21.246052661281315,
+        "pass_completion": 0.9421000981354269,
+        "backward_pass_share": 0.6182531894013739,
+        "shot_distance_m": 15.234850880197449,
+        "shot_conversion": 0.047619047619047616
+      },
+      "analysis": {
+        "decisions": 2263,
+        "analyzed": 2263,
+        "candidates": 22465,
+        "legal_candidates": 22447,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2167,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 6,
+        "unavailable": 1
+      },
+      "contexts": {
+        "no_forward_legal_target": 897,
+        "selected_backpass": 616,
+        "backpass_with_no_forward_target": 356
+      },
+      "rollout_outcomes": {
+        "intercepted": 6,
+        "received": 2
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-BRE-HUL",
+      "stats": {
+        "actions": 2311,
+        "passes": 1064,
+        "shots": 30,
+        "pass_distance_m": 20.736738403523265,
+        "pass_completion": 0.9172932330827067,
+        "backward_pass_share": 0.5845864661654135,
+        "shot_distance_m": 16.32469479819978,
+        "shot_conversion": 0.06666666666666667
+      },
+      "analysis": {
+        "decisions": 2281,
+        "analyzed": 2281,
+        "candidates": 22656,
+        "legal_candidates": 22629,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2212,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 903,
+        "selected_backpass": 613,
+        "backpass_with_no_forward_target": 347
+      },
+      "rollout_outcomes": {
+        "intercepted": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-FUL-BHA",
+      "stats": {
+        "actions": 2308,
+        "passes": 1075,
+        "shots": 25,
+        "pass_distance_m": 20.9755863355512,
+        "pass_completion": 0.932093023255814,
+        "backward_pass_share": 0.5841860465116279,
+        "shot_distance_m": 16.540275773210123,
+        "shot_conversion": 0.04
+      },
+      "analysis": {
+        "decisions": 2283,
+        "analyzed": 2283,
+        "candidates": 22681,
+        "legal_candidates": 22657,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2197,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 815,
+        "selected_backpass": 609,
+        "backpass_with_no_forward_target": 343
+      },
+      "rollout_outcomes": {
+        "intercepted": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-CHE-EVE",
+      "stats": {
+        "actions": 2300,
+        "passes": 1072,
+        "shots": 26,
+        "pass_distance_m": 20.858093995398136,
+        "pass_completion": 0.9319029850746269,
+        "backward_pass_share": 0.5783582089552238,
+        "shot_distance_m": 17.19387595180481,
+        "shot_conversion": 0.15384615384615385
+      },
+      "analysis": {
+        "decisions": 2274,
+        "analyzed": 2274,
+        "candidates": 22642,
+        "legal_candidates": 22627,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2182,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 797,
+        "selected_backpass": 607,
+        "backpass_with_no_forward_target": 302
+      },
+      "rollout_outcomes": {
+        "unreceived": 3,
+        "received": 5
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    },
+    {
+      "match_id": "PL26-W04-CRY-COV",
+      "stats": {
+        "actions": 2264,
+        "passes": 1017,
+        "shots": 30,
+        "pass_distance_m": 21.13271489963248,
+        "pass_completion": 0.9321533923303835,
+        "backward_pass_share": 0.5929203539823009,
+        "shot_distance_m": 17.270997224542363,
+        "shot_conversion": 0.16666666666666666
+      },
+      "analysis": {
+        "decisions": 2234,
+        "analyzed": 2234,
+        "candidates": 22210,
+        "legal_candidates": 22182,
+        "no_legal_pass": 0,
+        "all_passes_negative": 2158,
+        "rollout_runs": 2,
+        "cancelled_or_unresolved_actions": 7
+      },
+      "contexts": {
+        "no_forward_legal_target": 877,
+        "selected_backpass": 592,
+        "backpass_with_no_forward_target": 337
+      },
+      "rollout_outcomes": {
+        "received": 8
+      },
+      "postmatch_report": "present",
+      "tracking": "preview"
+    }
+  ],
+  "interpretation": [
+    "JS distance ranges 0-1; lower means closer distance distributions, not football intelligence.",
+    "Real holdout data has already been examined in the earlier run; this is a reproducibility/scale audit, not a fresh blind experiment.",
+    "Real outcome calibration is measured separately from the coach feasibility index. Coach scores are NOT validated probabilities.",
+    "Synthetic outcome Brier is an internal self-consistency measure, not independent real-world validation.",
+    "Coach compares passes only. Negative values do not mean a real player made a bad decision.",
+    "Real reference uses regular-play footed ground passes and footed shots in 8 World Cup matches; no continuous tracking.",
+    "Synthetic pass end locations for failed passes point to a defender; distance comparisons have an endpoint-definition mismatch.",
+    "Real under_pressure annotations and the simulator 3-metre proximity flag are different pressure definitions.",
+    "LLM agents are not invoked in this batch; deterministic analysis and four-scenario rollout tools are audited."
+  ]
+}

@@ -44,6 +44,21 @@ npm run dev
 
 Open <http://127.0.0.1:5173>. Serve the folder over HTTP rather than opening `index.html` directly: the browser needs to load JSONL files and a module Worker.
 
+### Language
+
+English is the default in every view: the dashboard, the coach page, the action
+review page, the validation page, the coach board and the 3D pitch sample. The
+source text is English, so a page reads correctly even before scripts run.
+
+The coach page keeps a `语言 / Language` selector. Choosing Chinese swaps the
+display strings through `coach-i18n.js`; identifiers, scores and exported evidence
+are never translated, and switching language discards in-flight model prose rather
+than mixing the two. The choice is remembered in `localStorage`.
+
+The only Chinese left in the source is the selector's own `中文` label, the Chinese
+default question that `coach.js` applies when the language is `zh`, and the
+dictionary in `coach-i18n.js`.
+
 ### Views
 
 The default landing page is **Home**. Choose any of the 20 clubs and click
@@ -75,6 +90,30 @@ The request sends the computed match report to your configured provider and may
 incur provider usage charges. Scores, statistics, evidence and Player of the Match
 remain computed locally. Failed requests leave the existing report intact.
 
+#### Pointing it at Azure AI Foundry
+
+The deployment can come from the environment instead of the Settings page, so a
+server can run without anyone entering a key:
+
+```sh
+export ITG_MODEL_BASE_URL="https://<resource>.cognitiveservices.azure.com/openai/v1"
+export ITG_MODEL_NAME="gpt-4.1-mini"
+export ITG_MODEL_API_KEY="<key>"
+python3 server.py
+```
+
+The Settings page overrides these for a local session. The key stays on the
+server: only whether one is configured is exposed to the browser.
+
+Azure AI Foundry authenticates with the `api-key` header and OpenAI with a bearer
+token. `model_service.auth_headers` sends both, so one client reaches either
+deployment and the base URL is the only difference.
+
+`ITG_DAILY_CALL_CAP` (default 200) bounds how many model calls a day the server
+will make. When the cap is spent, `/api/agent-review` returns `model_unavailable`
+with the computed comparison still attached, and the match-summary route returns
+502 without touching the stored report. A public demo entry cannot run up a bill.
+
 `model_service.py` owns model narration independently of `analysis_agent.py`.
 `server.py` provides same-origin settings and generation APIs on loopback only.
 The key is saved in `.local/model-service.json` with owner-only file permissions;
@@ -84,6 +123,96 @@ only expose whether a key exists. Leave the key blank to retain it, or choose
 Do not serve this directory with a generic static server after saving credentials.
 Pure static hosting can still show pre-generated reports but cannot use settings
 or generate new model summaries. This server is intended for local personal use.
+
+### The agent team
+
+Four roles reason over one frozen snapshot, in a fixed order:
+
+| Role | Job | Tool |
+| --- | --- | --- |
+| `coordinator` | Understand the question, delegate in order, synthesise | `delegate` |
+| `attack` | Compare the options and their trade-offs | `compare_actions` |
+| `defense` | Attack the conclusion: interception, sensitivity | `simulate_action` |
+| `audit` | Check citations, assumptions, overreach; accept or reject | `check_evidence` |
+
+The candidate set is the full comparison, not only passes: passes, three carries,
+a shot when in range, and holding. The roles share one evidence registry, so a
+number in the answer traces back to a computed value. `simulate_action` answers
+`rollout_supported: false` for a carry, shot or hold instead of failing.
+
+If the audit rejects the answer, the coordinator rewrites it once. If the rewrite
+does not hold up, only the computed comparison is returned. Every specialist
+recovers on its own: a failure is reported as the missing review rather than
+silently replaced with rule-based prose.
+
+#### The analysis contract
+
+The contract itself is the `contracts/` package: `schema.json` is the published
+shape, `model.py` holds the hashes and the cross-field checks, and
+`export_fixtures.py` pins the three fixed cases under `tests/fixtures/contracts/`.
+
+`decision/analysis.py` connects it to the running system, and
+`POST /api/analysis` is the route the interface and the agent share:
+
+```json
+{"match_id": "SYN-SINGLE-0001", "snapshot_id": "f181321fea364728",
+ "t_ms": 15600, "actor_id": "H10", "question": "Why not pass to #9?",
+ "mode": "fan", "language": "en",
+ "profile": {"profile_version": "sim-1", "kind": "simulated",
+             "preferred_foot": null, "weak_foot": null}}
+```
+
+The request carries a **snapshot id, not a frame**. The server resolves the
+frame from the match's own decision records and checks the id, so a client
+never holds the actual action, the outcome, or any future frame.
+
+The response carries `status`, `candidate_set_id`, `data_version`,
+`profile_version`, `candidates`, `evidence`, `explanation`, `agent_trace` and
+`limitations`.
+
+The rules the contract keeps:
+
+- `status` is one of `ready`, `partial`, `unknown`, `model_unavailable`, `error`.
+  A model failure returns `model_unavailable` with the comparison intact.
+- `candidate_set_id` is derived from the snapshot, the data version, the profile,
+  the candidates and the evidence. When it does not match the set the interface
+  is holding, the interface discards the agent answer.
+- `opportunity` and `main_risk` are derived from computed values, never written by
+  the model. No value gain, scenario weight or success percentage is shown, because
+  a rule assumption is not a probability.
+- `agent_trace` records role, tool, milliseconds and success. No key, no prompt
+  and no provider body appears in it.
+- `check_exchange` refuses a stale snapshot, a mismatched candidate set, a
+  dangling citation, a rank that is not contiguous, or a pass whose receiver is
+  not an active teammate. A refusal is a transport error, never a fabricated
+  response.
+
+One check the schema cannot do lives in `decision/analysis.py`: the schema
+validates structure and cannot read prose, so a response whose answer quotes a
+model internal ("value gain around 0.059") is marked `partial` with the claim
+named, instead of reaching the interface as if it were a probability.
+
+```sh
+npm run test:contract        # the pinned cases and the schema
+npm run validate:schema      # every record in the data against the schema
+```
+
+#### Comparing a single agent with the team
+
+To record where the team differs from one agent, run the same snapshot and
+question through both and read the two answers side by side:
+
+```sh
+# Pick a decision id from the match's decisions.jsonl
+python3 -m decision.agents --match PL26-W01-BHA-MUN --decision d000001 \
+  --question "Why not pass to the striker?"
+```
+
+It prints the single-reviewer text, the team's answer with its verdict and
+cited evidence ids, and the roles that ran. The single reviewer sees the same
+computed comparison but cannot audit its own prose; the audit role is what
+rejects an unsupported claim. Record one concrete difference per demo case
+rather than claiming a general improvement.
 
 ### Post-match analysis agent
 

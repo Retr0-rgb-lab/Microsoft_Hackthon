@@ -1,0 +1,1502 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nextplay:decision-analysis:1.0.0",
+  "title": "Decision analysis diagnostics and counterfactual extension",
+  "$defs": {
+    "analysis_request": {
+      "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_request"
+    },
+    "analysis_response": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "decision-analysis-1"
+        },
+        "match_id": {
+          "type": "string"
+        },
+        "decision_id": {
+          "type": "string"
+        },
+        "snapshot_id": {
+          "type": "string"
+        },
+        "candidate_set_id": {
+          "type": "string"
+        },
+        "data_version": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "const": "league"
+            },
+            "root": {
+              "const": "data/league"
+            },
+            "source_commit": {
+              "type": "string"
+            },
+            "dataset_version": {
+              "type": "string"
+            },
+            "model_id": {
+              "type": "string"
+            },
+            "snapshot_source": {
+              "const": "generator_decisions"
+            },
+            "match_excluded_from_fitting": {
+              "const": true
+            }
+          },
+          "required": [
+            "dataset",
+            "root",
+            "source_commit",
+            "dataset_version",
+            "model_id",
+            "snapshot_source",
+            "match_excluded_from_fitting"
+          ],
+          "additionalProperties": false
+        },
+        "snapshot": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/snapshot"
+        },
+        "public": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_response"
+        },
+        "action_conditions": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "player_id": {
+                  "type": "string"
+                },
+                "team_id": {
+                  "enum": [
+                    "HOME",
+                    "AWAY"
+                  ]
+                },
+                "speed_mps": {
+                  "type": "number"
+                },
+                "speed_kmh": {
+                  "type": "number"
+                },
+                "movement_heading_deg": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "movement_label": {
+                  "type": "string"
+                },
+                "nearest_opponent": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "player_id": {
+                          "type": "string"
+                        },
+                        "distance_m": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "player_id",
+                        "distance_m"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "under_pressure_3m": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "opponents_within_5m": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "ball_distance_m": {
+                  "type": "number"
+                },
+                "attacking_direction": {
+                  "enum": [
+                    "positive_x",
+                    "negative_x"
+                  ]
+                },
+                "body_orientation": {
+                  "type": "null"
+                },
+                "provenance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "player_id",
+                "team_id",
+                "speed_mps",
+                "speed_kmh",
+                "movement_heading_deg",
+                "movement_label",
+                "nearest_opponent",
+                "under_pressure_3m",
+                "opponents_within_5m",
+                "ball_distance_m",
+                "attacking_direction",
+                "body_orientation",
+                "provenance"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "model": {
+          "type": "object",
+          "properties": {
+            "model_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evaluation_mode": {
+              "const": "two_step_Q2"
+            },
+            "temperature": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "feature_units": {
+              "type": "object",
+              "properties": {
+                "progress": {
+                  "type": "string"
+                },
+                "y": {
+                  "type": "string"
+                },
+                "vx": {
+                  "type": "string"
+                },
+                "vy": {
+                  "type": "string"
+                },
+                "ball_speed": {
+                  "type": "string"
+                },
+                "distance": {
+                  "type": "string"
+                },
+                "advance": {
+                  "type": "string"
+                },
+                "lateral": {
+                  "type": "string"
+                },
+                "duration": {
+                  "type": "string"
+                },
+                "source_pressure": {
+                  "type": "string"
+                },
+                "receiver_pressure": {
+                  "type": "string"
+                },
+                "nearest_defender": {
+                  "type": "string"
+                },
+                "closing_speed": {
+                  "type": "string"
+                },
+                "lane_pressure": {
+                  "type": "string"
+                },
+                "intercept_margin": {
+                  "type": "string"
+                },
+                "goal_distance": {
+                  "type": "string"
+                },
+                "goal_angle": {
+                  "type": "string"
+                },
+                "blockers": {
+                  "type": "string"
+                },
+                "keeper_offset": {
+                  "type": "string"
+                },
+                "target_speed": {
+                  "type": "string"
+                },
+                "attack_ratio": {
+                  "type": "string"
+                },
+                "passing_ratio": {
+                  "type": "string"
+                },
+                "time_fraction": {
+                  "type": "string"
+                },
+                "score_difference": {
+                  "type": "string"
+                },
+                "player_difference": {
+                  "type": "string"
+                },
+                "receiver_nearest_defender": {
+                  "type": "string"
+                },
+                "receiver_reachable": {
+                  "type": "string"
+                },
+                "keeper_depth": {
+                  "type": "string"
+                },
+                "keeper_cover": {
+                  "type": "string"
+                },
+                "state_quality": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "progress",
+                "y",
+                "vx",
+                "vy",
+                "ball_speed",
+                "distance",
+                "advance",
+                "lateral",
+                "duration",
+                "source_pressure",
+                "receiver_pressure",
+                "nearest_defender",
+                "closing_speed",
+                "lane_pressure",
+                "intercept_margin",
+                "goal_distance",
+                "goal_angle",
+                "blockers",
+                "keeper_offset",
+                "target_speed",
+                "attack_ratio",
+                "passing_ratio",
+                "time_fraction",
+                "score_difference",
+                "player_difference",
+                "receiver_nearest_defender",
+                "receiver_reachable",
+                "keeper_depth",
+                "keeper_cover",
+                "state_quality"
+              ],
+              "additionalProperties": false
+            },
+            "probability_basis": {
+              "const": "unvalidated_tactical_assumption"
+            },
+            "relative_score_meaning": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "model_id",
+            "evaluation_mode",
+            "temperature",
+            "feature_units",
+            "probability_basis",
+            "relative_score_meaning"
+          ],
+          "additionalProperties": false
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action_id": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "pass",
+                  "carry",
+                  "shot"
+                ]
+              },
+              "eligible": {
+                "type": "boolean"
+              },
+              "rank": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "recipient_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "target": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "planned_duration_s": {
+                "type": "number"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "features": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "progress": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      },
+                      "vx": {
+                        "type": "number"
+                      },
+                      "vy": {
+                        "type": "number"
+                      },
+                      "ball_speed": {
+                        "type": "number"
+                      },
+                      "distance": {
+                        "type": "number"
+                      },
+                      "advance": {
+                        "type": "number"
+                      },
+                      "lateral": {
+                        "type": "number"
+                      },
+                      "duration": {
+                        "type": "number"
+                      },
+                      "source_pressure": {
+                        "type": "number"
+                      },
+                      "receiver_pressure": {
+                        "type": "number"
+                      },
+                      "nearest_defender": {
+                        "type": "number"
+                      },
+                      "closing_speed": {
+                        "type": "number"
+                      },
+                      "lane_pressure": {
+                        "type": "number"
+                      },
+                      "intercept_margin": {
+                        "type": "number"
+                      },
+                      "goal_distance": {
+                        "type": "number"
+                      },
+                      "goal_angle": {
+                        "type": "number"
+                      },
+                      "blockers": {
+                        "type": "number"
+                      },
+                      "keeper_offset": {
+                        "type": "number"
+                      },
+                      "target_speed": {
+                        "type": "number"
+                      },
+                      "attack_ratio": {
+                        "type": "number"
+                      },
+                      "passing_ratio": {
+                        "type": "number"
+                      },
+                      "time_fraction": {
+                        "type": "number"
+                      },
+                      "score_difference": {
+                        "type": "number"
+                      },
+                      "player_difference": {
+                        "type": "number"
+                      },
+                      "receiver_nearest_defender": {
+                        "type": "number"
+                      },
+                      "receiver_reachable": {
+                        "type": "number"
+                      },
+                      "keeper_depth": {
+                        "type": "number"
+                      },
+                      "keeper_cover": {
+                        "type": "number"
+                      },
+                      "state_quality": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "progress",
+                      "y",
+                      "vx",
+                      "vy",
+                      "ball_speed",
+                      "distance",
+                      "advance",
+                      "lateral",
+                      "duration",
+                      "source_pressure",
+                      "receiver_pressure",
+                      "nearest_defender",
+                      "closing_speed",
+                      "lane_pressure",
+                      "intercept_margin",
+                      "goal_distance",
+                      "goal_angle",
+                      "blockers",
+                      "keeper_offset",
+                      "target_speed",
+                      "attack_ratio",
+                      "passing_ratio",
+                      "time_fraction",
+                      "score_difference",
+                      "player_difference",
+                      "receiver_nearest_defender",
+                      "receiver_reachable",
+                      "keeper_depth",
+                      "keeper_cover",
+                      "state_quality"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "outcome_probabilities": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "number"
+                      },
+                      "loss": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "success",
+                      "loss"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "goal": {
+                        "type": "number"
+                      },
+                      "blocked": {
+                        "type": "number"
+                      },
+                      "saved": {
+                        "type": "number"
+                      },
+                      "off_target": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "goal",
+                      "blocked",
+                      "saved",
+                      "off_target"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "q2": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "q1": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "softmax_weight": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              },
+              "relative_score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "value_gap": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "decomposition": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "immediate": {
+                        "type": "number"
+                      },
+                      "continuation": {
+                        "type": "number"
+                      },
+                      "risk": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "immediate",
+                      "continuation",
+                      "risk"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "judgment": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  },
+                  "risk": {
+                    "type": "string"
+                  },
+                  "assumptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "evidence_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "similar_to_best": {
+                    "type": "boolean"
+                  },
+                  "comparison_tolerance": {
+                    "type": "number"
+                  },
+                  "counterfactual_available": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "reason",
+                  "risk",
+                  "assumptions",
+                  "evidence_ids",
+                  "similar_to_best",
+                  "comparison_tolerance",
+                  "counterfactual_available"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "action_id",
+              "type",
+              "eligible",
+              "rank",
+              "recipient_id",
+              "target",
+              "planned_duration_s",
+              "mode",
+              "features",
+              "outcome_probabilities",
+              "q2",
+              "q1",
+              "softmax_weight",
+              "relative_score",
+              "value_gap",
+              "decomposition",
+              "judgment"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "assessment": {
+          "type": "object",
+          "properties": {
+            "recommended_action_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "candidate_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "actual_action_included": {
+              "const": false
+            },
+            "similar_value_tolerance": {
+              "type": "number"
+            },
+            "agent_available": {
+              "const": false
+            }
+          },
+          "required": [
+            "recommended_action_id",
+            "candidate_count",
+            "actual_action_included",
+            "similar_value_tolerance",
+            "agent_available"
+          ],
+          "additionalProperties": false
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "request": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_request"
+        },
+        "player_source_profile": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "observation": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "issues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "used_in_probability": {
+              "const": false
+            },
+            "time_note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "observation",
+            "issues",
+            "used_in_probability"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "match_id",
+        "decision_id",
+        "snapshot_id",
+        "candidate_set_id",
+        "data_version",
+        "source",
+        "snapshot",
+        "public",
+        "action_conditions",
+        "model",
+        "candidates",
+        "assessment",
+        "limitations",
+        "request",
+        "player_source_profile"
+      ],
+      "additionalProperties": false
+    },
+    "counterfactual_request": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_request"
+        },
+        "candidate_set_id": {
+          "type": "string"
+        },
+        "action_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "request",
+        "candidate_set_id",
+        "action_id"
+      ],
+      "additionalProperties": false
+    },
+    "counterfactual_response": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "decision-counterfactual-1"
+        },
+        "action_id": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "counterfactual"
+        },
+        "source_t_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "horizon_s": {
+          "const": 4
+        },
+        "step_s": {
+          "const": 0.05
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "enum": [
+                  "quick",
+                  "baseline",
+                  "delayed",
+                  "wide_error"
+                ]
+              },
+              "reaction_s": {
+                "type": "number"
+              },
+              "lateral_error_m": {
+                "type": "number"
+              },
+              "outcome": {
+                "enum": [
+                  "received",
+                  "intercepted",
+                  "unreceived",
+                  "unresolved",
+                  "retained",
+                  "goal",
+                  "blocked",
+                  "saved",
+                  "off_target",
+                  "period_end"
+                ]
+              },
+              "controller_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "duration_s": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 4
+              },
+              "frames": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "elapsed_s": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 4
+                    },
+                    "players": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "prefixItems": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "number"
+                          }
+                        ],
+                        "items": false,
+                        "minItems": 5,
+                        "maxItems": 5
+                      }
+                    },
+                    "ball": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 6,
+                      "maxItems": 6
+                    }
+                  },
+                  "required": [
+                    "elapsed_s",
+                    "players",
+                    "ball"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "id",
+              "reaction_s",
+              "lateral_error_m",
+              "outcome",
+              "controller_id",
+              "duration_s",
+              "frames"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "snapshot_id": {
+          "type": "string"
+        },
+        "data_version": {
+          "type": "string"
+        },
+        "candidate_set_id": {
+          "type": "string"
+        },
+        "action_type": {
+          "enum": [
+            "pass",
+            "carry",
+            "shot"
+          ]
+        },
+        "start": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "target": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "template_speed_mps": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ranking_unchanged": {
+          "const": true
+        },
+        "not_observed_future": {
+          "const": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "action_id",
+        "kind",
+        "source_t_ms",
+        "horizon_s",
+        "step_s",
+        "scenarios",
+        "assumptions",
+        "summary",
+        "snapshot_id",
+        "data_version",
+        "candidate_set_id",
+        "action_type",
+        "start",
+        "target",
+        "template_speed_mps",
+        "ranking_unchanged",
+        "not_observed_future"
+      ],
+      "additionalProperties": false
+    },
+    "context_response": {
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/snapshot"
+        },
+        "metadata": {
+          "$ref": "urn:synthetic-football:records:1.0.0#/$defs/match"
+        },
+        "request": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_request"
+        },
+        "source_profile": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "observation": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "issues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "used_in_probability": {
+              "const": false
+            },
+            "time_note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "observation",
+            "issues",
+            "used_in_probability"
+          ],
+          "additionalProperties": false
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "const": "league"
+            },
+            "root": {
+              "const": "data/league"
+            },
+            "source_commit": {
+              "type": "string"
+            },
+            "dataset_version": {
+              "type": "string"
+            },
+            "model_id": {
+              "type": "string"
+            },
+            "snapshot_source": {
+              "const": "generator_decisions"
+            },
+            "match_excluded_from_fitting": {
+              "const": true
+            }
+          },
+          "required": [
+            "dataset",
+            "root",
+            "source_commit",
+            "dataset_version",
+            "model_id",
+            "snapshot_source",
+            "match_excluded_from_fitting"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "snapshot",
+        "metadata",
+        "request",
+        "source_profile",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "index_response": {
+      "type": "object",
+      "properties": {
+        "match_id": {
+          "type": "string"
+        },
+        "data_version": {
+          "type": "string"
+        },
+        "identification": {
+          "type": "string"
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "decisions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "covered": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "conflict": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "decisions",
+            "covered"
+          ],
+          "additionalProperties": false
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "decision_id": {
+                "type": "string"
+              },
+              "snapshot_id": {
+                "type": "string"
+              },
+              "t_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "period": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "actor_id": {
+                "type": "string"
+              },
+              "team_id": {
+                "enum": [
+                  "HOME",
+                  "AWAY",
+                  null
+                ]
+              },
+              "coverage": {
+                "const": "exact"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "analyzable": {
+                "type": "boolean"
+              },
+              "category": {
+                "enum": [
+                  "opportunity",
+                  "favoured",
+                  "similar",
+                  "comparison"
+                ]
+              },
+              "value_loss": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "best_q": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "best_action_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "zone": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              },
+              "possession_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision_id",
+              "snapshot_id",
+              "t_ms",
+              "period",
+              "actor_id",
+              "team_id",
+              "coverage",
+              "kind",
+              "analyzable",
+              "category",
+              "value_loss",
+              "best_q",
+              "best_action_id",
+              "zone",
+              "possession_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "ratings": {
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "attack": {
+                    "type": "number"
+                  },
+                  "defense": {
+                    "type": "number"
+                  },
+                  "passing": {
+                    "type": "number"
+                  },
+                  "pressing": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "attack",
+                  "defense",
+                  "passing",
+                  "pressing"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "representative_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "largest_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_dataset": {
+          "const": "league"
+        },
+        "selection_version": {
+          "const": "representative-1"
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "covered": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "analyzable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "representative_players": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "covered",
+            "analyzable",
+            "players",
+            "representative_players"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "match_id",
+        "data_version",
+        "identification",
+        "counts",
+        "records",
+        "ratings",
+        "representative_ids",
+        "largest_ids",
+        "source_dataset",
+        "selection_version",
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "catalog_response": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "decision-analysis-1"
+        },
+        "dataset": {
+          "const": "league"
+        },
+        "totals": {
+          "type": "object",
+          "properties": {
+            "decisions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "covered": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "conflict": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "decisions",
+            "covered",
+            "missing",
+            "conflict"
+          ],
+          "additionalProperties": false
+        },
+        "source_commit": {
+          "type": "string"
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "match_id": {
+                "type": "string"
+              },
+              "covered": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "match_id",
+              "covered"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "dataset",
+        "totals",
+        "source_commit",
+        "matches"
+      ],
+      "additionalProperties": false
+    },
+    "bound_request": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_request"
+        },
+        "candidate_set_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "request",
+        "candidate_set_id"
+      ],
+      "additionalProperties": false
+    },
+    "actual_response": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "$ref": "urn:nextplay:contracts:1.0.0#/$defs/analysis_response"
+        },
+        "actual_action_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "response",
+        "actual_action_id",
+        "resolution",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "routes_response": {
+      "type": "object",
+      "properties": {
+        "candidate_set_id": {
+          "type": "string"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action_id": {
+                "type": "string"
+              },
+              "start": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "target": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "required": [
+              "action_id",
+              "start",
+              "target"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "candidate_set_id",
+        "routes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/analysis_response"
+    },
+    {
+      "$ref": "#/$defs/counterfactual_response"
+    }
+  ]
+}

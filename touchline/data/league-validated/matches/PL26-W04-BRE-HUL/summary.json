@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W04-BRE-HUL",
+  "seed": 20265025,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655526,
+  "state_snapshots": 6001,
+  "event_count": 3826,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 120,
+    "restart": 37,
+    "pressure": 1221,
+    "carry": 1217,
+    "pass": 1064,
+    "shot": 30,
+    "stoppage": 17,
+    "interception": 88,
+    "save": 13,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 509,
+      "completed_passes": 466,
+      "shots": 16,
+      "shots_on_target": 7,
+      "interceptions": 45,
+      "pressure_events": 619,
+      "possession_seconds": 2812.8,
+      "possession_pct": 49.31,
+      "pass_accuracy_pct": 91.55
+    },
+    "AWAY": {
+      "passes": 555,
+      "completed_passes": 510,
+      "shots": 14,
+      "shots_on_target": 8,
+      "interceptions": 43,
+      "pressure_events": 602,
+      "possession_seconds": 2891.0,
+      "possession_pct": 50.69,
+      "pass_accuracy_pct": 91.89
+    }
+  },
+  "distance_m": {
+    "H01": 3203.1,
+    "H02": 7415.1,
+    "H03": 10814.6,
+    "H04": 11240.2,
+    "H05": 10208.3,
+    "H06": 7087.5,
+    "H07": 11765.8,
+    "H08": 11655.7,
+    "H09": 11452.2,
+    "H10": 12845.0,
+    "H11": 11664.3,
+    "A01": 3251.4,
+    "A02": 9731.6,
+    "A03": 10726.4,
+    "A04": 11590.9,
+    "A05": 8670.7,
+    "A06": 9086.0,
+    "A07": 11967.1,
+    "A08": 11871.7,
+    "A09": 11762.7,
+    "A10": 11827.2,
+    "A11": 7807.6,
+    "H12": 4400.6,
+    "H13": 0.0,
+    "H14": 2355.6,
+    "A12": 2377.5,
+    "A13": 3484.3,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 788800,
+      "period": 1,
+      "period_ms": 788800,
+      "team_id": "HOME",
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "H10",
+      "player_name": "Driftwood Player 26",
+      "shirt_number": 13,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 5928800,
+      "period": 2,
+      "period_ms": 2928800,
+      "team_id": "HOME",
+      "club_id": "BRE",
+      "club_name": "Driftwood FC",
+      "player_id": "H11",
+      "player_name": "Driftwood Player 24",
+      "shirt_number": 9,
+      "score": [
+        2,
+        0
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 4,
+    "kickoff_local": "2026-11-15T14:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Driftwood Park"
+  },
+  "home_club": {
+    "club_id": "BRE",
+    "name": "Driftwood FC",
+    "short_name": "Driftwood FC",
+    "stadium": "Driftwood Park",
+    "colors": {
+      "primary": "#E30613",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "HUL",
+    "name": "Kingswell FC",
+    "short_name": "Kingswell FC",
+    "stadium": "Kingswell Park",
+    "colors": {
+      "primary": "#F5A12D",
+      "secondary": "#000000"
+    },
+    "formation": "4-3-3"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-COV-LIV",
+  "seed": 20262025,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656023,
+  "state_snapshots": 6001,
+  "event_count": 3750,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 87,
+    "restart": 31,
+    "pressure": 1234,
+    "carry": 1241,
+    "pass": 1029,
+    "interception": 61,
+    "shot": 24,
+    "save": 9,
+    "stoppage": 15,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    2,
+    0
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 545,
+      "completed_passes": 514,
+      "shots": 12,
+      "shots_on_target": 6,
+      "interceptions": 30,
+      "pressure_events": 529,
+      "possession_seconds": 3192.4,
+      "possession_pct": 55.66,
+      "pass_accuracy_pct": 94.31
+    },
+    "AWAY": {
+      "passes": 484,
+      "completed_passes": 454,
+      "shots": 12,
+      "shots_on_target": 5,
+      "interceptions": 31,
+      "pressure_events": 705,
+      "possession_seconds": 2543.4,
+      "possession_pct": 44.34,
+      "pass_accuracy_pct": 93.8
+    }
+  },
+  "distance_m": {
+    "H01": 3198.5,
+    "H02": 7292.5,
+    "H03": 10915.7,
+    "H04": 10622.9,
+    "H05": 9606.8,
+    "H06": 7011.1,
+    "H07": 12198.9,
+    "H08": 11369.4,
+    "H09": 11097.5,
+    "H10": 12444.9,
+    "H11": 11727.8,
+    "A01": 3106.7,
+    "A02": 9806.0,
+    "A03": 10606.0,
+    "A04": 11049.9,
+    "A05": 9080.6,
+    "A06": 9328.9,
+    "A07": 12589.5,
+    "A08": 12357.4,
+    "A09": 11541.8,
+    "A10": 12283.6,
+    "A11": 7649.7,
+    "H12": 4460.6,
+    "H13": 0.0,
+    "H14": 2576.4,
+    "A12": 2212.2,
+    "A13": 3646.3,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 1135600,
+      "period": 1,
+      "period_ms": 1135600,
+      "team_id": "HOME",
+      "club_id": "COV",
+      "club_name": "Glenvale FC",
+      "player_id": "H10",
+      "player_name": "Glenvale Player 22",
+      "shirt_number": 9,
+      "score": [
+        1,
+        0
+      ]
+    },
+    {
+      "t_ms": 4216800,
+      "period": 2,
+      "period_ms": 1216800,
+      "team_id": "HOME",
+      "club_id": "COV",
+      "club_name": "Glenvale FC",
+      "player_id": "H11",
+      "player_name": "Glenvale Player 26",
+      "shirt_number": 18,
+      "score": [
+        2,
+        0
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-25T14:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Glenvale Park"
+  },
+  "home_club": {
+    "club_id": "COV",
+    "name": "Glenvale FC",
+    "short_name": "Glenvale",
+    "stadium": "Glenvale Park",
+    "colors": {
+      "primary": "#6CB4E4",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "LIV",
+    "name": "Northstar FC",
+    "short_name": "Northstar FC",
+    "stadium": "Northstar Park",
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

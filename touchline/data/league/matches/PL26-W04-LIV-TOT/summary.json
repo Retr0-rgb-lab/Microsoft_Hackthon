@@ -1,0 +1,165 @@
+{
+  "match_id": "PL26-W04-LIV-TOT",
+  "seed": 20265022,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656367,
+  "state_snapshots": 6001,
+  "event_count": 3772,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 97,
+    "restart": 26,
+    "carry": 1238,
+    "pressure": 1247,
+    "pass": 1032,
+    "interception": 75,
+    "shot": 19,
+    "stoppage": 11,
+    "save": 8,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    2
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 540,
+      "completed_passes": 501,
+      "shots": 9,
+      "shots_on_target": 6,
+      "interceptions": 36,
+      "pressure_events": 621,
+      "possession_seconds": 2927.8,
+      "possession_pct": 50.83,
+      "pass_accuracy_pct": 92.78
+    },
+    "AWAY": {
+      "passes": 492,
+      "completed_passes": 456,
+      "shots": 10,
+      "shots_on_target": 5,
+      "interceptions": 39,
+      "pressure_events": 626,
+      "possession_seconds": 2832.0,
+      "possession_pct": 49.17,
+      "pass_accuracy_pct": 92.68
+    }
+  },
+  "distance_m": {
+    "H01": 2956.1,
+    "H02": 7537.8,
+    "H03": 10941.9,
+    "H04": 10674.7,
+    "H05": 9870.3,
+    "H06": 7320.7,
+    "H07": 12085.9,
+    "H08": 11948.7,
+    "H09": 11870.6,
+    "H10": 12469.3,
+    "H11": 11175.9,
+    "A01": 2969.2,
+    "A02": 9945.2,
+    "A03": 11172.4,
+    "A04": 10943.8,
+    "A05": 8543.6,
+    "A06": 9564.4,
+    "A07": 12352.6,
+    "A08": 11798.3,
+    "A09": 11686.0,
+    "A10": 12352.0,
+    "A11": 7462.7,
+    "H12": 4520.0,
+    "H13": 0.0,
+    "H14": 2509.4,
+    "A12": 2378.8,
+    "A13": 4106.7,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 591200,
+      "period": 1,
+      "period_ms": 591200,
+      "team_id": "AWAY",
+      "club_id": "TOT",
+      "club_name": "Thornvale FC",
+      "player_id": "A10",
+      "player_name": "Thornvale Player 27",
+      "shirt_number": 19,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 3251800,
+      "period": 2,
+      "period_ms": 251800,
+      "team_id": "HOME",
+      "club_id": "LIV",
+      "club_name": "Northstar FC",
+      "player_id": "H10",
+      "player_name": "Northstar Player 25",
+      "shirt_number": 9,
+      "score": [
+        1,
+        1
+      ]
+    },
+    {
+      "t_ms": 4281600,
+      "period": 2,
+      "period_ms": 1281600,
+      "team_id": "AWAY",
+      "club_id": "TOT",
+      "club_name": "Thornvale FC",
+      "player_id": "A08",
+      "player_name": "Thornvale Player 14",
+      "shirt_number": 8,
+      "score": [
+        1,
+        2
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 4,
+    "kickoff_local": "2026-11-14T17:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Northstar Park"
+  },
+  "home_club": {
+    "club_id": "LIV",
+    "name": "Northstar FC",
+    "short_name": "Northstar FC",
+    "stadium": "Northstar Park",
+    "colors": {
+      "primary": "#C8102E",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "TOT",
+    "name": "Thornvale FC",
+    "short_name": "Thornvale",
+    "stadium": "Thornvale Park",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#132257"
+    },
+    "formation": "4-3-3"
+  }
+}

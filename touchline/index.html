@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f9">
-  <meta name="description" content="Touchline football intelligence: match replay, live statistics, events and fictional 2026/27 Northwater League squads.">
+  <meta name="description" content="Touchline football intelligence: match replay, live statistics, events and 2026/27 fictional club squads.">
   <title>Touchline · Football Intelligence</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23ed713d'/%3E%3Cpath d='M9 12h22M20 12v19' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=2.5.0">
-  <script type="module" src="app.js?v=2.5.0"></script>
+  <link rel="stylesheet" href="styles.css?v=2.6.0">
+  <script type="module" src="app.js?v=2.6.0"></script>
 </head>
 <body>
   <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -34,6 +34,7 @@
     <div class="workspace"><span class="workspace-icon">F</span><div>Football Ops<small>Personal workspace</small></div><span class="workspace-arrow">⌄</span></div>
     <div class="nav-caption">Workspace</div>
     <nav aria-label="Main navigation">
+      <a class="nav-item" href="coach.html">Decision Coach ↗</a>
       <button class="nav-item active" data-view="home"><svg><use href="#i-grid"/></svg>Home</button>
       <button class="nav-item" data-view="overview"><svg><use href="#i-grid"/></svg>Overview<span class="nav-dot"></span></button>
       <button class="nav-item" data-view="replay"><svg><use href="#i-pitch"/></svg>Replay</button>
@@ -42,7 +43,7 @@
       <button class="nav-item" data-view="squads"><svg><use href="#i-shirt"/></svg>Squads</button>
       <button class="nav-item" data-view="settings"><svg><use href="#i-grid"/></svg>Settings</button>
     </nav>
-    <div class="sidebar-bottom"><div class="dataset-card"><span class="tiny-label">Current dataset</span><strong><span class="status-dot"></span><span id="dataset-title">Northwater League 2026/27</span></strong><p id="dataset-summary">20 clubs · 40 matches · 5 Hz</p><div class="dataset-line"></div><span>Local data <span class="version" id="dataset-version">v2.2</span></span></div><div class="profile"><div class="avatar">F</div><div>Football Lab<small>Every run leaves a trace</small></div></div></div>
+    <div class="sidebar-bottom"><div class="dataset-card"><span class="tiny-label">Current dataset</span><strong><span class="status-dot"></span><span id="dataset-title">NextPlay League 2026/27</span></strong><p id="dataset-summary">20 clubs · 40 matches · 5 Hz</p><div class="dataset-line"></div><span>Local data <span class="version" id="dataset-version">v2.2</span></span></div><div class="profile"><div class="avatar">F</div><div>Football Lab<small>Every run leaves a trace</small></div></div></div>
   </aside>
   <div class="app-shell">
     <header class="topbar"><div class="breadcrumb">Workspace<span>/</span><strong id="breadcrumb">Overview</strong></div><div class="topbar-right"><span class="local-indicator"><i></i>Local data connected</span><span class="top-avatar">FL</span></div></header>
@@ -64,7 +65,7 @@
       </section>
       <section class="match-picker card" id="match-picker" aria-label="Select match" hidden>
         <div class="match-picker-summary">
-          <span class="tiny-label">NORTHWATER LEAGUE · 2026/27</span>
+          <span class="tiny-label">NEXTPLAY LEAGUE (SYNTHETIC) · 2026/27</span>
           <strong>Select match</strong>
           <p id="match-picker-meta">Loading league schedule…</p>
         </div>
@@ -80,7 +81,7 @@
       <div id="load-status" class="load-status" role="status">Loading league schedule…</div>
       <div id="error" class="error-box" role="alert" hidden></div>
       <section class="match-card card" id="match-summary-card" aria-label="Match score">
-        <div class="match-meta"><span><span class="orange-dot"></span><span id="match-competition">Northwater League (sim)</span><span class="meta-divider">/</span><span id="match-week">Matchweek 1</span><span class="meta-divider meta-divider-id">/</span><span id="match-id">NW26-W01</span></span><span class="subtle-badge">Simulated</span></div>
+        <div class="match-meta"><span><span class="orange-dot"></span><span id="match-competition">NextPlay League (sim)</span><span class="meta-divider">/</span><span id="match-week">Matchweek 1</span><span class="meta-divider meta-divider-id">/</span><span id="match-id">PL26-W01</span></span><span class="subtle-badge">Simulated</span></div>
         <div class="scoreboard"><div class="team home-team"><div class="crest home-crest"><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M5 4h30v23L20 40 5 27Z"/><path d="M12 26V15h16v11M16 15v-4m8 4v-4M12 21h16M20 15v16"/></svg></div><div><h2 id="home-name">Home</h2><p><span id="home-en">HOME</span> <span>Home</span></p></div></div><div class="score-center"><div class="score"><span id="home-score">–</span><span class="score-dash">:</span><span id="away-score">–</span></div><div class="match-clock"><span id="period-label">Replay</span><strong id="clock">--:--</strong></div></div><div class="team away-team"><div><h2 id="away-name">Away</h2><p><span>Away</span> <span id="away-en">AWAY</span></p></div><div class="crest away-crest"><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M5 4h30v23L20 40 5 27Z"/><path d="m9 28 9-15 5 8 3-5 7 12ZM18 13l3 15"/></svg></div></div></div>
         <div class="match-bottom"><span><svg><use href="#i-clock"/></svg><span id="match-kickoff">Kick-off</span></span><span id="score-context">Score synced to replay</span><span><svg><use href="#i-users"/></svg>22 starters</span></div>
       </section>
@@ -111,22 +112,30 @@
         </form>
         <p id="model-settings-status" role="status" aria-live="polite"></p>
       </section>
-      <section id="stats-view" hidden><div class="model-summary-controls"><button class="button" id="generate-model-summary">Generate model summary</button><span id="model-summary-status" role="status" aria-live="polite">Configure your model in Settings, then generate a summary for this match.</span></div><section id="match-report" class="card match-report" aria-label="Post-match analysis"><p class="empty" role="status">Loading post-match analysis…</p></section><div class="analysis-heading"><div><h2>Read the match in numbers.</h2><p>Final match statistics, independent of replay time.</p></div><span class="subtle-badge">FULL TIME</span></div><div id="full-metrics" class="metric-grid"></div><div class="analysis-grid"><section class="card"><div class="card-heading"><h3>Team comparison</h3><div class="legend"><span><i class="home-dot"></i><span id="full-legend-home">Home</span></span><span><i class="away-dot"></i><span id="full-legend-away">Away</span></span></div></div><div id="full-stats" class="full-stats"></div></section><section class="card"><div class="card-heading"><h3>Key events</h3><span class="subtle-badge">Full time</span></div><div id="all-goals" class="goal-list"></div></section></div></section>
+      <section id="stats-view" hidden><section class="card player-analysis-card"><h2>Player performance</h2><p>Select a player to explore full-match statistics and running coverage.</p><div id="analysis-players"></div></section><div class="model-summary-controls"><button class="button" id="generate-model-summary">Generate model summary</button><span id="model-summary-status" role="status" aria-live="polite">Configure your model in Settings, then generate a summary for this match.</span></div><section id="match-report" class="card match-report" aria-label="Post-match analysis"><p class="empty" role="status">Loading post-match analysis…</p></section><div class="analysis-heading"><div><h2>Read the match in numbers.</h2><p>Final match statistics, independent of replay time.</p></div><span class="subtle-badge">FULL TIME</span></div><div id="full-metrics" class="metric-grid"></div><div class="analysis-grid"><section class="card"><div class="card-heading"><h3>Team comparison</h3><div class="legend"><span><i class="home-dot"></i><span id="full-legend-home">Home</span></span><span><i class="away-dot"></i><span id="full-legend-away">Away</span></span></div></div><div id="full-stats" class="full-stats"></div></section><section class="card"><div class="card-heading"><h3>Key events</h3><span class="subtle-badge">Full time</span></div><div id="all-goals" class="goal-list"></div></section></div></section>
       <section id="lineup-view" hidden><div class="analysis-heading"><div><h2>Twenty-two starting coordinates.</h2><p>Starting lineups and substitutes · final appearance status · distances are simulated</p></div></div><div class="roster-grid" id="rosters"></div></section>
       <section id="squads-view" hidden>
-        <div class="analysis-heading"><div><h2>Club rosters.</h2><p>Fictional squad numbers and player details for the Northwater League. Select a club and explore its full roster.</p></div><span class="subtle-badge" id="squad-season">2026/27</span></div>
+        <div class="analysis-heading"><div><h2>Club rosters.</h2><p>Fictional club and player names; original roster attributes preserved. Select a club and explore its full roster.</p></div><span class="subtle-badge" id="squad-season">2026/27</span></div>
         <section class="card squad-toolbar">
           <div class="squad-toolbar-fields">
             <label class="picker-field"><span>Club</span><select id="squad-club-select" aria-label="Select club"></select></label>
             <label class="picker-field squad-search-field"><span>Search player</span><input id="squad-search" type="search" placeholder="Name, position or nationality" autocomplete="off"></label>
             <div class="squad-count" id="squad-count"></div>
           </div>
-          <p class="squad-source" id="squad-source">Fictional rosters produced by generate.py. Names, shirts and dates of birth are procedural.</p>
+          <p class="squad-source">Fictional identities; squad sizes, shirt numbers and player attributes are unchanged. <a id="squad-source" href="README.md#squad-data">Attribute provenance and limitations</a>.</p>
         </section>
         <div id="squad-content"></div>
       </section>
-      <footer><span><span class="footer-mark">t.</span> TOUCHLINE <span class="footer-divider">/</span> Football data, made clear.</span><span>Simulated match data · fictional 2026/27 squads</span></footer>
+      <footer><span><span class="footer-mark">t.</span> TOUCHLINE <span class="footer-divider">/</span> Football data, made clear.</span><span>Simulated match data · fictional clubs and players</span></footer>
     </main>
   </div>
+  <dialog id="player-dialog" aria-labelledby="player-report-title">
+    <div class="player-report-heading"><div><span class="tiny-label">PLAYER PERFORMANCE</span><h2 id="player-report-title"></h2><p id="player-report-context"></p></div><button class="button" id="close-player-report" aria-label="Close player report" autofocus>Close ×</button></div>
+    <label for="report-player-select">Player</label><select id="report-player-select"></select>
+    <div id="player-report-stats"></div>
+    <h3>Running coverage</h3><div id="player-heatmap"></div>
+    <div id="heatmap-legend"><span>Less time</span><i></i><span>More time</span></div>
+    <p class="heatmap-note">Full-match simulated tracking · colours show time spent in each area, scaled per player. Both halves use fixed pitch coordinates; ends switch at half-time. Only on-pitch samples are included.</p>
+  </dialog>
 </body>
 </html>

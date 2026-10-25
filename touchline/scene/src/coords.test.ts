@@ -125,7 +125,7 @@ describe("hud", () => {
       camera: "broadcast",
       hz: 25,
     });
-    expect(line).toContain("转播");
+    expect(line).toContain("Broadcast");
     expect(line).toContain("ball z 1.80 m");
     expect(line).toContain("22 players");
     expect(clipNameFromQuery(null)).toBe("clip.jsonl");

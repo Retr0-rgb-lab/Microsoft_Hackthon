@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-HUL-FUL",
+  "seed": 20262028,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656012,
+  "state_snapshots": 6001,
+  "event_count": 3731,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 95,
+    "restart": 35,
+    "pressure": 1193,
+    "carry": 1192,
+    "pass": 1077,
+    "interception": 64,
+    "shot": 28,
+    "stoppage": 18,
+    "save": 10,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 559,
+      "completed_passes": 525,
+      "shots": 13,
+      "shots_on_target": 7,
+      "interceptions": 30,
+      "pressure_events": 549,
+      "possession_seconds": 3037.6,
+      "possession_pct": 53.22,
+      "pass_accuracy_pct": 93.92
+    },
+    "AWAY": {
+      "passes": 518,
+      "completed_passes": 488,
+      "shots": 15,
+      "shots_on_target": 5,
+      "interceptions": 34,
+      "pressure_events": 644,
+      "possession_seconds": 2670.2,
+      "possession_pct": 46.78,
+      "pass_accuracy_pct": 94.21
+    }
+  },
+  "distance_m": {
+    "H01": 3204.7,
+    "H02": 7516.9,
+    "H03": 10648.6,
+    "H04": 10665.0,
+    "H05": 10112.5,
+    "H06": 7292.3,
+    "H07": 12287.0,
+    "H08": 11697.7,
+    "H09": 11727.7,
+    "H10": 12331.2,
+    "H11": 11393.6,
+    "A01": 3154.1,
+    "A02": 10039.4,
+    "A03": 10757.0,
+    "A04": 11088.0,
+    "A05": 8569.6,
+    "A06": 9362.7,
+    "A07": 12457.8,
+    "A08": 11781.4,
+    "A09": 11468.8,
+    "A10": 12849.4,
+    "A11": 8067.1,
+    "H12": 4105.9,
+    "H13": 0.0,
+    "H14": 2550.7,
+    "A12": 2382.3,
+    "A13": 3504.4,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 2406400,
+      "period": 1,
+      "period_ms": 2406400,
+      "team_id": "AWAY",
+      "club_id": "FUL",
+      "club_name": "Juniper FC",
+      "player_id": "A10",
+      "player_name": "Juniper Player 24",
+      "shirt_number": 7,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 4517200,
+      "period": 2,
+      "period_ms": 1517200,
+      "team_id": "HOME",
+      "club_id": "HUL",
+      "club_name": "Kingswell FC",
+      "player_id": "H12",
+      "player_name": "Kingswell Player 16",
+      "shirt_number": 14,
+      "score": [
+        1,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-25T19:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Kingswell Park"
+  },
+  "home_club": {
+    "club_id": "HUL",
+    "name": "Kingswell FC",
+    "short_name": "Kingswell FC",
+    "stadium": "Kingswell Park",
+    "colors": {
+      "primary": "#F5A12D",
+      "secondary": "#000000"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "FUL",
+    "name": "Juniper FC",
+    "short_name": "Juniper FC",
+    "stadium": "Juniper Park",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#000000"
+    },
+    "formation": "4-3-3"
+  }
+}

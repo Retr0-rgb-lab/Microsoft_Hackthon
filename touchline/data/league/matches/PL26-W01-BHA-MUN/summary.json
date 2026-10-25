@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-BHA-MUN",
+  "seed": 20262023,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656015,
+  "state_snapshots": 6001,
+  "event_count": 3769,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 100,
+    "restart": 33,
+    "pressure": 1174,
+    "carry": 1208,
+    "pass": 1112,
+    "interception": 71,
+    "shot": 26,
+    "stoppage": 21,
+    "save": 5,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    0,
+    2
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 650,
+      "completed_passes": 615,
+      "shots": 14,
+      "shots_on_target": 1,
+      "interceptions": 36,
+      "pressure_events": 524,
+      "possession_seconds": 3212.6,
+      "possession_pct": 56.32,
+      "pass_accuracy_pct": 94.62
+    },
+    "AWAY": {
+      "passes": 462,
+      "completed_passes": 426,
+      "shots": 12,
+      "shots_on_target": 6,
+      "interceptions": 35,
+      "pressure_events": 650,
+      "possession_seconds": 2491.2,
+      "possession_pct": 43.68,
+      "pass_accuracy_pct": 92.21
+    }
+  },
+  "distance_m": {
+    "H01": 3199.5,
+    "H02": 7460.2,
+    "H03": 10909.6,
+    "H04": 11060.7,
+    "H05": 10185.6,
+    "H06": 7166.7,
+    "H07": 12327.3,
+    "H08": 11704.2,
+    "H09": 12177.2,
+    "H10": 12931.9,
+    "H11": 11298.8,
+    "A01": 3276.1,
+    "A02": 10386.8,
+    "A03": 11078.9,
+    "A04": 11047.4,
+    "A05": 8504.6,
+    "A06": 9844.0,
+    "A07": 12694.2,
+    "A08": 12256.7,
+    "A09": 11774.1,
+    "A10": 12973.6,
+    "A11": 8150.3,
+    "H12": 4409.6,
+    "H13": 0.0,
+    "H14": 2668.9,
+    "A12": 2582.4,
+    "A13": 3966.7,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 3330000,
+      "period": 2,
+      "period_ms": 330000,
+      "team_id": "AWAY",
+      "club_id": "MUN",
+      "club_name": "Pinecrest FC",
+      "player_id": "A10",
+      "player_name": "Pinecrest Player 25",
+      "shirt_number": 10,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 5728200,
+      "period": 2,
+      "period_ms": 2728200,
+      "team_id": "AWAY",
+      "club_id": "MUN",
+      "club_name": "Pinecrest FC",
+      "player_id": "A10",
+      "player_name": "Pinecrest Player 25",
+      "shirt_number": 10,
+      "score": [
+        0,
+        2
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-24T20:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Ember Park"
+  },
+  "home_club": {
+    "club_id": "BHA",
+    "name": "Ember FC",
+    "short_name": "Ember",
+    "stadium": "Ember Park",
+    "colors": {
+      "primary": "#0057B8",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "MUN",
+    "name": "Pinecrest FC",
+    "short_name": "Pinecrest",
+    "stadium": "Pinecrest Park",
+    "colors": {
+      "primary": "#DA291C",
+      "secondary": "#FBE122"
+    },
+    "formation": "4-3-3"
+  }
+}

@@ -1,51 +1,50 @@
 {
-  "note": "Upstream packaging manifest from https://github.com/LiNTe912/NextPlay-AI commit a964c71031b0f32a8ed5226d77db5ce24f16e2b4. The hashes describe that commit's single-match bundle, including data/tracking.jsonl, and do not describe the trimmed sample in this tree. Regenerate with package.py only after producing tracking.jsonl.",
   "match_id": "SYN-20261019-001",
   "files": [
     {
       "path": "data/metadata.json",
-      "bytes": 7015,
-      "sha256": "0c0d1e8ade3cbdb80782100149dbc41cd0ba14c4009ef271b9ee2c7196965697"
+      "bytes": 7362,
+      "sha256": "4e3ebb5ebfc69cfb7edc78dbc0194379be91cb3566dc7ee7110e53e15ff94389"
     },
     {
       "path": "data/preview-60s.json",
-      "bytes": 315004,
-      "sha256": "7dd45bd1d41d73e4cc670036bef16dec235e00b89b00209f44341b1f6082ee81"
+      "bytes": 314280,
+      "sha256": "31800130bb6d3b1466f30e0396c9385b897c38d502a85f310d311e59e354b092"
     },
     {
       "path": "data/summary.json",
-      "bytes": 2831,
-      "sha256": "2132b0749c09831b0a42e51f15b18f23342b8f5626004b37228561da0cb1633d"
+      "bytes": 1914,
+      "sha256": "4aae3caf4009023b3e181a4a24915b2e56ad86679ac74b5447e31fbf7355bbeb"
     },
     {
       "path": "data/validation_report.json",
-      "bytes": 743,
-      "sha256": "fc991e1d3aa5a913d47bb65ff344307302a9cf9792867e07c3f4b19b264e0827"
+      "bytes": 742,
+      "sha256": "8d24ae84ec5606a8d609df7cce9994e7984a3cf934bc13a23be8af49daa66ebe"
     },
     {
       "path": "data/events.jsonl",
-      "bytes": 1305700,
-      "sha256": "30824466f687ebb23dc1adbfab02d170088706af5a38b4217061addb3664e165"
+      "bytes": 1470629,
+      "sha256": "5ce00abf57c1c88132aaf4c7923a9dfceab38db557e2eee9dfd15a76d3a51086"
     },
     {
       "path": "data/states.jsonl",
-      "bytes": 2862114,
-      "sha256": "238ed47794695b13c1675292a2cd06273bf768d7525d71790c8f3cb4bd5b4b17"
+      "bytes": 2859288,
+      "sha256": "e838bcc9fc055fa048e592dd5131770571d770d9e738544336b7cb2991188708"
     },
     {
       "path": "data/tracking.jsonl",
-      "bytes": 29795611,
-      "sha256": "ac48ff840fdecde0b0fba561d8dc32c1f896999adac31f2e23ae1390ac9aad7b"
+      "bytes": 29790693,
+      "sha256": "dea11a2793642652387f3297191693beb63ead13b9fec0a261c36f816ce23733"
     },
     {
       "path": "README.md",
-      "bytes": 8006,
-      "sha256": "2ab50637be6896e3b6a586fd0f35453271c7bc08b3c3dfa3a78fdf4038c957e1"
+      "bytes": 29219,
+      "sha256": "dba862362521d8149aedcefa9099f451eba926b940be91d0e05a0e0f374d27e3"
     },
     {
       "path": "generate.py",
-      "bytes": 58928,
-      "sha256": "be62ffbe68a84e4cc46338e31a48f20d38e7e76550ee52448587a634f5e4fbaa"
+      "bytes": 61312,
+      "sha256": "e908a0f1d9b5373282182880f990da07134561d5884e60be97c13fccc24bd53f"
     },
     {
       "path": "validate.py",
@@ -54,19 +53,29 @@
     },
     {
       "path": "validate_league.py",
-      "bytes": 12429,
-      "sha256": "88d4c3fa9118937c99e91b9a8858bdd4d7f81a5d0b5e197ebb894ad8e81f8e3f"
+      "bytes": 12434,
+      "sha256": "f7c99fea9e8f08352a952ad463c26b0ad7ecd8f743896383fc6aed838ca29c8f"
     },
     {
       "path": "package.py",
-      "bytes": 2146,
-      "sha256": "9f99a7930e88fd930bc66aa42a28401f41d5ae33ebc88be845da8234722ea128"
+      "bytes": 2221,
+      "sha256": "27edc0076d1dcfae0bff98a3f74d9392f40933e276f8e56b8381d7c21c37c8d6"
     },
     {
       "path": "schema.json",
       "bytes": 7843,
       "sha256": "7f4dda8ccec516466b41629d3e779ec4a7692f43f4bc7da14daf5efc9e22309e"
+    },
+    {
+      "path": "data/analysis.json",
+      "bytes": 41941,
+      "sha256": "b1b5e03364d2095d0580b13c166a8ca13599db4fd0108981a13e00101adad323"
+    },
+    {
+      "path": "data/heatmaps.json",
+      "bytes": 41940,
+      "sha256": "a471d4c5cb485b7f28faee32860440aa2f294fd17c8146e80d6a8215fe69a5ed"
     }
   ],
-  "total_bytes_excluding_manifest": 34386048
+  "total_bytes_excluding_manifest": 34649496
 }

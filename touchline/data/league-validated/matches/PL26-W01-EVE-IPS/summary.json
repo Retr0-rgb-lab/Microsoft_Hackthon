@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W01-EVE-IPS",
+  "seed": 20262027,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656324,
+  "state_snapshots": 6001,
+  "event_count": 3755,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 81,
+    "restart": 25,
+    "pressure": 1262,
+    "carry": 1266,
+    "pass": 1005,
+    "interception": 61,
+    "shot": 18,
+    "stoppage": 15,
+    "save": 3,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    1,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 518,
+      "completed_passes": 490,
+      "shots": 12,
+      "shots_on_target": 3,
+      "interceptions": 33,
+      "pressure_events": 615,
+      "possession_seconds": 2929.2,
+      "possession_pct": 50.86,
+      "pass_accuracy_pct": 94.59
+    },
+    "AWAY": {
+      "passes": 487,
+      "completed_passes": 454,
+      "shots": 6,
+      "shots_on_target": 2,
+      "interceptions": 28,
+      "pressure_events": 647,
+      "possession_seconds": 2830.6,
+      "possession_pct": 49.14,
+      "pass_accuracy_pct": 93.22
+    }
+  },
+  "distance_m": {
+    "H01": 2962.7,
+    "H02": 7822.6,
+    "H03": 10902.4,
+    "H04": 10259.0,
+    "H05": 9657.8,
+    "H06": 8085.8,
+    "H07": 11743.0,
+    "H08": 11745.1,
+    "H09": 12064.5,
+    "H10": 12309.7,
+    "H11": 10892.9,
+    "A01": 3070.5,
+    "A02": 9729.6,
+    "A03": 10810.3,
+    "A04": 10770.8,
+    "A05": 8730.9,
+    "A06": 9615.6,
+    "A07": 12401.7,
+    "A08": 11956.8,
+    "A09": 11522.2,
+    "A10": 11837.4,
+    "A11": 7863.8,
+    "H12": 4415.7,
+    "H13": 0.0,
+    "H14": 2372.3,
+    "A12": 2675.0,
+    "A13": 3388.2,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 2960400,
+      "period": 1,
+      "period_ms": 2960400,
+      "team_id": "AWAY",
+      "club_id": "IPS",
+      "club_name": "Larkspur FC",
+      "player_id": "A10",
+      "player_name": "Larkspur Player 22",
+      "shirt_number": 9,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 5620400,
+      "period": 2,
+      "period_ms": 2620400,
+      "team_id": "HOME",
+      "club_id": "EVE",
+      "club_name": "Ivory FC",
+      "player_id": "H10",
+      "player_name": "Ivory Player 19",
+      "shirt_number": 11,
+      "score": [
+        1,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-25T16:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Ivory Park"
+  },
+  "home_club": {
+    "club_id": "EVE",
+    "name": "Ivory FC",
+    "short_name": "Ivory FC",
+    "stadium": "Ivory Park",
+    "colors": {
+      "primary": "#003399",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "IPS",
+    "name": "Larkspur FC",
+    "short_name": "Larkspur FC",
+    "stadium": "Larkspur Park",
+    "colors": {
+      "primary": "#0044A9",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

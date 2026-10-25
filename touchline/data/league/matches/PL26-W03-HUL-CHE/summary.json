@@ -1,0 +1,165 @@
+{
+  "match_id": "PL26-W03-HUL-CHE",
+  "seed": 20264026,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 655965,
+  "state_snapshots": 6001,
+  "event_count": 3724,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 95,
+    "restart": 36,
+    "pressure": 1196,
+    "carry": 1202,
+    "pass": 1055,
+    "shot": 29,
+    "stoppage": 23,
+    "interception": 63,
+    "save": 6,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    0,
+    3
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 567,
+      "completed_passes": 532,
+      "shots": 12,
+      "shots_on_target": 1,
+      "interceptions": 28,
+      "pressure_events": 536,
+      "possession_seconds": 3060.6,
+      "possession_pct": 53.97,
+      "pass_accuracy_pct": 93.83
+    },
+    "AWAY": {
+      "passes": 488,
+      "completed_passes": 460,
+      "shots": 17,
+      "shots_on_target": 8,
+      "interceptions": 35,
+      "pressure_events": 660,
+      "possession_seconds": 2610.0,
+      "possession_pct": 46.03,
+      "pass_accuracy_pct": 94.26
+    }
+  },
+  "distance_m": {
+    "H01": 3192.4,
+    "H02": 7671.4,
+    "H03": 10421.0,
+    "H04": 10269.4,
+    "H05": 9581.0,
+    "H06": 7914.1,
+    "H07": 12076.2,
+    "H08": 11237.4,
+    "H09": 11287.0,
+    "H10": 12949.6,
+    "H11": 12424.1,
+    "A01": 3164.7,
+    "A02": 9778.9,
+    "A03": 10855.1,
+    "A04": 11254.3,
+    "A05": 9018.9,
+    "A06": 9383.4,
+    "A07": 12164.8,
+    "A08": 12320.6,
+    "A09": 11522.9,
+    "A10": 12459.7,
+    "A11": 7642.1,
+    "H12": 3701.6,
+    "H13": 0.0,
+    "H14": 2388.6,
+    "A12": 2240.0,
+    "A13": 3786.9,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 4572600,
+      "period": 2,
+      "period_ms": 1572600,
+      "team_id": "AWAY",
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "A10",
+      "player_name": "Fairhaven Player 25",
+      "shirt_number": 9,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 5290400,
+      "period": 2,
+      "period_ms": 2290400,
+      "team_id": "AWAY",
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "A10",
+      "player_name": "Fairhaven Player 25",
+      "shirt_number": 9,
+      "score": [
+        0,
+        2
+      ]
+    },
+    {
+      "t_ms": 5932000,
+      "period": 2,
+      "period_ms": 2932000,
+      "team_id": "AWAY",
+      "club_id": "CHE",
+      "club_name": "Fairhaven FC",
+      "player_id": "A07",
+      "player_name": "Fairhaven Player 21",
+      "shirt_number": 25,
+      "score": [
+        0,
+        3
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 3,
+    "kickoff_local": "2026-11-08T16:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Kingswell Park"
+  },
+  "home_club": {
+    "club_id": "HUL",
+    "name": "Kingswell FC",
+    "short_name": "Kingswell FC",
+    "stadium": "Kingswell Park",
+    "colors": {
+      "primary": "#F5A12D",
+      "secondary": "#000000"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "CHE",
+    "name": "Fairhaven FC",
+    "short_name": "Fairhaven FC",
+    "stadium": "Fairhaven Park",
+    "colors": {
+      "primary": "#034694",
+      "secondary": "#FFFFFF"
+    },
+    "formation": "4-3-3"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "revision": "player-actions-1",
+  "multipliers": {
+    "pass": 1.2676785250291727,
+    "carry": 1.4731620286964047,
+    "shot": 0.5354764191523225
+  },
+  "coefficients": {
+    "pass": {
+      "CRE": 0.35,
+      "TAC": 0.25,
+      "DEF": 0.15,
+      "TEC": 0.1,
+      "ATT": -0.15
+    },
+    "carry": {
+      "TEC": 0.45,
+      "ATT": 0.2,
+      "TAC": -0.15,
+      "DEF": -0.2
+    },
+    "shot": {
+      "ATT": 0.6,
+      "TEC": 0.2,
+      "DEF": -0.2
+    }
+  },
+  "attribute_strength": 1.0,
+  "attribute_effect": "bounded heuristic log-weight, not learned from paired player data",
+  "target": {
+    "counts": {
+      "pass": 4867,
+      "carry": 5616,
+      "shot": 106
+    },
+    "total": 10589,
+    "shares": {
+      "pass": 0.4596279157616394,
+      "carry": 0.5303616960997262,
+      "shot": 0.010010388138634432
+    }
+  },
+  "source_commit": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+  "train_match_ids": [
+    3857254,
+    3857255,
+    3857257,
+    3857258,
+    3857260,
+    3857261,
+    3857263,
+    3857264,
+    3857266,
+    3857267,
+    3857269,
+    3857270,
+    3857272,
+    3857273,
+    3857275,
+    3857276
+  ],
+  "fit_seeds": [
+    241000,
+    241001,
+    241002,
+    241003,
+    241004,
+    241005,
+    241006,
+    241007,
+    241008,
+    241009
+  ],
+  "roster_sha256": "c39c3452ab5d391febcce16638fe798eaaed325152d43515da7269b5b78e8387"
+}

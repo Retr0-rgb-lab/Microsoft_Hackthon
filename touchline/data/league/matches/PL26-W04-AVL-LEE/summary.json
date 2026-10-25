@@ -1,0 +1,150 @@
+{
+  "match_id": "PL26-W04-AVL-LEE",
+  "seed": 20265023,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656373,
+  "state_snapshots": 6001,
+  "event_count": 3778,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 94,
+    "restart": 31,
+    "carry": 1275,
+    "pass": 990,
+    "pressure": 1254,
+    "interception": 67,
+    "shot": 24,
+    "stoppage": 20,
+    "save": 4,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    0,
+    2
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 483,
+      "completed_passes": 450,
+      "shots": 13,
+      "shots_on_target": 3,
+      "interceptions": 34,
+      "pressure_events": 653,
+      "possession_seconds": 2799.4,
+      "possession_pct": 48.98,
+      "pass_accuracy_pct": 93.17
+    },
+    "AWAY": {
+      "passes": 507,
+      "completed_passes": 473,
+      "shots": 11,
+      "shots_on_target": 3,
+      "interceptions": 33,
+      "pressure_events": 601,
+      "possession_seconds": 2916.4,
+      "possession_pct": 51.02,
+      "pass_accuracy_pct": 93.29
+    }
+  },
+  "distance_m": {
+    "H01": 3033.3,
+    "H02": 7250.4,
+    "H03": 11047.3,
+    "H04": 10829.0,
+    "H05": 9753.4,
+    "H06": 7477.1,
+    "H07": 12299.0,
+    "H08": 11810.0,
+    "H09": 11371.3,
+    "H10": 11789.5,
+    "H11": 11187.1,
+    "A01": 3127.4,
+    "A02": 9652.8,
+    "A03": 10337.8,
+    "A04": 10285.2,
+    "A05": 8409.7,
+    "A06": 9385.3,
+    "A07": 11579.0,
+    "A08": 11562.4,
+    "A09": 11370.4,
+    "A10": 12512.4,
+    "A11": 7575.8,
+    "H12": 4489.8,
+    "H13": 0.0,
+    "H14": 2483.9,
+    "A12": 2545.4,
+    "A13": 4255.7,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 1124200,
+      "period": 1,
+      "period_ms": 1124200,
+      "team_id": "AWAY",
+      "club_id": "LEE",
+      "club_name": "Meadow FC",
+      "player_id": "A08",
+      "player_name": "Meadow Player 16",
+      "shirt_number": 10,
+      "score": [
+        0,
+        1
+      ]
+    },
+    {
+      "t_ms": 1668000,
+      "period": 1,
+      "period_ms": 1668000,
+      "team_id": "AWAY",
+      "club_id": "LEE",
+      "club_name": "Meadow FC",
+      "player_id": "A10",
+      "player_name": "Meadow Player 25",
+      "shirt_number": 14,
+      "score": [
+        0,
+        2
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 4,
+    "kickoff_local": "2026-11-14T20:00:00",
+    "time_zone": "Europe/London",
+    "venue": "Beacon Park"
+  },
+  "home_club": {
+    "club_id": "AVL",
+    "name": "Beacon FC",
+    "short_name": "Beacon FC",
+    "stadium": "Beacon Park",
+    "colors": {
+      "primary": "#670E36",
+      "secondary": "#95BFE5"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "LEE",
+    "name": "Meadow FC",
+    "short_name": "Meadow",
+    "stadium": "Meadow Park",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#1D428A"
+    },
+    "formation": "4-3-3"
+  }
+}

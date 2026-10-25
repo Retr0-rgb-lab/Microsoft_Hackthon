@@ -223,18 +223,6 @@ __marimo__/
 # Private model service credentials
 .local/
 
-# Full 5 Hz tracking and matches beyond the checked-in sample.
-# See README.md for generate.py --retain-matches.
-# Directory exceptions come first. The tracking rule is last so a generated
-# tracking.jsonl inside a kept match directory stays ignored.
-# The SynthData 25 Hz clip is the only tracked tracking.jsonl.
-data/league/matches/*
-!data/league/matches/NW26-W01-THF-HBR/
-!data/league/matches/NW26-W01-THF-HBR/**
-!data/league/matches/NW26-W03-ASH-MTN/
-!data/league/matches/NW26-W03-ASH-MTN/**
-data/league-alt/
-# Default output of scripts/synth/generate.py when --output is omitted.
-scripts/synth/data/
-data/**/tracking.jsonl
-!data/samples/sample_25hz_10min/tracking.jsonl
+# Decision integration fitting intermediates
+node_modules/
+data/decision-analysis/.training/

@@ -1,0 +1,135 @@
+{
+  "match_id": "PL26-W01-LEE-CRY",
+  "seed": 20262026,
+  "duration_seconds": 6000,
+  "tracking_hz": 5,
+  "tracking_frames": 30001,
+  "player_position_records": 656061,
+  "state_snapshots": 6001,
+  "event_count": 3762,
+  "event_counts": {
+    "period_start": 2,
+    "possession_change": 95,
+    "restart": 29,
+    "pressure": 1236,
+    "carry": 1205,
+    "pass": 1063,
+    "interception": 71,
+    "shot": 22,
+    "stoppage": 15,
+    "save": 7,
+    "yellow_card": 2,
+    "action_cancelled": 7,
+    "period_end": 2,
+    "substitution": 4,
+    "red_card": 1,
+    "match_end": 1
+  },
+  "final_score": [
+    0,
+    1
+  ],
+  "final_stats": {
+    "HOME": {
+      "passes": 521,
+      "completed_passes": 485,
+      "shots": 10,
+      "shots_on_target": 6,
+      "interceptions": 35,
+      "pressure_events": 647,
+      "possession_seconds": 2763.6,
+      "possession_pct": 48.01,
+      "pass_accuracy_pct": 93.09
+    },
+    "AWAY": {
+      "passes": 542,
+      "completed_passes": 507,
+      "shots": 12,
+      "shots_on_target": 2,
+      "interceptions": 36,
+      "pressure_events": 589,
+      "possession_seconds": 2992.2,
+      "possession_pct": 51.99,
+      "pass_accuracy_pct": 93.54
+    }
+  },
+  "distance_m": {
+    "H01": 3243.1,
+    "H02": 7561.2,
+    "H03": 11309.3,
+    "H04": 11012.7,
+    "H05": 9921.8,
+    "H06": 7715.8,
+    "H07": 12280.6,
+    "H08": 11497.5,
+    "H09": 11599.8,
+    "H10": 12579.6,
+    "H11": 11213.6,
+    "A01": 3143.9,
+    "A02": 10040.7,
+    "A03": 11003.1,
+    "A04": 11132.0,
+    "A05": 8621.2,
+    "A06": 9046.9,
+    "A07": 12281.0,
+    "A08": 11504.5,
+    "A09": 11407.5,
+    "A10": 12604.4,
+    "A11": 7713.0,
+    "H12": 4312.9,
+    "H13": 0.0,
+    "H14": 2458.6,
+    "A12": 2187.2,
+    "A13": 3556.4,
+    "A14": 0.0
+  },
+  "goals": [
+    {
+      "t_ms": 530000,
+      "period": 1,
+      "period_ms": 530000,
+      "team_id": "AWAY",
+      "club_id": "CRY",
+      "club_name": "Highridge FC",
+      "player_id": "A10",
+      "player_name": "Highridge Player 23",
+      "shirt_number": 9,
+      "score": [
+        0,
+        1
+      ]
+    }
+  ],
+  "competition": {
+    "id": "PL-SYN-2026",
+    "name": "NextPlay League (synthetic)",
+    "season": "2026/27",
+    "synthetic": true,
+    "matchweek": 1,
+    "kickoff_local": "2026-10-25T16:30:00",
+    "time_zone": "Europe/London",
+    "venue": "Meadow Park"
+  },
+  "home_club": {
+    "club_id": "LEE",
+    "name": "Meadow FC",
+    "short_name": "Meadow",
+    "stadium": "Meadow Park",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#1D428A"
+    },
+    "formation": "4-3-3"
+  },
+  "away_club": {
+    "club_id": "CRY",
+    "name": "Highridge FC",
+    "short_name": "Highridge FC",
+    "stadium": "Highridge Park",
+    "colors": {
+      "primary": "#1B458F",
+      "secondary": "#C4122E"
+    },
+    "formation": "4-3-3"
+  }
+}
