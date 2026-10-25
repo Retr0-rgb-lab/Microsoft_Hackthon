@@ -1,139 +1,139 @@
-# NextPlay 数据契约 v1
+# NextPlay data contract v1
 
-对应开发文档第 4 节与 5.1 节，供 A/B/C/D 使用同一组固定样本联调。
-JSON Schema 使用 Draft 2020-12；校验器只加载仓库内文件，无远程引用。
+Corresponds to sections 4 and 5.1 of the development document, so that A/B/C/D integrate against the same set of fixed samples.
+The JSON Schema uses Draft 2020-12; the validator loads only in-repo files, with no remote references.
 
-## 入口与边界
+## Entry points and boundaries
 
-| 文件 / 定义 | 数据 |
+| File / definition | Data |
 | --- | --- |
-| `schema.json#/$defs/match` | 现有 `metadata.json`：球队、球员、种子、生成器、策略参数、球场、分节与方向 |
-| `schema.json#/$defs/event` | `events.jsonl`：16 类事件，按类型要求动作、参与者、结果等字段 |
-| `schema.json#/$defs/tracking` / `state` / `preview` | 帧、统计快照、60 秒预览 |
-| `schema.json#/$defs/match_player` / `roster_player` / `squads` | 比赛名单、原始阵容中的匿名球员、完整阵容文件 |
-| `schema.json#/$defs/sofascore_profile` | 来源属性，外场与门将雷达分开；未知值为 `null` |
-| `contracts/schema.json#/$defs/match` / `snapshot` | 带 `data_version` 的比赛封装、带哈希的固定快照 |
-| `contracts/schema.json#/$defs/simulated_profile` | `kind: simulated` 的假设画像 |
-| `contracts/schema.json#/$defs/analysis_request` / `analysis_response` | 文档中的分析请求和响应 |
+| `schema.json#/$defs/match` | Existing `metadata.json`: teams, players, seed, generator, policy parameters, pitch, periods and direction |
+| `schema.json#/$defs/event` | `events.jsonl`: 16 event kinds, each requiring fields such as action, participant and result according to its kind |
+| `schema.json#/$defs/tracking` / `state` / `preview` | Frames, statistic snapshots, 60-second preview |
+| `schema.json#/$defs/match_player` / `roster_player` / `squads` | Match roster, anonymous players in the raw roster, full squads file |
+| `schema.json#/$defs/sofascore_profile` | Source attributes, with outfield and goalkeeper radars kept separate; unknown values are `null` |
+| `contracts/schema.json#/$defs/match` / `snapshot` | Match envelope carrying `data_version`, fixed snapshot carrying a hash |
+| `contracts/schema.json#/$defs/simulated_profile` | Hypothetical profile with `kind: simulated` |
+| `contracts/schema.json#/$defs/analysis_request` / `analysis_response` | The analysis request and response from the document |
 
-根目录 Schema 的根仍匹配 tracking/event/state 三种 JSONL 记录；其他类型按 `$defs` 选择。
-`$defs/player` 保留旧的 tracking 五元组含义，球员资料使用 `match_player`。
-生成器的 `metadata.schema_version: 1.0.0`、已有文件、球队与球员数量及数值均未迁移。
-新封装的版本为 `schema_version: contract-1`，通过 `make_match()` / `make_snapshot()` 构造。
-比赛封装中的 `metadata.seed` 与快照顶层 `seed` 都是生成种子。
+The root of the top-level Schema still matches the three JSONL record kinds tracking/event/state; other types are selected through `$defs`.
+`$defs/player` keeps the old tracking five-tuple meaning; player profiles use `match_player`.
+The generator's `metadata.schema_version: 1.0.0`, the existing files, and the team and player counts and values are all left unmigrated.
+The new envelope version is `schema_version: contract-1`, constructed via `make_match()` / `make_snapshot()`.
+Both `metadata.seed` in the match envelope and the top-level `seed` of a snapshot are generation seeds.
 
-本次提供契约、校验器、封装函数和固定样本。现有 `server.py`、`outcome.compare()`、
-`agents.py` 与浏览器还使用旧接口；响应示例不代表线上 API 已完成接线。
-B/C/D 后续需把计算、Agent 与前端接入这些字段及检查，特别是候选集校验与模型失败降级。
-Schema 不替代自然语言审查，不能判断解释中的每个数字是否真实有据，也不能自动检查文本中的成功百分比。
+This delivery provides the contract, the validator, the envelope functions and the fixed samples. The existing `server.py`, `outcome.compare()`,
+`agents.py` and the browser still use the old interface; the response examples do not mean the online API is already wired up.
+B/C/D must subsequently connect the computation, the agents and the frontend to these fields and checks, especially candidate-set validation and model-failure degradation.
+The Schema does not replace natural-language review: it cannot judge whether every number in an explanation is genuinely grounded, and it cannot automatically check success percentages in the text.
 
-## 单位、标识、时间和缺失值
+## Units, identifiers, time and missing values
 
-- 比赛球员 ID 沿用 `H01..H14` / `A01..A14`，球队为 `HOME` / `AWAY`。
-  文档中的 `HOME-08` 是示意；本仓库无需改写成该格式。ID 只在一场比赛内唯一，跨比赛必须携带 `match_id`。
-  阵容 ID（如 `ARS-01`）和球衣号码是另外两个字段，不能互换。
-- 球场固定 105×68 米，左上角原点，x 向右、y 向下、z 向上；速度为米/秒。
-  tracking.players 为 `[player_id,x,y,vx,vy]`，ball 为 `[x,y,z,vx,vy,vz]`。
-- `t_ms` 是比赛累计毫秒，不包含中场休息；`period_ms = t_ms - period.start_ms`。
-  现有比赛每半场 45+5 分钟，分节边界帧以记录中的 `period` 为准。
-  事件 `period_ms` 对应事件结束时刻；`start_ms <= end_ms <= available_at_ms`。
-  回放只能展示 `available_at_ms <= 当前回放时刻` 的事件结果。
-- `periods[].home_attacks` 给出主队方向；快照 `attacking_direction` 明确两队的相反方向。
-  不按画面左右、球员朝向或运动速度猜测进攻方向。
-- 模拟画像必须包含 `profile_version: sim-1`、`kind: simulated`、`preferred_foot`、`weak_foot`。
-  惯用脚为 `left/right/both/null`；弱脚采用本契约明确约定的 **1–5 整数或 null**（文档未指定量表）。
-  `null` 表示未知，不能自动补成右脚或默认能力值；应标注 `preferred_foot_not_considered` 并回退。
-- SofaScore 是来源观测，不是模拟画像；ATT/DEF/CRE/TEC/TAC 与 SAV/ANT/TAC/BAL/AER 不混用。
-  五维为 0–100 或 null，身高单位 cm、体重 kg。未知重量保留 null。
-  `complete` 要求五维、身高和惯用脚齐全，不要求体重；`partial` 保留未知项。
-  `needs_review/unmatched` 可只含 schema_version 与 status。来源冲突保留双方值。
-  模拟画像不会直接使用来源画像替代，修改模拟参数也不能回写来源数据。
+- Match player IDs keep the `H01..H14` / `A01..A14` form, and teams are `HOME` / `AWAY`.
+  `HOME-08` in the document is illustrative; this repository does not need rewriting into that format. IDs are unique only within one match, so cross-match references must carry `match_id`.
+  Squad IDs (such as `ARS-01`) and shirt numbers are two other fields and are not interchangeable.
+- The pitch is fixed at 105×68 m, origin at the top-left corner, x to the right, y downwards, z upwards; speeds are in metres per second.
+  tracking.players is `[player_id,x,y,vx,vy]`, ball is `[x,y,z,vx,vy,vz]`.
+- `t_ms` is accumulated match milliseconds, excluding half-time; `period_ms = t_ms - period.start_ms`.
+  Existing matches are 45+5 minutes per half, and period-boundary frames follow the `period` recorded in the record.
+  An event's `period_ms` corresponds to the moment the event ends; `start_ms <= end_ms <= available_at_ms`.
+  Replay may only show the results of events with `available_at_ms <= current replay time`.
+- `periods[].home_attacks` gives the home attacking direction; a snapshot's `attacking_direction` states the two teams' opposite directions explicitly.
+  Do not infer the attacking direction from screen left/right, body orientation or movement velocity.
+- A simulated profile must contain `profile_version: sim-1`, `kind: simulated`, `preferred_foot` and `weak_foot`.
+  Preferred foot is `left/right/both/null`; weak foot follows the **1–5 integer or null** explicitly agreed in this contract (the document does not specify a scale).
+  `null` means unknown and must not be auto-filled as right-footed or with a default ability value; mark `preferred_foot_not_considered` and fall back.
+- SofaScore is a source observation, not a simulated profile; ATT/DEF/CRE/TEC/TAC and SAV/ANT/TAC/BAL/AER are not mixed.
+  The five dimensions are 0–100 or null; height is in cm and weight in kg. An unknown weight stays null.
+  `complete` requires the five dimensions, height and preferred foot, and does not require weight; `partial` keeps the unknown items.
+  `needs_review/unmatched` may contain only schema_version and status. Source conflicts keep both values.
+  A simulated profile never substitutes the source profile directly, and changing simulation parameters never writes back to the source data.
 
-## 版本与哈希
+## Versions and hashes
 
-`contracts/model.py` 是参考实现，消费者优先使用服务端返回的 ID，无需自行实现散列。
+`contracts/model.py` is the reference implementation; consumers should prefer the IDs returned by the server and need not implement hashing themselves.
 
-1. `data_version = "gen-" + sha256(metadata 的规范 JSON)[:16]`。
-   它绑定种子、生成器版本、动作策略参数及名单属性；是生成输入元数据的内容版本，
-   **不是所有输出文件的总校验和**。生成算法或其他未写入 metadata 的依赖改变时必须升级 generator / policy revision。
-2. `snapshot_id = sha256(除 snapshot_id 外的完整快照封装)[:16]`。
-   包含数据版本、比赛、种子、时间、方向与当前帧，不含问题、实际动作、事件结果或未来帧。
-3. `candidate_set_id = outcome-<版本>:<16位哈希>`。
-   哈希输入为 `{snapshot_id, data_version, profile, candidates, evidence}`，
-   candidates 去除 `is_actual`。画像内容改变（即使 profile_version 没变）、候选或证据改变均失效；
-   仅揭示实际动作不改变 ID。计算器修改必须升级前缀版本。
+1. `data_version = "gen-" + sha256(canonical JSON of metadata)[:16]`.
+   It binds the seed, generator version, action policy parameters and roster attributes; it is the content version of the generation input metadata,
+   **not an overall checksum of all output files**. When the generation algorithm or another dependency not written into metadata changes, the generator / policy revision must be bumped.
+2. `snapshot_id = sha256(full snapshot envelope excluding snapshot_id)[:16]`.
+   It covers the data version, match, seed, time, direction and current frame, and excludes the question, the actual action, event outcomes and future frames.
+3. `candidate_set_id = outcome-<version>:<16-char hash>`.
+   The hash input is `{snapshot_id, data_version, profile, candidates, evidence}`,
+   with `is_actual` removed from candidates. It is invalidated when profile content changes (even if profile_version did not change), and when candidates or evidence change;
+   merely revealing the actual action does not change the ID. Any change to the calculator must bump the prefix version.
 
-规范 JSON 使用 Python `json.dumps(sort_keys=True, ensure_ascii=True, separators=(',', ':'), allow_nan=False)`，
-先将整数值 float（包括 -0.0）规范为 int；UTF-8 编码，数组顺序保留。这是项目的编码约定，非 RFC 8785。
-禁止 NaN/Infinity。固定样本含参考哈希；旧 Agent 内部的快照哈希不能与本契约混用。
+Canonical JSON uses Python `json.dumps(sort_keys=True, ensure_ascii=True, separators=(',', ':'), allow_nan=False)`,
+first normalising integer-valued floats (including -0.0) to int; UTF-8 encoded, array order preserved. This is the project's encoding convention, not RFC 8785.
+NaN/Infinity are forbidden. The fixed samples carry reference hashes; snapshot hashes internal to the old agent must not be mixed with this contract.
 
-## 分析响应与跨记录规则
+## Analysis response and cross-record rules
 
-模式沿用现有 `fan/analyst`，语言为 `en/zh`。
-候选类型为 `pass/carry/shot/hold`；action_id 的前缀必须与 type 一致。
-合法候选的 rank 从 1 连续、唯一；不合法候选 rank 为 null 且不能推演。
-目前仅合法传球允许 `rollout_supported: true`，其余三类必须为 false。
-候选只能公开文字机会、风险和排序；Schema 拒绝 `value_gain`、`scenario_weight` 等额外字段。
-数值评分仍可留在计算器内部，不能直接把内部候选对象当成公共候选返回。
+Modes reuse the existing `fan/analyst`, and languages are `en/zh`.
+Candidate types are `pass/carry/shot/hold`; the action_id prefix must match the type.
+Eligible candidates have ranks that are consecutive from 1 and unique; ineligible candidates have a null rank and cannot be rolled out.
+Currently only an eligible pass may have `rollout_supported: true`; the other three types must be false.
+Candidates may only expose textual opportunity, risk and ordering; the Schema rejects extra fields such as `value_gain` and `scenario_weight`.
+Numerical scores may stay inside the calculator; an internal candidate object must not be returned directly as a public candidate.
 
-所有状态均返回文档中的完整响应字段：
+Every status returns the complete response fields from the document:
 
 | status | candidates / evidence | explanation |
 | --- | --- | --- |
-| ready | 非空 | 有解释对象 |
-| partial | 非空 | 可为 null |
-| model_unavailable | 保留非空计算结果 | null |
-| unknown / error | 可为空 | null |
+| ready | non-empty | has an explanation object |
+| partial | non-empty | may be null |
+| model_unavailable | keeps the non-empty computed result | null |
+| unknown / error | may be empty | null |
 
-模型未调用时 agent_trace 可以为空；实际调用记录 coordinator/attack/defense/reviewer、tool、ms、ok，禁止放入密钥。
-结构校验后调用 `check_exchange(request,response,snapshot,metadata)` 检查：
+agent_trace may be empty when no model was called; an actual call records coordinator/attack/defense/reviewer, tool, ms, ok, and must never contain secrets.
+After structural validation, call `check_exchange(request,response,snapshot,metadata)` to check:
 
-- 快照哈希、数据版本、时间、方向、种子、当前持球人和活动名单一致；
-- 候选集 ID 绑定当前画像与计算结果；不一致应丢弃 Agent 回答并提示重试；
-- action_id/evidence_id 唯一，所有证据引用存在，rank 连续；
-- 传球接球人是同队的在场球员，最多一个实际动作，解释 mode 与请求一致。
+- snapshot hash, data version, time, direction, seed, current ball carrier and active roster agree;
+- the candidate-set ID is bound to the current profile and computed result; on mismatch, discard the agent answer and prompt a retry;
+- action_id/evidence_id are unique, every evidence reference exists, and ranks are consecutive;
+- a pass recipient is an on-pitch player of the same team, at most one action is actual, and the explanation mode matches the request.
 
-结构/引用校验无法证明模型从未读取未来数据。调用方必须只向比较器传当前 frame + metadata；
-实际动作和未来事件只进入独立的回放展示路径。对未找到比赛/快照的 HTTP 错误可直接返回传输层错误，
-不要伪造有效 snapshot_id 来满足分析响应。
+Structural and reference validation cannot prove that a model never read future data. Callers must pass only the current frame + metadata to the comparator;
+the actual action and future events enter only the separate replay display path. For an HTTP error where a match/snapshot is not found, the transport-level error may be returned directly;
+do not fabricate a valid snapshot_id to satisfy the analysis response.
 
-## 固定案例与验证
+## Fixed cases and validation
 
-`tests/fixtures/contracts/match.json` 与 `case-a/b/c/` 是可直接读取的固定样本。
-来源是 seed=20261019 的本地合成单场，源决策分别为 d000001 / d000322 / d000029。
+`tests/fixtures/contracts/match.json` and `case-a/b/c/` are fixed samples that can be read directly.
+The source is one locally synthesised match with seed=20261019, and the source decisions are d000001 / d000322 / d000029.
 
-| 案例 | 固定条件 |
+| Case | Fixed condition |
 | --- | --- |
-| A | 看起来空位的接球人离最近防守者 >5 米，但防守者先到传球线路；至少一种假设推演发生拦截 |
-| B | 实际选择射门，同时存在合法传球候选，可以展示传球推演 |
-| C | 持球人 3 米内有压迫；实际回传，向前线路被封，回传线路的到达时间差更好 |
+| A | The receiver who looks unmarked is more than 5 m from the nearest defender, but the defender reaches the passing lane first; at least one hypothetical rollout results in an interception |
+| B | The actual choice is a shot, and an eligible pass candidate also exists, so a pass rollout can be shown |
+| C | The carrier is pressed within 3 m; the actual choice is a back pass, the forward lane is closed, and the back-pass lane has the better arrival-time margin |
 
-每个案例有 `snapshot.json`、`request.json`、`response.example.json`、`context.json`。
-context 只供显示实际动作/选择问题，不属于计算输入。
-response.example 是从当前计算器确定性投影出的公共字段示例，使用 model_unavailable，
-明确没有调用模型；不伪造 Agent trace，也不声称已有真实模型回答。
-案例测试检查实际几何条件和传球推演，不能用案例筛选结果评估模型的总体准确率。
+Each case has `snapshot.json`, `request.json`, `response.example.json`, `context.json`.
+context exists only to display the actual action / decision question and is not a computation input.
+response.example is an example of the public fields projected deterministically from the current calculator; it uses model_unavailable
+and makes clear that no model was called; it does not fabricate an Agent trace and does not claim a real model answer exists.
+The case tests check the actual geometric conditions and the pass rollout; results filtered through the cases cannot be used to estimate the model's overall accuracy.
 
 ```sh
-npm ci                  # 仅开发校验依赖；应用运行仍只需 Python 标准库
-npm run test:contract   # 字段/错误状态/固定哈希/错配/引用/案例条件/短程种子复现
-npm test                # 包含 tests/test_contract.py
-npm run validate:schema # data 与 data/league 中全部现存的核心数据记录
+npm ci                  # development validation dependencies only; running the app still needs only the Python standard library
+npm run test:contract   # fields / error status / fixed hashes / mismatches / references / case conditions / short-horizon seed reproduction
+npm test                # includes tests/test_contract.py
+npm run validate:schema # every existing core data record in data and data/league
 
-# 单文件，或自定义数据目录：
+# single file, or a custom data directory:
 node scripts/validate_contracts.mjs --file contract.snapshot tests/fixtures/contracts/case-a/snapshot.json
 node scripts/validate_contracts.mjs --dataset data/league-validated data/realism-sample
 
-# 需要本地完整 decisions.jsonl；只在刻意升级固定案例时重导出并审查 diff：
+# requires a local full decisions.jsonl; re-export and review the diff only when deliberately upgrading the fixed cases:
 python3 -m contracts.export_fixtures
 ```
 
-全量校验覆盖 metadata、events、states、现存完整 tracking、decisions 内的 snapshot、preview、squads。
-报告中的 data.tracking 包含决策快照，decision_snapshots 是其中子集；preview 按完整对象计数。
-完整 tracking 与 decisions 是可选生成缓存，缺失时不冒充已经验证；events/states 缺失则失败。
-赛后报告、榜单、压缩演示打包等衍生展示文件不属于这份核心 Schema；
-它们的聚合与轨迹/事件一致性继续由既有 `validate.py`、`validate_league.py` 和各模块测试负责。
-固定快照不依赖被 gitignore 的大文件，fresh clone 可执行契约测试。
+Full validation covers metadata, events, states, the existing complete tracking, the snapshots inside decisions, preview and squads.
+data.tracking in the report includes decision snapshots, and decision_snapshots is the subset of those; preview is counted as complete objects.
+Complete tracking and decisions are optional generation caches and are not passed off as validated when absent; missing events/states fail.
+Post-match reports, leaderboards, compressed demo packages and other derived display files are not part of this core Schema;
+their aggregation and their track/event consistency remain the responsibility of the existing `validate.py`, `validate_league.py` and the per-module tests.
+Fixed snapshots do not depend on gitignored large files, so a fresh clone can run the contract tests.
 
 ## Current-generator decision-analysis extension
 

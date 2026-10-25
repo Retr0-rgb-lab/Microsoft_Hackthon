@@ -1,140 +1,140 @@
-# 教练板前端 v1
+# Coach board front end v1
 
-设计说明。这一版只定界面和数据，不改现有页面，也不接后端。
+Design note. This version fixes only the interface and the data; it changes no existing page and connects to no backend.
 
-联赛界面留在 `touchline/index.html` 与 `touchline/app.js`，端口 5173。三维样本留在 `touchline/scene`，端口 5174。教练板是第三块画面：同一块球场上完成观看、标注和摆阵型。
+The league interface stays in `touchline/index.html` and `touchline/app.js`, on port 5173. The 3D sample stays in `touchline/scene`, on port 5174. The coach board is a third screen: watching, annotating and setting a formation all happen on one pitch.
 
-球场用 v0.1 样本的中圈原点、米、105×68。数据 `(x, y, z)` 进 three.js 为 `(x, z, -y)`，`rotation.y` 用数据朝向。不读联赛那套左上角原点、5 Hz 的追踪。
+The pitch uses the v0.1 sample's centre-circle origin, metres, 105×68. Data `(x, y, z)` enters three.js as `(x, z, -y)`, and `rotation.y` takes the data facing. It does not read the league's top-left origin, 5 Hz tracking.
 
-## 1. 目录、端口、从 scene 拿什么
+## 1. Directory, port, and what to take from scene
 
-目录用 `touchline/board/`。它和 `touchline/scene`、`touchline/data/samples/sample_25hz_10min` 并列，样本相对路径好接，又不会变成联赛壳。
+The directory is `touchline/board/`. It sits alongside `touchline/scene` and `touchline/data/samples/sample_25hz_10min`, so the sample's relative path is easy to reach without becoming the league shell.
 
-开发服务器 `127.0.0.1:5175`，`strictPort: true`。5173 和 5174 被占用时，本应用直接失败，不去抢端口。
+Dev server `127.0.0.1:5175`, `strictPort: true`. When 5173 and 5174 are taken, this app fails outright rather than grabbing a port.
 
-Vite 别名 `@scene` 指向 `touchline/scene/src`。只读引用，不改 scene 里的文件。
+The Vite alias `@scene` points at `touchline/scene/src`. Read-only references; no file in scene is changed.
 
-直接引用：
+Direct references:
 
-| 模块 | 用途 |
+| Module | Purpose |
 | --- | --- |
-| `coords.ts` | `PITCH`、`toScene`、`Frame`、`sampleAt`、`pose`、`facingDirection` |
-| `pitch.ts` | `createStage`，草地和线 |
-| `actors.ts` | 22 个胶囊、球、`applyPose` |
-| `colors.ts` | HOME / AWAY 平色 |
-| `decisions.ts` | `Decision`、`probabilities`、`primary_pass`、`carry`、`loadDecisions`、`decisionAt`、`topAction` |
-| `hud.ts` | 时钟文案、片段文件名校验 |
+| `coords.ts` | `PITCH`, `toScene`, `Frame`, `sampleAt`, `pose`, `facingDirection` |
+| `pitch.ts` | `createStage`, grass and lines |
+| `actors.ts` | 22 capsules, the ball, `applyPose` |
+| `colors.ts` | flat HOME / AWAY colours |
+| `decisions.ts` | `Decision`, `probabilities`, `primary_pass`, `carry`, `loadDecisions`, `decisionAt`, `topAction` |
+| `hud.ts` | clock text, clip filename validation |
 
-`vite.config.ts` 里 `/sample` 指向同一样本目录的做法照抄一份到 board 自己的配置。默认片段仍是 `clip.jsonl`（25 Hz，约 30 秒）。`decisions.json` 放在 `touchline/board/public/decisions.json`，内容就是 `python scripts/export_decisions.py` 写出的那份决策核输出。
+The `/sample` mapping to the same sample directory in `vite.config.ts` is copied into board's own config. The default clip is still `clip.jsonl` (25 Hz, about 30 seconds). `decisions.json` goes in `touchline/board/public/decisions.json`, and its content is the decision-core output that `python scripts/export_decisions.py` writes.
 
-不引用 `main.ts`。那是固定相机、只靠 `requestAnimationFrame` 走时的样本壳。
+`main.ts` is not referenced. That is the sample shell with a fixed camera and time driven only by `requestAnimationFrame`.
 
-不引用 `overlay.ts` 和 `panel.ts`。色带的画法留在 board 里新写 `ink.ts`：贴地扁带、箭头、传球黄 `0xffe500`、带球青 `0x3ad6ff`。scene 的 overlay 只认识决策对象，会按 `event_id` 整组换掉，也没有射门，没有教练字段。
+`overlay.ts` and `panel.ts` are not referenced. The ribbon drawing is written fresh in board as `ink.ts`: a flat band on the grass, arrows, pass yellow `0xffe500`, carry cyan `0x3ad6ff`. Scene's overlay only understands decision objects, swaps them out as a whole by `event_id`, and has no shots and no coach fields.
 
-## 2. 一块屏幕
+## 2. One screen
 
-整页一块画布，球场铺满。上面叠四件控件，都在同一页里切换，不另开应用。
+The whole page is one canvas with the pitch filling it. Four controls are layered on top, all switching within the same page, with no separate app.
 
-**工具轨**在左侧，四选一：传球、带球、射门、阵型。前三个是标注模式。阵型是摆人模式。播放中工具轨还在，但射线拾取关掉。
+The **tool rail** is on the left, one of four: pass, carry, shot, formation. The first three are annotation modes. Formation is a placing-players mode. During playback the tool rail is still there, but raycast picking is turned off.
 
-**幽灵层**是球场上的一条淡色路线，加一枚小标签（动作类和该类概率）。只在暂停、并且当前时刻能对上一条决策时出现。
+The **ghost layer** is one pale route on the pitch plus a small label (the action class and that class's probability). It appears only while paused and only when the current time matches a decision.
 
-**相机**在右上，两个按钮，文案沿用 scene：转播、俯视。快捷键 `1` / `b`，`2` / `t`。转播是现有的透视相机（视角 28°，位置约 `(-6, 9.5, 46)`，看向 `(14, 1.2, 0)`）。俯视是现有的正交相机，从上方盖住 105×68。
+**Camera** is top right, two buttons, with wording taken from scene: Broadcast, Top-down. Shortcuts `1` / `b`, `2` / `t`. Broadcast is the existing perspective camera (field of view 28°, position about `(-6, 9.5, 46)`, looking at `(14, 1.2, 0)`). Top-down is the existing orthographic camera, covering 105×68 from above.
 
-环绕只为摆阵型。进入阵型模式时，把 `OrbitControls` 挂到转播那台透视相机上，目标在中圈，极角限制在草皮之上。俯视时卸掉环绕：上帝视角配地面射线就够拖人。离开阵型模式时卸掉控件，回到进入前的转播或俯视。标注和演练不用第三台相机。
+Orbit exists only for setting the formation. On entering formation mode, `OrbitControls` is attached to the broadcast perspective camera, with the target at the centre circle and the polar angle limited to above the turf. In top-down, orbit is detached: a god view with a ground raycast is enough to drag players. On leaving formation mode the controls are detached and the view returns to the broadcast or top-down it was in before entering. Annotation and rollouts do not use a third camera.
 
-**运输条**在底部：播放、暂停、时间条。空格切换暂停，与 scene 相同。时间条按 `t_ms` 拖，松手停在该帧，画面用 `sampleAt` 在相邻帧之间插值。演练放到片段末尾就暂停，不循环。
+The **transport bar** is at the bottom: play, pause, time bar. Space toggles pause, same as scene. The time bar drags by `t_ms` and, on release, stops on that frame, with the picture interpolated between adjacent frames by `sampleAt`. A rollout pauses at the end of the clip and does not loop.
 
-三种用法是模式：
+The three uses are modes:
 
-- 演练：运输条播已经载入的片段。胶囊跟着片段走，页面不控制人。
-- 标注：暂停。传球、带球、射门往墨迹列表里写。
-- 阵型：暂停。拖胶囊改 `x, y`。
+- Rollout: the transport bar plays the clip already loaded. Capsules follow the clip, and the page does not control the players.
+- Annotate: paused. Pass, carry and shot write into the ink list.
+- Formation: paused. Dragging capsules changes `x, y`.
 
-播放时标注和拖拽都停用。已经写下的墨迹留在场上，跟着世界坐标，不跟着某一帧消失。
+During playback both annotation and dragging are disabled. Ink already written stays on the pitch, following world coordinates and not disappearing with a particular frame.
 
-## 3. 每个工具怎么用
+## 3. How each tool is used
 
-拾取用射线。点胶囊选人，点草皮选地面点。scene 里没有这层，board 自己加。
+Picking uses raycasts. Click a capsule to pick a player, click the grass to pick a ground point. Scene has no such layer; board adds its own.
 
-坐标一律写回中圈米制。画的时候走 `toScene`。
+Coordinates are always written back as centre-circle metres. While drawing, go through `toScene`.
 
-### 传球
+### Pass
 
-选中传球，播放暂停。
+Select pass, playback pauses.
 
-先点球员 A，脚下出环。再点球员 B。A 到 B 立刻成为已提交墨迹：实色黄带加实心箭头。
+First click player A, and a ring appears at his feet. Then click player B. A to B immediately becomes committed ink: a solid yellow band with a filled arrow.
 
-然后教练补两个字段，模型不出这两个：
+The coach then supplies two fields, which the model does not produce:
 
-- 方式 `style`：`ground` 地面、`lofted` 高空、`driven` 低平。地面贴着草；高空把带在 three.js 的 Y 上拱起，平面落点仍是 A、B；低平比地面略宽。
-- 弧线 `curve`：`straight` 直线、`inside` 内弧、`outside` 外弧。内弧把中点向路径左侧偏 4 米，外弧向右侧偏 4 米。这是粉笔弯度，不是球的物理。
+- Style `style`: `ground` on the grass, `lofted` in the air, `driven` low and flat. Ground hugs the grass; lofted arches the band on three.js Y while the planar endpoints stay at A and B; driven is slightly wider than ground.
+- Curvature `curve`: `straight`, `inside` for an inward curve, `outside` for an outward curve. The inward curve offsets the midpoint 4 metres to the left of the path, the outward curve 4 metres to the right. This is chalk bend, not ball physics.
 
-### 带球
+### Carry
 
-选中带球，播放暂停。
+Select carry, playback pauses.
 
-点持球人，在草皮上拖出方向，松手写成墨迹。几何上是两点箭头。颜色用带球青，保留 scene 的虚线（实段 1.7 米、空段 1.0 米），并加上实心箭头。scene 的带球带没有箭头，教练板需要方向。
+Click the ball carrier, drag out a direction on the grass, and release to write the ink. Geometrically it is a two-point arrow. The colour is carry cyan, keeping scene's dashes (solid segment 1.7 metres, gap 1.0 metres) and adding a filled arrow. Scene's carry band has no arrowhead, and the coach board needs direction.
 
-没有方式和弧线。
+No style and no curvature.
 
-### 射门
+### Shot
 
-选中射门，播放暂停。
+Select shot, playback pauses.
 
-点射门人，在草皮上拖出方向，松手写成墨迹。颜色 `0xff8a3d`，实色带加实心箭头，和黄、青分开。
+Click the shooter, drag out a direction on the grass, and release to write the ink. The colour is `0xff8a3d`, a solid band with a filled arrow, kept separate from the yellow and the cyan.
 
-角度 `angle_deg` 由页面算：从该球员指向球门中点 `(attack_dir × 52.5, 0)` 的射线，到所画箭头的有符号夹角，正方向朝数据 +y。`attack_dir` 用这一帧的值，+1 表示 HOME 攻 +x。
+The angle `angle_deg` is computed by the page: the signed angle from the ray pointing from that player to the goal centre `(attack_dir × 52.5, 0)` to the arrow that was drawn, positive towards data +y. `attack_dir` uses this frame's value, where +1 means HOME attacks +x.
 
-方式 `style` 是教练字段：`placed` 推射、`driven` 抽射、`chip` 挑射。未选时为 `null`。
+Style `style` is a coach field: `placed` for a placed shot, `driven` for a driven shot, `chip` for a chip. It is `null` until chosen.
 
-### 阵型
+### Formation
 
-选中阵型，播放暂停，透视相机加上环绕。
+Select formation, playback pauses, and orbit is attached to the perspective camera.
 
-拖胶囊，射线落在草皮上，改该人的 `x, y`。v1 不改 `facing`，也不拖球。22 人都可以动。
+Drag a capsule and the ray lands on the grass, changing that player's `x, y`. v1 does not change `facing` and does not drag the ball. All 22 players can move.
 
-拖完的姿态留在内存，字段仍是 `player_id`、`team_id`、`x`、`y`、`facing`。它不写回正在播的 jsonl。再按播放时，画面回到已载入片段里的位置；回到阵型模式时，再套上内存里的工作姿态。
+The pose after dragging stays in memory, with the fields still `player_id`, `team_id`, `x`, `y`, `facing`. It is not written back into the jsonl being played. Pressing play again returns the picture to positions from the loaded clip; re-entering formation mode reapplies the working pose from memory.
 
-演练只播放已经生成好的片段。片段可以是样本，也可以是生成器从这份姿态起头之后写出的新 jsonl。页面提供载入片段。页面不生成片段，也不在播放时替人做决策。
+A rollout only plays a clip that has already been generated. The clip may be the sample, or a new jsonl the generator wrote after starting from this pose. The page offers clip loading. The page does not generate clips, and does not make decisions for the players during playback.
 
-### 幽灵
+### Ghost
 
-暂停时出现，语义和 Cursor 补全一样：建议，还不是墨迹。
+Appears while paused, with the same semantics as Cursor completion: a suggestion, not yet ink.
 
-用 `topAction(probabilities)` 取一类。标签与模型一致：`pass`、`shoot`、`dribble`、`hold`。界面把 `dribble` 说成带球，把 `shoot` 说成射门。平局时的取舍与 `decisions.ts` 相同：只有严格更大才替换，顺序是 pass、shoot、dribble、hold。
+Take one class with `topAction(probabilities)`. Labels match the model: `pass`, `shoot`, `dribble`, `hold`. The interface calls `dribble` carry and `shoot` shot. Tie-breaking is the same as `decisions.ts`: replace only on strictly greater, in the order pass, shoot, dribble, hold.
 
-只画一条路线：
+Only one route is drawn:
 
-| 动作 | 路线从哪来 |
+| Action | Where the route comes from |
 | --- | --- |
-| `pass` | 只用 `primary_pass`（`target_id`、`path`、`score`）。不画 `secondary_pass`。 |
-| `dribble` | 用 `carry.path`，画成方向。 |
-| `shoot` | 决策对象没有射门路径。从 `player_id` 的当前位置连一条直线到球门中点 `(attack_dir × 52.5, 0)`，并标 `derived: true`。 |
-| `hold` | 只有标签，没有路线。 |
+| `pass` | Only `primary_pass` (`target_id`, `path`, `score`). `secondary_pass` is not drawn. |
+| `dribble` | Uses `carry.path`, drawn as a direction. |
+| `shoot` | The decision object has no shot path. Draw a straight line from `player_id`'s current position to the goal centre `(attack_dir × 52.5, 0)`, and mark it `derived: true`. |
+| `hold` | Label only, no route. |
 
-不幽灵弧线，不幽灵射门方式。传球幽灵也不带 `style` 和 `curve`。
+No ghost curvature and no ghost shot style. A pass ghost carries no `style` and no `curve` either.
 
-接受：暂停且这条幽灵有路线时，按 `Tab`，或点那条淡色带。`Esc` 丢掉当前幽灵，直到 `t_ms` 再变。`hold` 按 `Tab` 不写墨迹。
+Accept: while paused, and when this ghost has a route, press `Tab` or click that pale band. `Esc` discards the current ghost until `t_ms` changes again. `Tab` on `hold` writes no ink.
 
-接受之后写一条墨迹，然后藏起幽灵，直到时刻变化。
+After accepting, one piece of ink is written, then the ghost is hidden until the time changes.
 
-- 传球：`from_id` 用决策的 `player_id`，`to_id` 和 `path` 用 `primary_pass`。`style` 先写成 `ground`，`curve` 先写成 `straight`，教练可以再改。
-- 带球：`path` 用 `carry.path`。
-- 射门：`path` 用那条推导直线，`angle_deg` 按上面的夹角写上，`style` 保持 `null`，等教练选。
+- Pass: `from_id` from the decision's `player_id`, `to_id` and `path` from `primary_pass`. `style` is written as `ground` first and `curve` as `straight` first, and the coach can change them.
+- Carry: `path` from `carry.path`.
+- Shot: `path` from that derived straight line, `angle_deg` written from the angle above, `style` left `null` until the coach chooses.
 
-外观和已提交墨迹分开：
+Appearance is kept distinct from committed ink:
 
-- 幽灵：不透明度约 0.28，一律虚线，空心箭头，颜色发灰，标签上是动作名和该类概率（例如 `shoot 31%`）。
-- 墨迹：不透明度约 0.95。传球实线加实心箭头，带球虚线加实心箭头，射门实线加实心箭头。方式和弧线只体现在墨迹上。
+- Ghost: opacity about 0.28, always dashed, hollow arrow, greyed colour, and the label shows the action name and that class's probability (for example `shoot 31%`).
+- Ink: opacity about 0.95. Pass solid with a filled arrow, carry dashed with a filled arrow, shot solid with a filled arrow. Style and curvature are expressed only in ink.
 
-播放时不显示幽灵。已提交墨迹保留。暂停时选决策不用 scene 的 8 秒上限：教练停在这一帧，就看这一帧能对上的最近一条。调用 `decisionAt(set, tMs, Number.POSITIVE_INFINITY)`。播放中既然不画幽灵，8 秒规则在这块板上用不到。
+The ghost is not shown during playback. Committed ink stays. While paused, choosing a decision does not use scene's 8-second limit: the coach has stopped on this frame, so it shows the nearest decision that matches this frame. Call `decisionAt(set, tMs, Number.POSITIVE_INFINITY)`. Since no ghost is drawn during playback, the 8-second rule is not needed on this board.
 
-## 4. 暂停一帧要的数据
+## 4. The data needed while paused on a frame
 
-下面这份是页面停在某一帧时手里的文档。球员和球来自片段插值后的姿态；幽灵来自静态 `decisions.json` 里对上的那条 `Decision`；墨迹来自本页会话。
+What follows is the document the page holds while stopped on a frame. Players and the ball come from the interpolated pose of the clip; the ghost comes from the matching `Decision` in the static `decisions.json`; ink comes from this page's session.
 
-名字尽量沿用决策核已经在发的字段：`probabilities`、`primary_pass`、`carry`，以及 `target_id`、`path`、`score`。`dribble` 不要改名为 carry 再放进概率里。概率四键就是 `pass`、`shoot`、`dribble`、`hold`。
+Names follow the fields the decision core already emits where possible: `probabilities`, `primary_pass`, `carry`, plus `target_id`, `path`, `score`. Do not rename `dribble` to carry and put it into the probabilities. The four probability keys are exactly `pass`, `shoot`, `dribble`, `hold`.
 
 ```json
 {
@@ -200,49 +200,49 @@ Vite 别名 `@scene` 指向 `touchline/scene/src`。只读引用，不改 scene 
 }
 ```
 
-`players` 在文档里写全 22 人。上例只留了一个人。`x, y` 是中圈米，`facing` 为弧度，0 朝 +x。片段行里的 `vx, vy` 这一帧的画面用不到，v1 不放进这份文档。
+In the document, `players` lists all 22 players. The example above keeps only one. `x, y` are centre-circle metres, `facing` is radians with 0 towards +x. The `vx, vy` from the clip line are not needed for this frame's picture, and v1 does not put them into this document.
 
-`pose_source` 为 `clip` 时，人的位置来自片段。阵型拖过之后改为 `formation`。
+When `pose_source` is `clip`, player positions come from the clip. After the formation has been dragged, it changes to `formation`.
 
-`ghost.action` 用模型标签。`pass` 时填 `primary_pass`，形状与决策核相同：`{ "target_id", "path", "score" }`。`dribble` 时填 `carry`，同样三个字段，`target_id` 通常是持球人自己。`shoot` 时只填 `shot`，并且 `derived` 为 true。`hold` 时三条路线都是 null。
+`ghost.action` uses the model labels. For `pass`, fill `primary_pass`, with the same shape as the decision core: `{ "target_id", "path", "score" }`. For `dribble`, fill `carry`, with the same three fields, where `target_id` is usually the ball carrier himself. For `shoot`, fill only `shot`, with `derived` true. For `hold`, all three routes are null.
 
-`path` 是 `[[x, y], ...]`，单位米，与 `public/decisions.json` 里的路径相同。
+`path` is `[[x, y], ...]` in metres, the same as the paths in `public/decisions.json`.
 
-`ink[].source` 为 `ghost` 或 `coach`，方便以后看出哪一笔是接受补全、哪一笔是手画。`style` 和 `curve` 只出现在教练能设的笔上。射门的 `style` 可以是 null。
+`ink[].source` is `ghost` or `coach`, so that it is later possible to tell which stroke accepted a completion and which was hand-drawn. `style` and `curve` appear only on strokes the coach can set. A shot's `style` may be null.
 
-v1 幽灵的来源是静态文件：`loadDecisions("/decisions.json")`，集合形状就是现有的 `DecisionSet`（`schema_version`、`match_id`、`frame_hz`、`origin`、`decision_count`、`decisions`）。
+In v1 the ghost's source is a static file: `loadDecisions("/decisions.json")`, whose set shape is the existing `DecisionSet` (`schema_version`, `match_id`, `frame_hz`, `origin`, `decision_count`, `decisions`).
 
-以后的接缝：换成一次本地 Python 调用。请求体是这一帧的 `players`、`ball`、`t_ms`、`attack_dir`。响应仍是一条 `Decision`（`probabilities`、`primary_pass`、`secondary_pass`、`carry`）。页面只换加载函数。在决策核写出射门路径之前，射门幽灵继续由球门中点推导。这一步不需要 Azure。静态文件仍然可以当离线后备。
+The seam for later: swap in a local Python call. The request body is this frame's `players`, `ball`, `t_ms`, `attack_dir`. The response is still one `Decision` (`probabilities`, `primary_pass`, `secondary_pass`, `carry`). The page only swaps the loader function. Until the decision core writes a shot path, the shot ghost keeps being derived from the goal centre. This step needs no Azure. The static file still serves as an offline fallback.
 
-## 5. 现有 scene 不够的地方
+## 5. Where the existing scene falls short
 
-`touchline/scene` 能播样本、能换两台固定相机、能把决策画成粉笔。教练板还要这些它没有的东西：
+`touchline/scene` can play the sample, switch between two fixed cameras, and draw decisions as chalk. The coach board also needs these things it does not have:
 
-- 没有射线。点不到人，也点不到草皮。
-- 没有拖拽。`applyPose` 每帧用片段盖住胶囊位置。
-- 没有时间条。时刻只在 `requestAnimationFrame` 里往前走，或用地址栏 `?t=` 起播。空格只能暂停。
-- 相机是写死的两台。没有环绕。
-- `decisions.json` 启动时取一次，不会按当前姿态重算。
-- `decisionAt` 默认超过 8 秒就返回 null，overlay 把画面清掉。暂停在一帧上研究时，这条规则会把建议弄没。
-- overlay 只画 `primary_pass`、`secondary_pass` 和虚线 `carry`，没有射门，没有方式，没有弧线，也没有“淡建议 / 实墨迹”两层。
+- No raycasts. You cannot pick a player, or pick the grass.
+- No dragging. `applyPose` overwrites capsule positions from the clip every frame.
+- No time bar. Time only advances inside `requestAnimationFrame`, or starts from a `?t=` in the address bar. Space can only pause.
+- The cameras are two hard-coded ones. No orbit.
+- `decisions.json` is fetched once at startup and is not recomputed for the current pose.
+- `decisionAt` returns null once past 8 seconds by default, and overlay clears the picture. When paused on a frame to study it, that rule makes the suggestion vanish.
+- overlay draws only `primary_pass`, `secondary_pass` and a dashed `carry`; no shots, no style, no curvature, and no two layers of "pale suggestion / solid ink".
 
-样本壳继续承担原来的演示。这些缺口在 `touchline/board` 里补，不回头改 scene。
+The sample shell keeps serving its original demo. These gaps are filled in `touchline/board`, without going back to change scene.
 
-## 6. 建造顺序
+## 6. Build order
 
-第一步先做能看的。搭 `touchline/board`，端口 5175，引用球场、胶囊和坐标，播 `clip.jsonl`。转播和俯视能换。运输条能播放、暂停、拖动。没有墨迹，没有阵型。看到 22 个胶囊和球，并且 5173、5174 仍归原来的两个应用，这一步就完成。
+Step one is to make something watchable. Stand up `touchline/board`, port 5175, referencing the pitch, capsules and coordinates, playing `clip.jsonl`. Broadcast and top-down can be switched. The transport bar can play, pause and drag. No ink, no formation. This step is done when 22 capsules and the ball are visible and 5173 and 5174 still belong to the two original apps.
 
-第二步做暂停幽灵。载入静态 `decisions.json`。暂停时画出一类动作和一条路线。`Tab` 或点击写成墨迹，播放时藏起幽灵、留下墨迹。射门路线用球门中点的直线，方式留空。这一步就可以把“补全再落笔”演示出来。弧线控件和射门方式控件可以后做，默认传球先落 `ground` / `straight`。
+Step two is the paused ghost. Load the static `decisions.json`. While paused, draw one action class and one route. `Tab` or a click writes ink; during playback the ghost is hidden and the ink stays. The shot route is the straight line to the goal centre, with style left empty. This step can already demonstrate "complete, then commit". Curvature controls and shot style controls can come later; a pass defaults to `ground` / `straight` first.
 
-第三步做手绘和阵型。加上射线：传球两点、带球方向、射门方向和角度、方式与弧线。阵型可拖，并且只在这时打开环绕。载入另一条 jsonl 就能播生成器事后写出的演练。浏览器里不调用生成器。
+Step three is hand drawing and formation. Add raycasts: pass as two points, carry as a direction, shot as direction and angle, style and curvature. The formation can be dragged, and orbit is attached only then. Loading another jsonl plays a rollout the generator wrote afterwards. The generator is not called in the browser.
 
-## 7. 非目标
+## 7. Non-goals
 
-- 不删除、不替换联赛首页和 `touchline/scene`。
-- 不设计联赛首页、阵容页、赛后文字报告。
-- 不占用 5173，也不改 5174。
-- 不加载左上角原点的 5 Hz 联赛追踪。
-- v1 不接 Azure，不要求为了幽灵单独起服务。
-- 幽灵不包含弧线、传球方式、射门方式，也不画 `secondary_pass`。
-- 页面不生成演练片段，播放时不控制球员。
-- 胶囊上不印俱乐部名或球员名。样本页现在也不印。
+- Do not delete or replace the league home page and `touchline/scene`.
+- Do not design a league home page, a squad page or a post-match written report.
+- Do not take port 5173, and do not change 5174.
+- Do not load the top-left origin, 5 Hz league tracking.
+- v1 does not connect to Azure and does not require a separate service just for the ghost.
+- The ghost contains no curvature, no pass style, no shot style, and does not draw `secondary_pass`.
+- The page does not generate rollout clips, and does not control players during playback.
+- No club name or player name is printed on the capsules. The sample page does not print them now either.

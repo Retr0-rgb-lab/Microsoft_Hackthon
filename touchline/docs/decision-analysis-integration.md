@@ -1,76 +1,76 @@
-# 当前生成器上的决策分析集成
+# Decision-analysis integration on the current generator
 
-## 版本与变更边界
+## Versions and change boundaries
 
-- 项目／数据基线：`96d13a377e98602c9998e3ebb82186843762febf`。
-- 决策模块来源：Hackthon `84251bbdf1a8102ab4d6113c80da986adb38a461`。
-- 目标是当前 NextPlay-AI 仓库；没有向 Hackthon 或远端推送更改。
-- 保留当前 A 的生成器、比赛、赛程、统计、积分榜、报告和已有 API，不重新模拟比赛。
-- 不接入 B 的旧 league 或 enriched-v1。新分析侧车全部关联当前 `data/league`。
+- Project / data baseline: `96d13a377e98602c9998e3ebb82186843762febf`.
+- Decision module source: Hackthon `84251bbdf1a8102ab4d6113c80da986adb38a461`.
+- The target is the current NextPlay-AI repository; no changes were pushed to Hackthon or to a remote.
+- The current A generator, matches, fixtures, statistics, standings, reports and existing APIs are kept; matches are not re-simulated.
+- B's old league or enriched-v1 is not connected. The new analysis sidecar is entirely tied to the current `data/league`.
 
-本次核对 330 个来源文件哈希，与 B 新数据模块当时使用的 A 源完全一致；因此移植已经针对该源拟合的四折 xT、温度和 B0/B1 传球基线，并执行新版本全量评分、选择与绑定。没有把旧模型冒充新源重新训练结果，也没有声称主概率公式是新训练的神经网络。
+This work checked the hashes of 330 source files, exactly matching the A source that B's new data module used at the time; therefore the four-fold xT, temperature and B0/B1 passing baselines already fitted on that source are ported, and a new-version full scoring, selection and binding pass was run. The old model is not passed off as a retrained result on a new source, and the main probability formula is not claimed to be a newly trained neural network.
 
-## 模型
+## Model
 
-主模型仍为 B 的两步 Q2：候选 → 当前几何 → 战术结果概率 → 一步预测后继 → 再比较一次动作 → 12×8 xT 尾值。当前进球即时奖励为 1；本队延续加分，对手延续扣分；时间折扣为 exp(−动作秒数/120)。
+The main model is still B's two-step Q2: candidate → current geometry → tactical outcome probability → one-step predicted successor → compare one more action → 12×8 xT tail value. The immediate reward for a goal is currently 1; continuation by our own team adds and continuation by the opponent subtracts; the time discount is exp(−action seconds/120).
 
-Q = immediate + continuation − risk。分支概率是规则假设；xT 是当前合成源事件的空间尾值。B0/B1 树只蒸馏源传球规则作对照，不替换主概率。没有训练 FQI 或完整自主踢球策略。
+Q = immediate + continuation − risk. Branch probabilities are rule assumptions; xT is the spatial tail value of events in the current synthetic source. The B0/B1 trees only distil the source passing rules as a control and do not replace the main probabilities. No FQI or complete autonomous playing policy was trained.
 
-兼容层读取明确攻向、分节终点、有效名单和实际门将角色。标准传球用球起点、接收者 0.25 秒速度前置和 14 m/s 地面球，与推演模板一致；越位、高球和场地支持掩码在两步均生效。高球和 hold 仍不排名、不假造零价值。
+The compatibility layer reads the explicit attacking direction, period endpoints, the active roster and the actual goalkeeper role. A canonical pass uses the ball's starting point, the recipient's 0.25-second velocity lead and a 14 m/s ground ball, matching the rollout template; offside, lofted balls and the pitch-support mask apply in both steps. Lofted balls and hold are still unranked, with no fabricated zero value.
 
-内部 Softmax 分数总和 100，最高项不强制 100；不是成功率或球员能力。新主表按用户要求用原因、风险替换净收益数字。完整数值仍在明确的诊断扩展 JSON 中。
+Internal Softmax scores sum to 100, and the top item is not forced to 100; they are not success rates or player ability. As requested, the new main table replaces net-gain numbers with a reason and a risk. The full numerical values remain in the explicit diagnostics extension JSON.
 
-来源 Sofascore 仅做来源画像和质量提示；惯用脚/弱脚保持中性。运动方向与身体朝向不同，未恢复视线、疲劳或个人技术质量。
+The SofaScore source is used only for the source profile and quality hints; preferred foot / weak foot stay neutral. Movement direction differs from body orientation, and line of sight, fatigue and individual technical quality are not recovered.
 
-## 页面整合
+## Page integration
 
-原 Analysis 内增加 Match report / Decision analysis 子页；原球员赛后报告、热力图和模型总结保留在 Match report 中。
+The original Analysis page gains Match report / Decision analysis sub-pages; the original player post-match report, heatmaps and model summary stay in Match report.
 
-Decision analysis 使用 B 原研究页的布局：球队／球员／动作／范围筛选，概要，决策时间线，快照，Player action conditions，候选排名／原因／风险，来源与证据详情。
+Decision analysis uses the layout of B's original research page: team / player / action / range filters, a summary, a decision timeline, the snapshot, Player action conditions, candidate ranking / reason / risk, and source and evidence details.
 
-- 默认最多 20 个代表节点：每球员≤2、每队≤10、同球权回合≤1、同球员相隔≥30 秒；按场区和球队轮换，不配平推荐动作比例。
-- All decisions 查看全部快照，Largest value losses 单独用于失误复盘，Unavailable / coverage 展示不能分析的状态。
-- 机会损失用实际类型／接收者匹配，不使用最终是否进球挑关键点。没有事前带球方向时不强制映射向前。
-- 没有完整动画的位置仍可看精确快照。Open in replay 只在同一当前比赛的完整轨迹或预览覆盖下启用。
-- 不再另开一个与主页面风格不同的决策首页。
+- By default at most 20 representative nodes: ≤2 per player, ≤10 per team, ≤1 per possession sequence, ≥30 seconds apart for the same player; rotation is by pitch zone and team, with no balancing of recommended-action proportions.
+- All decisions shows every snapshot, Largest value losses is used separately for mistake review, and Unavailable / coverage shows the states that cannot be analysed.
+- Opportunity loss is matched by actual type / recipient, not by picking the key moments from whether a goal was eventually scored. When there is no pre-action carry direction it is not forced to map forward.
+- Positions without a complete animation can still show the exact snapshot. Open in replay is enabled only under complete trajectory or preview coverage of the same current match.
+- There is no separate decision home page in a style different from the main page.
 
-`pitch-renderer.js` 从当前 Replay 提取，Replay、Decision analysis、Counterfactual lab 共同使用。草地条纹、白线、主橙／客蓝、号码、球和选中圈相同；候选线路只是额外覆盖，不替换球队配色。
+`pitch-renderer.js` is extracted from the current Replay and shared by Replay, Decision analysis and Counterfactual lab. Grass stripes, white lines, home orange / away blue, numbers, ball and selection ring are the same; candidate lanes are an extra overlay only and do not replace team colours.
 
-主页面保留简洁，推演进入 `decision-counterfactual.html?match=...&decision=...&action=...`。返回链接恢复同一比赛、决策和本地筛选。更新主资源 URL，避免旧模块缓存；修复主页面初始化吞掉比赛深链接的问题。
+The main page stays minimal, and a rollout opens `decision-counterfactual.html?match=...&decision=...&action=...`. The back link restores the same match, decision and local filters. Main asset URLs are bumped to avoid stale module caches; the main page's initialisation swallowing the match deep link was also fixed.
 
-## 反事实能力与限制
+## Counterfactual capabilities and limits
 
-所有可分析节点的受支持 pass/carry/shot 均可进入详情并推演，不再只做少数固定案例。
+Every supported pass/carry/shot at every analyzable node can open the detail page and run a rollout; it is no longer limited to a few fixed cases.
 
-传球复用 A 原物理循环，注入 B 排名的精确目标。带球和射门新增有明确边界的简化播放：速度上限 7.2 m/s、加速度 3.5 m/s²、50 ms 步长、最长 4 秒，当前分节边界截断。带球追目标并用近身接触近似丢球；射门为 24 m/s 直线地面球，近身封堵／门将接触判定，无反弹或个人能力。
+Pass reuses A's original physics loop and injects the exact target ranked by B. Carry and shot add simplified playback with explicit bounds: top speed 7.2 m/s, acceleration 3.5 m/s², 50 ms steps, at most 4 seconds, truncated at the current period boundary. Carry chases the target and approximates ball loss by close-range contact; shot is a 24 m/s straight ground ball with close-range block / goalkeeper-contact decisions, no rebounds and no individual ability.
 
-四种反应／误差假设不是概率样本；3/4 或 4/4 成功不等于真实成功率。Q2 与播放使用不同后继近似；播放不反向改变 Q、排名或真实比赛。高球、hold、越位、不能分析的节点明确降级。
+The four reaction / error assumptions are not probability samples; 3/4 or 4/4 successes do not equal a real success rate. Q2 and playback use different successor approximations; playback does not change Q, the ranking or the real match in reverse. Lofted balls, hold, offside and non-analyzable nodes degrade explicitly.
 
-## 接口与后续 Agent
+## Interfaces and the follow-up Agent
 
-完整专用契约：`contracts/decision-analysis/README.md`。
+Complete dedicated contract: `contracts/decision-analysis/README.md`.
 
-- 原公共契约不改，新增 `/api/decision-analysis/compare` 输出原 rank/text-only。
-- `/analyze` 返回 `decision-analysis-1`：完整 canonical request/snapshot、原 public 对象、球员条件、来源画像、30 个特征及单位、分支概率、Q1/Q2、Softmax、风险分解、判断、证据和版本。
-- `/counterfactual` 是扩展的传／带／射接口；原 rollout 支持字段和 `/api/rollout` 仍为传球语义。
-- `/context` 只返回登记的当前状态；客户端不能传任意未来帧。
-- `/actual` 在计算后独立揭示历史类型／接收者，不输入主比较。
-- Agent 可以读取指标并引用 evidence_ids；不能改排名或把假设写成观察。当前没有真实 Agent 调用，不伪造 trace。
+- The original public contract is unchanged; the new `/api/decision-analysis/compare` outputs the original rank/text-only form.
+- `/analyze` returns `decision-analysis-1`: the complete canonical request/snapshot, the original public object, player conditions, the source profile, the 30 features and their units, branch probabilities, Q1/Q2, Softmax, risk decomposition, judgment, evidence and versions.
+- `/counterfactual` is the extended pass / carry / shot interface; the original rollout support field and `/api/rollout` keep pass semantics.
+- `/context` returns only registered current states; the client cannot submit arbitrary future frames.
+- `/actual` reveals the historical type / recipient separately after the computation and is not an input to the main comparison.
+- An Agent may read the metrics and cite evidence_ids; it may not change the ranking or present assumptions as observations. There is currently no real Agent call, and no trace is fabricated.
 
-Schema、工具目录和真实示例都位于 `contracts/decision-analysis/`。源文件更改、模型错配、过期候选集和非同源请求会拒绝。服务器运行期间也检查源文件签名，变化时重新核对哈希，而不是继续服务缓存的旧 metadata。
+Schema, tool catalog and real examples all live in `contracts/decision-analysis/`. Changed source files, model mismatches, stale candidate sets and requests that are not from the same source are rejected. Source file signatures are also checked while the server runs, and hashes are re-verified on change rather than continuing to serve cached old metadata.
 
-## 运行
+## Running
 
-原入口不变：`python3 server.py`，打开 `/`，选比赛 → Analysis → Decision analysis。
+The original entry point is unchanged: `python3 server.py`, open `/`, pick a match → Analysis → Decision analysis.
 
-可深链接：`/?match=PL26-W01-MCI-CHE&view=stats&analysis=decisions`。
+Deep link: `/?match=PL26-W01-MCI-CHE&view=stats&analysis=decisions`.
 
-本地仓库只有一套当前比赛数据，不新增 Original/Enriched 切换。先前桌面 `启动NextPlay-AI.command` 已打开完整首页；新代码应启动新的服务进程，旧 Python 进程不会自动重新导入代码。启动器自动选择空闲端口，以终端实际打印地址为准。
+The local repository has only one set of current match data, so no Original/Enriched toggle is added. The earlier desktop `启动NextPlay-AI.command` had already opened the full home page; new code needs to start a new server process, because an old Python process does not re-import code automatically. The launcher picks a free port automatically, so trust the address actually printed in the terminal.
 
-## 复现与资源
+## Reproduction and resources
 
-`decision_analysis.pipeline` 保留 audit/train/score/validate，但输入为当前生成器 decision 快照，没有旧事件链推断兜底。默认 score 仅抽样，`score --all-decisions` 才全量；本次交付为全量。
+`decision_analysis.pipeline` keeps audit/train/score/validate, but its input is current-generator decision snapshots, with no fallback to inferring from an old event chain. By default score samples only; `score --all-decisions` is the full pass, and this delivery is the full pass.
 
-源锁见 `docs/decision-source-lock.json`；metadata、事件、轨迹、球员数据和生成器等均有保护。模型、快照和结果放在 `data/decision-analysis`，不覆盖源。开发依赖可按 requirements-decision-analysis.txt 安装；网页运行只需 Python 标准库。
+See `docs/decision-source-lock.json` for the source lock; metadata, events, tracking, player data and the generator are all protected. Models, snapshots and results are placed in `data/decision-analysis` and do not overwrite the source. Development dependencies can be installed from requirements-decision-analysis.txt; running the web pages needs only the Python standard library.
 
-有关实测数量、耗时、原测试兼容和限制，见 `decision-analysis-validation.md`。源仓库跟踪的 node_modules 缺少 AJV dist，开发测试在临时副本使用独立已安装的 AJV 8.17.1/ajv-formats 3.0.1，未修改目标 node_modules；运行 Demo 本身无需这些依赖。
+For measured counts, timings, compatibility with the original tests and limits, see `decision-analysis-validation.md`. The source repository's tracked node_modules lacks the AJV dist, so the development tests used a separately installed AJV 8.17.1/ajv-formats 3.0.1 in a temporary copy and did not modify the target node_modules; running the demo itself does not need those dependencies.
