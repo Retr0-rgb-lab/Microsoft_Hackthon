@@ -58,7 +58,7 @@ class SofascoreImportTests(unittest.TestCase):
             verify_identity(original, row, parse_observation(row))
         row['identity_review'] = {'local_player_id': 'ARS-01', 'source_player_id': 123,
                                   'evidence': 'Name, club, nationality and shirt checked.'}
-        row['review_page_text'] = 'Example Player\nArsenal\n' + row['general']
+        row['review_page_text'] = 'Example Player\nExample Club\n' + row['general']
         self.assertEqual(verify_identity(original, row, parse_observation(row)),
                          'reviewed_name_and_club_history')
         row['identity_review']['source_player_id'] = 456

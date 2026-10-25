@@ -214,6 +214,16 @@ $('#run-agents').onclick = async () => {
     const doc = await contractPost('/api/decision-analysis/analyze', bound);
     const value = await contractPost('/api/decision-analysis/agents', {request: bound, candidate_set_id: doc.candidate_set_id});
     if (request !== token || report !== analysis) return;
+    // The answer belongs to one candidate set. If the snapshot moved, the
+    // answer describes a different moment, so it is dropped rather than shown.
+    if (value.candidate_set_id !== doc.candidate_set_id) {
+      agentResult = null; agentDocument = null;
+      $('#agent-answer').textContent = '';
+      $('#agent-caveats').replaceChildren();
+      $('#agent-trace').textContent = '';
+      $('#agent-status').textContent = translate('The agent answered for a different candidate set, so the answer was discarded. The computed comparison is unchanged. Run the agents again.', getLanguage());
+      return;
+    }
     agentResult = value; agentDocument = doc;
     renderAgentContract(value, doc, record, source);
   } catch(e) { if (request === token) $('#agent-status').textContent = translate(e.message, getLanguage()); }
