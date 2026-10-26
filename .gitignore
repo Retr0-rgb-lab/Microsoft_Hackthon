@@ -31,3 +31,6 @@ demo_output/
 !.env.example
 coverage/
 .vite/
+
+# Local deployment packages
+.deploy/

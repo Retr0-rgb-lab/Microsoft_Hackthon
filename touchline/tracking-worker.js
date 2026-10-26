@@ -15,6 +15,11 @@ self.onmessage = async ({ data: payload }) => {
     const periods = new Uint8Array(count);
     const inPlay = new Uint8Array(count);
     const ids = new Map(metadata.players.map((p, i) => [p.player_id, i]));
+    // The checked-in sample omits the full tracking file, so a clean checkout
+    // has no tracking to read. A probe keeps that out of the console as a 404
+    // and lets the page fall back to the 60-second preview on purpose.
+    const probe = await fetch(trackingUrl, { method: 'HEAD', cache: 'no-store' });
+    if (!probe.ok) throw new Error(`No full tracking file for this match (${probe.status})`);
     const response = await fetch(trackingUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Unable to read tracking file (${response.status})`);
     const reader = response.body.getReader();
