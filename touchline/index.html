@@ -129,6 +129,10 @@
             <div class="desk-head"><h3>Ask</h3><button type="button" class="desk-collapse" id="collapse-ask" aria-expanded="true" aria-controls="desk-ask-body">Hide</button></div>
             <div id="desk-ask-body">
               <div class="ask-now"><span id="ask-clock">—</span><span id="ask-follow">Waiting for a match</span></div>
+              <div class="desk-switch ask-modes" role="group" aria-label="Explanation mode">
+                <button type="button" data-mode="fan" aria-pressed="true">Fan</button>
+                <button type="button" data-mode="coach" aria-pressed="false">Coach</button>
+              </div>
               <p id="ask-narration" class="ask-narration"></p>
               <div id="ask-measures" class="ask-measures"></div>
               <p id="ask-status" role="status">Pause on a decision to ask about that moment.</p>

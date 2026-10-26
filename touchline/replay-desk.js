@@ -28,7 +28,8 @@ export function createReplayDesk(getState) {
   let doc = null;
   let token = 0;
   let inFlight = false;
-  let pending = null;
+  let mode = "fan";
+  let picked = "";
   const cache = new Map();
 
   function collapse(buttonId, bodyId, className) {
@@ -173,20 +174,42 @@ export function createReplayDesk(getState) {
     };
     const options = (doc.public?.candidates || doc.candidates || []).filter(item => item.eligible);
     const actor = bundle?.request?.actor_id;
-    const state = doc.public?.status || doc.status || "ready";
-    analysis.innerHTML =
-      `<p class="ask-subject"><strong>${esc(name(actor))}</strong><span>${esc(state === "model_unavailable" ? "computed comparison" : state)}</span></p>` +
+    const label = doc.public?.status === "model_unavailable" ? "computed comparison" : (doc.public?.status || doc.status || "ready");
+    const head = `<p class="ask-subject"><strong>${esc(name(actor))}</strong><span>${esc(label)}</span></p>`;
+
+    // Coach mode withholds the reading until you commit to a choice. That is the
+    // "pick first, then reveal" half of the brief, and it is the reason the
+    // three-dimensional page was still carrying a mode this page now owns.
+    if (mode === "coach" && !picked) {
+      analysis.innerHTML = head +
+        `<p class="ask-pick">Pick the option you would take. The comparison unlocks once you commit.</p>` +
+        options.slice(0, 3).map(item =>
+          `<button class="ask-choice" type="button" data-pick="${esc(item.action_id)}">` +
+          `<strong>${esc(item.type)}</strong><small>${esc(item.action_id)}</small></button>`).join("");
+      return;
+    }
+
+    const verdict = picked
+      ? (() => {
+          const chosen = options.find(item => item.action_id === picked);
+          const rank = chosen?.rank;
+          return `<p class="ask-verdict">You picked <b>${esc(picked)}</b>. ` +
+            (rank === 1 ? "The model ranked it first." : `The model ranked it ${esc(String(rank ?? "outside the listed options"))}.`) +
+            `</p>`;
+        })()
+      : "";
+    analysis.innerHTML = head + verdict +
       options.slice(0, 3).map(item =>
-        `<article><h4><span class="ask-rank">${esc(item.rank)}</span>${esc(item.type)}<small>${esc(item.action_id)}</small></h4>` +
+        `<article${item.action_id === picked ? ' class="ask-yours"' : ""}><h4><span class="ask-rank">${esc(item.rank)}</span>${esc(item.type)}<small>${esc(item.action_id)}</small></h4>` +
         `<p>${esc(item.opportunity)}</p>` +
-        `<p class="ask-risk">${esc(item.main_risk)}</p>` +
-        `</article>`).join("");
+        `<p class="ask-risk">${esc(item.main_risk)}</p></article>`).join("");
   }
 
   function show(row, entry) {
     bundle = entry.bundle;
     doc = entry.doc;
     shownId = row.decision_id;
+    picked = "";
     renderMeasures(bundle.request.actor_id);
     renderAnalysis();
     status.textContent = getState().playing
@@ -218,6 +241,24 @@ export function createReplayDesk(getState) {
       if (current === token) status.textContent = error.message;
     }
   }
+
+  for (const button of document.querySelectorAll("[data-mode]")) {
+    button.addEventListener("click", () => {
+      mode = button.dataset.mode;
+      picked = "";
+      for (const other of document.querySelectorAll("[data-mode]")) {
+        other.setAttribute("aria-pressed", String(other === button));
+      }
+      if (doc) renderAnalysis();
+    });
+  }
+
+  analysis.addEventListener("click", event => {
+    const choice = event.target.closest("[data-pick]");
+    if (!choice) return;
+    picked = choice.dataset.pick;
+    renderAnalysis();
+  });
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
