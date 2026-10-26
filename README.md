@@ -8,6 +8,15 @@ The screen does not grade the player.
 
 English is the default. Chinese is the second button on the decision flow.
 
+**Hosted instance:** <https://nextplay-ai.azurewebsites.net/index.html?match=PL26-W01-MCI-CHE>
+
+That link opens a match with the replay desk already on screen. The model key
+lives in the instance's settings, so the four-role team answers without the
+visitor supplying anything. The hosted instance runs the same code as the
+repository; `deploy/` holds the steps that put it there.
+
+To run it locally instead:
+
 ```sh
 cd touchline && python3 server.py
 ```

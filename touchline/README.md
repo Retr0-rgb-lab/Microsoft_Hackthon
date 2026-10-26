@@ -44,6 +44,12 @@ npm run dev
 
 Open <http://127.0.0.1:5173>. Serve the folder over HTTP rather than opening `index.html` directly: the browser needs to load JSONL files and a module Worker.
 
+A hosted instance runs the same code on Azure App Service. `wsgi.py` exposes the
+same handler through WSGI and `startup.sh` starts it under gunicorn; `deploy/`
+holds the steps that publish it. The instance's own hostname has to be listed
+in `ITG_ALLOWED_HOSTS`, because the server only answers requests it considers
+same-origin.
+
 ### Language
 
 English is the default in every view: the dashboard, the coach page, the action

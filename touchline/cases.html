@@ -11,10 +11,18 @@ a{color:#9edbbb}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
 button{font:inherit;background:#1c3037;color:inherit;border:1px solid #46665a;border-radius:8px;padding:10px 14px;cursor:pointer}
 button[aria-pressed="true"]{background:#24483a}
+button:disabled{opacity:.55;cursor:progress}
 article{background:#1c3037;border-radius:12px;padding:18px 20px;margin:12px 0}
 h1{font-size:1.6rem}h2{font-size:1.15rem;margin:0 0 8px}
+h3{font-size:1rem;margin:16px 0 6px}
 .tag{color:#ffd78c;font-size:.9rem}
+.risk{color:#e0b48a}
 ul{padding-left:1.1rem}
+.opt{border-top:1px solid #2c4750;padding:10px 0}
+.opt:first-of-type{border-top:0}
+.opt h4{margin:0 0 4px;font-size:1rem;display:flex;gap:8px;align-items:baseline}
+.rank{background:#24483a;border-radius:50%;display:grid;place-items:center;width:22px;height:22px;font-size:.75rem}
+.small{font-size:.85rem;color:#a9c3b8}
 </style>
 </head>
 <body>
@@ -27,53 +35,131 @@ ul{padding-left:1.1rem}
 <button type="button" id="case-b" aria-pressed="false">B · Shot or another pass</button>
 <button type="button" id="case-c" aria-pressed="false">C · Backward under pressure</button>
 </div>
-<article id="card"></article>
+<article id="card"><p class="small">Loading the comparison…</p></article>
 <p class="tag" id="status" role="status"></p>
 <p>The three fixed cases are also reachable in context: open <a href="index.html?view=replay">Replay</a>, pause on a possession, and the right-hand column reads the choice set for that moment, in Fan mode or in Coach mode where you pick before the reading appears. Pass rollouts with four defensive reactions run from the coach page on this server. If the language model is not configured, the comparison on this page still stands.</p>
 </main>
 <script>
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = selector => document.querySelector(selector);
+
+// The three cases are fixed registered decisions in the checked-in league, so
+// every run of this page reads the same moments. The wording below is the
+// question each moment answers; the comparison itself is computed.
 const CASES = {
   a: {
-    title: "Why not pass to the open-looking teammate?",
-    actual: "The carrier keeps the ball or plays a shorter pass.",
-    alts: [
-      ["Pass into the open lane", "The ball reaches a teammate who can play the next action.", "A defender can arrive on that lane before the ball. The hypothetical rollout shows the interception."],
-      ["Another short pass", "Possession stays with a nearby teammate.", "Little forward progress, and the same pressure remains."]
-    ]
+    match: 'PL26-W01-MCI-CHE', decision: 'd000001',
+    title: 'Why not pass to the open-looking teammate?',
+    question: 'Why not pass along this route?',
+    note: 'The lane looks open, but the geometric rule says a defender can reach it before the ball.'
   },
   b: {
-    title: "Why shoot instead of one more pass?",
-    actual: "The carrier shoots.",
-    alts: [
-      ["Shoot", "The current window is used now.", "A miss gives the opponent the restart."],
-      ["One more pass", "A teammate may have a better window.", "The extra touch lets a defender close the lane."]
-    ]
+    match: 'PL26-W01-MCI-CHE', decision: 'd000017',
+    title: 'Why shoot instead of one more pass?',
+    question: 'Why shoot here rather than one more pass?',
+    note: 'A shooting window is open now; a further pass would let a defender close the lane.'
   },
   c: {
-    title: "Why pass backward instead of forward under pressure?",
-    actual: "The carrier passes backward.",
-    alts: [
-      ["Backward pass", "Possession is kept.", "The attack does not advance."],
-      ["Forward pass", "The ball goes toward the goal.", "The forward lane is closed and pressure is already arriving."]
-    ]
+    match: 'PL26-W01-MCI-CHE', decision: 'd000008',
+    title: 'Why pass backward instead of forward under pressure?',
+    question: 'Why recycle possession instead of playing forward?',
+    note: 'The forward lane is closed under pressure; keeping the ball is the cheaper of the two.'
   }
 };
-const card = document.querySelector("#card");
-const status = document.querySelector("#status");
-function show(id) {
-  const item = CASES[id];
-  for (const button of document.querySelectorAll(".row button")) {
-    button.setAttribute("aria-pressed", String(button.id === "case-" + id));
-  }
-  card.innerHTML = `<h2>${item.title}</h2><p><strong>What happened.</strong> ${item.actual}</p>` +
-    item.alts.map(([name, opportunity, risk]) =>
-      `<h2>${name}</h2><p><strong>Opportunity.</strong> ${opportunity}</p><p><strong>Main risk.</strong> ${risk}</p>`
-    ).join("") +
-    `<p class="tag">Assumptions: lane rule unvalidated; simulated profile; no preferred-foot ability score. A weak left foot only labels one rightward window as narrower.</p>`;
-  status.textContent = "Case " + id.toUpperCase() + " · computed comparison · model_unavailable until a Foundry key is configured on the server.";
+
+const card = $('#card');
+const status = $('#status');
+let current = 'a';
+
+async function get(path) {
+  const r = await fetch(path, {cache:'no-store'});
+  const value = await r.json();
+  if (!r.ok) throw Error(value.error || 'Decision-analysis service unavailable');
+  return value;
 }
-for (const id of ["a", "b", "c"]) document.querySelector("#case-" + id).onclick = () => show(id);
-show("a");
+async function post(path, body) {
+  const r = await fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  const value = await r.json();
+  if (!r.ok) throw Error(value.error || 'Decision-analysis service unavailable');
+  return value;
+}
+
+function clockOf(tMs) {
+  const s = Math.floor(tMs / 1000);
+  return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+}
+
+async function loadCase(id) {
+  current = id;
+  const item = CASES[id];
+  for (const button of document.querySelectorAll('.row button')) {
+    button.setAttribute('aria-pressed', String(button.id === 'case-' + id));
+  }
+  card.innerHTML = '<p class="small">Reading the registered decision…</p>';
+  status.textContent = 'Loading case ' + id.toUpperCase() + '…';
+  try {
+    const context = await get(`/api/decision-analysis/context?match_id=${encodeURIComponent(item.match)}&decision_id=${encodeURIComponent(item.decision)}`);
+    const doc = await post('/api/decision-analysis/analyze', context.request);
+    const publicPart = doc.public || doc;
+    const candidates = (publicPart.candidates || []).filter(c => c.eligible);
+    const actual = (publicPart.candidates || []).find(c => c.is_actual);
+    const head = `<h2>${esc(item.title)}</h2>` +
+      `<p class="small">${esc(item.match)} · decision ${esc(item.decision)} · ${clockOf(context.request.t_ms)} · ${esc(item.note)}</p>` +
+      (actual ? `<p><strong>What happened.</strong> The carrier took <strong>${esc(actual.type)}</strong>${actual.action_id ? ' (' + esc(actual.action_id) + ')' : ''}.</p>` : '') +
+      `<p class="small">${esc(item.question)}</p>`;
+    const options = candidates.slice(0, 3).map(c =>
+      `<div class="opt"><h4><span class="rank">${esc(c.rank)}</span>${esc(c.type)}<span class="small">${esc(c.action_id)}</span></h4>` +
+      `<p><strong>Opportunity.</strong> ${esc(c.opportunity)}</p>` +
+      `<p class="risk"><strong>Main risk.</strong> ${esc(c.main_risk)}</p></div>`).join('');
+    const assumptions = (publicPart.candidates || []).flatMap(c => c.assumptions || []);
+    const limits = (publicPart.limitations || []).slice(0, 2);
+    card.innerHTML = head + options +
+      `<h3>Assumptions</h3><p class="small">${esc([...new Set(assumptions)].slice(0, 5).join(' · ') || 'None recorded for this moment.')}</p>` +
+      (limits.length ? `<h3>Limitations</h3><p class="small">${esc(limits.join(' '))}</p>` : '') +
+      `<h3>Ask the four-role team</h3><p class="small">The comparison above is computed. The team adds a defended reading of it.</p>` +
+      `<div class="row"><button type="button" id="ask-case">Ask about this moment</button>` +
+      `<a href="index.html?match=${encodeURIComponent(item.match)}&view=replay">Open in the Replay desk →</a></div>` +
+      `<div id="case-answer"></div>`;
+    // The comparison carries no explanation until the team runs, so its own
+    // status label says nothing about the model. Ask the settings route.
+    let connected = false;
+    try {
+      const settings = await get('/api/model-settings');
+      connected = Boolean(settings.has_key);
+    } catch (e) { connected = false; }
+    status.textContent = `Case ${id.toUpperCase()} · computed comparison · ${connected ? 'the language model is connected on this server' : 'no language model is configured on this server, so the comparison stands on its own'}`;
+    $('#ask-case').onclick = async () => {
+      const button = $('#ask-case');
+      button.disabled = true;
+      $('#case-answer').innerHTML = '<p class="small">Asking the team…</p>';
+      try {
+        const value = await post('/api/decision-analysis/agents', {
+          request: {...context.request, question: item.question, mode: 'fan', language: 'en'},
+          candidate_set_id: publicPart.candidate_set_id
+        });
+        const text = value.explanation?.text;
+        const roles = (value.agent_trace || []).map(t => t.agent).filter((v, i, a) => a.indexOf(v) === i);
+        $('#case-answer').innerHTML = (text
+          ? `<p>${esc(text)}</p>`
+          : '<p class="small">The team returned no explanation. The comparison above still stands.</p>') +
+          `<p class="small">Team status: ${esc(value.status || 'unknown')}.</p>` +
+          (roles.length ? `<p class="small">Roles that worked on it: ${esc(roles.join(' · '))}.</p>` : '');
+        if (value.explanation?.cited_evidence_ids?.length) {
+          $('#case-answer').innerHTML += `<p class="small">Cited evidence: ${esc(value.explanation.cited_evidence_ids.join(', '))}.</p>`;
+        }
+      } catch (e) {
+        $('#case-answer').innerHTML = `<p class="small">${esc(e.message)} The comparison above still stands.</p>`;
+        button.disabled = false;
+      }
+    };
+  } catch (e) {
+    card.innerHTML = `<p class="small">${esc(e.message)}</p>`;
+    status.textContent = 'Case ' + id.toUpperCase() + ' could not be read.';
+  }
+}
+
+for (const id of Object.keys(CASES)) document.querySelector('#case-' + id).onclick = () => loadCase(id);
+loadCase('a');
 </script>
 </body>
 </html>
