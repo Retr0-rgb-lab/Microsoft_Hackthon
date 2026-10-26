@@ -27,7 +27,7 @@ from inside_the_game.system1.tracking import decide_from_tracking, score_paths
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SAMPLE = REPO_ROOT / "touchline" / "data" / "samples" / "sample_25hz_10min"
-DEFAULT_OUTPUT = REPO_ROOT / "touchline" / "scene" / "public" / "decisions.json"
+DEFAULT_OUTPUT = REPO_ROOT / "touchline" / "data" / "decisions.json"
 
 SCHEMA_VERSION = 1
 

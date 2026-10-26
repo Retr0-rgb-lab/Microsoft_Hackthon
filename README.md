@@ -1,6 +1,48 @@
-# Inside the Game
+# NextPlay AI
 
-Microsoft × Premier League Developer Hackathon project.
+Microsoft × Premier League hackathon entry for the multi-agent award. A viewer pauses a
+fictional match and asks what the carrier could have done, and what each option cost.
+The screen does not grade the player.
+
+## Judge path
+
+English is the default. Chinese is the second button on the decision flow.
+
+```sh
+cd touchline && python3 server.py
+```
+
+Open http://127.0.0.1:5173/cases.html and walk the three cases: an open-looking pass a
+defender can reach first, a shot against one more pass, and a backward pass under
+pressure. Each card shows the opportunity and the main risk. Numbers behind the rank
+are not printed.
+
+The match page is the product. Open Replay. The left board shows the player you click,
+or a team’s totals. The right board stays quiet while the match plays. Pause on a
+decision, then ask about that moment.
+
+Azure AI Foundry is the language-model host when the server is configured:
+
+```sh
+export ITG_MODEL_BASE_URL="https://<resource>.cognitiveservices.azure.com/openai/v1"
+export ITG_MODEL_NAME="gpt-4.1-mini"
+export ITG_MODEL_API_KEY="<key>"
+```
+
+The key stays on the server. `ITG_DAILY_CALL_CAP` defaults to 200. If the model is
+down, the comparison still returns with status `model_unavailable`. The four roles
+(coordinator, attack, defense, reviewer) share one candidate set; a reviewer rejection
+rewrites once, then the computed comparison is what remains. StatsBomb Open Data is the
+calibration reference only, attributed in `touchline/README.md`. Squads in the product
+are fictional.
+
+A local recording is `docs/media/nextplay-demo.mp4`. It is not yet a public YouTube or
+Vimeo link, and there is no hosted URL that stays up through 10 November without a
+machine running the server.
+
+The decision kernel underneath the product is documented from [The decision kernel](#the-decision-kernel).
+
+# The decision kernel
 
 Two things live here. **[`touchline/`](touchline/README.md)** is the product: a fictional
 2026/27 league, match replay, the coach page where a viewer freezes a moment and asks
@@ -14,7 +56,7 @@ computed opportunity and risk, and the full probability distribution over **pass
 
 Start here: [touchline/README.md](touchline/README.md). This file documents the kernel.
 
-The browser flow lives in `touchline/scene`. From `touchline/scene`, run `npm install` and `npm run dev`, then open `http://127.0.0.1:5174/flow.html`. It plays the synthetic `sample_25hz_10min` clip, pauses on a `decision_point`, and renders a stub of `decide_from_tracking`. The phase diagram is in `touchline/scene/FLOW.md`.
+The match replay on `touchline/index.html` is the screen: a 2D pitch, a data board, and a question box for the paused decision.
 
 ## Locked architecture
 

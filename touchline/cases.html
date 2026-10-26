@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NextPlay · Three cases</title>
+<style>
+body{font:17px/1.55 system-ui,sans-serif;background:#101e25;color:#e7f2ec;margin:0}
+main{max-width:880px;margin:0 auto;padding:28px 20px 64px}
+a{color:#9edbbb}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+button{font:inherit;background:#1c3037;color:inherit;border:1px solid #46665a;border-radius:8px;padding:10px 14px;cursor:pointer}
+button[aria-pressed="true"]{background:#24483a}
+article{background:#1c3037;border-radius:12px;padding:18px 20px;margin:12px 0}
+h1{font-size:1.6rem}h2{font-size:1.15rem;margin:0 0 8px}
+.tag{color:#ffd78c;font-size:.9rem}
+ul{padding-left:1.1rem}
+</style>
+</head>
+<body>
+<main>
+<p><a href="index.html">League</a> · <a href="coach.html">Coach page</a> · <a href="public-demo/index.html">Browser demo</a></p>
+<h1>Three cases</h1>
+<p>Fictional squads. Pause before the carrier acts, then read the actual choice beside the alternatives. This is a decision aid, not a grade. The rank is shown. The number behind it is not.</p>
+<div class="row" role="group" aria-label="Cases">
+<button type="button" id="case-a" aria-pressed="true">A · Open teammate</button>
+<button type="button" id="case-b" aria-pressed="false">B · Shot or another pass</button>
+<button type="button" id="case-c" aria-pressed="false">C · Backward under pressure</button>
+</div>
+<article id="card"></article>
+<p class="tag" id="status" role="status"></p>
+<p>Playback of the synthetic clip, with fan mode and training review, is the decision flow at <code>touchline/scene</code> on port 5174. Pass rollouts with four defensive reactions run from the coach page on this server. If the language model is not configured, the comparison on this page still stands.</p>
+</main>
+<script>
+const CASES = {
+  a: {
+    title: "Why not pass to the open-looking teammate?",
+    actual: "The carrier keeps the ball or plays a shorter pass.",
+    alts: [
+      ["Pass into the open lane", "The ball reaches a teammate who can play the next action.", "A defender can arrive on that lane before the ball. The hypothetical rollout shows the interception."],
+      ["Another short pass", "Possession stays with a nearby teammate.", "Little forward progress, and the same pressure remains."]
+    ]
+  },
+  b: {
+    title: "Why shoot instead of one more pass?",
+    actual: "The carrier shoots.",
+    alts: [
+      ["Shoot", "The current window is used now.", "A miss gives the opponent the restart."],
+      ["One more pass", "A teammate may have a better window.", "The extra touch lets a defender close the lane."]
+    ]
+  },
+  c: {
+    title: "Why pass backward instead of forward under pressure?",
+    actual: "The carrier passes backward.",
+    alts: [
+      ["Backward pass", "Possession is kept.", "The attack does not advance."],
+      ["Forward pass", "The ball goes toward the goal.", "The forward lane is closed and pressure is already arriving."]
+    ]
+  }
+};
+const card = document.querySelector("#card");
+const status = document.querySelector("#status");
+function show(id) {
+  const item = CASES[id];
+  for (const button of document.querySelectorAll(".row button")) {
+    button.setAttribute("aria-pressed", String(button.id === "case-" + id));
+  }
+  card.innerHTML = `<h2>${item.title}</h2><p><strong>What happened.</strong> ${item.actual}</p>` +
+    item.alts.map(([name, opportunity, risk]) =>
+      `<h2>${name}</h2><p><strong>Opportunity.</strong> ${opportunity}</p><p><strong>Main risk.</strong> ${risk}</p>`
+    ).join("") +
+    `<p class="tag">Assumptions: lane rule unvalidated; simulated profile; no preferred-foot ability score. A weak left foot only labels one rightward window as narrower.</p>`;
+  status.textContent = "Case " + id.toUpperCase() + " · computed comparison · model_unavailable until a Foundry key is configured on the server.";
+}
+for (const id of ["a", "b", "c"]) document.querySelector("#case-" + id).onclick = () => show(id);
+show("a");
+</script>
+</body>
+</html>

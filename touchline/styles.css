@@ -221,3 +221,49 @@ body.is-loading .match-picker-controls{pointer-events:none}
 #heatmap-legend i { width: 120px; height: 8px; border-radius: 8px; background: linear-gradient(90deg, #766d36, #efad36, #f04422); }
 @media(max-width:600px) { #analysis-players { grid-template-columns: 1fr; } #player-dialog { padding: 18px; } .player-report-heading h2 { font-size: 19px; } .player-summary-stats > div { padding: 9px; } .player-summary-stats strong { font-size: 18px; } }
 #player-heatmap svg { height: auto; max-height: 280px; stroke: none; }
+.replay-desk{display:grid;grid-template-columns:280px minmax(0,1fr) 300px;gap:14px;align-items:start}
+.replay-desk.is-data-collapsed{grid-template-columns:52px minmax(0,1fr) 300px}
+.replay-desk.is-ask-collapsed{grid-template-columns:280px minmax(0,1fr) 52px}
+.replay-desk.is-data-collapsed.is-ask-collapsed{grid-template-columns:52px minmax(0,1fr) 52px}
+.desk-side{background:#fff;border:1px solid var(--line);border-radius:16px;min-height:280px;overflow:hidden}
+.desk-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.desk-head h3{margin:0;font-size:14px}
+.desk-collapse{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11px}
+.desk-switch{display:flex;gap:6px;padding:12px 12px 0}
+.desk-switch button{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:11px}
+.desk-switch button[aria-pressed="true"]{background:#252a36;color:#fff}
+#player-board,#team-board,#desk-ask-body,#desk-data-body{padding:12px}
+#player-select,#ask-input{width:100%;margin:8px 0}
+#ask-analysis article{border-top:1px solid var(--line);padding:8px 0}
+#ask-analysis h4{margin:0 0 4px;font-size:12px}
+#ask-answer{white-space:pre-wrap}
+.desk-note{color:var(--muted);margin:0 0 8px}
+.is-data-collapsed #desk-data .desk-head h3,.is-ask-collapsed #desk-ask .desk-head h3{display:none}
+@media(max-width:960px){.replay-desk,.replay-desk.is-data-collapsed,.replay-desk.is-ask-collapsed,.replay-desk.is-data-collapsed.is-ask-collapsed{grid-template-columns:1fr}}
+
+/* Right column: the read that follows the playhead. */
+.ask-now{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:12px 16px 0;font-size:10px;color:#9aa3b0}
+.ask-now #ask-clock{font-size:13px;font-weight:600;color:#5f6a79;font-variant-numeric:tabular-nums}
+.ask-narration{margin:8px 16px 0;font-size:12px;line-height:1.6;color:#3f4855}
+.ask-narration:empty{display:none}
+.ask-measures{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin:12px 16px 0;padding:12px 0 0;border-top:1px solid var(--line)}
+.ask-measures:empty{display:none}
+.ask-measures span{display:block;font-size:9px;color:#a1a9b4}
+.ask-measures strong{display:block;margin-top:4px;font-size:13px;font-weight:550;color:#606f80;font-variant-numeric:tabular-nums}
+.ask-measures small{font-size:9px;font-weight:400;color:#a4adb9}
+#ask-status{margin:12px 16px 0;font-size:10px;color:#8f98a5;line-height:1.6}
+#ask-analysis{margin:10px 16px 0}
+#ask-analysis .ask-subject{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px;font-size:11px}
+#ask-analysis .ask-subject span{font-size:9px;color:#9aa3b0}
+#ask-analysis article{border:1px solid var(--line);border-radius:10px;padding:10px 11px;margin-bottom:8px;background:#fcfcfd}
+#ask-analysis h4{display:flex;align-items:center;gap:7px;margin:0 0 6px;font-size:11px;font-weight:600;text-transform:capitalize}
+#ask-analysis h4 small{margin-left:auto;font-size:9px;font-weight:400;color:#a3abb7;text-transform:none}
+.ask-rank{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#f2f4f7;color:#7d8794;font-size:9px;font-weight:600}
+#ask-analysis p{margin:0;font-size:10px;line-height:1.55;color:#6b7686}
+#ask-analysis .ask-risk{color:#a4764f;margin-top:5px}
+#ask-form{margin:12px 16px 0;display:flex;flex-direction:column;gap:6px}
+#ask-form label{font-size:9px;color:#9aa3b0}
+#ask-form input{border:1px solid var(--line);border-radius:8px;padding:8px 9px;font-size:11px}
+#ask-form .button{align-self:flex-start}
+#ask-answer{margin:10px 16px 16px;font-size:11px;line-height:1.65;color:#4b5563}
+#ask-answer:empty{display:none}

@@ -28,7 +28,9 @@ the selected action.
 | --- | --- | --- | --- | --- | --- |
 | A — contested pass | `d000001` | Why not pass to the striker? | accept | 10 | 11 |
 | B — shot over pass | `d000029` | Why shoot instead of passing? | accept | 10 | 42 |
-| C — carry over pass | `d000003` | Why carry instead of passing? | accept | 10 | 12 |
+| C — backward pass | `d000003` | Why pass backward instead of forward under pressure? | accept | 10 | 12 |
+
+The contract fixture for case C (`tests/fixtures/contracts/case-c/`) asks the backward-pass question above. An earlier note on this row said “why carry”; that wording is retired.
 
 All three runs completed with four roles and an `accept` verdict. The recorded
 `evidence_ids` names resolve against the same candidate set the interface shows.

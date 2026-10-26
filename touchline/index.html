@@ -7,8 +7,8 @@
   <meta name="description" content="Touchline football intelligence: match replay, live statistics, events and 2026/27 fictional club squads.">
   <title>Touchline · Football Intelligence</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23ed713d'/%3E%3Cpath d='M9 12h22M20 12v19' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=2.6.0">
-  <script type="module" src="app.js?v=2.6.0"></script>
+  <link rel="stylesheet" href="styles.css?v=2.8.0">
+  <script type="module" src="app.js?v=2.8.0"></script>
 </head>
 <body>
   <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
@@ -35,7 +35,6 @@
     <div class="nav-caption">Workspace</div>
     <nav aria-label="Main navigation">
       <a class="nav-item" href="coach.html">Decision Coach ↗</a>
-      <a class="nav-item" href="scene/flow.html">Decision flow (3D) ↗</a>
       <a class="nav-item" href="action-review.html">Action review ↗</a>
       <a class="nav-item" href="decision-counterfactual.html">Counterfactual ↗</a>
       <a class="nav-item" href="realism-validation.html">Real-data validation ↗</a>
@@ -94,14 +93,55 @@
       <section id="live-view">
         <div id="post-match-banner" class="post-match-banner" role="status" hidden><div><strong>Full time. The match report is ready.</strong><p>Review the match story and discover the Player of the Match.</p></div><button class="button" data-view="stats">Read match report →</button></div>
         <div class="metric-grid" id="metrics"></div>
-        <div class="live-grid">
+        <div class="replay-desk" id="replay-desk">
+          <aside class="desk-side" id="desk-data">
+            <div class="desk-head"><h3>Data</h3><button type="button" class="desk-collapse" id="collapse-data" aria-expanded="true" aria-controls="desk-data-body">Hide</button></div>
+            <div id="desk-data-body">
+              <div class="desk-switch" role="group" aria-label="Data board">
+                <button type="button" data-board="player" aria-pressed="true">Player</button>
+                <button type="button" data-board="home">Home</button>
+                <button type="button" data-board="away">Away</button>
+              </div>
+              <div id="player-board">
+                <label class="sr-only" for="player-select">Select player</label>
+                <select id="player-select"></select>
+                <div id="player-detail"></div>
+              </div>
+              <div id="team-board" hidden>
+                <p class="desk-note" id="team-board-label">Team totals follow the replay clock.</p>
+                <div class="possession-heading"><span>Possession</span></div>
+                <div class="possession-values"><strong id="home-possession">—</strong><span>POSSESSION</span><strong id="away-possession">—</strong></div>
+                <div class="possession-bar"><span id="possession-home"></span><span id="possession-away"></span></div>
+                <div class="stats-team-label"><span><i class="home-dot"></i><span id="stats-home-label">Home</span></span><span><span id="stats-away-label">Away</span><i class="away-dot"></i></span></div>
+                <div id="live-stats"></div>
+                <div id="discipline-strip" class="discipline-strip" aria-label="Cards and substitutions"></div>
+              </div>
+            </div>
+          </aside>
+          <div class="desk-stage">
           <section class="card pitch-card"><div class="card-heading"><div><h3><svg><use href="#i-pitch"/></svg>Pitch replay <span class="replay-badge">REPLAY</span></h3><p>Follow the match and every movement</p></div><div class="legend"><span><i class="home-dot"></i><span id="legend-home">Home</span></span><span><i class="away-dot"></i><span id="legend-away">Away</span></span></div></div>
             <div class="pitch-wrap"><canvas id="pitch" aria-label="Football pitch tracking; use the player selector below" role="img"></canvas><div class="pitch-top"><span id="pitch-phase">Waiting for data</span><span>105 × 68 m</span></div><div class="pitch-bottom"><span id="attack-direction">Home attack →</span><span>POSITIONAL TRACKING · 5 Hz</span></div></div>
             <div class="playback"><div class="timeline-label"><strong id="timeline-clock">--:--</strong><span id="timeline-caption">Full timeline</span><span id="timeline-end-label">90+5:00</span></div><div class="scrubber"><div id="goal-markers"></div><input id="timeline" type="range" min="0" max="6000000" value="0" step="200" aria-label="Replay time" disabled></div><div class="period-ticks"><span id="tick-start">Kick-off</span><span id="tick-mid">Half-time</span><span id="tick-end">Full-time</span></div><div class="playback-buttons"><div class="transport"><button class="icon-button" id="back" aria-label="Back 10 seconds" title="Back 10 seconds"><svg><use href="#i-back"/></svg></button><button class="play-button" id="play" aria-label="Play" disabled><svg><use href="#i-play"/></svg></button><button class="icon-button" id="forward" aria-label="Forward 10 seconds" title="Forward 10 seconds"><svg><use href="#i-forward"/></svg></button><span class="playback-hint">Space to play / pause</span></div><div class="speed-control"><label for="speed">Speed</label><select id="speed" aria-label="Playback speed"><option value="1">1×</option><option value="4">4×</option><option value="10">10×</option></select><button class="text-button" id="restart">Back to clip start ↺</button></div></div></div>
           </section>
-          <section class="card stats-card"><div class="card-heading"><div><h3>Match stats</h3><p>At current replay time</p></div><svg class="muted-icon"><use href="#i-chart"/></svg></div><div class="possession-heading"><span>Possession</span><svg><use href="#i-ball"/></svg></div><div class="possession-values"><strong id="home-possession">—</strong><span>POSSESSION</span><strong id="away-possession">—</strong></div><div class="possession-bar"><span id="possession-home"></span><span id="possession-away"></span></div><div class="stats-team-label"><span><i class="home-dot"></i><span id="stats-home-label">Home</span></span><span><span id="stats-away-label">Away</span><i class="away-dot"></i></span></div><div id="live-stats"></div><div id="discipline-strip" class="discipline-strip" aria-label="Cards and substitutions"></div><div class="stats-note"><svg><use href="#i-clock"/></svg>1-second snapshots · updated with replay</div></section>
+          <section class="card events-card"><div class="card-heading"><div><h3>Match events <span id="event-count" class="count-badge">0</span></h3><p id="event-help">Click an event to jump to the moment</p></div><div class="event-controls"><select id="event-scope" aria-label="Event time range"><option value="replay">At replay time</option><option value="full">Full match</option></select><select id="event-filter" aria-label="Filter match events"><option value="key">Key events</option><option value="all">All events</option><option value="goal">Goals</option><option value="pass">Passes</option><option value="shot">Shots</option><option value="interception">Interceptions</option><option value="yellow_card">Yellow cards</option><option value="red_card">Red cards</option><option value="substitution">Substitutions</option></select></div></div><div id="event-list" class="event-list"></div></section>
+          </div>
+          <aside class="desk-side" id="desk-ask">
+            <div class="desk-head"><h3>Ask</h3><button type="button" class="desk-collapse" id="collapse-ask" aria-expanded="true" aria-controls="desk-ask-body">Hide</button></div>
+            <div id="desk-ask-body">
+              <div class="ask-now"><span id="ask-clock">—</span><span id="ask-follow">Waiting for a match</span></div>
+              <p id="ask-narration" class="ask-narration"></p>
+              <div id="ask-measures" class="ask-measures"></div>
+              <p id="ask-status" role="status">Pause on a decision to ask about that moment.</p>
+              <div id="ask-analysis"></div>
+              <form id="ask-form" hidden>
+                <label for="ask-input">Question about this decision</label>
+                <input id="ask-input" type="text" maxlength="400" placeholder="Why not pass to the open teammate?">
+                <button class="button" type="submit">Ask</button>
+              </form>
+              <p id="ask-answer"></p>
+            </div>
+          </aside>
         </div>
-        <div class="bottom-grid"><section class="card events-card"><div class="card-heading"><div><h3>Match events <span id="event-count" class="count-badge">0</span></h3><p id="event-help">Click an event to jump to the moment</p></div><div class="event-controls"><select id="event-scope" aria-label="Event time range"><option value="replay">At replay time</option><option value="full">Full match</option></select><select id="event-filter" aria-label="Filter match events"><option value="key">Key events</option><option value="all">All events</option><option value="goal">Goals</option><option value="pass">Passes</option><option value="shot">Shots</option><option value="interception">Interceptions</option><option value="yellow_card">Yellow cards</option><option value="red_card">Red cards</option><option value="substitution">Substitutions</option></select></div></div><div id="event-list" class="event-list"></div></section><section class="card player-card"><div class="card-heading"><div><h3>Player focus</h3><p>Click a player on the pitch for live details</p></div><svg class="muted-icon"><use href="#i-users"/></svg></div><label class="sr-only" for="player-select">Select player</label><select id="player-select"></select><div id="player-detail"></div></section></div>
       </section>
       <section id="settings-view" hidden class="card model-settings">
         <h2>Match summary model</h2>

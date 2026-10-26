@@ -117,6 +117,10 @@ class ContractTests(unittest.TestCase):
         known,other=self.result(request=request)
         self.assertNotEqual(unknown['candidate_set_id'],known['candidate_set_id'])
         self.assertEqual([(r['key'],r['q']) for r in private['options']],[(r['key'],r['q']) for r in other['options']])
+        labelled=[c for c in known['candidates'] if 'simulated_weak_foot_window_labelled' in c['assumptions']]
+        self.assertEqual(len(labelled),1)
+        self.assertIn('labelled narrower',labelled[0]['opportunity'])
+        self.assertEqual([c['rank'] for c in unknown['candidates']],[c['rank'] for c in known['candidates']])
         profile=source_profile({'position':'CB','sofascore':{'status':'partial','attribute_kind':'goalkeeper','attributes':{'SAV':99},'source_conflicts':{'position':True}}})
         self.assertEqual(profile['status'],'needs_review');self.assertFalse(profile['used_in_probability'])
         self.assertIsNone(source_profile({'position':'GK'})['observation'])

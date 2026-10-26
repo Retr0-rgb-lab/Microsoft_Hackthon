@@ -20,10 +20,35 @@ LIMITATIONS = [
     'Tactical execution probabilities and short geometric successors are unvalidated assumptions, not individual skill models.',
     'The next decision uses a maximum and can overestimate achievable continuation; xT retains source-policy bias.',
     'Source radar indices and generator choice probabilities do not modify action success or Q2.',
-    'Source observations and simulated profile are separate. Foot effects remain neutral; body orientation is unknown.',
+    'Source observations and simulated profile are separate. A weak left foot only labels one rightward pass window as narrower; it does not change the rank. Body orientation is unknown.',
     'High balls and hold are unsupported in the public contract; legacy research analysis remains available separately.',
     'One standardised route per receiver; historical carry direction is unknown unless explicitly recorded before execution.',
 ]
+
+
+def _weak_foot_window(request, state, rows):
+    """Label one rightward pass when the simulated profile is a weak left foot.
+
+    The rank is computed before this sentence. Pitch y increases downward, so a
+    larger target y is the right side of a player facing +x.
+    """
+    profile = request['profile']
+    if profile.get('preferred_foot') != 'left':
+        return None
+    weak = profile.get('weak_foot')
+    if type(weak) is not int or weak > 2:
+        return None
+    actor = next((p for p in state['players'] if p['id'] == state['actor']), None)
+    passes = [row for row in rows if row.get('kind') == 'pass' and row.get('target') and row.get('q') is not None]
+    if actor is None or not passes:
+        return None
+    chosen = max(passes, key=lambda row: (float(row['target'][1]) - float(actor['y']), row['key']))
+    receiver = str(chosen['key']).split(':', 1)[-1]
+    return chosen['key'], (
+        f" Simulated profile only: left foot, weak foot {weak}/5. "
+        f"The rightward window to {receiver} is labelled narrower, because the ball would leave across the weaker side. "
+        "The rank is unchanged."
+    )
 
 
 def empty_response(request, snapshot, reason):
@@ -73,6 +98,7 @@ def compare_actions(request, snapshot, metadata, model, ratings=None):
               '; textual thresholds are versioned hypotheses; neutral player-profile effects.')]
     candidates = []
     rank = 0
+    narrowed = _weak_foot_window(request, state, rows)
     unknown_foot = request['profile']['preferred_foot'] is None
     foot_assumption = 'preferred_foot_not_considered' if unknown_foot else 'simulated_foot_profile_retained_but_not_used_in_success_probability'
     for index, row in enumerate(rows, 1):
@@ -115,6 +141,9 @@ def compare_actions(request, snapshot, metadata, model, ratings=None):
             else:
                 opportunity += ' Goal distance '+format(f['goal_distance'],'.1f')+' m; opening '+format(f['goal_angle'],'.2f')+' rad.'
         evidence.append(dict(evidence_id=eid, kind='computed', source='decision_analysis.tactical_rules.geometry via decision_analysis/q2.py', value=value))
+        if narrowed and narrowed[0] == row['key']:
+            opportunity += narrowed[1]
+            assumptions.append('simulated_weak_foot_window_labelled')
         candidates.append(dict(action_id=row['key'], type=kind, is_actual=False, eligible=eligible,
             opportunity=opportunity, main_risk=risk, rank=rank if eligible else None,
             evidence_ids=[eid, 'model-context'], assumptions=assumptions,

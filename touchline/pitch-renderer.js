@@ -5,8 +5,7 @@ export function pitchGeometry(canvasWidth, canvasHeight) {
   return { x: (w - 105 * scale) / 2, y: (h - 68 * scale) / 2 + 3, scale, w, h };
 }
 
-export function renderPitch(canvas, frame, {metadata, selected=null, route=null, actualRoute=null, width, height}={}) {
-  if (!canvas || !frame) return;
+export function renderPitch(canvas, frame, {metadata, selected=null, route=null, actualRoute=null, width, height}={}) {  if (!canvas || !frame) return;
   const canvasWidth=width||canvas.clientWidth, canvasHeight=height||canvas.clientHeight;
   if (!canvasWidth||!canvasHeight) return;
   const ratio=Math.min(globalThis.devicePixelRatio||1,2);
@@ -52,4 +51,33 @@ export function renderPitch(canvas, frame, {metadata, selected=null, route=null,
   ctx.fillStyle = '#193d3760'; ctx.beginPath(); ctx.ellipse(bx + 1, by + 2, 3.5, 2, 0, 0, Math.PI * 2); ctx.fill();
   ctx.beginPath(); ctx.arc(bx, by - lift, 3.6, 0, Math.PI * 2); ctx.fillStyle = '#fffdf4'; ctx.fill(); ctx.strokeStyle = '#e1d9bf'; ctx.lineWidth = .8; ctx.stroke();
   ctx.beginPath(); ctx.arc(bx, by - lift, 1.3, 0, Math.PI * 2); ctx.fillStyle = '#707c6d'; ctx.fill();
+}
+
+// Which player is under the pointer. The circle radius is what renderPitch
+// draws, plus a few pixels of slop so a small canvas is still clickable.
+export function hitTestPlayer(canvas, frame, {clientX, clientY}={}) {
+  if (!canvas || !frame || !frame.players) return null;
+  const width = canvas.clientWidth, height = canvas.clientHeight;
+  if (!width || !height) return null;
+  const rect = canvas.getBoundingClientRect();
+  const px = clientX - rect.left, py = clientY - rect.top;
+  const { x, y, scale: s } = pitchGeometry(width, height);
+  const radius = Math.max(6, Math.min(10, s * 1.65));
+  let nearest = null, nearestDistance = radius + 6;
+  for (const player of frame.players) {
+    const distance = Math.hypot(x + player[1] * s - px, y + player[2] * s - py);
+    if (distance < nearestDistance) { nearestDistance = distance; nearest = player[0]; }
+  }
+  return nearest;
+}
+
+// Whether a click landed on the pitch surface rather than outside it.
+export function hitTestPitch(canvas, {clientX, clientY}={}) {
+  if (!canvas) return false;
+  const width = canvas.clientWidth, height = canvas.clientHeight;
+  if (!width || !height) return false;
+  const rect = canvas.getBoundingClientRect();
+  const px = clientX - rect.left, py = clientY - rect.top;
+  const { x, y, scale: s } = pitchGeometry(width, height);
+  return px >= x && px <= x + 105 * s && py >= y && py <= y + 68 * s;
 }

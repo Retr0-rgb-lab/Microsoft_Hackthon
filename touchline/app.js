@@ -1,5 +1,6 @@
-import {renderPitch,pitchGeometry} from './pitch-renderer.js?v=integrated-da-1';
+import {renderPitch,pitchGeometry,hitTestPlayer,hitTestPitch} from './pitch-renderer.js?v=integrated-da-2';
 import {createDecisionView} from './decision-analysis-view.js?v=integrated-da-1';
+import {createReplayDesk} from './replay-desk.js?v=2.8.0';
 import { playerStats, heatmapSVG } from './player-analysis.js';
 import { januarySchedule, calendarDays } from './calendar.js';
 import { CURRENT_MATCHWEEK, HOME_CLUB_KEY, clubDashboard } from './club-home.js';
@@ -14,10 +15,18 @@ const canvas = $('#pitch');
 const ctx = canvas.getContext('2d');
 const LEAGUE_ROOT = './data/league/';
 let analysisTab=new URLSearchParams(location.search).get('analysis')||'report';
-const decisionView=createDecisionView($('#decision-analysis'),time=>{changeView('replay');seek(time);});
+// The standalone decision tab is optional: the replay desk now reads the same
+// contract inline. When its container is absent the view is inert rather than
+// a null dereference that stops the whole page from starting.
+const decisionHost=$('#decision-analysis');
+const decisionView=decisionHost
+  ?createDecisionView(decisionHost,time=>{changeView('replay');seek(time);})
+  :{show(){},clear(){},refreshReplayAvailability(){},setMatch(){}};
+const replayDesk=createReplayDesk(()=>state);
 function setAnalysisTab(tab){
   analysisTab=tab==='decisions'?'decisions':'report';
-  $('#match-report-panel').hidden=analysisTab==='decisions';$('#decision-analysis').hidden=analysisTab!=='decisions';
+  if($('#match-report-panel'))$('#match-report-panel').hidden=analysisTab==='decisions';
+  if(decisionHost)decisionHost.hidden=analysisTab!=='decisions';
   document.querySelectorAll('[data-analysis-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.analysisTab===analysisTab);b.setAttribute('aria-selected',String(b.dataset.analysisTab===analysisTab));});
   decisionView.show(state.view==='stats'&&analysisTab==='decisions');
   if(state.view==='stats'){const url=new URL(location.href);url.searchParams.set('analysis',analysisTab);history.replaceState(null,'',url);}
@@ -241,6 +250,7 @@ async function loadMatch(matchId, { updateUrl = true } = {}) {
     buildPlayerSelect();
     buildAnalysis();
     decisionView.setMatch({metadata,fixture,preview,fullReady:()=>!!state.packed,clock:(t,p)=>formatClock(t,metadata,p)});
+    replayDesk.setMatch(metadata.match_id);
     buildRosters();
     $('#timeline').min = preview.start_ms;
     $('#timeline').max = preview.end_ms;
@@ -447,6 +457,9 @@ function setPlaying(playing) {
   state.playing = playing;
   $('#play').innerHTML = icon(playing ? 'pause' : 'play');
   $('#play').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  // The tick loop only repaints while the clock runs, so a pause has to tell the
+  // desk itself. That is what turns the read from "following" into "ask".
+  if (state.metadata) refresh(true);
 }
 function changeView(view) {
   state.view = view;
@@ -611,6 +624,7 @@ function refresh(force = false) {
   }
   updateEvents();
   updatePlayer(frame);
+  replayDesk.sync();
   if (force) drawPitch(frame);
 }
 
@@ -865,12 +879,22 @@ document.addEventListener('click', e => {
 });
 canvas.onclick = e => {
   if (!state.frame) return;
-  const box = canvas.getBoundingClientRect(), { x, y, scale } = pitchLayout();
-  const px = (e.clientX - box.left - x) / scale, py = (e.clientY - box.top - y) / scale;
-  const nearest = state.frame.players.map(p => ({ id: p[0], distance: Math.hypot(p[1] - px, p[2] - py) })).sort((a, b) => a.distance - b.distance)[0];
-  if (nearest.distance * scale < 20 && state.time >= state.metadata.duration_ms) { openPlayerReport(nearest.id); return; }
-  if (nearest.distance * scale < 20) { state.selected = nearest.id; $('#player-select').value = nearest.id; refresh(true); }
+  // A player under the pointer wins. Grass means "show me the team", which is
+  // the side in possession at this frame.
+  const id = hitTestPlayer(canvas, state.frame, { clientX: e.clientX, clientY: e.clientY });
+  if (id) {
+    if (state.time >= state.metadata.duration_ms) { openPlayerReport(id); return; }
+    state.selected = id;
+    $('#player-select').value = id;
+    window.dispatchEvent(new Event('touchline-player'));
+    refresh(true);
+    return;
+  }
+  if (hitTestPitch(canvas, { clientX: e.clientX, clientY: e.clientY }) && state.frame.possession_team_id) {
+    replayDesk.showTeam(state.frame.possession_team_id);
+  }
 };
+canvas.title = 'Click a player for their live numbers; click the grass for the team in possession.';
 document.addEventListener('keydown', e => {
   if (!state.metadata || ['INPUT', 'SELECT', 'TEXTAREA', 'BUTTON', 'A'].includes(e.target.tagName) || $('#live-view').hidden) return;
   if (e.code === 'Space') { e.preventDefault(); setPlaying(!state.playing); }
