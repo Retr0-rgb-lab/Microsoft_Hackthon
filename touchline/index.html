@@ -95,7 +95,7 @@
         <div class="metric-grid" id="metrics"></div>
         <div class="replay-desk" id="replay-desk">
           <aside class="desk-side" id="desk-data">
-            <div class="desk-head"><h3>Data</h3><button type="button" class="desk-collapse" id="collapse-data" aria-expanded="true" aria-controls="desk-data-body">Hide</button></div>
+            <div class="desk-head"><h3>Data</h3><button type="button" class="desk-collapse" id="collapse-data" aria-expanded="true" aria-controls="desk-data-body" aria-label="Hide the data board"><svg aria-hidden="true"><use href="#i-back"/></svg><span class="desk-collapse-label">Hide</span></button></div>
             <div id="desk-data-body">
               <div class="desk-switch" role="group" aria-label="Data board">
                 <button type="button" data-board="player" aria-pressed="true">Player</button>
@@ -126,7 +126,7 @@
           <section class="card events-card"><div class="card-heading"><div><h3>Match events <span id="event-count" class="count-badge">0</span></h3><p id="event-help">Click an event to jump to the moment</p></div><div class="event-controls"><select id="event-scope" aria-label="Event time range"><option value="replay">At replay time</option><option value="full">Full match</option></select><select id="event-filter" aria-label="Filter match events"><option value="key">Key events</option><option value="all">All events</option><option value="goal">Goals</option><option value="pass">Passes</option><option value="shot">Shots</option><option value="interception">Interceptions</option><option value="yellow_card">Yellow cards</option><option value="red_card">Red cards</option><option value="substitution">Substitutions</option></select></div></div><div id="event-list" class="event-list"></div></section>
           </div>
           <aside class="desk-side" id="desk-ask">
-            <div class="desk-head"><h3>Ask</h3><button type="button" class="desk-collapse" id="collapse-ask" aria-expanded="true" aria-controls="desk-ask-body">Hide</button></div>
+            <div class="desk-head"><h3>Ask</h3><button type="button" class="desk-collapse" id="collapse-ask" aria-expanded="true" aria-controls="desk-ask-body" aria-label="Hide the read"><svg aria-hidden="true"><use href="#i-back"/></svg><span class="desk-collapse-label">Hide</span></button></div>
             <div id="desk-ask-body">
               <div class="ask-now"><span id="ask-clock">—</span><span id="ask-follow">Waiting for a match</span></div>
               <div class="desk-switch ask-modes" role="group" aria-label="Explanation mode">

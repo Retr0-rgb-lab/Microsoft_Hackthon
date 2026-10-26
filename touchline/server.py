@@ -20,6 +20,7 @@ from analysis_agent import build_report
 from model_service import narrate, validate_base_url
 
 ROOT = Path(__file__).resolve().parent
+LOOPBACK_HOSTS = {'127.0.0.1', 'localhost', '::1'}
 CONFIG = ROOT / '.local' / 'model-service.json'
 LOCK = threading.Lock()
 
@@ -101,10 +102,31 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
+    def allowed_hosts(self):
+        """The hosts this server answers for.
+
+        Loopback is always the operator's own machine, whatever port the server
+        happens to run on. A hosted instance adds its public name through
+        ITG_ALLOWED_HOSTS, so the same-origin rule still holds in production.
+        """
+        hosts = set()
+        host = self.headers.get('Host', '')
+        if host.split(':')[0] in LOOPBACK_HOSTS:
+            hosts.add(host)
+        for extra in os.environ.get('ITG_ALLOWED_HOSTS', '').split(','):
+            extra = extra.strip()
+            if extra:
+                hosts.add(extra)
+        return hosts
+
     def trusted(self):
         host = self.headers.get('Host', '')
-        allowed = {f'127.0.0.1:{self.server.server_port}', f'localhost:{self.server.server_port}'}
-        return host in allowed and self.headers.get('Origin', f'http://{host}') == f'http://{host}'
+        if host not in self.allowed_hosts():
+            return False
+        origin = self.headers.get('Origin')
+        if not origin:
+            return True
+        return origin in (f'http://{host}', f'https://{host}')
 
     def reply(self, status, value):
         body = json.dumps(value).encode()
@@ -191,7 +213,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.reply(200, simulate(data['frame'], data['metadata'], data['action_id']))
                 return
             if route == '/api/action-review':
-                result = review_record(ROOT, data.get('dataset','league-validated'), data.get('match_id',''), data.get('decision_id',''), data.get('replay_at_ms'))
+                result = review_record(ROOT, data.get('dataset','league'), data.get('match_id',''), data.get('decision_id',''), data.get('replay_at_ms'))
                 self.reply(200,result)
                 return
             if route == '/api/decision':

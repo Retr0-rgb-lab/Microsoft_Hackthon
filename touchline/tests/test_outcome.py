@@ -47,16 +47,16 @@ class OutcomeTests(unittest.TestCase):
         self.assertGreater(after,before)
 
     def test_record_review_does_not_rescore_when_outcome_revealed(self):
-        folder=ROOT/'data/league-validated/matches'
+        folder=ROOT/'data/league/matches'
         if not folder.exists(): self.skipTest('Optional generated league unavailable')
         match=sorted(folder.iterdir())[0].name
         with (folder/match/'decisions.jsonl').open() as stream:
             d=json.loads(stream.readline())
-        before=review_record(ROOT,'league-validated',match,d['decision_id'])
-        after=review_record(ROOT,'league-validated',match,d['decision_id'],6000000)
+        before=review_record(ROOT,'league',match,d['decision_id'])
+        after=review_record(ROOT,'league',match,d['decision_id'],6000000)
         self.assertEqual(before['candidates'],after['candidates'])
         self.assertEqual(before['execution']['status'],'pending')
         self.assertEqual(after['execution']['status'],'observed')
 
     def test_path_traversal_rejected(self):
-        with self.assertRaises(ValueError):review_record(ROOT,'league-validated','../private','d000001')
+        with self.assertRaises(ValueError):review_record(ROOT,'league','../private','d000001')

@@ -35,19 +35,23 @@ export function createReplayDesk(getState) {
   let picked = "";
   const cache = new Map();
 
-  function collapse(buttonId, bodyId, className) {
+  function collapse(buttonId, bodyId, className, label) {
     const button = $(buttonId);
     const body = $(bodyId);
     button.addEventListener("click", () => {
       const open = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", String(!open));
-      button.textContent = open ? "Show" : "Hide";
+      // Only the label changes. Replacing the whole button would drop the
+      // chevron that says which way the panel folds.
+      const text = button.querySelector(".desk-collapse-label");
+      if (text) text.textContent = open ? "Show" : "Hide";
+      button.setAttribute("aria-label", open ? `Show the ${label}` : `Hide the ${label}`);
       body.hidden = open;
       desk.classList.toggle(className, open);
     });
   }
-  collapse("#collapse-data", "#desk-data-body", "is-data-collapsed");
-  collapse("#collapse-ask", "#desk-ask-body", "is-ask-collapsed");
+  collapse("#collapse-data", "#desk-data-body", "is-data-collapsed", "data board");
+  collapse("#collapse-ask", "#desk-ask-body", "is-ask-collapsed", "read");
 
   function showBoard(mode) {
     $("#player-board").hidden = mode !== "player";

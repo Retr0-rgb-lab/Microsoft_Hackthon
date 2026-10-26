@@ -2,7 +2,7 @@ import {canAnalyze, nextMoment, unavailableReason} from './coach-moments.js';
 import {setupLanguage, translate} from './coach-i18n.js';
 const getLanguage = setupLanguage();
 const $ = s => document.querySelector(s);
-const leagueRoot = new URLSearchParams(location.search).get('dataset') === 'validated' ? 'data/league-validated' : 'data/league';
+const leagueRoot = 'data/league';
 let preview, report, selected, token = 0;
 let agentResult = null, agentDocument = null, agentsBusy = false, analysisBusy = false;
 let rollout = null, simIndex = null, animation = null, simToken = 0;

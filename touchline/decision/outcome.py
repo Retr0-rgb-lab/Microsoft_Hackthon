@@ -95,7 +95,7 @@ def execution(event,replay_at_ms,expected_weight=None):
     return result
 
 def review_record(root,dataset,match_id,decision_id,replay_at_ms=None):
-    if dataset not in ('league','league-validated','realism-sample'):raise ValueError('Invalid dataset')
+    if dataset not in ('league','realism-sample'):raise ValueError('Invalid dataset')
     import re
     if not re.fullmatch(r'[A-Za-z0-9-]+',match_id) or not re.fullmatch(r'd[0-9]{6}',decision_id):raise ValueError('Invalid identifiers')
     folder=root/'data'/dataset

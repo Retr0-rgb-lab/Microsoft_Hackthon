@@ -108,7 +108,7 @@ class ServerTests(unittest.TestCase):
         from test_decision import sample
         frame, metadata = sample()
         metadata.update(match_id='TEST-MATCH', synthetic=True)
-        folder = Path(self.temp.name) / 'data/league-validated/matches/TEST-MATCH'
+        folder = Path(self.temp.name) / 'data/league/matches/TEST-MATCH'
         folder.mkdir(parents=True)
         (folder / 'metadata.json').write_text(json.dumps(metadata))
         record = {'decision_id':'d000001','snapshot':frame,'t_ms':20000,'action_id':'a1',
@@ -119,7 +119,7 @@ class ServerTests(unittest.TestCase):
                  'end_location':[65,20],'outcome':'complete'}
         (folder / 'decisions.jsonl').write_text(json.dumps(record)+'\n')
         (folder / 'events.jsonl').write_text(json.dumps(event)+'\n')
-        data = {'dataset':'league-validated','match_id':'TEST-MATCH','decision_id':'d000001'}
+        data = {'dataset':'league','match_id':'TEST-MATCH','decision_id':'d000001'}
         with patch.object(server, 'ROOT', Path(self.temp.name)):
             status, before = self.request('/api/action-review', data)
             self.assertEqual(status,200)

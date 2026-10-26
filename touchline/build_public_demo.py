@@ -14,7 +14,7 @@ def league_root():
     the calibration run analysed. The checked-in league is the fallback, so a
     clean checkout can still build the public demonstration.
     """
-    for candidate in (ROOT/'data/league-validated', ROOT/'data/league'):
+    for candidate in (ROOT/'data/league',):
         if (candidate/'matches').is_dir():
             return candidate
     raise SystemExit('No synthetic league found under data/.')

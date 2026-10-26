@@ -279,3 +279,19 @@ body.is-loading .match-picker-controls{pointer-events:none}
 .ask-yours{border-color:#ed7445;background:#fdf7f3}
 .ask-verdict{margin:10px 16px 0;font-size:10px;line-height:1.6;color:#6b7686}
 .ask-verdict b{color:#3f4855}
+
+/* Collapsed side panels become a slim rail. The toggle has to fit inside it,
+   so the head loses its padding and the button keeps only its chevron. */
+.desk-collapse{display:flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid var(--line);border-radius:6px;background:#fff;color:#8f98a5;font-size:10px;line-height:1;transition:color .15s,border-color .15s}
+.desk-collapse:hover{color:#e17346;border-color:#e6d5c9}
+.desk-collapse svg{width:11px;height:11px;transition:transform .18s}
+.is-data-collapsed #desk-data .desk-head,
+.is-ask-collapsed #desk-ask .desk-head{padding:10px 0;justify-content:center}
+.is-data-collapsed #desk-data .desk-collapse-label,
+.is-ask-collapsed #desk-ask .desk-collapse-label{display:none}
+.is-data-collapsed #desk-data .desk-collapse,
+.is-ask-collapsed #desk-ask .desk-collapse{padding:6px;width:30px;justify-content:center}
+/* The left rail folds away to the left, the right one folds away to the right. */
+#desk-ask .desk-collapse svg{transform:rotate(180deg)}
+.is-data-collapsed #desk-data .desk-collapse svg,
+.is-ask-collapsed #desk-ask .desk-collapse svg{transform:rotate(0)}

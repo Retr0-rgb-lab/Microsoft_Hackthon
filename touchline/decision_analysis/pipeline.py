@@ -53,7 +53,7 @@ def sha(path):
 
 def guarded_output(path, source=None):
     output = Path(path).resolve()
-    protected = [ROOT / 'data/league', ROOT / 'data/league-validated']
+    protected = [ROOT / 'data/league']
     if source is not None:
         protected.append(Path(source).resolve())
     for p in protected:

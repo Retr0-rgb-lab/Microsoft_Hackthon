@@ -92,7 +92,7 @@ def paired_brier_interval(model, games, kind, prior):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--league',type=Path,default=ROOT/'data/league-validated')
+    parser.add_argument('--league',type=Path,default=ROOT/'data/league')
     parser.add_argument('--stream',action='store_true',help='Analyze finished match folders while the league is generating')
     args=parser.parse_args()
     out=ROOT/'artifacts/realism';out.mkdir(parents=True,exist_ok=True)

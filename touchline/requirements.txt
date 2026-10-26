@@ -1,0 +1,3 @@
+# The product itself runs on the standard library. The hosted instance needs a
+# WSGI server in front of it; the local server does not.
+gunicorn==23.0.0
