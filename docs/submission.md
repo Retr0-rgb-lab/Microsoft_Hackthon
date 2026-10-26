@@ -14,6 +14,15 @@ The product is a working web application, not a mock-up: 40 synthetic matches,
 91,031 registered decision snapshots, four trained fold models, and a live
 model-backed agent team.
 
+**Live instance:** <https://nextplay-ai.azurewebsites.net/index.html?match=PL26-W01-MCI-CHE>
+
+That link opens a match with the replay desk on screen. The model key is held
+by the instance, so the four-role team answers without the visitor supplying
+anything. The three fixed cases are at
+<https://nextplay-ai.azurewebsites.net/cases.html>, and the browser-only demo
+that needs no key at all is at
+<https://nextplay-ai.azurewebsites.net/public-demo/index.html>.
+
 ## The five challenge stages, and where each lives
 
 | Stage | What the product does | Where |

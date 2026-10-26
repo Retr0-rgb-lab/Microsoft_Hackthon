@@ -120,14 +120,15 @@ async function loadCase(id) {
       `<div class="row"><button type="button" id="ask-case">Ask about this moment</button>` +
       `<a href="index.html?match=${encodeURIComponent(item.match)}&view=replay">Open in the Replay desk →</a></div>` +
       `<div id="case-answer"></div>`;
+    status.textContent = `Case ${id.toUpperCase()} · computed comparison`;
     // The comparison carries no explanation until the team runs, so its own
-    // status label says nothing about the model. Ask the settings route.
-    let connected = false;
-    try {
-      const settings = await get('/api/model-settings');
-      connected = Boolean(settings.has_key);
-    } catch (e) { connected = false; }
-    status.textContent = `Case ${id.toUpperCase()} · computed comparison · ${connected ? 'the language model is connected on this server' : 'no language model is configured on this server, so the comparison stands on its own'}`;
+    // status label says nothing about the model. The settings route answers
+    // that, but it must not hold up the button.
+    get('/api/model-settings').then(settings => {
+      status.textContent = `Case ${id.toUpperCase()} · computed comparison · ${settings.has_key ? 'the language model is connected on this server' : 'no language model is configured on this server, so the comparison stands on its own'}`;
+    }).catch(() => {
+      status.textContent = `Case ${id.toUpperCase()} · computed comparison · the model state could not be read`;
+    });
     $('#ask-case').onclick = async () => {
       const button = $('#ask-case');
       button.disabled = true;
