@@ -6,6 +6,9 @@ const $ = selector => document.querySelector(selector);
 // A decision stays on screen for eight seconds of match time, which is how long
 // the moment it describes is still recognisable on the pitch.
 const DECISION_WINDOW_MS = 8000;
+// Paused anywhere else, the closest registered decision still describes the
+// situation reasonably well, as long as the panel says how far back it is.
+const PAUSED_LOOKBACK_MS = 30000;
 // One comparison costs about 0.9 s of server work. At 1x the next decision is
 // 2.2 s away, so the read has to start before the playhead arrives.
 const PREFETCH_AHEAD = 3;
@@ -70,11 +73,11 @@ export function createReplayDesk(getState) {
     return value;
   }
 
-  function nearest(time) {
+  function nearest(time, window = DECISION_WINDOW_MS) {
     if (!index) return null;
     let found = null;
     for (const row of index.records) {
-      if (row.t_ms <= time && (time - row.t_ms) <= DECISION_WINDOW_MS) found = row;
+      if (row.t_ms <= time && (time - row.t_ms) <= window) found = row;
       else if (row.t_ms > time) break;
     }
     return found;
@@ -212,10 +215,16 @@ export function createReplayDesk(getState) {
     picked = "";
     renderMeasures(bundle.request.actor_id);
     renderAnalysis();
-    status.textContent = getState().playing
+    const { time, playing } = getState();
+    const offset = time - row.t_ms;
+    // Never let a stale read pass as the current frame.
+    const age = offset > DECISION_WINDOW_MS + 500
+      ? ` Nearest registered decision, ${(offset / 1000).toFixed(1)} s before this frame.`
+      : "";
+    status.textContent = playing
       ? "Following the playhead. Pause to ask a question about this moment."
-      : "Paused on this decision. Ask about these choices.";
-    form.hidden = getState().playing;
+      : `Paused on this decision.${age} Ask about these choices.`;
+    form.hidden = playing;
   }
 
   function clearPanel(message) {
@@ -308,12 +317,15 @@ export function createReplayDesk(getState) {
     sync() {
       const { time, playing } = getState();
       if (!index) return;
-      const row = nearest(time);
+      // Playing keeps the window tight so the read matches the picture. Paused,
+      // a wider lookback is what lets the panel answer "what is happening now"
+      // anywhere in the half, with the offset stated.
+      const row = playing ? nearest(time) : nearest(time, PAUSED_LOOKBACK_MS);
       renderNarration(row);
       if (playing) followLabel.textContent = "Following the playhead";
       else followLabel.textContent = row ? "Paused on a decision" : "Paused";
       if (!row) {
-        if (shownId) clearPanel(playing ? "No registered decision here." : "Paused. Move the timeline onto a decision.");
+        if (shownId) clearPanel(playing ? "No registered decision here." : "No registered decision in the last 30 s. Move the timeline onto a possession.");
         return;
       }
       if (row.decision_id === shownId) {
