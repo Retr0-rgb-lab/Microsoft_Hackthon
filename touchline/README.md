@@ -47,7 +47,7 @@ Open <http://127.0.0.1:5173>. Serve the folder over HTTP rather than opening `in
 ### Language
 
 English is the default in every view: the dashboard, the coach page, the action
-review page, the validation page, the coach board and the 3D pitch sample. The
+review page, the validation page and the counterfactual page. The
 source text is English, so a page reads correctly even before scripts run.
 
 The coach page keeps a `语言 / Language` selector. Choosing Chinese swaps the

@@ -53,5 +53,3 @@ jobs:
         run: |
           python touchline/scripts/synth/validate.py \
             touchline/data/samples/sample_25hz_10min
-      - name: Export decisions for the checked-in sample
-        run: python scripts/export_decisions.py --output /tmp/decisions.json

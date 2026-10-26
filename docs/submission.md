@@ -21,7 +21,7 @@ model-backed agent team.
 | Ingest synthetic events | A generator produces matches, events, tracking and per-match decisions from a fixed seed | `touchline/generate.py`, `touchline/scripts/synth/` |
 | Interpret as statistics and context | A frozen snapshot becomes a ranked candidate set with an evidence registry | `touchline/decision_analysis/input_adapter.py`, `comparison.py` |
 | Explain why it matters | Each candidate carries a written opportunity and main risk, derived from the computed values rather than written by a language model | `touchline/decision_analysis/comparison.py` |
-| Render to the screen | 2D pitch snapshot, a 3D decision flow, an action review and a browser-only public demo | `touchline/coach.html`, `touchline/scene/flow.html`, `touchline/public-demo/` |
+| Render to the screen | A three-column replay desk (data board, 2D match, decision read), an action review and a browser-only public demo | `touchline/index.html`, `touchline/replay-desk.js`, `touchline/public-demo/` |
 | Personalisation | A fan mode and a coach mode produce genuinely different answers to the same moment, and the interface switches between English and Chinese | `touchline/decision/agents.py`, `touchline/coach-i18n.js` |
 
 ## Microsoft and Azure technology actually used
@@ -92,7 +92,6 @@ the answer citing evidence ids the browser can resolve.
 | `touchline/` | The web application: server, contract, decision analysis, agent team, front-ends |
 | `touchline/data/decision-analysis/` | The trained model layer: four fold models, 40-match scored and snapshot datasets, training report, manifest |
 | `touchline/contracts/` | The JSON contract, its schemas and the validators |
-| `touchline/scene/` | The three.js pitch and the decision flow |
 | `docs/media/nextplay-demo.mp4` | The demo recording, 1 minute 37 seconds |
 
 ## Reproduce
@@ -103,7 +102,6 @@ python3 -m decision_analysis.pipeline validate   # re-checks the committed datas
 node scripts/validate_contracts.mjs --dataset data data/league
 node scripts/validate_decision_analysis.mjs
 python3 -m pytest tests/ -q
-cd scene && npm test && npm run build
 ```
 
 `python3 server.py` serves the application on port 5173.
